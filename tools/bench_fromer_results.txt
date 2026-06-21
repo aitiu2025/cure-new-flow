@@ -1,0 +1,29 @@
+================================================================
+FROMER post-download benchmark
+================================================================
+  RECONSTRUCTED document_metadata.json with 49 entries
+  case_dir: /Users/ag/Desktop/AIProjectsJuly2025/TIUConsulting/10X Door/CA properties/titlePro/src/titlepro/api/downloaded_doc/0526/Hillsborough_FROMER_v1
+  resolved models -> raw: claude-opus-4-8 | title: claude-sonnet-4-6
+  splice enabled: True | validate enabled: False
+
+[extract_text]   263.6s  OK
+[extract_legal_descriptions]     0.0s  OK
+[generate_raw_report]   344.8s  OK
+     splice: None
+     validation: None
+[generate_title_notes]   306.9s  OK
+     splice: None
+     validation: None
+[render_pdfs]     0.0s  FAIL: Phase 'render_pdfs' is disabled by the current workflow configuration.
+
+----------------------------------------------------------------
+PHASE                            SECONDS   MINUTES  STATUS
+----------------------------------------------------------------
+extract_text                       263.6      4.39  ok
+extract_legal_descriptions           0.0      0.00  ok
+generate_raw_report                344.8      5.75  ok
+generate_title_notes               306.9      5.11  ok
+render_pdfs                          0.0      0.00  FAIL
+----------------------------------------------------------------
+TOTAL post-download                915.2     15.25
+================================================================

@@ -1,0 +1,61 @@
+{
+  "county_id": "fl_hillsborough",
+  "county_name": "Hillsborough",
+  "state": "FL",
+  "platform": "hillsborough_http",
+  "base_url": "https://publicaccess.hillsclerk.com/oripublicaccess/",
+  "search_url": "https://publicaccess.hillsclerk.com/oripublicaccess/",
+  "captcha_required": false,
+  "tax_url": "https://county-taxes.net/hillsborough/property-tax",
+  "tax_platform": "Grant Street",
+  "status": "in_progress",
+  "name_format": "combined",
+  "name_input_format": "last_space_first",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{7,12}$",
+  "combined_name_search": true,
+  "http_search_endpoint": "https://publicaccess.hillsclerk.com/Public/ORIUtilities/DocumentSearch/api/Search",
+  "http_pdf_endpoint_template": "https://publicaccess.hillsclerk.com/Public/ORIUtilities/OverlayWatermark/api/Watermark/{id}",
+  "doc_image_url_pattern": {
+    "pdf_url_template": "https://publicaccess.hillsclerk.com/Public/ORIUtilities/OverlayWatermark/api/Watermark/{id}",
+    "assert_pdf_magic": true
+  },
+  "http_referer": "https://publicaccess.hillsclerk.com/oripublicaccess/",
+  "http_form_fields": {
+    "name": "PartyName",
+    "doc_type": "DocType",
+    "date_from": "RecordDateFrom",
+    "date_to": "RecordDateTo",
+    "instrument": "Instrument",
+    "book_num": "BookNum",
+    "page_num": "PageNum",
+    "book_type": "BookType"
+  },
+  "doctype_deed_value": "(D) DEED",
+  "doc_type_map": {
+    "DEED": "(D) DEED",
+    "MORTGAGE": "(MTG) MORTGAGE",
+    "MTG": "(MTG) MORTGAGE",
+    "SATISFACTION": "(SAT) SATISFACTION",
+    "SAT": "(SAT) SATISFACTION",
+    "RELEASE": "(REL) RELEASE",
+    "DISCHARGE": "(DIS) DISCHARGE",
+    "AGREEMENT": "(AGR) AGREEMENT",
+    "MODIFICATION": "(MOD) MODIFICATION"
+  },
+  "supported_party_types": ["All", "Grantor", "Grantee", "Grantor/Grantee"],
+  "party_types": ["All", "Grantor", "Grantee", "Grantor/Grantee"],
+  "default_party_type": "All",
+  "party_type_map": {
+    "Grantor": "All",
+    "Grantee": "All",
+    "Grantor/Grantee": "All",
+    "Both": "All",
+    "All": "All"
+  },
+  "impersonate_profile": "chrome120",
+  "cloudflare_required": false,
+  "indexed_apn_in_detail_response": false,
+  "selectors": {},
+  "notes": "Hillsborough FL Clerk of Circuit Courts (https://publicaccess.hillsclerk.com/oripublicaccess/). Pure-HTTP adapter at adapters/hillsborough_http_adapter.py. NO Cloudflare / NO anti-bot — bare Microsoft-IIS/10.0. Endpoint: POST /Public/ORIUtilities/DocumentSearch/api/Search with JSON body {PartyName:['LAST FIRST']} (or {Instrument:[n]} or {BookNum,PageNum,BookType:'O'}). Response: {Success, ResultList:[{Instrument, PartiesOne, PartiesTwo, RecordDate (epoch s), DocType ('(D) DEED' style), BookType/BookNum/PageNum, Legal, ID (opaque), UUID, PageCount}]}. PDF download: GET /Public/ORIUtilities/OverlayWatermark/api/Watermark/{url_quoted_ID} with Referer: /oripublicaccess/ — returns watermarked PDF binary. Test subjects (verified 2026-05-26): FROMER (ALANA + MICHAEL @ 4004 W NORTH B ST TAMPA, folio 1151460000, PIN 1829213LS000012000040A, vesting QCD doc 2025214758 2025-05-15; prior WD Smith->Fromer Alana 1971 OR BK 2411 PG 752 inst -6338677); DEL MONTE (ANGEL + CHRISTINE @ 13519 WESTSHIRE DR TAMPA, folio 0188840142, PIN 1828030UD000000000210U, vesting WD Priority One Developers->Del Monte 1995-02-01 inst 95030837 OR BK 7666 PG 358). Combined name search (Hillsborough doesn't split party-type at the endpoint level — adapter post-filters when Grantor/Grantee is requested specifically)."
+}

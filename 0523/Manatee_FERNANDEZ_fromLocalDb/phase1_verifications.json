@@ -1,0 +1,352 @@
+{
+  "subject": {
+    "address": "4837 SABAL HARBOUR DR, BRADENTON, FL",
+    "apn": "1697719559",
+    "owners": [
+      "FERNANDEZ PABLO",
+      "ROZANES DANIELA"
+    ]
+  },
+  "documents": [
+    {
+      "instrument": "201541003454395",
+      "slug": "A1-Toivanen-NOC-2015",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "12-01-2015",
+      "book": "2596",
+      "page": "7252",
+      "grantors": "TOIVANEN REIJO",
+      "grantees": "LEE OVERHOLT CONSTRUCTION INC",
+      "legal": "",
+      "pages_count": 1,
+      "text_chars": 3000,
+      "address_verification": null
+    },
+    {
+      "instrument": "201841020434",
+      "slug": "A2-VESTING-DEED-Toivanen-to-Fernandez-2018",
+      "doc_type": "DEED",
+      "record_date": "03-01-2018",
+      "book": "2716",
+      "page": "2565",
+      "grantors": "TOIVANEN REIJO, TOIVANEN PIRJO",
+      "grantees": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 1,
+      "text_chars": 3080,
+      "address_verification": {
+        "extracted": "4837 Sabal Harbour\nDr, Bradenton, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "201841020435",
+      "slug": "A3-Purchase-Mortgage-Fairway-2018",
+      "doc_type": "MORTGAGE",
+      "record_date": "03-01-2018",
+      "book": "2716",
+      "page": "2566",
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC, MERS, FAIRWAY INDEPENDENT MORTGAGE CORPORATION",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 20,
+      "text_chars": 66320,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, FL",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "201941092835",
+      "slug": "A6-NOC-FERNADEZ-misspelled-2019",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "09-17-2019",
+      "book": "2802",
+      "page": "4840",
+      "grantors": "FERNADEZ PABLO",
+      "grantees": "DYNASTY BUILDING SOLUTIONS",
+      "legal": "LOT 09 BLK 35 SABAL HARBOUR",
+      "pages_count": 1,
+      "text_chars": 3150,
+      "address_verification": null
+    },
+    {
+      "instrument": "202041027841",
+      "slug": "A4-Affidavit-2020",
+      "doc_type": "AFFIDAVIT",
+      "record_date": "03-13-2020",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 1,
+      "text_chars": 2449,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202041027842",
+      "slug": "A5-Termination-of-2019-NOC",
+      "doc_type": "TERMINATION",
+      "record_date": "03-13-2020",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "",
+      "legal": "OR2802 PG4840",
+      "pages_count": 2,
+      "text_chars": 5013,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202041027843",
+      "slug": "A7-Suncoast-HELOC-2020",
+      "doc_type": "MORTGAGE",
+      "record_date": "03-13-2020",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "SUNCOAST CREDIT UNION",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 17,
+      "text_chars": 65895,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, Fl",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202041043360",
+      "slug": "A8-Satisfaction-of-2018-Fairway-MTG",
+      "doc_type": "SATISFACTION",
+      "record_date": "04-28-2020",
+      "book": null,
+      "page": null,
+      "grantors": "MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC, MERS, FAIRWAY INDEPENDENT MORTGAGE CORPORATION",
+      "grantees": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "legal": "OR2716 PG2566",
+      "pages_count": 1,
+      "text_chars": 2431,
+      "address_verification": null
+    },
+    {
+      "instrument": "202541032476",
+      "slug": "A9-NOC-Freedom-Forever-Solar-2025",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "03-13-2025",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO",
+      "grantees": "FREEDOM FOREVER FL LLC",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 1,
+      "text_chars": 3096,
+      "address_verification": null
+    },
+    {
+      "instrument": "202541046441",
+      "slug": "A10-UCC-Solar-Mosaic-2025",
+      "doc_type": "FINANCING STATEMENT UCC",
+      "record_date": "04-11-2025",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO",
+      "grantees": "SOLAR MOSAIC LLC",
+      "legal": "",
+      "pages_count": 3,
+      "text_chars": 9913,
+      "address_verification": null
+    },
+    {
+      "instrument": "202641010612",
+      "slug": "A11-Solar-Affidavit-2026",
+      "doc_type": "AFFIDAVIT",
+      "record_date": "01-30-2026",
+      "book": null,
+      "page": null,
+      "grantors": "ALBRIGHT GREGORY, FREEDOM FOREVER FL LLC, FERNANDEZ PABLO",
+      "grantees": "",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 1,
+      "text_chars": 2265,
+      "address_verification": {
+        "extracted": "4837 Sabal Harbour Dr, Bradenton, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202641040260",
+      "slug": "A12-SouthState-Mortgage-2026-CURRENT-1st",
+      "doc_type": "MORTGAGE",
+      "record_date": "04-09-2026",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "SOUTHSTATE BANK",
+      "legal": "LOT 141 SABAL HARBOUR",
+      "pages_count": 10,
+      "text_chars": 51248,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, FL",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202641040261",
+      "slug": "A13-Subordination-of-Suncoast-HELOC-2026",
+      "doc_type": "NOTICE",
+      "record_date": "04-09-2026",
+      "book": null,
+      "page": null,
+      "grantors": "FERNANDEZ PABLO, ROZANES DANIELA",
+      "grantees": "SUNCROAST CREDIT UNION",
+      "legal": "INST 202041027843",
+      "pages_count": 3,
+      "text_chars": 4383,
+      "address_verification": {
+        "extracted": "4837 SABAL HARBOUR DR, BRADENTON, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    },
+    {
+      "instrument": "202641050708",
+      "slug": "A14-Termination-of-Solar-Mosaic-UCC-2026",
+      "doc_type": "TERMINATION",
+      "record_date": "05-04-2026",
+      "book": null,
+      "page": null,
+      "grantors": "SOLAR MOSAIC LLC",
+      "grantees": "FERNANDEZ PABLO",
+      "legal": "INST 202541046441",
+      "pages_count": 2,
+      "text_chars": 5285,
+      "address_verification": {
+        "extracted": "4837 Sabal Harbour Dr , Bradenton, FL 34203",
+        "status": "MATCH",
+        "similarity": 1.0,
+        "matched_components": {
+          "street_number": true,
+          "street_name": true,
+          "city": true,
+          "state": true,
+          "directional": true,
+          "street_type": true
+        },
+        "evidence": "status=MATCH, similarity=1.000; street_number match: '4837'; city match: 'BRADENTON'; street_name match: 'SABAL HARBOUR'"
+      }
+    }
+  ],
+  "mortgage_classifications": {
+    "202041027843": {
+      "doc_number": "202041027843",
+      "status": "open",
+      "release_chain": [],
+      "related_modifications": []
+    },
+    "201841020435": {
+      "doc_number": "201841020435",
+      "status": "released",
+      "release_chain": [
+        {
+          "mortgage_doc_number": "201841020435",
+          "satisfaction_doc_number": "202041043360",
+          "satisfaction_type": "satisfaction",
+          "evidence_text": "ARCH 01, 2018 in Book 2716 at Page 2566 as Clerk's File No. 201841020435.  AS DESCRIBED IN SAID DEED OF TRUST  IN WITNES"
+        }
+      ],
+      "related_modifications": []
+    },
+    "202641040260": {
+      "doc_number": "202641040260",
+      "status": "open",
+      "release_chain": [],
+      "related_modifications": []
+    }
+  }
+}

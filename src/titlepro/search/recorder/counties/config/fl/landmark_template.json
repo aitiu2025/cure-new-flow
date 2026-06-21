@@ -1,0 +1,61 @@
+{
+  "_template_metadata": {
+    "purpose": "Reusable template for the 15 Wave-2 Landmark FL counties (Lee, Escambia, St. Johns, Clay, Hernando, Bay, Martin, Indian River, Citrus, Flagler, Monroe, Walton, Wakulla, Levy, Okeechobee). Copy to <county>.json, fill in the FIVE _TODO_ markers below, then add the county_id to counties/registry.py with platform='landmark'. Live-probe to confirm the recaptcha_site_key — some Landmark tenants share the Palm-Beach sitekey, others mint their own.",
+    "source_of_truth": "docs/County_URL_Mapping_CA_OH.md + docs/County_URL_Mapping_CUREMasterSheet.xlsx",
+    "validation_checklist": [
+      "1. curl_cffi.Session(impersonate='chrome120').get(base_url) returns 200 with 'Landmark Web Official Records' in title (Lee may need a different fingerprint behind Akamai)",
+      "2. POST /Search/SetDisclaimer returns 200 with empty body",
+      "3. GET /search/index?theme=.blue&section=searchCriteriaName returns the search form (~2-3 MB HTML)",
+      "4. POST /Search/ShowCaptcha returns 'True' on cold session (means recaptcha_v2 is enforced)",
+      "5. recaptcha_site_key matches the data-sitekey on .recaptchasection-Name in the search form"
+    ]
+  },
+  "county_id": "_TODO_fl_<county>",
+  "county_name": "_TODO_<County Display Name>",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "_TODO_https://<recorder-host>/LandMarkWeb/",
+  "recorder_root": "_TODO_https://<recorder-host>/LandMarkWeb/",
+  "search_url": "_TODO_https://<recorder-host>/LandMarkWeb/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "recaptcha_site_key": "_TODO_<scrape from data-sitekey on search form>",
+  "allow_automated_captcha_solver": true,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found",
+    "recaptcha_section": ".recaptchasection-Name",
+    "recaptcha_sitekey_attr": "data-sitekey"
+  },
+  "status": "template",
+  "notes": "Landmark Web Official Records platform — same engine as fl_palm_beach. Adapter at src/titlepro/search/recorder/counties/adapters/landmark_adapter.py. See palm_beach.json for a live-validated example. Wave-2 build order (per FL_Implementation_Plan.md): Lee (#8) -> Escambia (#21) -> St. Johns (#22) -> Clay (#25) -> Hernando (#27) -> Bay (#28) -> Martin (#30) -> Indian River (#31) -> Citrus (#33) -> Flagler (#34) -> Monroe (#38) -> Walton (#42) -> Wakulla (#46) -> Levy (#47) -> Okeechobee (#48). Lee sits behind Akamai (bazadebezolkohpepadr) so 'safari17_2_ios' may be needed as impersonate_profile."
+}

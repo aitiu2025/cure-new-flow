@@ -1,0 +1,170 @@
+{
+  "report_metadata": {
+    "report_type": "RAW Two-Owner Title Search Examination Report",
+    "report_version": "2.0",
+    "cure_order_number": "CURE-2026-HERRON-001",
+    "exam_date": "04/14/2026",
+    "effective_date": "04/13/2026",
+    "examiner": "CURE TitlePro (Automated Agent)",
+    "recorder_search_date": "04/13/2026",
+    "document_review_date": "04/14/2026",
+    "report_status": "UPDATED — Full document image review completed",
+    "report_generated": "2026-04-14T14:00:00Z"
+  },
+  "property": {
+    "address": "21942 Via del Lago",
+    "city": "Trabuco Canyon",
+    "state": "CA",
+    "zip": "92679",
+    "county": "Orange",
+    "apn": "833-551-29",
+    "property_type": "Single Family Residence",
+    "tract": "12217",
+    "lot": "18",
+    "pud": "Rancho Cielo",
+    "city_official": "Rancho Santa Margarita",
+    "legal_description": "LOT 18 OF TRACT NO. 12217, IN THE CITY OF RANCHO SANTA MARGARITA, COUNTY OF ORANGE, STATE OF CALIFORNIA, AS SHOWN ON A MAP RECORDED IN BOOK 611, PAGES 39 THROUGH 42, INCLUSIVE OF MISCELLANEOUS MAPS. EXCEPTING ALL RIPARIAN RIGHTS IN TRABUCO CREEK.",
+    "estimated_purchase_price": 1551000,
+    "last_sale_date": "08/10/2021",
+    "documentary_transfer_tax": 1706.10
+  },
+  "borrowers": {
+    "borrower_1": {
+      "full_name": "DAVID R. HERRON",
+      "vesting": "A married man, as his sole and separate property"
+    },
+    "borrower_2": {
+      "full_name": "SANDRA D. HENCH",
+      "vesting": "A single woman"
+    },
+    "joint_tenancy": true
+  },
+  "title_status": {
+    "status": "ENCUMBERED",
+    "open_liens_on_subject": 2,
+    "confirmed_open": 1,
+    "potentially_open": 1,
+    "maximum_exposure": 870000,
+    "minimum_exposure": 100000
+  },
+  "tax_information": {
+    "apn": "833-551-29",
+    "tax_portal": "taxbill.octreasurer.gov",
+    "current_year": {
+      "tax_year": "2025-2026",
+      "annual_tax": 10931,
+      "first_installment": {"amount": 5466, "due_date": "12/10/2025", "status": "PAYMENT STATUS UNVERIFIED"},
+      "second_installment": {"amount": 5465, "due_date": "04/10/2026", "status": "PAYMENT STATUS UNVERIFIED"},
+      "assessed_values": {"land": 598518, "improvements": 464366, "total": 1062884}
+    },
+    "prior_year": {
+      "tax_year": "2024-2025",
+      "annual_tax": 10734,
+      "assessed_values": {"land": 598518, "improvements": 464366, "total": 1062884}
+    }
+  },
+  "chain_of_title": [
+    {
+      "instrument": "2021000502863",
+      "recording_date": "08/10/2021",
+      "document_type": "GRANT DEED",
+      "grantor": "DANIEL J. LOSKOT AND CORINNE R. LOSKOT, TRUSTEES OF THE LOSKOT LIVING TRUST",
+      "grantee": "DAVID R. HERRON AND SANDRA D. HENCH, AS JOINT TENANTS",
+      "dtt": 1706.10,
+      "property": "21942 Via del Lago, Trabuco Canyon, CA 92679",
+      "apn": "833-551-29",
+      "notes": "CONTROLLING VESTING DEED"
+    }
+  ],
+  "open_liens_on_subject": [
+    {
+      "instrument": "2021000502864",
+      "recording_date": "08/10/2021",
+      "note_date": "08/05/2021",
+      "beneficiary": "ROCKET MORTGAGE LLC / MERS",
+      "amount": 770000,
+      "type": "Conventional — Purchase Money",
+      "maturity": "09/01/2051",
+      "loan_number": "3483630408",
+      "min": "100039034836304081",
+      "apn": "833-551-29",
+      "status": "POTENTIALLY OPEN",
+      "status_detail": "NO RECONVEYANCE FOUND — recorded nearly 5 years ago",
+      "reviewed": true,
+      "pdf_filename": "B48473449.pdf"
+    },
+    {
+      "instrument": "2026000041247",
+      "recording_date": "02/18/2026",
+      "deed_date": "02/09/2026",
+      "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+      "amount": 100000,
+      "type": "HELOC — Revolving Credit (LOANLINER)",
+      "term": "20 years",
+      "apn": "833-551-29",
+      "status": "OPEN",
+      "status_detail": "CONFIRMED ACTIVE LIEN",
+      "reviewed": true,
+      "pdf_filename": "B48473444.pdf"
+    }
+  ],
+  "reconveyed_on_subject": [
+    {
+      "original_instrument": "2023000121368",
+      "original_recording_date": "05/24/2023",
+      "original_beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+      "original_amount": 75000,
+      "loan_type": "HELOC",
+      "reconveyance_instrument": "2026000043728",
+      "reconveyance_date": "02/18/2026",
+      "status": "RECONVEYED"
+    }
+  ],
+  "liens_on_other_properties": [
+    {
+      "instrument": "2008000473486",
+      "recording_date": "10/14/2008",
+      "beneficiary": "AMTRUST BANK / MERS",
+      "amount": 504000,
+      "property": "21591 Partridge St, Trabuco Canyon, CA 92679",
+      "apn": "833-691-49",
+      "status": "RECONVEYED via 2010000706590 (12/29/2010)"
+    },
+    {
+      "instrument": "2012000725348",
+      "recording_date": "11/27/2012",
+      "beneficiary": "INTERBANK MORTGAGE / NATIONSTAR",
+      "amount": null,
+      "property": "21591 Partridge St, Trabuco Canyon, CA 92679",
+      "apn": "833-691-49",
+      "status": "RECONVEYED via 2014000234691 (06/16/2014)"
+    }
+  ],
+  "remaining_issues": [
+    {
+      "severity": "CRITICAL",
+      "title": "$770K Rocket Mortgage DOT — no reconveyance",
+      "action": "Contact MERS at (888) 679-6377, MIN 100039034836304081"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Tax status unverified",
+      "action": "Check taxbill.octreasurer.gov APN 833-551-29"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Prior owner not searched",
+      "action": "Search LOSKOT in recorder"
+    },
+    {
+      "severity": "LOW",
+      "title": "Co-owner not separately searched",
+      "action": "Search HENCH SANDRA D in recorder"
+    },
+    {
+      "severity": "LOW",
+      "title": "Judgment search not performed",
+      "action": "OC Superior Court + CA SOS UCC"
+    }
+  ]
+}

@@ -1,0 +1,873 @@
+{
+  "_metadata": {
+    "description": "California county property tax lookup URL configuration",
+    "version": "1.0.0",
+    "last_updated": "2026-04-03",
+    "notes": "Each entry maps a lowercase county key to its tax lookup configuration. The 'platform' field determines which scraper module handles the lookup. Supported platforms: 'mbc' (mptsweb.com), 'oc_treasurer' (Orange County), 'la_propertytax' (LA County), 'playwright_form' (generic Playwright recipe at config/tax_recipes/<county>.json), 'direct' (county-specific sites without a shared platform yet)."
+  },
+  "counties": {
+    "orange": {
+      "base_url": "https://taxbill.octreasurer.gov/",
+      "platform": "oc_treasurer",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": true,
+      "description": "Orange County Treasurer-Tax Collector - Tax Bill Search",
+      "notes": "Requires CAPTCHA solving via OCR. Searches by Parcel Number only."
+    },
+    "los_angeles": {
+      "base_url": "https://www.propertytax.lacounty.gov/",
+      "platform": "la_propertytax",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address",
+        "ain"
+      ],
+      "captcha": false,
+      "description": "LA County Property Tax Portal",
+      "notes": "Supports search by APN, Address, or Assessor Identification Number (AIN). Portal also links to assessor detail at portal.assessor.lacounty.gov.",
+      "assessor_url": "https://portal.assessor.lacounty.gov/"
+    },
+    "san_diego": {
+      "base_url": "https://www.sdttc.com/content/ttc/en/tax-collection/prior-year-tax-records.html",
+      "platform": "playwright_form",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "San Diego County Treasurer-Tax Collector (Prior-Year Records)",
+      "notes": "Playwright recipe at config/tax_recipes/san_diego.json drives the GET form (?fiscal_year=...&q=<APN>). APN format ###-###-##-##. Returns paid-secured prior-year data only; current-year live portal (iwr.sdttc.com) is Akamai-blocked.",
+      "recipe": "san_diego.json"
+    },
+    "santa_clara": {
+      "base_url": "https://santaclaracounty.telleronline.net/search/1/PropertyAddress",
+      "platform": "playwright_form",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Santa Clara County Department of Tax and Collections (Teller Online portal)",
+      "notes": "Playwright recipe at config/tax_recipes/santa_clara.json is ACTIVE (no longer deferred \u2014 2026-05-13). Runner gained `press_key` action so the recipe can submit the Material autocomplete form via Enter on #mat-input-1 (the form has no submit button). DTAC homepage links to https://payments.sccgov.org/propertytax which 301-redirects to santaclaracounty.telleronline.net.",
+      "recipe": "santa_clara.json",
+      "info_url": "https://dtac.santaclaracounty.gov/"
+    },
+    "alameda": {
+      "base_url": "https://propertytax.alamedacountyca.gov/search",
+      "platform": "playwright_form",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Alameda County Secured/Supplemental Property Taxes",
+      "notes": "Playwright recipe at config/tax_recipes/alameda.json drives the Astro-rendered Parcel Number tab flow: #toggleParcel -> #displayApn fill -> .suggestion click -> #searchButton -> /account-summary. Summary page returns APN, address, fiscal year, both installments, and total but NOT assessed value (assessed value lives in the View Bill PDF). The View Bill Details accordion is opened to render installment line items.",
+      "recipe": "alameda.json"
+    },
+    "riverside": {
+      "base_url": "https://ca-riverside-ttc.publicaccessnow.com/PropertySearch.aspx",
+      "platform": "playwright_form",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Riverside County Treasurer-Tax Collector Property Search",
+      "notes": "Playwright recipe at config/tax_recipes/riverside.json drives the Angular SPA: PIN (9-digit) -> SEARCH -> View Account -> Processing redirect (~15s) -> AccountSummary -> expand Paid Tax Bills -> View Bill Detail. Multi-step navigation with intermediate ~20s wait after View Account.",
+      "recipe": "riverside.json"
+    },
+    "san_bernardino": {
+      "base_url": "https://www.sbcountyatc.gov/tax-services/property-tax",
+      "platform": "playwright_form",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "San Bernardino County Auditor-Controller/Treasurer/Tax Collector",
+      "notes": "Playwright recipe at config/tax_recipes/san_bernardino.json is DEFERRED: bill data lives two iframes deep (gsgprod.sbcountyatc.gov + iframe-taxsys subframe) and the current playwright_runner cannot traverse iframes. Recipe + fixture pair archived for the future runner upgrade. See `_known_limitation` field in the recipe.",
+      "recipe": "san_bernardino.json",
+      "assessor_url": "https://arc.sbcounty.gov/property-information/"
+    },
+    "san_mateo": {
+      "base_url": "https://smcacre.gov/assessor/property-tax-look",
+      "platform": "direct",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "San Mateo County Assessor Property Tax Lookup",
+      "notes": "Search by parcel number or address."
+    },
+    "sacramento": {
+      "base_url": "https://eproptax.saccounty.gov/",
+      "platform": "playwright_form",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Sacramento County Property Tax Lookup (county-taxes.net / GovHub)",
+      "notes": "Playwright recipe at config/tax_recipes/sacramento.json. eproptax.saccounty.gov 301-redirects to county-taxes.net/sacramento/property-tax (Grant Street GovHub \u2014 same vendor pattern as SBD). Flow: typeahead-input fill -> [role='option'] click -> outer page navigates to /<base64-account-id>/ which injects iframe[src*='iframe-taxsys'] -> enter_frame -> click 2025 Secured Annual Bill -> bill detail page exposes assessed value + installment data. APN format is XXX-XXXX-XXX-XXXX.",
+      "recipe": "sacramento.json"
+    },
+    "ventura": {
+      "base_url": "https://www.mytaxcollector.com/trSearch.aspx",
+      "platform": "direct",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Ventura County Auditor-Controller/Treasurer/Tax Collector",
+      "notes": "Property tax search by parcel number or address."
+    },
+    "fresno": {
+      "base_url": "https://fcacttcptr.fresnocountyca.gov/",
+      "platform": "playwright_form",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Fresno County Auditor-Controller/Treasurer-Tax Collector - Secured Tax Roll",
+      "notes": "Playwright recipe at config/tax_recipes/fresno.json drives the 3-field APN form. The legacy landing page (www.fresnocountyca.gov) is informational only.",
+      "recipe": "fresno.json",
+      "info_url": "https://www.fresnocountyca.gov/Departments/Auditor-Controller-Treasurer-Tax-Collector/Property-Tax-Information"
+    },
+    "contra_costa": {
+      "base_url": "https://taxcolp.cccttc.us/",
+      "platform": "playwright_form",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Contra Costa County Treasurer-Tax Collector",
+      "notes": "Playwright recipe at config/tax_recipes/contra_costa.json bypasses the JS-driven lookup widget by hitting the Accessible Bill HTML page directly: /PTS_TaxbillsHtmlCY?APN=<9-digit-APN>. CCC PIN is 10-digit (3-3-3-1) but the URL accepts the 9-digit base; the extracted apn echoes back the 9-digit prefix to avoid hyphen-stripped mismatch with the trailing sub-parcel digit. Info-only landing at www.cctax.us.",
+      "recipe": "contra_costa.json"
+    },
+    "kern": {
+      "base_url": "https://ttc.kerncounty.com/",
+      "platform": "direct",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Kern County Treasurer-Tax Collector",
+      "notes": "Property tax search and payment."
+    },
+    "san_joaquin": {
+      "base_url": "https://propertytax.sjgov.org/",
+      "platform": "direct",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "San Joaquin County Property Tax Lookup",
+      "notes": "Search by parcel number or situs address."
+    },
+    "sonoma": {
+      "base_url": "https://sonomacounty.ca.gov/tax",
+      "platform": "direct",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Sonoma County Tax Collector",
+      "notes": "Property tax information and online payment."
+    },
+    "stanislaus": {
+      "base_url": "https://www.stancounty.com/tax/",
+      "platform": "direct",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Stanislaus County Tax Collector",
+      "notes": "Tax bill lookup and payment."
+    },
+    "santa_barbara": {
+      "base_url": "https://www.countyofsb.org/ttc",
+      "platform": "direct",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Santa Barbara County Treasurer-Tax Collector",
+      "notes": "Property tax search and payment."
+    },
+    "san_luis_obispo": {
+      "base_url": "https://www.slocountytax.org/",
+      "platform": "direct",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "San Luis Obispo County Tax Collector",
+      "notes": "Property tax lookup and payment."
+    },
+    "amador": {
+      "base_url": "https://common1.mptsweb.com/MBC/amador/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Amador County Tax Collector (MBC Platform)",
+      "notes": "MBC common1 server instance. No CAPTCHA required."
+    },
+    "plumas": {
+      "base_url": "https://common1.mptsweb.com/MBC/plumas/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Plumas County Tax Collector (MBC Platform)",
+      "notes": "MBC common1 server instance."
+    },
+    "tehama": {
+      "base_url": "https://common1.mptsweb.com/mbc/tehama/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Tehama County Tax Collector (MBC Platform)",
+      "notes": "MBC common1 server instance."
+    },
+    "kings": {
+      "base_url": "https://common1.mptsweb.com/MBC/kings/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Kings County Tax Collector (MBC Platform)",
+      "notes": "MBC common1 server instance."
+    },
+    "lake": {
+      "base_url": "https://common2.mptsweb.com/MBC/lake/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Lake County Tax Collector (MBC Platform)",
+      "notes": "MBC common2 server instance."
+    },
+    "mono": {
+      "base_url": "https://common2.mptsweb.com/mbc/mono/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Mono County Tax Collector (MBC Platform)",
+      "notes": "MBC common2 server instance."
+    },
+    "san_benito": {
+      "base_url": "https://common2.mptsweb.com/mbc/sanbenito/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "San Benito County Tax Collector (MBC Platform)",
+      "notes": "MBC common2 server instance. Note: config key uses underscore but MBC URL uses 'sanbenito'."
+    },
+    "butte": {
+      "base_url": "https://common2.mptsweb.com/mbc/butte/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Butte County Tax Collector (MBC Platform)",
+      "notes": "MBC common2 server instance."
+    },
+    "placer": {
+      "base_url": "https://common3.mptsweb.com/mbc/placer/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Placer County Tax Collector (MBC Platform)",
+      "notes": "MBC common3 server instance."
+    },
+    "tulare": {
+      "base_url": "https://common2.mptsweb.com/MBC/tulare/tax/search",
+      "platform": "mbc",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Tulare County Tax Collector (MBC Platform)",
+      "notes": "MBC common2 server instance."
+    },
+    "cuyahoga": {
+      "base_url": "https://myplace.cuyahogacounty.gov/",
+      "platform": "myplace_cuyahoga",
+      "state": "OH",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "owner",
+        "parcel",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Cuyahoga County MyPlace - Property & Tax Information Portal",
+      "parcel_format": "NNN-NN-NNN (e.g. 311-32-153)",
+      "tax_year_label": "Tax Year YYYY Pay YYYY+1",
+      "navigation": {
+        "step_1_url": "https://myplace.cuyahogacounty.gov/",
+        "step_1_action": "Go to the MyPlace portal. The search bar at the top has three tabs: Owner, Parcel, Address. Select the appropriate tab and enter the search term, then click Search Results.",
+        "step_2_action": "From results, click on the matching property to open the Property Detail page. The left sidebar shows: PROPERTY DATA section (General Information, Transfers, Values, Land, Building Information, Building Sketch, Other Improvements, Permits, Property Summary Report) and a TAXES section (Tax By Year, Pay Your Taxes Online).",
+        "step_3_action": "In the left sidebar under TAXES, click Tax By Year. This shows: Primary Owner, Property Address, Tax Mailing Address, Description, Property Class, Parcel Number, Taxset, Tax Year, Taxable Assessed Values, Taxable Market Values, First/Second Half Year Charge Amounts (Gross Tax, 920 Reduction, Non-business Credit, Owner Occupancy Credit, Homestead Reduction, Total Assessments, Half Year Net Taxes).",
+        "step_4_extract": "Extract: Parcel Number, Primary Owner, Property Address, Property Class, Taxset (city/municipality), Tax Year, Total Market Value, Total Assessed Value, Gross Tax, Half Year Net Taxes (x2 = annual). Use Tax Year dropdown for current year (2025 Pay 2026)."
+      },
+      "notes": "Three steps deep per Tony Roveda (National Attorney Title CEO): Search -> property detail -> left sidebar TAXES -> Tax By Year. Parcel number is Ohio equivalent of APN/PIN. 920 Reduction is Ohio-specific credit for owner-occupied residential. Cuyahoga County Recorder deed search: https://cr.cuyahogacounty.us/"
+    },
+    "fl_manatee": {
+      "base_url": "https://secure.taxcollector.com/ptaxweb/editPropertySearch2.action",
+      "platform": "manatee_ptaxweb",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Manatee County (FL) Tax Collector \u2014 custom ptaxweb (Struts-style) application at secure.taxcollector.com. NOT Grant Street. Search by parcel number; results returned via session-cookied POST.",
+      "notes": "Probed 2026-05-26: HTTP 200, no anti-bot. No adapter built yet \u2014 follow-up after recorder live-validation. For now the tax_dispatcher should fall back to 'manual' mode for fl_manatee until manatee_ptaxweb scraper is implemented (recipe-style would also work).",
+      "apn_format": "10-digit numeric parcel id (e.g. 1697719559)",
+      "platform_family": "manatee_proprietary",
+      "recipe": null,
+      "status": "ready",
+      "adapter": "src/titlepro/tax/manatee_ptaxweb.py"
+    },
+    "manatee": {
+      "base_url": "https://secure.taxcollector.com/ptaxweb/editPropertySearch2.action",
+      "platform": "manatee_ptaxweb",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Alias for fl_manatee \u2014 see fl_manatee for full notes.",
+      "platform_family": "manatee_proprietary",
+      "status": "ready",
+      "adapter": "src/titlepro/tax/manatee_ptaxweb.py"
+    },
+    "broward": {
+      "base_url": "https://county-taxes.net/broward/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Broward County (FL) Records, Taxes & Treasury \u2014 Grant Street GovHub portal",
+      "notes": "Pure-HTTP adapter at src/titlepro/tax/grant_street_http.py (no Selenium/Playwright). Three-hop flow: (1) Algolia POST to https://0lwzo52ls2-dsn.algolia.net/1/indexes/*/queries with indexName=fl-broward.property_tax resolves APN -> parcel UUID + base64 ID. (2) GET https://county-taxes.net/iframe-taxsys/broward.county-taxes.com/govhub/property-tax/{b64}/load-bill-history yields the Account History table with one row per tax year and an href to /bills/{bill_uuid} for each. (3) GET the iframe-taxsys variant of that bills URL returns 55KB HTML with Ad-Valorem taxing-authority table (assessed/exemption/taxable/tax per authority), Non-Ad-Valorem assessments, alternate key, escrow + millage codes, owner, and situs. Pick the most-recent 'Annual bill' row by default. No anti-bot \u2014 curl_cffi(chrome120) is sufficient.",
+      "apn_format": "##-##-##-##-#### (e.g. 49-42-25-04-0800). Algolia tolerates hyphenated, dashless, and partially-spaced variants.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_broward": {
+      "base_url": "https://county-taxes.net/broward/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Broward County (FL) \u2014 alias matching the recorder-side county_id used by workflow_config (fl_broward).",
+      "notes": "Duplicates the 'broward' entry so the tax dispatcher resolves either form. Both entries point at src/titlepro/tax/grant_street_http.py.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_palm_beach": {
+      "base_url": "https://pbctax.publicaccessnow.com/PropertyTax.aspx",
+      "platform": "pbcpao_tax",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address",
+        "owner"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Palm Beach County (FL) Tax Collector \u2014 Aumentum Technologies PublicAccessNow portal (NOT Grant Street).",
+      "notes": "Palm Beach uses Aumentum Technologies' publicaccessnow.com hosting (different platform from Broward's Grant Street GovHub). No tax-recipe runner ships for Aumentum yet \u2014 flagged as a Wave-2 follow-up. For now, this entry exists so the tax dispatcher resolves the URL and can hand it to a future aumentum_http or playwright_form recipe. PCN format: 12-43-46-21-12-345-6789. Live URL: https://pbctax.publicaccessnow.com/PropertyTax.aspx -> Property Search by PCN/Owner -> Detail view with current-year + prior-year bills.",
+      "platform_family": "aumentum",
+      "recipe": null,
+      "status": "stub_pending_recipe",
+      "_followup": "Build src/titlepro/tax/aumentum_http.py adapter (covers Palm Beach + other FL Aumentum counties per FL_Implementation_Plan.md) OR add a playwright_form recipe at config/tax_recipes/fl_palm_beach.json.",
+      "tax_source": "pbcpao_certified_trim",
+      "note": "Annual certified (TRIM) tax sourced from pbcpao.gov Property-Details; Tax Collector (Aumentum/PublicAccessNow) installment status not HTTP-available. Wired 2026-06-18."
+    },
+    "hillsborough": {
+      "base_url": "https://county-taxes.net/hillsborough/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Hillsborough County (FL) Tax Collector \u2014 Grant Street GovHub portal",
+      "notes": "Pure-HTTP adapter at src/titlepro/tax/grant_street_http.py (shared with Broward; same Algolia app_id+api_key). Algolia index fl-hillsborough.property_tax. Parcel UUID prefix 'hillsborough:real_estate:parents:<uuid>'. iframe subdomain hillsborough.county-taxes.com. Verified 2026-05-26 against FROMER folio 1151460000 (parcel f5249e84-e509-11eb-af6c-00505681b2cf) \u2014 bill-history returned 12+ Annual bill rows.",
+      "apn_format": "###### or ######-#### (10-digit Hillsborough folio, e.g. 1151460000 / 115146-0000)",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_hillsborough": {
+      "base_url": "https://county-taxes.net/hillsborough/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Hillsborough County (FL) \u2014 alias matching the recorder-side county_id used by workflow_config (fl_hillsborough).",
+      "notes": "Duplicates the 'hillsborough' entry so the tax dispatcher resolves either form. Both entries point at src/titlepro/tax/grant_street_http.py.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "orange_fl": {
+      "base_url": "https://ocpa-mainsite-afd-standard.azurefd.net",
+      "alt_base_url": "https://octaxcol.com/_/",
+      "platform": "ocpa_http",
+      "platform_family": "ocpa_prc",
+      "state": "FL",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Orange County (FL) tax bill data sourced from the Property Appraiser PRC endpoints (certified roll). Same county data the Tax Collector bills from. Pure-HTTP via curl_cffi(chrome120) + x-user-key.",
+      "notes": "Adapter src/titlepro/tax/orange_ocpa_http.py uses GetPRCTotalTaxes + GetPRCCertifiedTaxes + GetPRCNonAdValorem + GetPRCPropertyValues. Surfaces APN, tax year, assessed/market/taxable/exemption, annual gross tax, per-authority millage, and non-ad-valorem line items. PAYMENT STATUS (paid/unpaid/delinquent) requires the Tax Collector Aumentum portal at octaxcol.com which is Akamai-WAF blocked from curl_cffi \u2014 deferred to a Wave-2 Playwright recipe. Probed live 2026-05-26 against GREER PID 272230202900330: $13,053.37 gross 2025 taxes ($12,653.37 ad-val + $400.00 non-ad-val).",
+      "_followup_ticket": "Add Aumentum (octaxcol.com) Playwright recipe for paid/unpaid status. Same platform powers Palm Beach FL (config/tax_recipes/fl_palm_beach.json stub). Required for: paid/unpaid status by installment, delinquent flag, tax-bill PDF. Not required for: assessed value, annual amount, non-ad-valorem (all delivered by orange_ocpa_http.py)."
+    },
+    "fl_orange": {
+      "base_url": "https://ocpa-mainsite-afd-standard.azurefd.net",
+      "alt_base_url": "https://octaxcol.com/_/",
+      "platform": "ocpa_http",
+      "platform_family": "ocpa_prc",
+      "state": "FL",
+      "search_type": "hybrid",
+      "search_capabilities": [
+        "apn",
+        "address"
+      ],
+      "captcha": false,
+      "description": "Orange County (FL) \u2014 alias matching the recorder-side county_id used by workflow_config (fl_orange). See 'orange_fl' for full notes."
+    },
+    "fl_clay": {
+      "base_url": "https://county-taxes.net/fl-clay/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Clay County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_hernando": {
+      "base_url": "https://county-taxes.net/fl-hernando/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Hernando County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_martin": {
+      "base_url": "https://county-taxes.net/fl-martin/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Martin County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_citrus": {
+      "base_url": "https://county-taxes.net/citrus/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Citrus County FL Tax Collector \u2014 Grant Street (no fl- prefix)",
+      "platform_family": "grant_street"
+    },
+    "fl_monroe": {
+      "base_url": "https://county-taxes.net/fl-monroe/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Monroe County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_lee": {
+      "base_url": "https://county-taxes.net/fl-lee/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Lee County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_escambia": {
+      "base_url": "https://county-taxes.net/fl-escambia/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Escambia County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_bay": {
+      "base_url": "https://county-taxes.net/fl-bay/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Bay County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_indian_river": {
+      "base_url": "https://county-taxes.net/indianriver/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Indian River County FL Tax Collector \u2014 Grant Street (URL omits 'fl-' prefix)",
+      "platform_family": "grant_street"
+    },
+    "fl_flagler": {
+      "base_url": "https://county-taxes.net/fl-flagler/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Flagler County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_walton": {
+      "base_url": "https://county-taxes.net/fl-walton/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Walton County FL Tax Collector \u2014 Grant Street",
+      "platform_family": "grant_street"
+    },
+    "fl_st_johns": {
+      "base_url": "https://stjohnstax.us",
+      "platform": "publicsoft_http",
+      "status": "stub_pending_recipe",
+      "search_type": "apn",
+      "search_capabilities": [],
+      "captcha": null,
+      "description": "St. Johns FL Tax \u2014 PublicSoft platform \u2014 no production adapter yet",
+      "platform_family": "publicsoft",
+      "_followup": "Build PublicSoft tax recipe"
+    },
+    "fl_levy": {
+      "base_url": "https://levy.floridatax.us",
+      "platform": "publicsoft_http",
+      "status": "stub_pending_recipe",
+      "search_type": "apn",
+      "search_capabilities": [],
+      "captcha": null,
+      "description": "Levy FL Tax \u2014 PublicSoft platform \u2014 no production adapter yet",
+      "platform_family": "publicsoft",
+      "_followup": "Build PublicSoft tax recipe"
+    },
+    "fl_wakulla": {
+      "base_url": "https://wakullacountytaxcollector.com",
+      "platform": "visualgov_http",
+      "status": "stub_pending_recipe",
+      "search_type": "apn",
+      "search_capabilities": [],
+      "captcha": null,
+      "description": "Wakulla FL Tax \u2014 VisualGov platform \u2014 no production adapter yet",
+      "platform_family": "visualgov",
+      "_followup": "Build VisualGov tax recipe"
+    },
+    "fl_okeechobee": {
+      "base_url": "https://okeechobeecountytaxcollector.com",
+      "platform": "visualgov_http",
+      "status": "stub_pending_recipe",
+      "search_type": "apn",
+      "search_capabilities": [],
+      "captcha": null,
+      "description": "Okeechobee FL Tax \u2014 VisualGov platform \u2014 no production adapter yet",
+      "platform_family": "visualgov",
+      "_followup": "Build VisualGov tax recipe"
+    },
+    "fl_pasco": {
+      "base_url": "https://county-taxes.net/pasco/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Pasco County (FL) \u2014 Grant Street GovHub, same backbone as Broward/Hillsborough. Probed 2026-06-10: pasco.county-taxes.com/public redirects to county-taxes.net/fl-pasco, 200 with safari17_2_ios, no challenge.",
+      "notes": "Requires the COUNTY_DEFAULTS['pasco'] patch below in grant_street_http.py (the adapter resolves config from COUNTY_DEFAULTS, not from this file). algolia_index name is by vendor convention \u2014 validate on first Wave-2 lookup.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_duval": {
+      "base_url": "https://county-taxes.net/fl-duval/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Duval County (FL) \u2014 Grant Street GovHub on county-taxes.net (duval.county-taxes.com redirects to county-taxes.net/fl-duval). Confirmed live 2026-06-10 (SKINNER probe).",
+      "notes": "Public path is state-prefixed 'fl-duval' (newer GovHub onboarding), NOT 'duval'. Cloudflare challenges chrome120 \u2014 REQUIRES impersonate=safari17_2_ios. Algolia index fl-duval.property_tax (pattern-derived; verify with one live query in Wave 2).",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_brevard": {
+      "base_url": "https://county-taxes.net/brevard/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "platform_family": "grant_street",
+      "recipe": null,
+      "stub": true,
+      "description": "Brevard County (FL) \u2014 Grant Street GovHub (county-taxes.net). Confirmed live 2026-06-10 (no anti-bot). Config-only swap of the Broward grant_street block. Also add COUNTY_DEFAULTS['brevard'] in src/titlepro/tax/grant_street_http.py: algolia_index 'fl-brevard.property_tax', portal_subdomain 'brevard.county-taxes.com', public_path 'brevard/property-tax', referer 'https://county-taxes.net/brevard/property-tax', shared public algolia app_id 0LWZO52LS2 / api_key c0745578b56854a1b90ed57b63fbf0ba. Wave-2: confirm algolia index name on first run."
+    },
+    "duval": {
+      "base_url": "https://county-taxes.net/fl-duval/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Duval County (FL) \u2014 alias of fl_duval so the tax dispatcher resolves either county-id form.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "lee": {
+      "base_url": "https://county-taxes.net/fl-lee/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Lee County (FL) \u2014 alias matching the unprefixed key grant_street_http COUNTY_DEFAULTS uses (mirrors the broward/fl_broward dual entry).",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_polk": {
+      "base_url": "https://polk.floridatax.us/AccountSearch?s=pt",
+      "platform": "publicsoft_tax",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Polk County (FL) Tax Collector \u2014 PublicSoft (floridatax.us). NOT Grant Street (polk.county-taxes.com does not resolve). ASP.NET WebForms: GET seeds __VIEWSTATE, POST ctl00$MainContent$txtSearchCriteria=APN, follow to account-detail Bill page.",
+      "notes": "Probed live 2026-06-10: GET https://polk.floridatax.us/AccountSearch?s=pt -> HTTP 200 (REACHABLE from Wave-1 egress, unlike the recorder + PA hosts). Page source contains 'PublicSoft'. NO publicsoft_tax adapter exists yet (current tax adapters: grant_street_http, manatee_ptaxweb, orange_ocpa_http). Wave-2: build src/titlepro/tax/publicsoft_tax.py (WebForms scrape; reusable across *.floridatax.us PublicSoft counties), capture a real Bill page, add >=6 tests, flip status -> ready. Keep fetch_tax TRUE with this engineering ticket attached (never silently set fetch_tax:false).",
+      "platform_family": "publicsoft",
+      "recipe": null,
+      "status": "stub_pending_adapter"
+    },
+    "sarasota": {
+      "base_url": "https://county-taxes.net/sarasota/property-tax",
+      "platform": "grant_street_http",
+      "platform_family": "grant_street",
+      "adapter": "src/titlepro/tax/grant_street_http.py",
+      "grant_street": {
+        "algolia_index": "fl-sarasota.property_tax",
+        "portal_subdomain": "sarasota.county-taxes.com",
+        "iframe_path": "property-tax",
+        "public_path": "sarasota/property-tax",
+        "iframe_origin": "https://county-taxes.net",
+        "referer": "https://county-taxes.net/sarasota/property-tax",
+        "authoritative_hosts": [
+          "county-taxes.net"
+        ]
+      },
+      "description": "Sarasota County (FL) Tax Collector \u2014 Grant Street GovHub.",
+      "notes": "Confirmed GovHub 2026-06-10: sarasota.county-taxes.com/public 200 -> redirects to county-taxes.net/fl-sarasota; /sarasota/property-tax serves the identical Vue SPA shell as Broward/Hillsborough (grantstreet-cdn preconnect, entry-govhub bundles). Config-only swap onto grant_street_http.py. algolia_index follows the fl-<county>.property_tax convention \u2014 VERIFY on first Wave-2 lookup (structural Algolia probe was operator-denied in Wave 1). Probe: src/titlepro/api/downloaded_doc/0610/Sarasota_BRUNO_v1/phase0_probe_tax.md."
+    },
+    "fl_sarasota": {
+      "base_url": "https://county-taxes.net/sarasota/property-tax",
+      "platform": "grant_street_http",
+      "platform_family": "grant_street",
+      "adapter": "src/titlepro/tax/grant_street_http.py",
+      "grant_street": {
+        "algolia_index": "fl-sarasota.property_tax",
+        "portal_subdomain": "sarasota.county-taxes.com",
+        "iframe_path": "property-tax",
+        "public_path": "sarasota/property-tax",
+        "iframe_origin": "https://county-taxes.net",
+        "referer": "https://county-taxes.net/sarasota/property-tax",
+        "authoritative_hosts": [
+          "county-taxes.net"
+        ]
+      },
+      "description": "Sarasota County (FL) \u2014 alias matching the recorder-side county_id (fl_sarasota).",
+      "notes": "Duplicates the 'sarasota' entry so the tax dispatcher resolves either form."
+    },
+    "fl_seminole": {
+      "base_url": "https://county-taxes.net/fl-seminole/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "platform_family": "grant_street",
+      "description": "Seminole County Tax Collector \u2014 Grant Street GovHub / TaxSys (county-taxes.net/fl-seminole). Same backbone as Broward + Hillsborough; handled by src/titlepro/tax/grant_street_http.py with the COUNTY_DEFAULTS['seminole'] block.",
+      "notes": "Flipped grant_street -> grant_street_http 2026-06-18 (the bare 'grant_street' platform routed to TAX_NO_RUNNER; the http adapter + COUNTY_DEFAULTS['seminole'] already existed). Live-validated 2026-06-18 from India egress (county-taxes.net NOT geo-blocked): public slug 'fl-seminole', Algolia index fl-seminole.property_tax.",
+      "stub": false
+    },
+    "fl_volusia": {
+      "base_url": "https://county-taxes.net/vctaxcollector/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Volusia County FL Tax Collector (Will Roberts) \u2014 Grant Street GovHub",
+      "notes": "Live-validated 2026-06-10 against GUILD APN 533705070110 (parcel uuid d51ba963-e508-11eb-9998-00505681f6c9): Algolia index fl-volusia.property_tax hit + load-bill-history 200 (2025 Annual bill Paid $844.95 on 02/24/2026; 2024 Paid $679.78). Public browser-bar path is the vanity slug 'vctaxcollector', NOT 'volusia' \u2014 volusia.county-taxes.com 302s to county-taxes.net/vctaxcollector. COUNTY_DEFAULTS['volusia'] added to src/titlepro/tax/grant_street_http.py this session (required \u2014 overrides only apply after a COUNTY_DEFAULTS hit).",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "volusia": {},
+    "fl_miami_dade": {
+      "base_url": "https://county-taxes.net/fl-miamidade/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Miami-Dade County (FL) \u2014 Grant Street GovHub on county-taxes.net (miamidade.county-taxes.com/public redirects to county-taxes.net/fl-miamidade). Probed live 2026-06-18 (0618 NUNEZ/PROPHETE/HAMMONS batch). Key = 13-digit Property Appraiser folio.",
+      "notes": "Public path is state-prefixed 'fl-miamidade'. safari17_2_ios required. Algolia index fl-miamidade.property_tax (pattern-derived; verify with one live query). COUNTY_DEFAULTS['miami_dade'] added to grant_street_http.py this session.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "miami_dade": {
+      "base_url": "https://county-taxes.net/fl-miamidade/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "description": "Miami-Dade County (FL) \u2014 alias of fl_miami_dade so the tax dispatcher resolves either county-id form.",
+      "notes": "Public path is state-prefixed 'fl-miamidade'. safari17_2_ios required. Algolia index fl-miamidade.property_tax (pattern-derived; verify with one live query). COUNTY_DEFAULTS['miami_dade'] added to grant_street_http.py this session.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_lake": {
+      "base_url": "https://county-taxes.net/lake/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Lake County (FL) Tax Collector \u2014 Grant Street GovHub (fl-lake.property_tax Algolia index confirmed 2026-06-19).",
+      "notes": "Algolia index fl-lake.property_tax confirmed live (1511 records). Same app_id/key as other FL GovHub counties. APN format: 03-23-26-0109-000-003D0. Public path lake/property-tax (validate on first lookup). Datacenter 403 is normal \u2014 Algolia API bypasses the public Cloudflare layer.",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_sumter": {
+      "base_url": "https://county-taxes.net/sumter/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Sumter County (FL) Tax Collector \u2014 Grant Street GovHub (fl-sumter.property_tax Algolia index confirmed 2026-06-19).",
+      "notes": "Algolia index fl-sumter.property_tax confirmed live (755 records). Same app_id/key as other FL GovHub counties. APN format: D33G061 (The Villages parcel IDs). Public path sumter/property-tax (validate on first lookup).",
+      "platform_family": "grant_street",
+      "recipe": null
+    },
+    "fl_santa_rosa": {
+      "base_url": "https://county-taxes.net/fl-santarosa/property-tax",
+      "platform": "grant_street_http",
+      "search_type": "apn",
+      "search_capabilities": [
+        "apn"
+      ],
+      "captcha": false,
+      "state": "FL",
+      "description": "Santa Rosa County (FL) Tax Collector — Grant Street GovHub (fl-santarosa.property_tax Algolia index confirmed 2026-06-19).",
+      "notes": "Algolia index fl-santarosa.property_tax confirmed live (WHITE parcel efe55559-e509-11eb-a109-005056b98e38, external_id 231S28000300A000170). Public path fl-santarosa/property-tax (confirmed from parcelview.srcpa.gov link). iframe-taxsys bill-history CF-blocked from datacenter egress — needs residential cf_clearance. Engineering ticket: add santa_rosa CF clearance to ~/.titlepro/santa_rosa_cookies.json.",
+      "platform_family": "grant_street",
+      "recipe": null
+    }
+  }
+}

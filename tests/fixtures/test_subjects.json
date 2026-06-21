@@ -1,0 +1,1970 @@
+{
+  "subjects": {
+    "John Doe": {
+      "vested": [
+        {
+          "owner": "John Doe",
+          "type": "Joint Tenancy",
+          "recorded": "2023-03-10"
+        }
+      ],
+      "liens": [
+        {
+          "lien_type": "Mortgage",
+          "amount": "$500,000",
+          "holder": "ABC Bank",
+          "date": "2023-05-01"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "12345",
+          "title": "Grant Deed",
+          "type": "Deed",
+          "date": "2023-03-10"
+        },
+        {
+          "doc_id": "12346",
+          "title": "Deed of Trust",
+          "type": "Mortgage",
+          "date": "2023-05-01"
+        },
+        {
+          "doc_id": "12345",
+          "title": "Grant Deed",
+          "type": "Deed",
+          "date": "2023-03-10"
+        }
+      ],
+      "party_mapping": {
+        "John Doe": {
+          "role": "Owner"
+        },
+        "ABC Bank": {
+          "role": "Lienholder",
+          "contact": "support@abcbank.com"
+        }
+      }
+    },
+    "Jane & Richard Roe": {
+      "vested": [],
+      "liens": [
+        {
+          "lien_type": "Tax Lien",
+          "amount": "$3,000",
+          "holder": "County Treasurer",
+          "date": "2022-12-15"
+        }
+      ],
+      "documents": [
+        {
+          "doc_id": "84399",
+          "title": "Lien Notice",
+          "type": "Lien",
+          "date": "2022-12-15"
+        }
+      ],
+      "party_mapping": {
+        "Jane Roe": {
+          "role": "Owner"
+        },
+        "Richard Roe": {
+          "role": "Owner"
+        },
+        "County Treasurer": {
+          "role": "Lienholder"
+        }
+      }
+    },
+    "ABBY SMITH (De Soto)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SMITH",
+        "borrower_first_name": "ABBY",
+        "as_shown_on_document": null,
+        "property_address": "1378 NE MANLEY RD, Arcadia",
+        "county": "De Soto",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544332",
+        "tag_reference_no": "9837632-08",
+        "county_platform": "Cericus"
+      }
+    },
+    "BADER BAJALIA (Duval)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BAJALIA",
+        "borrower_first_name": "BADER",
+        "as_shown_on_document": "BADER J BAJALIA AND JEANETTE B BAJALIA",
+        "property_address": "11526 EDGEMERE DR, JACKSONVILLE",
+        "county": "Duval",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-29",
+        "vendor_reference_no": "3544116",
+        "tag_reference_no": "9652064-09",
+        "county_platform": "Cericus"
+      }
+    },
+    "MARK EIGINGER (Duval)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "EIGINGER",
+        "borrower_first_name": "MARK",
+        "as_shown_on_document": null,
+        "property_address": "14526 TRANQUILITY CREEK DR, Jacksonville",
+        "county": "Duval",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-27",
+        "vendor_reference_no": "3543191",
+        "tag_reference_no": "9901469-07",
+        "county_platform": "Cericus"
+      }
+    },
+    "GARY HALL (Franklin)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HALL",
+        "borrower_first_name": "GARY",
+        "as_shown_on_document": "GARY L HALL AND SANDRA J HALL",
+        "property_address": "102 5TH ST, APALACHICOLA",
+        "county": "Franklin",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-29",
+        "vendor_reference_no": "3552846",
+        "tag_reference_no": "9794788-04",
+        "county_platform": "Cericus"
+      }
+    },
+    "SPENCER KELLY (Nassau)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "KELLY",
+        "borrower_first_name": "SPENCER",
+        "as_shown_on_document": "SPENCER R KELLY AND MAREN B KELLY HW",
+        "property_address": "95175 SHELL MIDDEN LN, FERNANDINA BEACH",
+        "county": "Nassau",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544545",
+        "tag_reference_no": "9882579-08",
+        "county_platform": "Clericus"
+      }
+    },
+    "ROBERT TEGGE (Sumter)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "TEGGE",
+        "borrower_first_name": "ROBERT",
+        "as_shown_on_document": "ROBERT TEGGE AND KAMERON A TEGGE HW",
+        "property_address": "2053 LARKWOOD CT, THE VILLAGES",
+        "county": "Sumter",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547320",
+        "tag_reference_no": "9907988-04",
+        "county_platform": "Clericus"
+      }
+    },
+    "DONNA GILLIAND (Sumter)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "GILLIAND",
+        "borrower_first_name": "DONNA",
+        "as_shown_on_document": null,
+        "property_address": "1917 ARMONDO DR, LADY LAKE",
+        "county": "Sumter",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-14",
+        "vendor_reference_no": "3548443",
+        "tag_reference_no": "9904227-04",
+        "county_platform": "Clericus"
+      }
+    },
+    "DEREK PROSSER (Sumter)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "PROSSER",
+        "borrower_first_name": "DEREK",
+        "as_shown_on_document": null,
+        "property_address": "1316 SUMMERLIN ST, THE VILLAGES",
+        "county": "Sumter",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-19",
+        "vendor_reference_no": "3549758",
+        "tag_reference_no": "9883960-05",
+        "county_platform": "Clericus"
+      }
+    },
+    "VERNON KNOLL (Seminole)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "KNOLL",
+        "borrower_first_name": "VERNON",
+        "as_shown_on_document": "VERNON KNOLL AND MICHELE KNOLL HW",
+        "property_address": "902 WAYBOURNE WAY, LAKE MARY",
+        "county": "Seminole",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544393",
+        "tag_reference_no": "9802036-04",
+        "county_platform": "DuProcess"
+      }
+    },
+    "LATOYA SMITH (Seminole)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SMITH",
+        "borrower_first_name": "LATOYA",
+        "as_shown_on_document": null,
+        "property_address": "116 BELLA ROSA CIR, SANFORD",
+        "county": "Seminole",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544402",
+        "tag_reference_no": "9808886-04",
+        "county_platform": "DuProcess"
+      }
+    },
+    "JORDY GOMEZ ROSARIO (Seminole)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "GOMEZ ROSARIO",
+        "borrower_first_name": "JORDY",
+        "as_shown_on_document": null,
+        "property_address": "886 LEWIS PL, LONGWOOD",
+        "county": "Seminole",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-14",
+        "vendor_reference_no": "3548896",
+        "tag_reference_no": "9765585-07",
+        "county_platform": "DuProcess"
+      }
+    },
+    "PETER ROMAS (Bay)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ROMAS",
+        "borrower_first_name": "PETER",
+        "as_shown_on_document": "Peter Euthyumus Romas and Mary Rose Romas",
+        "property_address": "8700 FRONT BEACH RD UNIT 2101, PANAMA CITY BEACH",
+        "county": "Bay",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544330",
+        "tag_reference_no": "9817414-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "ERICK MUSSELMAN (Citrus)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MUSSELMAN",
+        "borrower_first_name": "ERICK",
+        "as_shown_on_document": "ERICK PAUL MUSSELMAN AND DEBORAH J MUSSELMAN HW",
+        "property_address": "2451 N STAMPEDE DR, BEVERLY HILLS",
+        "county": "Citrus",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-14",
+        "vendor_reference_no": "3548455",
+        "tag_reference_no": "9931557-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "GREGG TORRES (Citrus)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "TORRES",
+        "borrower_first_name": "GREGG",
+        "as_shown_on_document": "GREGG TORRES AND KATHERINE BARNETT",
+        "property_address": "4435 E AVOCET CT, INVERNESS",
+        "county": "Citrus",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-18",
+        "vendor_reference_no": "3549401",
+        "tag_reference_no": "9903114-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "NICHOLAS SMITH (Clay)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SMITH",
+        "borrower_first_name": "NICHOLAS",
+        "as_shown_on_document": "NICHOLAS SMITH AND MONICA SMITH HW",
+        "property_address": "571 TYNES BLVD, Middleburg",
+        "county": "Clay",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544548",
+        "tag_reference_no": "9931034-08",
+        "county_platform": "Landmark"
+      }
+    },
+    "RACHEL HOLMGREN (Clay)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HOLMGREN",
+        "borrower_first_name": "RACHEL",
+        "as_shown_on_document": "RACHEL ANN HOLMGREN AND ALLEN HOLMGREN",
+        "property_address": "2567 SIGMA CT, ORANGE PARK",
+        "county": "Clay",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-12",
+        "vendor_reference_no": "3547605",
+        "tag_reference_no": "9890780-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "MELISSA GILLISPIE (Clay)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "GILLISPIE",
+        "borrower_first_name": "MELISSA",
+        "as_shown_on_document": "JOSHUA GILLISPIE AND MELISSA GILLISPIE HW",
+        "property_address": "1877 SENTRY OAK CT, Fleming Island",
+        "county": "Clay",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-26",
+        "vendor_reference_no": "3551537",
+        "tag_reference_no": "9941963-07",
+        "county_platform": "Landmark"
+      }
+    },
+    "ROGER HILLIS (Escambia)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HILLIS",
+        "borrower_first_name": "ROGER",
+        "as_shown_on_document": "ROGER A HILLIS AND STEPHANIE HILLIS HW",
+        "property_address": "1460 TARA DAWN LN, PENSACOLA",
+        "county": "Escambia",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544986",
+        "tag_reference_no": "9793262-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "GIACOMO FEDERICO (Flagler)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "FEDERICO",
+        "borrower_first_name": "GIACOMO",
+        "as_shown_on_document": "same",
+        "property_address": "610 SOUTHLAKE DR, ORMOND BEACH",
+        "county": "Flagler",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-18",
+        "vendor_reference_no": "3549212",
+        "tag_reference_no": "9842379-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "SAMANTHA WILSON (Flagler)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "WILSON",
+        "borrower_first_name": "SAMANTHA",
+        "as_shown_on_document": null,
+        "property_address": "29 BLAINE DR, PALM COAST",
+        "county": "Flagler",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-26",
+        "vendor_reference_no": "3551374",
+        "tag_reference_no": "9940447-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "JAMIE ROBINETTE (Hernando)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ROBINETTE",
+        "borrower_first_name": "JAMIE",
+        "as_shown_on_document": "same",
+        "property_address": "900 MOONLIGHT LN, BROOKSVILLE",
+        "county": "Hernando",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-27",
+        "vendor_reference_no": "3543391",
+        "tag_reference_no": "9783294-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "GLENN VALCARCEL (Hernando)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "VALCARCEL",
+        "borrower_first_name": "GLENN",
+        "as_shown_on_document": null,
+        "property_address": "1227 VENETIA DR, SPRING HILL",
+        "county": "Hernando",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544340",
+        "tag_reference_no": "9872929-06",
+        "county_platform": "Landmark"
+      }
+    },
+    "KATHLEEN POGANY (Indian River)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "POGANY",
+        "borrower_first_name": "KATHLEEN",
+        "as_shown_on_document": "KATHLEEN POGANY AND JASON POGANY HW",
+        "property_address": "4023 SILVER PALM DRIVE # 10, VERO BEACH",
+        "county": "Indian River",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-13",
+        "vendor_reference_no": "3543386",
+        "tag_reference_no": "9830819-05",
+        "county_platform": "Landmark"
+      }
+    },
+    "KATHI VANDERMOLEN (Indian River)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "VANDERMOLEN",
+        "borrower_first_name": "KATHI",
+        "as_shown_on_document": null,
+        "property_address": "2165 HAWK RIVER DR SW, VERO BEACH",
+        "county": "Indian River",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-26",
+        "vendor_reference_no": "3546499",
+        "tag_reference_no": "9858589-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "NELSON MADRIGAL (Marion)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MADRIGAL",
+        "borrower_first_name": "NELSON",
+        "as_shown_on_document": "NELSON MADRIGAL AND NORMA PADILLA HW",
+        "property_address": "15317 SW 65TH TERRACE RD, OCALA",
+        "county": "Marion",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545329",
+        "tag_reference_no": "9872827-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "JASON YEARY (Marion)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "YEARY",
+        "borrower_first_name": "JASON",
+        "as_shown_on_document": null,
+        "property_address": "2811 SE 19TH CT, OCALA",
+        "county": "Marion",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-06",
+        "vendor_reference_no": "3546049",
+        "tag_reference_no": "9830814-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "ANNE BLAIS (Marion)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BLAIS",
+        "borrower_first_name": "ANNE",
+        "as_shown_on_document": null,
+        "property_address": "5393 NW 35TH LANE RD, OCALA",
+        "county": "Marion",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547317",
+        "tag_reference_no": "9895846-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "TINA COLLINA (Martin)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "COLLINA",
+        "borrower_first_name": "TINA",
+        "as_shown_on_document": "SAME",
+        "property_address": "1037 SW 37TH ST, Palm City",
+        "county": "Martin",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-04",
+        "vendor_reference_no": "3540239",
+        "tag_reference_no": "9894287-05",
+        "county_platform": "Landmark"
+      }
+    },
+    "WILLIAM MCKENNA (Martin)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MCKENNA",
+        "borrower_first_name": "WILLIAM",
+        "as_shown_on_document": null,
+        "property_address": "1177 SW LIGHTHOUSE DR, Palm City",
+        "county": "Martin",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-06",
+        "vendor_reference_no": "3546217",
+        "tag_reference_no": "9925596-09",
+        "county_platform": "Landmark"
+      }
+    },
+    "LARISSA COLON-BENGOA (Martin)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "COLON-BENGOA",
+        "borrower_first_name": "LARISSA",
+        "as_shown_on_document": null,
+        "property_address": "20036 SE BRIDGEWATER DR, JUPITER",
+        "county": "Martin",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547310",
+        "tag_reference_no": "9877339-08",
+        "county_platform": "Landmark"
+      }
+    },
+    "JOHN CURRY (Monroe)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "CURRY",
+        "borrower_first_name": "JOHN",
+        "as_shown_on_document": "JOHN L CURRY AND TERRI LYNN CURRY",
+        "property_address": "222 JOLLY ROGER DR, KEY LARGO",
+        "county": "Monroe",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-14",
+        "vendor_reference_no": "3548555",
+        "tag_reference_no": "9914025-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "ANNE MCINTOSH (Okeechobee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MCINTOSH",
+        "borrower_first_name": "ANNE",
+        "as_shown_on_document": "ANNE PELL MCINTOSH AND MARY JANE PELL",
+        "property_address": "3315 SW 18TH ST, OKEECHOBEE",
+        "county": "Okeechobee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-21",
+        "vendor_reference_no": "3550489",
+        "tag_reference_no": "9735791-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "VICTOR PANIAGUA (Okeechobee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "PANIAGUA",
+        "borrower_first_name": "VICTOR",
+        "as_shown_on_document": null,
+        "property_address": "1104 NW 6TH ST, OKEECHOBEE",
+        "county": "Okeechobee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-29",
+        "vendor_reference_no": "3553079",
+        "tag_reference_no": "9954760-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "ANDREW VOLLMAN (Palm Beach)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "VOLLMAN",
+        "borrower_first_name": "ANDREW",
+        "as_shown_on_document": "ANDREW VOLLMAN AND GRACE MELINDA WU",
+        "property_address": "102 SEGOVIA WAY, Jupiter",
+        "county": "Palm Beach",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3542155",
+        "tag_reference_no": "9756597-05",
+        "county_platform": "Landmark"
+      }
+    },
+    "SANTOSH MATHEN (Palm Beach)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MATHEN",
+        "borrower_first_name": "SANTOSH",
+        "as_shown_on_document": null,
+        "property_address": "19772 BACK NINE DR, BOCA RATON",
+        "county": "Palm Beach",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544338",
+        "tag_reference_no": "9871664-08",
+        "county_platform": "Landmark"
+      }
+    },
+    "GARY DEMARS (Palm Beach)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "DEMARS",
+        "borrower_first_name": "GARY",
+        "as_shown_on_document": null,
+        "property_address": "9294 HEATHRIDGE DR, WEST PALM BEACH",
+        "county": "Palm Beach",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-04",
+        "vendor_reference_no": "3545575",
+        "tag_reference_no": "9901375-04",
+        "county_platform": "Landmark"
+      }
+    },
+    "RICHARD MEEK (Saint Johns)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MEEK",
+        "borrower_first_name": "RICHARD",
+        "as_shown_on_document": "SAME",
+        "property_address": "400 SAN NICOLAS WAY, ST. AUGUSTINE",
+        "county": "Saint Johns",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544543",
+        "tag_reference_no": "9847942-07",
+        "county_platform": "Landmark"
+      }
+    },
+    "JOHN MULLIN (Saint Johns)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MULLIN",
+        "borrower_first_name": "JOHN",
+        "as_shown_on_document": null,
+        "property_address": "64 WILD EGRET LANE, ST AUGUSTINE",
+        "county": "Saint Johns",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544988",
+        "tag_reference_no": "9878217-05",
+        "county_platform": "Landmark"
+      }
+    },
+    "KENNETH ALTMANN (Saint Johns)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ALTMANN",
+        "borrower_first_name": "KENNETH",
+        "as_shown_on_document": null,
+        "property_address": "44 PULLMAN CIR, ST. AUGUSTINE",
+        "county": "Saint Johns",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-06-01",
+        "vendor_reference_no": "3553531",
+        "tag_reference_no": "9963103-09",
+        "county_platform": "Landmark"
+      }
+    },
+    "CHRISTIANE JETT (Walton)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "JETT",
+        "borrower_first_name": "CHRISTIANE",
+        "as_shown_on_document": "JOAB JETT AND CHRISTIANE DAWN JETT HW",
+        "property_address": "2250 SCENIC GULF DR UNIT 105B, Miramar Beach",
+        "county": "Walton",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544989",
+        "tag_reference_no": "9888844-05",
+        "county_platform": "Landmark"
+      }
+    },
+    "CARY SHAHID (Walton)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SHAHID",
+        "borrower_first_name": "CARY",
+        "as_shown_on_document": null,
+        "property_address": "51 KENSINGTON LANE 51A, MIRAMAR BEACH",
+        "county": "Walton",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-06-01",
+        "vendor_reference_no": "3553460",
+        "tag_reference_no": "9897464-07",
+        "county_platform": "Landmark"
+      }
+    },
+    "ANGELA LEWIS (Brevard)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "LEWIS",
+        "borrower_first_name": "ANGELA",
+        "as_shown_on_document": "same",
+        "property_address": "977 HAMMACHER AVE SW, PALM BAY",
+        "county": "Brevard",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-04",
+        "vendor_reference_no": "3545574",
+        "tag_reference_no": "9897706-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "RICHARD OHALLARON (Brevard)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "OHALLARON",
+        "borrower_first_name": "RICHARD",
+        "as_shown_on_document": "RICHARD D OHALLARON AND PAMELA G OHALLARON HW",
+        "property_address": "8021 WAXWING CIR, MELBOURNE",
+        "county": "Brevard",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-13",
+        "vendor_reference_no": "3548117",
+        "tag_reference_no": "9885632-05",
+        "county_platform": "OneCare"
+      }
+    },
+    "LAURENCE BROWN (Lake)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BROWN",
+        "borrower_first_name": "LAURENCE",
+        "as_shown_on_document": "LAURENCE BROWN AND KATHLEEN MARY BROWN",
+        "property_address": "3513 BELLAND CIR UNIT D, CLERMONT",
+        "county": "Lake",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-04",
+        "vendor_reference_no": "3545578",
+        "tag_reference_no": "9921399-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "ANA RAMIREZ (Lake)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "RAMIREZ",
+        "borrower_first_name": "ANA",
+        "as_shown_on_document": null,
+        "property_address": "30850 TULIP AVE, Eustis",
+        "county": "Lake",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-06",
+        "vendor_reference_no": "3546219",
+        "tag_reference_no": "9881496-05",
+        "county_platform": "OneCare"
+      }
+    },
+    "RUSSELL BRAMLAGE (Lake)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BRAMLAGE",
+        "borrower_first_name": "RUSSELL",
+        "as_shown_on_document": null,
+        "property_address": "3649 CONSERVATION TRL, THE VILLAGES",
+        "county": "Lake",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-06-01",
+        "vendor_reference_no": "3553450",
+        "tag_reference_no": "9955276-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "MORAIMA ORTA-GONZALEZ (Lee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ORTA-GONZALEZ",
+        "borrower_first_name": "MORAIMA",
+        "as_shown_on_document": "BARBARO GONZALEZ SOLIS AKA BARBARO GONZALEZ AND MORAIMA A ORTA GONZALEZ HW",
+        "property_address": "2300 SE 5TH ST, CAPE CORAL",
+        "county": "Lee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547323",
+        "tag_reference_no": "9919347-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "LISA MILLER (Lee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MILLER",
+        "borrower_first_name": "LISA",
+        "as_shown_on_document": null,
+        "property_address": "5720 SANDPIPER PL, FORT MYERS",
+        "county": "Lee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-18",
+        "vendor_reference_no": "3549185",
+        "tag_reference_no": "9747880-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "FLORY HERMAN (Lee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HERMAN",
+        "borrower_first_name": "FLORY",
+        "as_shown_on_document": null,
+        "property_address": "19393 LA SERENA DR, ESTERO",
+        "county": "Lee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-06-03",
+        "vendor_reference_no": "3554312",
+        "tag_reference_no": "9913545-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "DANIEL DOWNING (Pinellas)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "DOWNING",
+        "borrower_first_name": "DANIEL",
+        "as_shown_on_document": "ROBIN S DOWNING AND DANIEL DOWNING HW",
+        "property_address": "4007 JENITA DR, PALM HARBOR",
+        "county": "Pinellas",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544434",
+        "tag_reference_no": "9833039-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "MICHAEL COLLINS (Pinellas)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "COLLINS",
+        "borrower_first_name": "MICHAEL",
+        "as_shown_on_document": null,
+        "property_address": "3163 LANDMARK DR APT 621, CLEARWATER",
+        "county": "Pinellas",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544466",
+        "tag_reference_no": "9844063-04",
+        "county_platform": "OneCare"
+      }
+    },
+    "JOEL YOTAS (Pinellas)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "YOTAS",
+        "borrower_first_name": "JOEL",
+        "as_shown_on_document": null,
+        "property_address": "631 CAPISTRANO CT, Largo",
+        "county": "Pinellas",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547322",
+        "tag_reference_no": "9910534-07",
+        "county_platform": "OneCare"
+      }
+    },
+    "KENDRIA HAWKINS (Broward)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HAWKINS",
+        "borrower_first_name": "KENDRIA",
+        "as_shown_on_document": "same",
+        "property_address": "8415 SHADOW CT #1-10, CORAL SPRINGS",
+        "county": "Broward",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544454",
+        "tag_reference_no": "9839438-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RENE GONZALEZ (Broward)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "GONZALEZ",
+        "borrower_first_name": "RENE",
+        "as_shown_on_document": "RENE GONZALEZ AND EDRIS RODRIGUEZ",
+        "property_address": "6641 SEGOVIA CIR N, FORT LAUDERDALE",
+        "county": "Broward",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-19",
+        "vendor_reference_no": "3549756",
+        "tag_reference_no": "9881582-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RICHARD DECARLO (Broward)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "DECARLO",
+        "borrower_first_name": "RICHARD",
+        "as_shown_on_document": "RICHARD DECARLO AND NICOLE DECARLO AKA MARIA J NICOLE DECARIO HW",
+        "property_address": "12202 NW 75TH PL, Parkland",
+        "county": "Broward",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-18",
+        "vendor_reference_no": "3549402",
+        "tag_reference_no": "9918118-05",
+        "county_platform": "Proprietary"
+      }
+    },
+    "IVAN OLAR (Charlotte)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "OLAR",
+        "borrower_first_name": "IVAN",
+        "as_shown_on_document": "IVAN OLAR AND ERICA OLAR",
+        "property_address": "100 LONG MEADOW LN, Rotonda West",
+        "county": "Charlotte",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-08",
+        "vendor_reference_no": "3546965",
+        "tag_reference_no": "9696483-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "DIANE KAYS (Charlotte)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "KAYS",
+        "borrower_first_name": "DIANE",
+        "as_shown_on_document": "MARK C KAYS AND DIANE M KAYS HW",
+        "property_address": "29528 CLARK DR, PUNTA GORDA",
+        "county": "Charlotte",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-29",
+        "vendor_reference_no": "3552817",
+        "tag_reference_no": "9966596-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "H CAMPBELL (Charlotte)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "CAMPBELL",
+        "borrower_first_name": "H",
+        "as_shown_on_document": "HARRY LEE CAMPBELL AND ALLENE MARIE COLLINS HW",
+        "property_address": "3442 SWANEE RD, Port Charlotte",
+        "county": "Charlotte",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-29",
+        "vendor_reference_no": "3552818",
+        "tag_reference_no": "9968280-07",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RANDY HACKER (Collier)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HACKER",
+        "borrower_first_name": "RANDY",
+        "as_shown_on_document": "RANDALL HACKER AND ANGELA HACKER HW",
+        "property_address": "4230 5TH AVE NW, NAPLES",
+        "county": "Collier",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545306",
+        "tag_reference_no": "9849281-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "BARBARA GARBINSKY (Collier)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "GARBINSKY",
+        "borrower_first_name": "BARBARA",
+        "as_shown_on_document": "BARBARA AND ROBERT GARBINSKY",
+        "property_address": "653 95TH AVE N, NAPLES",
+        "county": "Collier",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-19",
+        "vendor_reference_no": "3549713",
+        "tag_reference_no": "9851836-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "SUSAN BAKER (Collier)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BAKER",
+        "borrower_first_name": "SUSAN",
+        "as_shown_on_document": "JEFFREY S BAKE AND SUSAN E BAKER",
+        "property_address": "9711 LITCHFIELD LN, NAPLES",
+        "county": "Collier",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-28",
+        "vendor_reference_no": "3552315",
+        "tag_reference_no": "9858008-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RAMESH KOLA (Hillsborough)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "KOLA",
+        "borrower_first_name": "RAMESH",
+        "as_shown_on_document": "RAMESH KOLA AND SAI SWARUPA MANDADI HW",
+        "property_address": "20620 GREAT LAUREL AVE, Tampa",
+        "county": "Hillsborough",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-28",
+        "vendor_reference_no": "3543876",
+        "tag_reference_no": "9887102-05",
+        "county_platform": "Proprietary"
+      }
+    },
+    "LISAQ SATMARY MARTINEZ (Hillsborough)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SATMARY MARTINEZ",
+        "borrower_first_name": "LISAQ",
+        "as_shown_on_document": null,
+        "property_address": "777 N ASHLEY DR UNIT 2810, Tampa",
+        "county": "Hillsborough",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-19",
+        "vendor_reference_no": "3549818",
+        "tag_reference_no": "9929866-08",
+        "county_platform": "Proprietary"
+      }
+    },
+    "KELLY PAFFEL (Hillsborough)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "PAFFEL",
+        "borrower_first_name": "KELLY",
+        "as_shown_on_document": null,
+        "property_address": "2111 SEAMAN RD, TAMPA",
+        "county": "Hillsborough",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-21",
+        "vendor_reference_no": "3550544",
+        "tag_reference_no": "9854015-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "TELLIE JONES (Leon)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "JONES",
+        "borrower_first_name": "TELLIE",
+        "as_shown_on_document": "same",
+        "property_address": "4828 EASY ST, Tallahassee",
+        "county": "Leon",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-13",
+        "vendor_reference_no": "3548008",
+        "tag_reference_no": "9875156-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "DANIEL SHAUL (Manatee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SHAUL",
+        "borrower_first_name": "DANIEL",
+        "as_shown_on_document": "DANIEL SHAUL AND DIANA R SHAUL HW",
+        "property_address": "10304 SPOONBILL RD W, BRADENTON",
+        "county": "Manatee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544535",
+        "tag_reference_no": "9855639-06",
+        "county_platform": "Proprietary"
+      }
+    },
+    "FRANCES JAMES (Manatee)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "JAMES",
+        "borrower_first_name": "FRANCES",
+        "as_shown_on_document": null,
+        "property_address": "7201 29TH AVENUE DR W APT 304, BRADENTON",
+        "county": "Manatee",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-06",
+        "vendor_reference_no": "3545999",
+        "tag_reference_no": "9798306-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RAFAEL NUNEZ (Miami-Dade)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "NUNEZ",
+        "borrower_first_name": "RAFAEL",
+        "as_shown_on_document": "same",
+        "property_address": "601 NE 27TH ST APT 1701, Miami",
+        "county": "Miami-Dade",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-23",
+        "vendor_reference_no": "3542405",
+        "tag_reference_no": "9848394-07",
+        "county_platform": "Proprietary"
+      }
+    },
+    "KEVIN PROPHETE (Miami-Dade)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "PROPHETE",
+        "borrower_first_name": "KEVIN",
+        "as_shown_on_document": null,
+        "property_address": "832 NW 206TH TER, MIAMI",
+        "county": "Miami-Dade",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544390",
+        "tag_reference_no": "9801952-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "SCARLET HAMMONS (Miami-Dade)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HAMMONS",
+        "borrower_first_name": "SCARLET",
+        "as_shown_on_document": null,
+        "property_address": "11500 GRIFFING BLVD, BISCAYNE PARK",
+        "county": "Miami-Dade",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544336",
+        "tag_reference_no": "9863658-06",
+        "county_platform": "Proprietary"
+      }
+    },
+    "CHRISTOPHER ARROYO ROBLES (Osceola)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ARROYO ROBLES",
+        "borrower_first_name": "CHRISTOPHER",
+        "as_shown_on_document": "CHRISTOPHER ARROYA-ROBLES AND NEISHA Y NEGRON RIVERA HW",
+        "property_address": "1066 BERKELEY DR, KISSIMMEE",
+        "county": "Osceola",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544987",
+        "tag_reference_no": "9864351-09",
+        "county_platform": "Proprietary"
+      }
+    },
+    "MALLORY CRITES (Osceola)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "CRITES",
+        "borrower_first_name": "MALLORY",
+        "as_shown_on_document": null,
+        "property_address": "5160 CANTANIA CT, SAINT CLOUD",
+        "county": "Osceola",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-06",
+        "vendor_reference_no": "3546062",
+        "tag_reference_no": "9834928-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "MICHAEL MUSSO (Osceola)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MUSSO",
+        "borrower_first_name": "MICHAEL",
+        "as_shown_on_document": null,
+        "property_address": "315 GRAND MAGNOLIA AVE APT 213, CELEBRATION",
+        "county": "Osceola",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-11",
+        "vendor_reference_no": "3547308",
+        "tag_reference_no": "9865864-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "ROBERT ENGELKE (Pasco)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ENGELKE",
+        "borrower_first_name": "ROBERT",
+        "as_shown_on_document": "SAME",
+        "property_address": "10141 RINGLING ST, NEW PORT RICHEY",
+        "county": "Pasco",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545204",
+        "tag_reference_no": "9846371-06",
+        "county_platform": "Proprietary"
+      }
+    },
+    "JENNIFER ALBANO (Pasco)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ALBANO",
+        "borrower_first_name": "JENNIFER",
+        "as_shown_on_document": null,
+        "property_address": "11453 SHORT COURT, New Port Richey",
+        "county": "Pasco",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-27",
+        "vendor_reference_no": "3540302",
+        "tag_reference_no": "9873550-06",
+        "county_platform": "Proprietary"
+      }
+    },
+    "CAROL SCHECKLER (Pasco)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SCHECKLER",
+        "borrower_first_name": "CAROL",
+        "as_shown_on_document": null,
+        "property_address": "38231 BOXWOOD DR, ZEPHYRHILLS",
+        "county": "Pasco",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545215",
+        "tag_reference_no": "9875628-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RUTH BRITO (Polk)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "BRITO",
+        "borrower_first_name": "RUTH",
+        "as_shown_on_document": "SAME",
+        "property_address": "1001 PRADO GRANDE ST, HAINES CITY",
+        "county": "Polk",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545178",
+        "tag_reference_no": "9813783-05",
+        "county_platform": "Proprietary"
+      }
+    },
+    "NEIL ERICKSON (Polk)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ERICKSON",
+        "borrower_first_name": "NEIL",
+        "as_shown_on_document": null,
+        "property_address": "5810 STARLING DR, MULBERRY",
+        "county": "Polk",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-04",
+        "vendor_reference_no": "3545569",
+        "tag_reference_no": "9825388-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "ALEXANDRA ROJAS (Polk)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ROJAS",
+        "borrower_first_name": "ALEXANDRA",
+        "as_shown_on_document": null,
+        "property_address": "7 LAKE ELOISE LN, WINTER HAVEN",
+        "county": "Polk",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545220",
+        "tag_reference_no": "9907427-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "FREDERICK WEBSTER (Saint Lucie)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "WEBSTER",
+        "borrower_first_name": "FREDERICK",
+        "as_shown_on_document": "FREDERICK WEBSTER II AND KERRIE A WEBSTER HW",
+        "property_address": "772 NW DUPRE ST, Port Saint Lucie",
+        "county": "Saint Lucie",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-12",
+        "vendor_reference_no": "3547632",
+        "tag_reference_no": "9952685-06",
+        "county_platform": "Proprietary"
+      }
+    },
+    "DUSTIN FREEMAN (Saint Lucie)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "FREEMAN",
+        "borrower_first_name": "DUSTIN",
+        "as_shown_on_document": null,
+        "property_address": "2132 SW HARRISON AVE, Port Saint Lucie",
+        "county": "Saint Lucie",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-14",
+        "vendor_reference_no": "3548444",
+        "tag_reference_no": "9910300-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "TIMOTHY WHITE (Santa Rosa)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "WHITE",
+        "borrower_first_name": "TIMOTHY",
+        "as_shown_on_document": "TIMOTHY WHITE AND AMANDA WHITE HW",
+        "property_address": "1009 RIN CT, Milton",
+        "county": "Santa Rosa",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544781",
+        "tag_reference_no": "9880764-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "SETH HOFFMAN (Santa Rosa)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HOFFMAN",
+        "borrower_first_name": "SETH",
+        "as_shown_on_document": null,
+        "property_address": "2271 HORN RD, MILTON",
+        "county": "Santa Rosa",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-21",
+        "vendor_reference_no": "3550670",
+        "tag_reference_no": "9896311-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "NICHOLAS HENDRICKSON (Santa Rosa)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "HENDRICKSON",
+        "borrower_first_name": "NICHOLAS",
+        "as_shown_on_document": null,
+        "property_address": "1291 BAGDAD CV, GULF BREEZE",
+        "county": "Santa Rosa",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-26",
+        "vendor_reference_no": "3551372",
+        "tag_reference_no": "9918692-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "DAVID SEAL (Volusia)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "SEAL",
+        "borrower_first_name": "DAVID",
+        "as_shown_on_document": "SAME",
+        "property_address": "2 CANTERBURY WOODS, Ormond Beach",
+        "county": "Volusia",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-01",
+        "vendor_reference_no": "3544779",
+        "tag_reference_no": "9859208-08",
+        "county_platform": "Proprietary"
+      }
+    },
+    "JEFFREY WATKINS (Volusia)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "WATKINS",
+        "borrower_first_name": "JEFFREY",
+        "as_shown_on_document": null,
+        "property_address": "558 N HALIFAX DR, ORMOND BEACH",
+        "county": "Volusia",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-05",
+        "vendor_reference_no": "3545310",
+        "tag_reference_no": "9854062-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "KEVIN MANLEY (Volusia)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "MANLEY",
+        "borrower_first_name": "KEVIN",
+        "as_shown_on_document": null,
+        "property_address": "2 TROPICAL LN, DAYTONA BEACH",
+        "county": "Volusia",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-05-13",
+        "vendor_reference_no": "3548010",
+        "tag_reference_no": "9880858-04",
+        "county_platform": "Proprietary"
+      }
+    },
+    "RENE ESCOBAR (Orange)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "ESCOBAR",
+        "borrower_first_name": "RENE",
+        "as_shown_on_document": "RENE ESCOBAR AND THELMA O ESCOBAR HW",
+        "property_address": "6721 FORSYTH OAK CT, Orlando",
+        "county": "Orange",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-28",
+        "vendor_reference_no": "3543882",
+        "tag_reference_no": "9872821-07",
+        "county_platform": "Tyler"
+      }
+    },
+    "JOHN KELLEY (Orange)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "KELLEY",
+        "borrower_first_name": "JOHN",
+        "as_shown_on_document": null,
+        "property_address": "203 SALVADOR SQ, WINTER PARK",
+        "county": "Orange",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544389",
+        "tag_reference_no": "9800786-04",
+        "county_platform": "Tyler"
+      }
+    },
+    "SANTOR NISHIZAKI (Orange)": {
+      "vested": [],
+      "liens": [],
+      "documents": [],
+      "party_mapping": {},
+      "meta": {
+        "ingest_batch": "2026-06-17",
+        "source": "FL Test Subjects sheet",
+        "borrower": "NISHIZAKI",
+        "borrower_first_name": "SANTOR",
+        "as_shown_on_document": null,
+        "property_address": "12758 CHARMED DR, Winter Garden",
+        "county": "Orange",
+        "state": "FL",
+        "document_type": "Mortgage - Security Deed",
+        "recorded_date": "2026-04-30",
+        "vendor_reference_no": "3544556",
+        "tag_reference_no": "9854332-05",
+        "county_platform": "Tyler"
+      }
+    }
+  }
+}

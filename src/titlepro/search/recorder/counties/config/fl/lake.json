@@ -1,0 +1,77 @@
+{
+  "county_id": "fl_lake",
+  "county_name": "Lake",
+  "state": "FL",
+  "platform": "onecare_http",
+  "status": "live",
+  "live_confirmed": "2026-06-18",
+
+  "base_url": "https://officialrecords.lakecountyclerk.org/",
+  "disclaimer_url": "https://officialrecords.lakecountyclerk.org/search/Disclaimer",
+  "search_url": "https://officialrecords.lakecountyclerk.org/search/SearchTypeName",
+
+  "cloudflare_required": false,
+  "captcha_required": false,
+  "impersonate_profile": "safari17_2_ios",
+
+  "_SEARCH_FLOW_NOTE": "Three-step AcclaimWeb (Telerik 2012). Identical to Brevard but: (1) GridResults requires X-Requested-With: XMLHttpRequest or returns 500; (2) camelCase JSON keys 'data'/'total'; (3) Official Records BookType=1 (Brevard=3); (4) Deed DocType=26 (Brevard=80); (5) PDF endpoint is /Image/DocumentPdfAllPages/{TransactionItemId} — not WebAtalaCache.",
+
+  "default_book_type_numeric": "1",
+
+  "doctype_deed_value": "26",
+  "doctype_deed_display": "DEED (D)",
+  "doctype_numeric_map": {
+    "DEED": "26",
+    "DEED_EXEMPT": "159",
+    "DEED_TIMESHARE": "60",
+    "MORTGAGE": "41",
+    "MORTGAGE_CONSIDERATION_DIFF": "163",
+    "MORTGAGE_EXEMPT_BOTH": "160",
+    "MORTGAGE_EXEMPT_INT": "162",
+    "MORTGAGE_EXEMPT_MTG": "161",
+    "SATISFACTION": "55",
+    "RELEASE": "52",
+    "PARTIAL_RELEASE": "50",
+    "JUDGMENT": "33",
+    "JUDGMENT_LIEN": "31",
+    "LIS_PENDENS": "36",
+    "NOTICE_OF_COMMENCEMENT": "43",
+    "ASSIGNMENT": "17",
+    "MODIFICATION": "39",
+    "AGREEMENT": "16",
+    "TAX_DEED": "122",
+    "EASEMENT": "28"
+  },
+
+  "record_type_official_records": 1,
+
+  "party_type_map": {
+    "Both": "Both",
+    "All": "Both",
+    "Grantor": "Direct",
+    "Grantee": "Reverse"
+  },
+  "supported_party_types": ["Both", "Direct", "Reverse"],
+  "default_party_type": "Both",
+
+  "step_delay_seconds": 1.0,
+
+  "book_types": {
+    "1": "O - Official Records",
+    "2": "C - Condo",
+    "3": "P - Plat",
+    "4": "PAT - Patent",
+    "5": "DEED - Deed Book",
+    "6": "MIL - Military",
+    "7": "TD - Tax Deed",
+    "8": "MAR - Marriage",
+    "9": "RM - Road Map"
+  },
+
+  "default_record_date_floor": "10/11/1884",
+
+  "apn_source": "Lake County PA adapter (probe required — Lake CAMA portal TBD)",
+  "tax_adapter": "grant_street",
+
+  "notes": "Lake County FL Clerk of Court — OneCare / AcclaimWeb (Telerik 2012). Probed live 2026-06-18 (US datacenter, no CF). Key deltas vs Brevard: BookType OR=1, Deed DocType=26, GridResults needs XMLHttpRequest header, PDF = /Image/DocumentPdfAllPages/{txn_id}. LAURENCE BROWN shows 0 deed results under that exact name — may need to search by last name only ('BROWN') then filter itemValues by 'LAURENCE' prefix. Three test subjects: BROWN, RAMIREZ, BRAMLAGE (all from test_subjects.json)."
+}

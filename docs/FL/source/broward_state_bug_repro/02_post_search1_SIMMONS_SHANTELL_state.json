@@ -1,0 +1,106 @@
+{
+  "stage": "02_post_search1_SIMMONS_SHANTELL",
+  "timestamp": "2026-05-22T19:27:17",
+  "current_url": "https://officialrecords.broward.org/AcclaimWeb/search/SearchTypeName",
+  "document_title": "Broward County Official Records",
+  "form_values": {
+    "SearchOnName": "SIMMONS, SHANTELL",
+    "LastName": null,
+    "FirstName": null,
+    "Name": null,
+    "PartyType": "Both",
+    "RecordDateFrom": "1/1/1977",
+    "RecordDateTo": "5/22/2026",
+    "DateFiledFrom": null,
+    "DateFiledTo": null
+  },
+  "request_verification_token": null,
+  "request_verification_token_len": null,
+  "cookies": [
+    {
+      "name": "Group1",
+      "domain": "officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "SearchGridForName={\"Sear...",
+      "value_len": 550,
+      "expiry": 1781989475
+    },
+    {
+      "name": "cartButton",
+      "domain": "officialrecords.broward.org",
+      "path": "/AcclaimWeb/search",
+      "value_preview": "shown...",
+      "value_len": 5,
+      "expiry": null
+    },
+    {
+      "name": "Group3",
+      "domain": "officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "SearchGridForInstrumentN...",
+      "value_len": 497,
+      "expiry": 1781994296
+    },
+    {
+      "name": "OpenDocumentInPDF",
+      "domain": "officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "OpenDocumentInPDF=true...",
+      "value_len": 22,
+      "expiry": 1810938323
+    },
+    {
+      "name": "ASP.NET_SessionId",
+      "domain": "officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "1ovapeo5f0ct4pltlfftozh5...",
+      "value_len": 24,
+      "expiry": null
+    },
+    {
+      "name": "AcclaimWebUserPreferencesCookie",
+      "domain": "officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "UserDefaultAutoLoadImage...",
+      "value_len": 32,
+      "expiry": 1781994318
+    },
+    {
+      "name": "ns_bc",
+      "domain": ".officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "MDMAAAIAk-4uLwAAAACin3ju...",
+      "value_len": 200,
+      "expiry": null
+    },
+    {
+      "name": "cf_clearance",
+      "domain": ".officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "Uy4ylcyKdpRNQh7B8GetqRW8...",
+      "value_len": 405,
+      "expiry": 1811039210
+    },
+    {
+      "name": "__cf_bm",
+      "domain": ".officialrecords.broward.org",
+      "path": "/",
+      "value_preview": "4l4v_xS08IEXGkJC0Rvblfoh...",
+      "value_len": 199,
+      "expiry": 1779505010
+    }
+  ],
+  "cookie_names": [
+    "ASP.NET_SessionId",
+    "AcclaimWebUserPreferencesCookie",
+    "Group1",
+    "Group3",
+    "OpenDocumentInPDF",
+    "__cf_bm",
+    "cartButton",
+    "cf_clearance",
+    "ns_bc"
+  ],
+  "kendo_row_count": 0,
+  "no_results_marker_present": false
+}

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "titlepro"
+version = "0.1.0"
+description = "Automated property title search and examination system for California counties"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Proprietary"}
+
+dependencies = [
+    "Flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "selenium>=4.15.0",
+    "webdriver-manager>=4.0.0",
+    "PyMuPDF>=1.23.0",
+    "reportlab>=4.0.0",
+    "Pillow>=10.0.0",
+    "pytesseract>=0.3.13",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+]
+
+[project.scripts]
+titlepro-gated-workflow = "titlepro.automation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

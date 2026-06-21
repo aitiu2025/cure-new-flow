@@ -1,0 +1,50 @@
+{
+  "county_id": "fl_saint_lucie",
+  "county_name": "Saint Lucie",
+  "state": "FL",
+  "platform": "acclaimweb_http",
+  "status": "partial_datacenter_accessible",
+  "live_confirmed": null,
+  "base_url": "https://acclaimweb.stlucieclerk.gov/AcclaimWeb/",
+  "search_url": "https://acclaimweb.stlucieclerk.gov/AcclaimWeb/search/SearchTypeName",
+  "http_search_endpoint": "https://acclaimweb.stlucieclerk.gov/AcclaimWeb/search/SearchByName",
+  "disclaimer_url": "https://acclaimweb.stlucieclerk.gov/AcclaimWeb/",
+  "impersonate_profile": "safari17_2_ios",
+  "cloudflare_required": false,
+  "akamai_required": false,
+  "akamai_note": "Akamai is present (ak_bmsc cookie) but does NOT block search sub-paths from datacenter — probe finding was wrong. Home (200) and SearchTypeName (200) both work. Root issue: SearchTypeName POST requires HistoryObject='{}' (JSON empty object) NOT empty string; server crashes with Object reference not set to an instance of an object otherwise. ExportCsv endpoint returns 500 regardless — session results not populated because modern Kendo AcclaimWeb uses AJAX Kendo grid (not session ExportCsv). Needs adapter update: results come via grid AJAX calls, not ExportCsv. Status: datacenter-reachable but adapter incomplete (ExportCsv path is broken).",
+  "captcha_required": false,
+  "platform_version": "kendo",
+  "platform_notes": "Modern Kendo-based AcclaimWeb (same generation as Broward). x-aspnetmvc-version: 5.2. Adapter class is acclaimweb_http_adapter.AcclaimWebHTTPAdapter. Standard Broward-pattern search fields apply.",
+  "http_form_fields": {
+    "name": "SearchOnName",
+    "date_from": "RecordDateFrom",
+    "date_to": "RecordDateTo",
+    "doc_type": "DocTypes"
+  },
+  "antiforgery_token_field": "__RequestVerificationToken",
+  "doctype_deed_value": "DEED",
+  "supported_party_types": ["All", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Grantor/Grantee": "All",
+    "Both": "All",
+    "All": "All",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "doc_number_pattern": "^\\d{4}-\\d{6,12}$|^\\d{8,}$",
+  "doc_image_url_pattern": {
+    "jump_url": "details/JumpToInstrumentNumber/{record_type}/{doc_num}",
+    "start_image_retrieval": "Image/StartImageRetrieval/{token}/0",
+    "viewer_url": "Image/DocumentImage1/{token}",
+    "record_type": 27
+  },
+  "session_acquisition_strategy": "browser_minted_cookies",
+  "cookie_jar_path": "~/.titlepro/cookie_jar/saint_lucie.json",
+  "test_subjects": [
+    {"name": "WEBSTER,FREDERICK", "address": "772 NW Dupre St, Port St Lucie, FL"},
+    {"name": "FREEMAN,DUSTIN"}
+  ],
+  "probe_notes": "Probed 2026-06-18. Home/Index returns 200. SearchTypeName GET/POST reachable from datacenter. CORRECTED from original probe: Akamai does NOT block search. Root issue is HistoryObject field format (must be '{}' JSON, not empty). ExportCsv fails 500 — server-side issue in SharedSearchController.ExportCsv because session results aren't built via the step1 POST the same way Telerik AcclaimWeb builds them. This is a newer Kendo AcclaimWeb variant where grid data loads via Kendo DataSource AJAX (not ExportCsv). Form field: Name (not SearchOnName). DEED doctype value: 10667. TributeWeb (Tax Deed) at /TributeWeb/ is separate. 2026-06-18 re-validation: needs custom adapter that reads Kendo grid AJAX data source.",
+  "unblock_recipe": "No residential IP needed. Adapter fix required: after SearchTypeName POST with HistoryObject='{}', read results from Kendo grid AJAX endpoint (to be determined via browser network capture). ExportCsv route is broken on this tenant."
+}

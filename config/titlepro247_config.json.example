@@ -1,0 +1,15 @@
+{
+    "username": "your_titlepro247_username",
+    "password": "your_titlepro247_password",
+    "search_subjects": [
+        {
+            "address": "123 Main St, Anytown, CA 90000"
+        },
+        {
+            "apn": "123-456-7890"
+        },
+        {
+            "owner": "Jane Smith"
+        }
+    ]
+}

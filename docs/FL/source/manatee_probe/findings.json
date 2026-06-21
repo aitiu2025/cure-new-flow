@@ -1,0 +1,11 @@
+{
+  "stage1_status": 200,
+  "stage1_token_present_form": true,
+  "stage1_cookies": [
+    "__RequestVerificationToken"
+  ],
+  "stage2_status": 200,
+  "stage2_tr_count": 22,
+  "stage2_found_results": null,
+  "first_token_chars": "E7llgK0pV1nkq0EWPra8mXz10uDURq"
+}

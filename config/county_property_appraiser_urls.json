@@ -1,0 +1,668 @@
+{
+  "_metadata": {
+    "description": "Per-county Property Appraiser portal config (Phase 1a anchor source). Distinct from county_tax_urls.json (tax bill data) and recorder configs (deed search). PA provides APN + owner of record + sale history for the SIMMONS subject-property gate and ANAND back-chain recovery.",
+    "version": "1.0.0",
+    "source_doc": "~/.claude/plans/async-wondering-tiger.md (Phase 1a anchor architecture, 2026-05-22)"
+  },
+  "counties": {
+    "fl_broward": {
+      "platform": "bcpa_http",
+      "base_url": "https://web.bcpa.net/bcpaclient/",
+      "warmup_url": "https://web.bcpa.net/bcpaclient/searchsub.aspx",
+      "endpoints": {
+        "autocomplete_address": "https://web.bcpa.net/bcpaclient/search.aspx/GetAutoCompleteDataBySiteAddress",
+        "search_by_address": "https://web.bcpa.net/bcpaclient/search.aspx/GetDataBySiteAddress",
+        "search_by_owner": "https://web.bcpa.net/bcpaclient/search.aspx/GetDataByOwnerNamesByCity",
+        "parcel_info": "https://web.bcpa.net/bcpaclient/search.aspx/getParcelInformationData",
+        "extra_sales": "https://web.bcpa.net/bcpaclient/search.aspx/getRecentSalesList"
+      },
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Broward County Property Appraiser \u2014 ASP.NET WebMethod API on bcpa.net. Probed 2026-05-26 \u2014 see /tmp/bcpa_probe.md."
+    },
+    "fl_hillsborough": {
+      "platform": "hcpa_http",
+      "base_url": "https://gis.hcpafl.org/CommonServices/property/search/",
+      "warmup_url": "https://gis.hcpafl.org/propertysearch/",
+      "endpoints": {
+        "autocomplete": "https://gis.hcpafl.org/CommonServices/property/search/Autocomplete",
+        "basic_search": "https://gis.hcpafl.org/CommonServices/property/search/BasicSearch",
+        "advanced_search": "https://gis.hcpafl.org/CommonServices/property/search/AdvancedSearch",
+        "parcel_data": "https://gis.hcpafl.org/CommonServices/property/search/ParcelData"
+      },
+      "search_capabilities": [
+        "address",
+        "folio",
+        "pin",
+        "owner_name"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Hillsborough County Property Appraiser \u2014 REST/JSON API on gis.hcpafl.org/CommonServices. Backed by Knockout SPA at /propertysearch. Probed 2026-05-26 \u2014 endpoints discovered via viewModels.js: BasicSearch (address/folio/owner -> list[parcel-summary]), ParcelData?pin=PIN (full parcel + salesHistory[]), Autocomplete?value=X&table=address (jQuery-UI autocomplete for address typeahead)."
+    },
+    "fl_manatee": {
+      "platform": "manatee_pao",
+      "base_url": "https://www.manateepao.gov/",
+      "warmup_url": "https://www.manateepao.gov/search/",
+      "parcel_referer_tmpl": "https://www.manateepao.gov/prg/parcel/?parid={parid}",
+      "endpoints": {
+        "search_results": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-parcel-search-results.php",
+        "owner": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-owner.php",
+        "sales": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-sales.php",
+        "addresses": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-addresses.php",
+        "value_history": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-value-history.php",
+        "exemptions": "https://www.manateepao.gov/wp-content/themes/frontier-child/models/pao-model-exemptions.php"
+      },
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Manatee County Property Appraiser \u2014 WordPress + Frontier child theme; per-purpose pao-model-*.php endpoints. SearchQ POST is a JSON array of {name,value} field criteria. Per-parcel data spread across 6 endpoints (owner POST returns HTML; sales/addresses/value-history/exemptions GET return {cols,rows} JSON). Probed 2026-05-27 \u2014 see /tmp/manateepao_probe.md."
+    },
+    "manatee": {
+      "platform": "manatee_pao",
+      "base_url": "https://www.manateepao.gov/",
+      "description": "Alias matching the recorder-side county_id used by workflow_config (manatee). Same adapter as fl_manatee."
+    },
+    "fl_orange": {
+      "platform": "ocpa_http",
+      "base_url": "https://ocpa-mainsite-afd-standard.azurefd.net",
+      "origin_url": "https://ocpaweb.ocpafl.org",
+      "user_key": "a5250bb5-c321-4926-a966-9e907f560f31",
+      "endpoints": {
+        "search_by_address": "api/QuickSearch/GetSearchInfoByAddress",
+        "search_by_parcel": "api/QuickSearch/GetSearchInfoByParcel",
+        "general_info": "api/PRC/GetPRCGeneralInfo",
+        "legal": "api/PRC/GetPRCPropFeatLegal",
+        "sales": "api/PRC/GetPRCSales",
+        "total_taxes": "api/PRC/GetPRCTotalTaxes",
+        "certified_taxes": "api/PRC/GetPRCCertifiedTaxes",
+        "non_ad_valorem": "api/PRC/GetPRCNonAdValorem",
+        "property_values": "api/PRC/GetPRCPropertyValues",
+        "location": "api/PRCLocation/GetPRCLocationInfo"
+      },
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Orange County (FL) Property Appraiser \u2014 Angular SPA at ocpaweb.ocpafl.org backed by Azure-Front-Door-fronted REST API at ocpa-mainsite-afd-standard.azurefd.net. Auth via static x-user-key header (GUID extracted from bundled JS \u2014 public-by-design). TLS-fingerprinted: REQUIRES curl_cffi(impersonate=chrome120) to bypass AFD's plain-requests 403. parcelId is 15-digit numeric Sec-Twp-Rng-Subdiv-Block-Lot; canonical APN form NN-NN-NN-NNNN-NN-NNN. Probed live 2026-05-26 against MIRANDA subject 7313 TWILIGHT BAY DR (pid 272333545802830)."
+    },
+    "fl_palm_beach": {
+      "platform": "pbcpao_http",
+      "base_url": "https://www.pbcpao.gov/",
+      "endpoints": {
+        "parcel_detail": "https://www.pbcpao.gov/Property/Details/",
+        "address_search": "https://www.pbcpao.gov/AdvSearch/RealPropSearch",
+        "public_detail_pattern": "https://www.pbcpao.gov/Property/Details/?parcelId={pcn_clean}"
+      },
+      "search_capabilities": [
+        "apn",
+        "address_ambiguous"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Palm Beach County Property Appraiser (PAPA) \u2014 pbcpao.gov serves Property/Details HTML directly. Probed live 2026-05-26 against HABER subject (PCN 00-41-47-22-04-000-1090 / unhyphenated 00414722040001090) \u2014 146 KB HTML carries owner, mailing address, situs, legal description, 5-year + 10-year assessment tables, sales history back to 1995, and exemption status. Address-only search requires antiforgery + page tokens not yet reverse-engineered; address calls return PA_AMBIGUOUS with the AdvSearch landing URL. Use lookup_by_apn() with the PCN extracted from the Landmark recorder index column 15 legal field (Landmark adapter exposes this via _extract_pcn_from_legal)."
+    },
+    "fl_pasco": {
+      "platform": "pascopa_http",
+      "base_url": "https://search.pascopa.com/",
+      "warmup_url": "https://search.pascopa.com/",
+      "endpoints": {
+        "search": "https://search.pascopa.com/default.aspx",
+        "parcel": "https://search.pascopa.com/parcel.aspx"
+      },
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name",
+        "or_book_page"
+      ],
+      "captcha": false,
+      "impersonate": "safari17_2_ios",
+      "description": "Pasco County Property Appraiser \u2014 in-house ASP.NET WebForms on bare IIS at search.pascopa.com. ALL searches are plain GET querystrings (pid=add/nam/orb + key=GLI; parcel.aspx takes sec/twn/rng/sbb/blk/lot). Probed 2026-06-10 \u2014 see 0610/Pasco_RILEY_v1/phase0_probe_pa.md. Result/parcel-page HTML shape fixture-locked, live-verify in Wave 2."
+    },
+    "fl_duval": {
+      "platform": "duval_pao",
+      "base_url": "https://paopropertysearch.coj.net/",
+      "endpoints": {
+        "basic_search": "https://paopropertysearch.coj.net/Basic/Search.aspx",
+        "basic_results": "https://paopropertysearch.coj.net/Basic/Results.aspx",
+        "detail": "https://paopropertysearch.coj.net/Basic/Detail.aspx"
+      },
+      "form_fields": {
+        "address": "ctl00$cphBody$tbAddress1",
+        "_warning": "address field name is a Wave-1 best-evidence GUESS \u2014 geo-block prevented live capture; harvest real name= attrs from Basic/Search.aspx on first US-egress run and update"
+      },
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "captcha": false,
+      "impersonate": "safari17_2_ios",
+      "description": "Duval County Property Appraiser (City of Jacksonville) \u2014 ASP.NET WebForms at paopropertysearch.coj.net. APN = 10-digit RE number (display XXXXXX-XXXX). Direct detail: GET Basic/Detail.aspx?RE=<10 digits> (no VIEWSTATE). Adapter: src/titlepro/property_appraiser/counties/duval_pao.py (factory branch 'duval_pao' already wired in property_appraiser/__init__.py this wave). Host geo-blocks non-US egress at TCP level."
+    },
+    "fl_brevard": {
+      "platform": "bcpao_http",
+      "base_url": "https://www.bcpao.us/api/v1/",
+      "warmup_url": "https://www.bcpao.us/PropertySearch/",
+      "endpoints": {
+        "search": "https://www.bcpao.us/api/v1/search",
+        "account": "https://www.bcpao.us/api/v1/account"
+      },
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "captcha": false,
+      "impersonate": "safari17_2_ios",
+      "referer": "https://www.bcpao.us/",
+      "cf_cookies": {},
+      "stub": true,
+      "description": "Brevard County Property Appraiser \u2014 BCPAO REST JSON API v1. \u26a0\ufe0f Cloudflare MANAGED CHALLENGE blocks curl_cffi for ALL impersonation profiles (probed live 2026-06-10, 403 on every profile). Adapter (brevard_bcpao.py) + 18 unit tests complete on canned fixtures. To go live: mint cf_clearance cookie via interactive browser session and inject into cf_cookies (TTL ~30d) \u2014 same Cloudflare playbook as Broward recorder. Then add platform branch in src/titlepro/property_appraiser/__init__.py: elif platform=='bcpao_http': from .counties.brevard_bcpao import BrevardBCPAO; adapter=BrevardBCPAO(cfg)."
+    },
+    "fl_lee": {
+      "platform": "leepa_http",
+      "base_url": "https://www.leepa.org/",
+      "endpoints": {
+        "property_search": "https://www.leepa.org/Search/PropertySearch.aspx",
+        "parcel_display": "https://www.leepa.org/Display/DisplayParcel.aspx"
+      },
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Lee County Property Appraiser (LeePA) \u2014 leepa.org ASP.NET WebForms. Probed live 2026-06-10 against OSTIGUY (STRAP 29-44-24-C2-00101.0150 / FolioID 10176930). Address search POST -> result grid (STRAP + FolioID + owners + situs); DisplayParcel GET -> FL DOR NAL field dump (F01..F92) parsed for owner/legal/values/year/homestead. No Cloudflare/Akamai/CAPTCHA on leepa.org. Sale history restricted for some parcels (instruments 'not viewable by the general public') \u2014 deed back-chain via the Lee Clerk recorder. Adapter: src/titlepro/property_appraiser/counties/lee_leepa.py (platform leepa_http, registered in property_appraiser/__init__.py this session). 24 unit tests green."
+    },
+    "fl_polk": {
+      "platform": "polk_pa",
+      "base_url": "https://www.polkflpa.gov/",
+      "warmup_url": "https://www.polkflpa.gov/",
+      "endpoints": {
+        "cama_display": "https://www.polkflpa.gov/CamaDisplay.aspx",
+        "advanced_search": "https://www.polkflpa.gov/AdvancedQuerySearch.aspx",
+        "cama_parcel_template": "https://www.polkflpa.gov/CamaDisplay.aspx?OutputMode=Display&SearchType=RealEstate&ParcelID={apn}"
+      },
+      "search_capabilities": [
+        "apn",
+        "address_pending"
+      ],
+      "captcha": false,
+      "impersonate": "safari17_2_ios",
+      "tax_year": "2025",
+      "description": "Polk County Property Appraiser \u2014 custom ASP.NET WebForms CAMA at www.polkpa.org (CamaDisplay.aspx parcel page, AdvancedQuerySearch.aspx). Adapter at src/titlepro/property_appraiser/counties/polk_pa.py \u2014 HTML scrape, label-driven parser. Reverse-engineered 2026-06-10 from Wayback (live host firewall/geo-fenced \u2014 TCP-unreachable from Wave-1 egress). WAVE-2: capture a real CamaDisplay.aspx body, confirm the parcel-detail querystring + the address-search __VIEWSTATE POST, tune _FIELD_LABELS, then move to address-capable. lookup_by_apn() is the canonical path (APN from recorder deed legal or from the PA strap). DOMAIN UPDATE 2026-06-10: county moved to www.polkflpa.gov (polkpa.org stale) \u2014 live-verified during the BUNKER run (CamaSearch.aspx/CamaDisplay.aspx same paths).",
+      "status": "stub_pending_probe"
+    },
+    "fl_sarasota": {
+      "platform": "scpa_http",
+      "base_url": "https://www.sc-pa.com/propertysearch/",
+      "warmup_url": "https://www.sc-pa.com/propertysearch/",
+      "endpoints": {
+        "search_result": "https://www.sc-pa.com/propertysearch/Result"
+      },
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "description": "Sarasota County Property Appraiser \u2014 custom ASP.NET MVC app at sc-pa.com/propertysearch. Bare IIS, no anti-bot, no CSRF on the search form. Single POST to /propertysearch/Result with AddressKeywords | OwnerKeywords | Strap (digits, maxlength 12). Adapter at src/titlepro/property_appraiser/counties/sarasota_scpa.py. Probed 2026-06-10 \u2014 see src/titlepro/api/downloaded_doc/0610/Sarasota_BRUNO_v1/phase0_probe_pa.md. Result/detail HTML shapes fixture-driven; re-validate on first approved live query (Wave 2)."
+    },
+    "fl_seminole": {
+      "platform": "scpa_arcgis",
+      "base_url": "https://www.scpafl.org/search/parcels/details/",
+      "detail_base_url": "https://www.scpafl.org/search/parcels/details/",
+      "arcgis_query_url": "https://map.scpafl.org/gis/sharing/servers/b1408f8cfb614cd48305a419a7c705f5/rest/services/production/modal_map/MapServer/19/query",
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "field_map": {},
+      "description": "Seminole County Property Appraiser (scpafl.org). LIVE-VALIDATED 2026-06-10: ArcGIS parcel layer production/modal_map/MapServer/19 (portal-proxied via /gis/sharing/servers/b1408f8c...). Fields: Parcel/ParcelFormat/ApprId/OwnerName/PrimaryAddress/MailingAddress/LegalDescription/TotalJustValue/AssessedValue/TaxableValue/HasHomestead/YearBuilt/TotalLivingArea/LastSaleDate/LastSaleAmt. PrimaryAddress uses USPS-abbreviated suffixes (LN not LANE). Layer exposes most-recent sale only - full chain from recorder. Adapter: seminole_scpa.py.",
+      "stub": false
+    },
+    "fl_volusia": {
+      "platform": "vcpa_http",
+      "base_url": "https://vcpa.vcgov.org/",
+      "endpoints": {
+        "search_real_property": "https://vcpa.vcgov.org/api/search/real-property",
+        "parcel_summary": "https://vcpa.vcgov.org/parcel/summary/?altkey={altkey}"
+      },
+      "referer": "https://vcpa.vcgov.org/search/real-property",
+      "captcha": false,
+      "description": "Volusia County Property Appraiser (vcpa.vcgov.org)",
+      "notes": "Live-validated 2026-06-10 against GUILD (435 ELSIE AVE HOLLY HILL): POST /api/search/real-property (DataTables form body, search[value] accepts name/address/altkey/parcel) -> rows {altkey,parcel,owner,street,pc} ONE ROW PER OWNER; GET /parcel/summary/?altkey={altkey} requires cookie acceptedNewDisclaimer=true (adapter sets it) and returns server-rendered owners + manner of holding + short legal + FULL sales history (Book/Page + Instrument + Deed Type + Qualified + price) with hyperlinks to the recorder direct-retrieval endpoint. No anti-bot. Adapter: src/titlepro/property_appraiser/counties/volusia_vcpa.py (23 unit tests green; dispatcher branch 'vcpa_http' already wired in property_appraiser/__init__.py)."
+    },
+    "fl_escambia": {
+      "base_url": "https://www.escpa.org/",
+      "platform": "escambia_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "county_id": "fl_escambia",
+      "county_name": "Escambia",
+      "impersonate": "chrome120",
+      "endpoints": {
+        "search": "https://www.escpa.org/CAMA/Search.aspx",
+        "parcel_detail": "https://www.escpa.org/CAMA/Detail_a.aspx"
+      },
+      "live_confirmed": "2026-06-17",
+      "address_search_caveat": "Address search resolves the FIRST 16-digit Parcel ID in the result grid; the grid returns substring matches (e.g. '211 N PALAFOX ST' surfaces '6211/221/2110 N PALAFOX ST' rows too) so the first row may not be the exact-address parcel. APN-anchored lookup (the production PA-anchor path, keyed off the recorder deed APN) is exact. Engineering follow-up: tighten _resolve_parcel_id_by_address to pick the exact-situs row.",
+      "description": "Escambia County PA (ESCPA) escpa.org ASP.NET WebForms. Detail is a DIRECT GET by 16-digit Parcel ID (Detail_a.aspx?s=<parcelID>); address search via Search.aspx VIEWSTATE postback (txtValue + chkSubParcels) -> SearchResultList grid -> Parcel ID. LIVE-CONFIRMED 2026-06-17 from US egress: lookup_by_apn('000S009007003004') returns PA_SUCCESS matching the captured fixture field-by-field (owner/folio/situs/just_value 841501/assessed 816465/4 newest-first sale rows). Required a parser fix: live BeautifulSoup.get_text renders every table cell on its own line plus a 'Nav. Mode' bare-label preamble, which broke the single-line-row + after() parsers; _normalize_text() now collapses both the live per-cell layout and the captured-fixture single-line layout into one shape (escambia_pa.py, all 7 fixture tests still green)."
+    },
+    "fl_st_johns": {
+      "base_url": "https://www.sjcpa.gov/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=960. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter (Datacamp/Seattle) \u2014 the 2026-06-17 block was transient burst-rate, not a residential gate. PA_SUCCESS confirmed: APN=0000200100 SMITH KENNETH R. Detail pages require full session-bound href (PageTypeID=4&LayerID=...&PageID=...&Q=...) \u2014 fixed in adapter 2026-06-19 (was using simplified PageType=Details which returns 500 on this tenant). Throttle: Schneider applies an app-level reCAPTCHA gate after ~6-8 rapid search+detail requests per IP session; space runs 30s+ apart. Probe: docs/FL/source/landmark_pa_probe/fl_st_johns/probe_observed.md",
+      "app_id": "960",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=0000200100 SMITH KENNETH R (SMITH owner search)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_clay": {
+      "base_url": "https://www.ccpao.com/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=830. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter (Datacamp/Seattle). PA_SUCCESS confirmed: address '571 Tynes Blvd' -> APN=18-04-25-007953-056-43 Smith Monica Claire JV=314,973 4 sales. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_clay/probe_observed.md",
+      "app_id": "830",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=18-04-25-007953-056-43 (571 Tynes Blvd, SMITH NICHOLAS subject)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_hernando": {
+      "base_url": "https://hernandocountypa-florida.us/",
+      "platform": "landmark_pa_scaffold",
+      "status": "scaffold",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "scaffolded": "2026-06-14",
+      "_probe": "SCAFFOLD \u2014 recorder+tax ready; PA anchor pending. VERIFY base_url and capture address-search + parcel-detail + sale-history shape live before implementing. Module: property_appraiser/counties/hernando_pa.py"
+    },
+    "fl_bay": {
+      "base_url": "https://baypa.net/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=834. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: owner 'SMITH' -> APN=00100-000-000. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_bay/probe_observed.md",
+      "app_id": "834",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=00100-000-000 (SMITH smoke owner search)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_martin": {
+      "base_url": "https://www.pamartinfl.gov/",
+      "platform": "landmark_pa_scaffold",
+      "status": "scaffold",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "scaffolded": "2026-06-14",
+      "_probe": "SCAFFOLD \u2014 recorder+tax ready; PA anchor pending. VERIFY base_url and capture address-search + parcel-detail + sale-history shape live before implementing. Module: property_appraiser/counties/martin_pa.py"
+    },
+    "fl_indian_river": {
+      "base_url": "https://www.ircpa.org/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=1109. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: address '4023 Silver Palm Dr' -> APN=32402900015000000010.0 Pogany Jason J JV=469,758 7 sales. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_indian_river/probe_observed.md",
+      "app_id": "1109",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=32402900015000000010.0 (4023 Silver Palm Dr, POGANY subject)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_citrus": {
+      "base_url": "https://www.citruspa.org/",
+      "platform": "citrus_pa_http",
+      "status": "live",
+      "captcha": false,
+      "impersonate": "safari17_2_ios",
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner_name"
+      ],
+      "county_id": "fl_citrus",
+      "county_name": "Citrus",
+      "endpoints": {
+        "search": "https://www.citruspa.org/_web/search/commonsearch.aspx",
+        "datalet": "https://www.citruspa.org/_web/Datalets/Datalet.aspx"
+      },
+      "scaffolded": "2026-06-14",
+      "shape_validated": true,
+      "live_confirmed": "2026-06-18",
+      "apn_search_caveat": "realprop inpParid keys on the numeric altkey/folio (e.g. 1772311), NOT the geo strap Parcel ID (20E19S210020 02280 0400). Reach the anchor via address lookup; its result.folio is the realprop key.",
+      "_probe": "Tyler/TrueAutomation EagleWeb (ProVal Web) \u2014 _web/search/commonsearch.aspx?mode=<address|realprop|owner> + Disclaimer.aspx VIEWSTATE accept -> searchResults grid -> Datalets/Datalet.aspx?mode=profileall. No Cloudflare (plain IIS). Submit must POST to the mode-qualified URL with all hidden form state harvested verbatim (bare-URL POST -> 'page not registered'). Adapter validated against 4 captured fixtures (tests/unit/fixtures/citrus/) + live address+folio lookup 2026-06-18 (US egress). Probe: docs/FL/source/landmark_pa_probe/fl_citrus/probe_observed.md"
+    },
+    "fl_flagler": {
+      "base_url": "https://flaglerpa.com/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=598. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed via owner-name: 'FEDERICO GIACOMO' -> APN=03-13-31-5120-2AF05-1090 Federico Giacomo 610 SOUTH LAKE DR ORMOND BEACH JV=612,836. NOTE: address '610 Southlake Dr' returns no results (street stored as 'SOUTH LAKE' with space \u2014 use owner-name search or APN). The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_flagler/probe_observed.md",
+      "app_id": "598",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=03-13-31-5120-2AF05-1090 (FEDERICO owner search, 610 SOUTH LAKE DR)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "address_search_caveat": "Street name stored as 'SOUTH LAKE' (two words) not 'SOUTHLAKE'; use owner-name or APN lookup for this subject.",
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_monroe": {
+      "base_url": "https://www.mcpafl.org/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=605. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: address '222 Jolly Roger Dr' -> APN=00495520-000000 CURRY JR JOHN L JV=1,289,871 3 sales. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_monroe/probe_observed.md",
+      "app_id": "605",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=00495520-000000 (222 Jolly Roger Dr, CURRY subject)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_walton": {
+      "base_url": "https://waltonpa.com/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=835, HOST=beacon.schneidercorp.com. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: owner 'JETT CHRISTIANE' -> APN=14-2S-20-33152-000-012L JV=281,572. IMPORTANT: Walton uses beacon.schneidercorp.com (not qpublic.schneidercorp.com). Detail pages require the full session-bound href (PageTypeID=4&LayerID=...&PageID=...&Q=...) \u2014 fixed in adapter 2026-06-19. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_walton/probe_observed.md",
+      "app_id": "835",
+      "qpublic_host": "beacon.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=14-2S-20-33152-000-012L (JETT CHRISTIANE owner search)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_wakulla": {
+      "base_url": "https://mywakullapa.com/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=836. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: owner 'JONES' -> APN=00-00-003-082-06166-084 JONES CYNTHIA J JV=242,006 7 sales. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_wakulla/probe_observed.md",
+      "app_id": "836",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=00-00-003-082-06166-084 (JONES smoke owner search)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_levy": {
+      "base_url": "https://www.qpublic.net/fl/levy/",
+      "platform": "qpublic_schneider_pa_http",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "qPublic/Schneider AppID=930. Re-challenged 2026-06-19: NOT Cloudflare-gated from datacenter. PA_SUCCESS confirmed: owner 'JOHNSON' -> APN=0003900000. Detail pages require full session-bound href (PageTypeID=4&LayerID=...&PageID=...&Q=...) \u2014 fixed in adapter 2026-06-19. Levy uses non-standard labels: 'ParcelID' (no space), 'Location Address(es)', 'Owner Name' sublabel \u2014 all handled in adapter 2026-06-19 parser fixes. The 2026-06-17 block was a transient burst-rate event. Probe: docs/FL/source/landmark_pa_probe/fl_levy/probe_observed.md",
+      "app_id": "930",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: PA_SUCCESS APN=0003900000 (JOHNSON smoke owner search)",
+      "live_confirmed": "2026-06-19",
+      "shape_validated": true,
+      "label_notes": "Levy: 'ParcelID' (no space), 'Location Address(es)', 'Owner Name' sublabel before actual owner name.",
+      "throttle_note": "Schneider reCAPTCHA after ~6-8 rapid requests per IP session; space 30s+"
+    },
+    "fl_okeechobee": {
+      "base_url": "https://www.okeechobeepa.com/",
+      "platform": "landmark_pa_scaffold",
+      "status": "scaffold",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "scaffolded": "2026-06-14",
+      "_probe": "SCAFFOLD \u2014 recorder+tax ready; PA anchor pending. VERIFY base_url and capture address-search + parcel-detail + sale-history shape live before implementing. Module: property_appraiser/counties/okeechobee_pa.py"
+    },
+    "fl_miami_dade": {
+      "platform": "mdcpa_http",
+      "base_url": "https://apps.miamidadepa.gov/",
+      "county_id": "fl_miami_dade",
+      "county_name": "Miami-Dade",
+      "endpoints": {
+        "proxy": "https://apps.miamidadepa.gov/PApublicServiceProxy/PaServicesProxy.ashx"
+      },
+      "operations": {
+        "address": "GetAddress",
+        "folio": "GetPropertySearchByFolio"
+      },
+      "referer": "https://apps.miamidadepa.gov/PropertySearch/",
+      "public_detail_pattern": "https://www.miamidade.gov/Apps/PA/PropertySearch/#/report/detail/{folio}",
+      "search_capabilities": [
+        "address",
+        "apn"
+      ],
+      "captcha": false,
+      "impersonate": "chrome120",
+      "status": "live",
+      "shape_validated": true,
+      "description": "Miami-Dade County Property Appraiser (MDCPA) \u2014 public REST/JSON proxy at apps.miamidadepa.gov/PApublicServiceProxy/PaServicesProxy.ashx that backs the official Angular Property Search SPA (www.miamidade.gov/Apps/PA/PropertySearch/ -> redirects to apps.miamidadepa.gov/PropertySearch/). Single endpoint; the Operation param selects the call: GetAddress (myAddress/myUnit/from/to -> MinimumPropertyInfos[] with Strap=hyphenated folio); GetPropertySearchByFolio (folioNumber=13-digit -> full parcel + SalesInfos[]). LIVE-VALIDATED 2026-06-17 (US egress) against 111 NW 1 ST / folio 01-4137-023-0020 (Govt Center) + 7500 SW 82 ST G105 / folio 30-4035-047-2550 (Dadeland condo). NO Cloudflare/Akamai/CAPTCHA. See docs/FL/source/miami_dade_pa_probe.md; raw fixtures tests/unit/fixtures/miami_dade/. NOTE: this is the PUBLIC Property Appraiser, DISTINCT from the paywalled Miami-Dade Clerk Official Records recorder (miamidadeclerk.gov; see docs/FL/miami_dade_probe.md). Folio = 13-digit (display NN-NNNN-NNN-NNNN). Module: property_appraiser/counties/miami_dade_mdcpa.py (mdcpa_http branch wired in property_appraiser/__init__.py). KNOWN GAP: MDCPA feed has NO DeedType (and grantor/grantee came back blank) -> recorder cross-ref fills deed type; sale feed is oldest-first (SaleId 1 == newest) and the adapter sorts newest-first."
+    },
+    "fl_lake": {
+      "platform": "lake_copa_http",
+      "county_id": "fl_lake",
+      "county_name": "Lake",
+      "base_url": "https://www.lakecopropappr.com",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "owner",
+        "apn"
+      ],
+      "_probe": "Lake County FL \u2014 county-custom ASP.NET WebForms at lakecopropappr.com. Three-step: TOU gate (POST /property-disclaimer.aspx) \u2192 search (POST /property-search.aspx, street name only, not full address) \u2192 detail (GET /property-details.aspx?AltKey=<7-digit>). No Cloudflare / Akamai, plain IIS. Live-validated 2026-06-18 (PA_SUCCESS, AltKey=3904456, BROWN at 3513 BELLAND CIR UNIT D, CLERMONT). Fixtures: tests/unit/fixtures/pa_lake/.",
+      "live_smoke": "2026-06-18: PA_SUCCESS BROWN, AltKey=3904456",
+      "shape_validated": true,
+      "apn_search_caveat": "search uses AltKey (7-digit int), not the parcel number (03-23-26-0109-000-012C0). APN is the dotted parcel number from the detail page."
+    },
+    "fl_sumter": {
+      "platform": "qpublic_schneider_pa_http",
+      "county_id": "fl_sumter",
+      "county_name": "Sumter",
+      "base_url": "https://qpublic.schneidercorp.com",
+      "app_id": "1207",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "status": "live",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "Sumter County FL \u2014 qPublic/Schneider AppID=1207. Live-validated 2026-06-19: NOT Cloudflare-gated from datacenter egress (AppID=1207 search page returns 200 with SearchIntents: OwnerName/ParcelID/Address/LegalDesc/STR). Report pages use 'Site Location' / 'Legal Description' / 'Owner' labels (not 'Location Address' / 'Brief Tax Description' / 'Owner Information' \u2014 fixed in qpublic_schneider_pa_http.py parse_detail_html + parse_grid_html 2026-06-19). Fixtures: tests/unit/fixtures/pa_sumter/. Subject: TEGGE ROBERT L, D33G061, 2053 LARKWOOD CT, THE VILLAGES.",
+      "live_smoke": "2026-06-19: smoke_pass AppID=1207 search page 200; offline tests PA_SUCCESS TEGGE",
+      "shape_validated": true
+    },
+    "fl_de_soto": {
+      "platform": "grizzly_gis_spa",
+      "county_id": "fl_de_soto",
+      "county_name": "De Soto",
+      "base_url": "https://www.desotopa.com",
+      "gis_url": "https://www.desotopa.com/gis/",
+      "status": "deferred_spa",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "De Soto County FL \u2014 Grizzly GIS (FloridaPA.com) JavaScript SPA at desotopa.com/gis/. The GIS app uses OpenLayers + a legacy MapServer CGI (gz.floridapa.com/mapserver/), with a custom JS app (gisMain.js, gisMain_Features.js). All search interaction is browser-side; no accessible REST endpoint found during 2026-06-19 probe. ssl cert on gz_DeSoto.FloridaPA.com is invalid for direct access. Datacenter-reachable: YES (desotopa.com 200, no CF). Platform: NOT HTTP-accessible via curl_cffi without SSL bypass and MapServer CGI reverse-engineering. DEFERRED: requires browser-network-capture to identify exact search API shape (same category as hernando/martin/okeechobee custom JS SPAs from the Landmark probe). Engineering ticket: probe gisMain.js mapserver endpoint with `verify=False` + SSL bypass.",
+      "live_smoke": "2026-06-19: desotopa.com 200, gis page 200, search endpoint not found",
+      "shape_validated": false
+    },
+    "fl_franklin": {
+      "platform": "qpublic_schneider_pa_http",
+      "county_id": "fl_franklin",
+      "county_name": "Franklin",
+      "base_url": "https://qpublic.schneidercorp.com",
+      "status": "residential_gated",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "Franklin County FL \u2014 qPublic/Schneider. AppID confirmed CF-gated: direct probe of qpublic.schneidercorp.com with AppID=1167 returns 'Just a moment...' 403 (Cloudflare Bot-Manager managed challenge) from datacenter egress. AppID=1167 confirmed as Franklin County KY (wrong county), so FL Franklin AppID is UNKNOWN \u2014 FL Franklin may not be on qPublic. The franklincountytaxcollector.com redirects to VisualGov (cloudservices.visualgov.com/FLFranklinMobile) which is for the Tax Collector only, not the PA. No accessible FL Franklin PA portal found from datacenter egress. Engineering ticket: (1) identify correct PA portal via residential probe of franklincountyfl.gov; (2) if on qPublic determine AppID; (3) if on VisualGov build a VisualGov adapter.",
+      "app_id": "UNKNOWN",
+      "qpublic_host": "qpublic.schneidercorp.com",
+      "live_smoke": "2026-06-19: no accessible portal found from datacenter",
+      "shape_validated": false
+    },
+    "fl_nassau": {
+      "platform": "nassauflpa_webforms",
+      "county_id": "fl_nassau",
+      "county_name": "Nassau",
+      "base_url": "https://www.nassauflpa.com",
+      "status": "maintenance_503",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ],
+      "_probe": "Nassau County FL \u2014 Nassau County Property Appraiser at nassauflpa.com. The site is WordPress-based with a /Search/Default.aspx endpoint. Currently returning 503 Maintenance page (title: 'Maintenance \u2013 Nassau County Property Appraiser'). The maintenance page has no ETA. County official site (nassaucountyfl.com) does not carry a fallback PA search tool. No other accessible PA endpoint found. Status: maintenance_503. Action: re-probe nassauflpa.com for 200 before running Nassau subjects. When live, the /Search/Default.aspx endpoint likely requires a TOU accept + address/owner search (typical FL county PA WebForms pattern). Engineering ticket: monitor nassauflpa.com for restoration; capture /Search/Default.aspx live HTML to build adapter.",
+      "live_smoke": "2026-06-19: 503 maintenance",
+      "shape_validated": false
+    },
+    "fl_leon": {
+      "platform": "leon_pa_http",
+      "county_id": "fl_leon",
+      "county_name": "Leon",
+      "state": "FL",
+      "base_url": "https://search.leonpa.gov",
+      "description": "Leon County Property Appraiser \u2014 ASP.NET MVC DataTables serverSide at search.leonpa.gov. TOU gate + ExecutePropertySearch JSON + /Property/Details/<ParcelId>. Live-validated 2026-06-19 (TELLIE JONES / 4828 EASY ST).",
+      "status": "live",
+      "live_confirmed": "2026-06-19",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ]
+    },
+    "fl_santa_rosa": {
+      "platform": "santa_rosa_pa_http",
+      "county_id": "fl_santa_rosa",
+      "county_name": "Santa Rosa",
+      "state": "FL",
+      "base_url": "https://search.srcpa.gov",
+      "parcelview_url": "https://parcelview.srcpa.gov",
+      "description": "Santa Rosa County Property Appraiser \u2014 Remix SPA at search.srcpa.gov (POST /property/query JSON) + Astro parcel detail at parcelview.srcpa.gov. No TOU gate. Live-validated 2026-06-19 (TIMOTHY WHITE / 1009 RIN CT).",
+      "status": "live",
+      "live_confirmed": "2026-06-19",
+      "captcha": false,
+      "search_capabilities": [
+        "address",
+        "apn",
+        "owner"
+      ]
+    },
+    "fl_charlotte": {
+      "county_name": "Charlotte",
+      "base_url": "https://www.ccappraiser.com",
+      "platform": "charlotte_ccpa_http",
+      "status": "live",
+      "live_confirmed": "2026-06-19",
+      "description": "Charlotte County Property Appraiser (classic ASP, IIS 8.5, no CF)",
+      "notes": "Direct Show_Parcel.asp?acct=<APN> works with only homepage session cookie. Search: GET RPSearchEnter.asp \u2192 POST RPSearchQuery.asp \u2192 GET RPSearchSelect.asp (results) \u2192 GET Show_Parcel.asp. APN format: 12-digit numeric (e.g. 412024203012)."
+    },
+    "fl_marion": {
+      "county_name": "Marion",
+      "base_url": "UNKNOWN",
+      "platform": "landmark_pa_scaffold",
+      "status": "scaffold",
+      "notes": "pa.marion.fl.us has no A record (abandoned). Actual PA portal URL unknown \u2014 requires residential access to marioncountyfl.org to identify. The .org site blocks datacenter IP (Akamai 403). Unblock: residential proxy \u2192 navigate marioncountyfl.org \u2192 capture PA portal URL \u2192 probe."
+    },
+    "fl_collier": {
+      "county_name": "Collier",
+      "base_url": "https://www.collierappraiser.com",
+      "platform": "landmark_pa_scaffold",
+      "status": "deferred_spa",
+      "notes": "Custom jQuery frameset SPA. /Main_Search/RecordDetail.aspx returns 500\u2192error.html regardless of session/headers \u2014 requires JS-populated session state from the frameset UI. Unblock: Playwright browser session inside frameset \u2192 capture RecordDetail.aspx XHR payload \u2192 mirror in HTTP adapter."
+    },
+    "fl_osceola": {
+      "county_name": "Osceola",
+      "base_url": "https://ocpaweb.osceola.org",
+      "platform": "landmark_pa_scaffold",
+      "status": "deferred_infra_offline",
+      "notes": "ocpaweb.osceola.org resolves (198.140.240.14) but all paths return 404 (IIS with no routes). Schneider qPublic CF-blocks datacenter. Unblock: residential IP \u2192 confirm if ocpaweb responds or if county migrated to new portal. If Schneider: existing qpublic_schneider_pa_http adapter + residential cf_clearance handles it."
+    }
+  }
+}

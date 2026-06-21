@@ -1,0 +1,77 @@
+{
+  "county": "bay",
+  "surname": "ROMAS",
+  "record_count": 9,
+  "probe_date": "2026-06-18",
+  "notes": "Live-validated 2026-06-18. reCAPTCHA v3 (6LcOPpksAAAAAAscT8v1H5JJP5-OU7cvpzKa29uE). Column map: instrument=col12, doc_id=col25, doc_type=col8(location_header). Palm Beach uses col13/col29/col9.",
+  "records": [
+    {
+      "document_number": "2005008788",
+      "document_type": "LIEN",
+      "recording_date": "02/03/2005",
+      "grantors": "ROMAS TONY",
+      "grantees": "STATE OF FLORIDA DEPARTMENT OF REVENUE"
+    },
+    {
+      "document_number": "2005027694",
+      "document_type": "LIEN",
+      "recording_date": "05/05/2005",
+      "grantors": "ROMAS TONY",
+      "grantees": "STATE OF FLORIDA DEPARTMENT OF REVENUE"
+    },
+    {
+      "document_number": "2005051789",
+      "document_type": "LIEN",
+      "recording_date": "09/23/2005",
+      "grantors": "ROMAS TONY",
+      "grantees": "STATE OF FLORIDA DEPARTMENT OF REVENUE"
+    },
+    {
+      "document_number": "2010043241",
+      "document_type": "DEED",
+      "recording_date": "07/16/2010",
+      "grantors": "ROMASHKINA EVGENIYA SERGEEVNA",
+      "grantees": "SCHAFFER TIMOTHY JAMES"
+    },
+    {
+      "document_number": "2011002399",
+      "document_type": "DEED",
+      "recording_date": "01/04/2011",
+      "grantors": "ROMASHKINA EVGENIYA",
+      "grantees": "ROMASHKINA EVGENIYA"
+    },
+    {
+      "document_number": "2011002534",
+      "document_type": "DEED",
+      "recording_date": "01/10/2011",
+      "grantors": "ROMASHKINA EVGENIYA SERGEYEVNA",
+      "grantees": "RASTEGAYEV ROMAN VLADIMIROVICH"
+    },
+    {
+      "document_number": "2011049123",
+      "document_type": "MORTGAGE",
+      "recording_date": "09/19/2011",
+      "grantors": "ROMAS AIMEE D",
+      "grantees": "INNOVATIONS FEDERAL CREDIT UNION"
+    },
+    {
+      "document_number": "2025066267",
+      "document_type": "DEED",
+      "recording_date": "11/14/2025",
+      "grantors": "ROMAS MARY ROSE ROMAS PETER EUTHYMIUS",
+      "grantees": "VIK RANDALL CARL; VIK HAZEL I"
+    },
+    {
+      "document_number": "2026026355",
+      "document_type": "MORTGAGE",
+      "recording_date": "05/01/2026",
+      "grantors": "ROMAS MARY ROSE ROMAS PETER EUTHYMIUS",
+      "grantees": "ROMAS PETER EUTHYMIUS; ROMAS MARY ROSE"
+    }
+  ],
+  "raw_rows_sample": {
+    "row1": {"12": "nobreak_2005008788", "8": "nobreak_LIEN", "25": "hidden_1622964", "DT_RowId": "doc_1622964_1"},
+    "row8": {"12": "nobreak_2025066267", "8": "nobreak_DEED", "13": "UNIT 2101 ISLAND RESERVE", "25": "hidden_8502348", "DT_RowId": "doc_8502348_8"},
+    "row9": {"12": "nobreak_2026026355", "8": "nobreak_MORTGAGE", "13": "U 2101 ISLAND RESERVE", "25": "hidden_8548156", "DT_RowId": "doc_8548156_9"}
+  }
+}

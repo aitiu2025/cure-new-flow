@@ -1,0 +1,65 @@
+{
+  "county_id": "fl_santa_rosa",
+  "county_name": "Santa Rosa",
+  "state": "FL",
+  "platform": "acclaimweb_telerik_http",
+  "status": "live",
+  "live_confirmed": "2026-06-18",
+  "base_url": "https://acclaim.srccol.com/AcclaimWeb/",
+  "disclaimer_path": "Search/Disclaimer",
+  "step1_path": "search/SearchTypeName",
+  "step2_path": "Search/SearchTypePreName",
+  "export_csv_path": "Search/ExportCsv",
+  "instrument_path": "search/SearchTypeInstrumentNumber",
+  "doctype_deed_code": "79",
+  "book_types_code": "All",
+  "impersonate_profile": "safari17_2_ios",
+  "cloudflare_required": false,
+  "akamai_required": false,
+  "captcha_required": false,
+  "platform_notes": "Older Telerik AcclaimWeb (2012.1.214), NOT the modern Kendo version (Broward/Saint Lucie). Uses Telerik TreeView for name disambiguation. ExportCsv endpoint delivers all rows in one GET after step 2.",
+  "doctype_codes": {
+    "DEED": "79",
+    "WARRANTY_DEED": "79",
+    "MORTGAGE": "91",
+    "SATISFACTION": "122",
+    "RELEASE": "119",
+    "FINANCING_STATEMENT": "85",
+    "JUDGMENT": "88",
+    "AGREEMENT_CONTRACT": "68",
+    "QUIT_CLAIM_DEED": "109",
+    "EASEMENT": "83",
+    "TIMESHARE_DEED": "130",
+    "TAX_DEED": "127",
+    "TERMINATION": "128",
+    "TRANSFER": "129"
+  },
+  "search_flow": [
+    "POST /Search/Disclaimer?st=/search/SearchTypeName {disclaimer:true}",
+    "POST /search/SearchTypeName?Length=6 {name, doctype, dates} → Telerik TreeView HTML",
+    "POST /Search/SearchTypePreName {checked nodes + context} → grid page (empty skeleton)",
+    "GET /Search/ExportCsv → CSV with all results"
+  ],
+  "csv_columns": [
+    "Consideration", "Party", "Name", "CrossPartyName", "InstrumentNumber",
+    "RecordDate", "DocTypeDescription", "BookType", "BookPage", "DocLink",
+    "CaseNumber", "Comments"
+  ],
+  "party_values": {
+    "grantor": "From",
+    "grantee": "To"
+  },
+  "supported_party_types": ["Both", "Direct", "Reverse"],
+  "doc_number_pattern": "^\\d{9,12}$",
+  "doc_number_field": "InstrumentNumber",
+  "book_page_format": "NNNN/NN",
+  "index_horizon_years": 44,
+  "index_start_date": "01/01/1982",
+  "max_results_per_export": 9999,
+  "test_subject": {
+    "name": "WHITE,TIMOTHY",
+    "address": "1009 Rin Ct, Milton, FL",
+    "live_result": "DEED from FANNIE MAE to WHITE TIMOTHY on 01/13/2015, OR 3400/80, Instrument 201501167; MORTGAGE to TRUIST BANK on 05/04/2026, OR 4740/78, Instrument 202622312"
+  },
+  "probe_notes": "Probed 2026-06-18. acclaim.srccol.com plain ASP.NET/IIS (no CF/Akamai). Three-step flow confirmed. DEED ID=79 confirmed from DocTypeGroupDropDown. ExportCsv works in same session after step 2. Live-validated: 3+ docs for WHITE TIMOTHY."
+}

@@ -1,0 +1,28 @@
+https://www2.miamidadeclerk.gov/UserManagementServices/?hs=or
+
+Note: Message: invalid selector: No selector specified
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidselectorexception
+Stacktrace:
+0   undetected_chromedriver             0x0000000101250e68 undetected_chromedriver + 6856296
+1   undetected_chromedriver             0x00000001012484da undetected_chromedriver + 6821082
+2   undetected_chromedriver             0x0000000100c35a85 undetected_chromedriver + 453253
+3   undetected_chromedriver             0x0000000100c3cae4 undetected_chromedriver + 482020
+4   undetected_chromedriver             0x0000000100c3f3b6 undetected_chromedriver + 492470
+5   undetected_chromedriver             0x0000000100c3f483 undetected_chromedriver + 492675
+6   undetected_chromedriver             0x0000000100c8916c undetected_chromedriver + 794988
+7   undetected_chromedriver             0x0000000100c89b91 undetected_chromedriver + 797585
+8   undetected_chromedriver             0x0000000100cd56c1 undetected_chromedriver + 1107649
+9   undetected_chromedriver             0x0000000100cd2786 undetected_chromedriver + 1095558
+10  undetected_chromedriver             0x0000000100c7cef1 undetected_chromedriver + 745201
+11  undetected_chromedriver             0x0000000100c7dcf1 undetected_chromedriver + 748785
+12  undetected_chromedriver             0x0000000101208487 undetected_chromedriver + 6558855
+13  undetected_chromedriver             0x000000010120c836 undetected_chromedriver + 6576182
+14  undetected_chromedriver             0x00000001011e849a undetected_chromedriver + 6427802
+15  undetected_chromedriver             0x000000010120d2a8 undetected_chromedriver + 6578856
+16  undetected_chromedriver             0x00000001011d7930 undetected_chromedriver + 6359344
+17  undetected_chromedriver             0x0000000101234b78 undetected_chromedriver + 6740856
+18  undetected_chromedriver             0x0000000101234d0c undetected_chromedriver + 6741260
+19  undetected_chromedriver             0x00000001012480f1 undetected_chromedriver + 6820081
+20  libsystem_pthread.dylib             0x00007ff81b45bd49 _pthread_start + 115
+21  libsystem_pthread.dylib             0x00007ff81b45782f thread_start + 15
+

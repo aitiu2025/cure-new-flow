@@ -1,0 +1,487 @@
+{
+  "report_date": "2026-04-13",
+  "property": {
+    "address": "5915 E CALLE PRINCIPIA, ANAHEIM",
+    "county": "Orange"
+  },
+  "current_owners": {
+    "names": "MASTRANGELO ANTHONY"
+  },
+  "documents_downloaded": [
+    {
+      "instrument_number": "2021000188481",
+      "filename": "B48473512.pdf",
+      "year": "2021",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:11:47.972330"
+    },
+    {
+      "instrument_number": "2020000679170",
+      "filename": "B48473514.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:12:37.364304"
+    },
+    {
+      "instrument_number": "2020000670636",
+      "filename": "B48473515.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:13:26.572260"
+    },
+    {
+      "instrument_number": "2020000670635",
+      "filename": "B48473516.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:14:15.589324"
+    },
+    {
+      "instrument_number": "2020000666908",
+      "filename": "B48473517.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:15:02.361295"
+    },
+    {
+      "instrument_number": "2017000164990",
+      "filename": "B48473518.pdf",
+      "year": "2017",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:15:51.646824"
+    },
+    {
+      "instrument_number": "2017000154868",
+      "filename": "B48473520.pdf",
+      "year": "2017",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:16:41.408079"
+    },
+    {
+      "instrument_number": "2017000150898",
+      "filename": "B48473524.pdf",
+      "year": "2017",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:17:29.955650"
+    },
+    {
+      "instrument_number": "2017000134002",
+      "filename": "B48473526.pdf",
+      "year": "2017",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:18:18.711552"
+    },
+    {
+      "instrument_number": "2016000103026",
+      "filename": "B48473529.pdf",
+      "year": "2016",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:20:23.483976"
+    },
+    {
+      "instrument_number": "2015000484211",
+      "filename": "B48473532.pdf",
+      "year": "2015",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:21:11.513429"
+    },
+    {
+      "instrument_number": "2015000476968",
+      "filename": "B48473534.pdf",
+      "year": "2015",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:22:00.636535"
+    },
+    {
+      "instrument_number": "2015000461024",
+      "filename": "B48473537.pdf",
+      "year": "2015",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:22:48.400192"
+    },
+    {
+      "instrument_number": "2013000425780",
+      "filename": "B48473538.pdf",
+      "year": "2013",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:23:36.716730"
+    },
+    {
+      "instrument_number": "2013000085542",
+      "filename": "B48473543.pdf",
+      "year": "2013",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:24:23.095492"
+    },
+    {
+      "instrument_number": "2013000040599",
+      "filename": "B48473545.pdf",
+      "year": "2013",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:26:32.027417"
+    },
+    {
+      "instrument_number": "2012000761580",
+      "filename": "B48473547.pdf",
+      "year": "2012",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:27:20.761142"
+    },
+    {
+      "instrument_number": "2011000595228",
+      "filename": "B48473549.pdf",
+      "year": "2011",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:28:07.075524"
+    },
+    {
+      "instrument_number": "2005000560756",
+      "filename": "B48473550.pdf",
+      "year": "2005",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:28:53.327242"
+    },
+    {
+      "instrument_number": "2003001156471",
+      "filename": "B48473552.pdf",
+      "year": "2003",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:29:40.494101"
+    },
+    {
+      "instrument_number": "2003001060608",
+      "filename": "D215255596.pdf",
+      "year": "2003",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:30:29.510474"
+    },
+    {
+      "instrument_number": "2003000834571",
+      "filename": "B48473556.pdf",
+      "year": "2003",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:31:18.363957"
+    },
+    {
+      "instrument_number": "2021000240977",
+      "filename": "B48473560.pdf",
+      "year": "2021",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:36:50.815967"
+    },
+    {
+      "instrument_number": "2017000134001",
+      "filename": "D215255616.pdf",
+      "year": "2017",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:37:34.251367"
+    },
+    {
+      "instrument_number": "2013000040600",
+      "filename": "B48473563.pdf",
+      "year": "2013",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:38:21.754056"
+    }
+  ],
+  "documents_metadata": {
+    "2021000188481": {
+      "filename": "B48473512.pdf",
+      "year": "2021",
+      "downloaded_at": "2026-04-13T13:11:47.972330",
+      "all_files": [
+        "B48473512.pdf",
+        "D215255482.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000679170": {
+      "filename": "B48473514.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T13:12:37.364304",
+      "all_files": [
+        "B48473514.pdf",
+        "D215255490.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000670636": {
+      "filename": "B48473515.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T13:13:26.572260",
+      "all_files": [
+        "B48473515.pdf",
+        "D215255491.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000670635": {
+      "filename": "B48473516.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T13:14:15.589324",
+      "all_files": [
+        "B48473516.pdf",
+        "D215255492.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000666908": {
+      "filename": "B48473517.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T13:15:02.361295",
+      "all_files": [
+        "B48473517.pdf",
+        "D215255493.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2017000164990": {
+      "filename": "B48473518.pdf",
+      "year": "2017",
+      "downloaded_at": "2026-04-13T13:15:51.646824",
+      "all_files": [
+        "B48473518.pdf",
+        "D215255494.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2017000154868": {
+      "filename": "B48473520.pdf",
+      "year": "2017",
+      "downloaded_at": "2026-04-13T13:16:41.408079",
+      "all_files": [
+        "B48473520.pdf",
+        "D215255502.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2017000150898": {
+      "filename": "B48473524.pdf",
+      "year": "2017",
+      "downloaded_at": "2026-04-13T13:17:29.955650",
+      "all_files": [
+        "B48473524.pdf",
+        "D215255509.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2017000134002": {
+      "filename": "B48473526.pdf",
+      "year": "2017",
+      "downloaded_at": "2026-04-13T13:18:18.711552",
+      "all_files": [
+        "B48473526.pdf",
+        "D215255517.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2016000103026": {
+      "filename": "B48473529.pdf",
+      "year": "2016",
+      "downloaded_at": "2026-04-13T13:20:23.483976",
+      "all_files": [
+        "B48473529.pdf",
+        "D215255530.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2015000484211": {
+      "filename": "B48473532.pdf",
+      "year": "2015",
+      "downloaded_at": "2026-04-13T13:21:11.513429",
+      "all_files": [
+        "B48473532.pdf",
+        "D215255540.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2015000476968": {
+      "filename": "B48473534.pdf",
+      "year": "2015",
+      "downloaded_at": "2026-04-13T13:22:00.636535",
+      "all_files": [
+        "B48473534.pdf",
+        "D215255547.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2015000461024": {
+      "filename": "B48473537.pdf",
+      "year": "2015",
+      "downloaded_at": "2026-04-13T13:22:48.400192",
+      "all_files": [
+        "B48473537.pdf",
+        "D215255550.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2013000425780": {
+      "filename": "B48473538.pdf",
+      "year": "2013",
+      "downloaded_at": "2026-04-13T13:23:36.716730",
+      "all_files": [
+        "B48473538.pdf",
+        "D215255551.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2013000085542": {
+      "filename": "B48473543.pdf",
+      "year": "2013",
+      "downloaded_at": "2026-04-13T13:24:23.095492",
+      "all_files": [
+        "B48473543.pdf",
+        "D215255563.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2013000040599": {
+      "filename": "B48473545.pdf",
+      "year": "2013",
+      "downloaded_at": "2026-04-13T13:26:32.027417",
+      "all_files": [
+        "B48473545.pdf",
+        "D215255568.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2012000761580": {
+      "filename": "B48473547.pdf",
+      "year": "2012",
+      "downloaded_at": "2026-04-13T13:27:20.761142",
+      "all_files": [
+        "B48473547.pdf",
+        "D215255572.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2011000595228": {
+      "filename": "B48473549.pdf",
+      "year": "2011",
+      "downloaded_at": "2026-04-13T13:28:07.075524",
+      "all_files": [
+        "B48473549.pdf",
+        "D215255584.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2005000560756": {
+      "filename": "B48473550.pdf",
+      "year": "2005",
+      "downloaded_at": "2026-04-13T13:28:53.327242",
+      "all_files": [
+        "B48473550.pdf",
+        "D215255585.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2003001156471": {
+      "filename": "B48473552.pdf",
+      "year": "2003",
+      "downloaded_at": "2026-04-13T13:29:40.494101",
+      "all_files": [
+        "B48473552.pdf",
+        "D215255588.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2003001060608": {
+      "filename": "D215255596.pdf",
+      "year": "2003",
+      "downloaded_at": "2026-04-13T13:30:29.510474",
+      "all_files": [
+        "D215255596.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2003000834571": {
+      "filename": "B48473556.pdf",
+      "year": "2003",
+      "downloaded_at": "2026-04-13T13:31:18.363957",
+      "all_files": [
+        "B48473556.pdf",
+        "D215255599.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2021000240977": {
+      "filename": "B48473560.pdf",
+      "year": "2021",
+      "downloaded_at": "2026-04-13T13:36:50.815967",
+      "all_files": [
+        "B48473560.pdf",
+        "D215255615.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2017000134001": {
+      "filename": "D215255616.pdf",
+      "year": "2017",
+      "downloaded_at": "2026-04-13T13:37:34.251367",
+      "all_files": [
+        "D215255616.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2013000040600": {
+      "filename": "B48473563.pdf",
+      "year": "2013",
+      "downloaded_at": "2026-04-13T13:38:21.754056",
+      "all_files": [
+        "B48473563.pdf",
+        "D215255620.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    }
+  },
+  "source_files": [
+    "B48473512.pdf",
+    "B48473514.pdf",
+    "B48473515.pdf",
+    "B48473516.pdf",
+    "B48473517.pdf",
+    "B48473518.pdf",
+    "B48473520.pdf",
+    "B48473524.pdf",
+    "B48473526.pdf",
+    "B48473529.pdf",
+    "B48473532.pdf",
+    "B48473534.pdf",
+    "B48473537.pdf",
+    "B48473538.pdf",
+    "B48473543.pdf",
+    "B48473545.pdf",
+    "B48473547.pdf",
+    "B48473549.pdf",
+    "B48473550.pdf",
+    "B48473552.pdf",
+    "B48473556.pdf",
+    "B48473560.pdf",
+    "B48473563.pdf",
+    "D215255482.pdf",
+    "D215255490.pdf",
+    "D215255491.pdf",
+    "D215255492.pdf",
+    "D215255493.pdf",
+    "D215255494.pdf",
+    "D215255502.pdf",
+    "D215255509.pdf",
+    "D215255517.pdf",
+    "D215255530.pdf",
+    "D215255540.pdf",
+    "D215255547.pdf",
+    "D215255550.pdf",
+    "D215255551.pdf",
+    "D215255563.pdf",
+    "D215255568.pdf",
+    "D215255572.pdf",
+    "D215255584.pdf",
+    "D215255585.pdf",
+    "D215255588.pdf",
+    "D215255596.pdf",
+    "D215255599.pdf",
+    "D215255615.pdf",
+    "D215255616.pdf",
+    "D215255620.pdf"
+  ]
+}

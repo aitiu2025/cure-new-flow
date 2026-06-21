@@ -1,0 +1,218 @@
+{
+  "portal": "https://onlineservices.miamidadeclerk.gov/officialrecords/",
+  "subject": "HAUGABOOK, RACHEL ANNE",
+  "landing": {
+    "url": "https://onlineservices.miamidadeclerk.gov/officialrecords/",
+    "title": "Official Records",
+    "iframes": [
+      {
+        "id": "",
+        "name": "a-cpg5hpqhmkpw",
+        "src": "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LfI8ikaAAAAAH0qlQMApskMGd1U6EqDyniH5t0x&co=aHR0cHM6Ly9vbmxpbmVzZXJ2aWNlcy5taWFtaWRhZGVjbGVyay5nb3Y6NDQz&hl=en&v=Br0hYqpfWeFzYCAXLD4UuCIV&size=invisible&anchor-ms=20000&execute-ms=30000&cb=6tt0bcoxq7jw"
+      },
+      {
+        "id": "",
+        "name": "",
+        "src": ""
+      }
+    ]
+  },
+  "landing_clickables": [
+    {
+      "class": "skip-content",
+      "href": "https://onlineservices.miamidadeclerk.gov/officialrecords/#content",
+      "id": "skip",
+      "name": "",
+      "tag": "a",
+      "text": "Skip to main content",
+      "type": ""
+    },
+    {
+      "class": "header__nav-link",
+      "href": "https://www2.miamidadeclerk.gov/usermanagementservices",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Register/Login",
+      "type": ""
+    },
+    {
+      "class": "header__nav-link me-2",
+      "href": "https://www.miamidadeclerk.gov/clerk/contact.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Contact Us",
+      "type": ""
+    },
+    {
+      "class": "",
+      "href": "https://www.miamidadeclerk.gov/clerk/home.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Clerk Home",
+      "type": ""
+    },
+    {
+      "class": "text-decoration-underline fw-bold",
+      "href": "https://www2.miamidadeclerk.gov/UserManagementServices/?hs=or",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "register/login",
+      "type": ""
+    },
+    {
+      "class": "text-decoration-underline fw-bold border-0 bg-transparent p-0",
+      "href": "",
+      "id": "",
+      "name": "",
+      "tag": "button",
+      "text": "Registering",
+      "type": "button"
+    },
+    {
+      "class": "text-decoration-underline fw-bold border-0 bg-transparent p-0",
+      "href": "",
+      "id": "",
+      "name": "",
+      "tag": "button",
+      "text": "Logging In",
+      "type": "button"
+    },
+    {
+      "class": "cursorPointer",
+      "href": "https://www2.miamidadeclerk.gov/Developers/Home/MyAccount",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Web API Services",
+      "type": ""
+    },
+    {
+      "class": "cursorPointer",
+      "href": "https://www.miamidade.gov/global/disclaimer/disclaimer.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Miami-Dade County Disclaimer",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidadeclerk.gov/clerk/official-records.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Official Record Information",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www2.miamidadeclerk.gov/usermanagementservices",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Login",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidadeclerk.gov/clerk/home.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Clerk's Home",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidade.gov/global/disclaimer/privacy-and-security.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Privacy Statement",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidade.gov/global/disclaimer/ada-notice.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "ADA Notice",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidade.gov/global/disclaimer/disclaimer.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Disclaimer",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidadeclerk.gov/clerk/contact.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "Contact Us",
+      "type": ""
+    },
+    {
+      "class": "footer__nav-link",
+      "href": "https://www.miamidadeclerk.gov/clerk/about.page",
+      "id": "",
+      "name": "",
+      "tag": "a",
+      "text": "About Us",
+      "type": ""
+    }
+  ],
+  "form_inputs": [
+    {
+      "aria": "",
+      "id": "g-recaptcha-response-100000",
+      "label": "",
+      "name": "g-recaptcha-response",
+      "placeholder": "",
+      "tag": "textarea",
+      "type": "textarea",
+      "visible": false
+    }
+  ],
+  "identified_fields": {
+    "last": null,
+    "first": null,
+    "middle": null,
+    "start": null,
+    "end": null
+  },
+  "submit_candidates": [
+    {
+      "class": "text-decoration-underline fw-bold border-0 bg-transparent p-0",
+      "href": "",
+      "id": "",
+      "name": "",
+      "tag": "button",
+      "text": "Registering",
+      "type": "button"
+    },
+    {
+      "class": "text-decoration-underline fw-bold border-0 bg-transparent p-0",
+      "href": "",
+      "id": "",
+      "name": "",
+      "tag": "button",
+      "text": "Logging In",
+      "type": "button"
+    }
+  ],
+  "result_rows_guess": {
+    "count": 0,
+    "selector": ""
+  }
+}

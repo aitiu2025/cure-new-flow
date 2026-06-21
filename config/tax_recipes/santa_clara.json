@@ -1,0 +1,128 @@
+{
+  "county": "santa_clara",
+  "platform": "playwright_form",
+  "base_url": "https://santaclaracounty.telleronline.net/search/1/PropertyAddress",
+  "authoritative_source_hosts": ["santaclaracounty.telleronline.net"],
+  "host_whitelist_mode": "strict",
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 30000,
+  "_portal_topology": "Santa Clara DTAC routes property-tax payments through https://payments.sccgov.org/propertytax which 301-redirects to https://santaclaracounty.telleronline.net (Grant Street Group 'Teller Online' platform, NOT the same as Sacramento/SBD's GovHub). Search flow: load /search/1/PropertyAddress -> fill #mat-input-1 (Material autocomplete-trigger, name='PropertyAddress') -> wait for cdk-overlay-pane mat-option list (100 results capped) -> click first option (populates input value) -> press Enter on the input. The Enter press triggers POST /api/public-portal/search?PageId=1&SearchValues[PropertyAddress]=<addr> which returns a BsiKey, then the SPA navigates to /search/1/details?BsiKey=S_<id> with the result page (APN, address, TRA, installment 1/2 amounts + statuses).",
+  "_meta": "ACTIVE 2026-05-13: previously deferred while the runner lacked a `press_key` action. Runner now supports `press_key`, so this recipe is live. The Enter press on #mat-input-1 submits the autocomplete form (the form has no submit button — verified in DOM). Discovery probe + fixture pair: /tmp/tax_probes/santa_clara/v13_billdetail.body.txt.",
+  "no_results_patterns": [
+    "Sorry,?\\s+we\\s+couldn'?t\\s+find\\s+any\\s+results",
+    "no\\s+results\\s+found",
+    "no\\s+matching\\s+account"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://santaclaracounty.telleronline.net/search/1/PropertyAddress",
+      "settle_ms": 5000
+    },
+    {
+      "action": "fill",
+      "selector": "#mat-input-1",
+      "value": "{property_address}",
+      "timeout_ms": 15000
+    },
+    {
+      "action": "sleep",
+      "ms": 4000
+    },
+    {
+      "action": "wait_for",
+      "selector": "mat-option",
+      "state": "visible",
+      "timeout_ms": 15000
+    },
+    {
+      "action": "click",
+      "selector": "mat-option",
+      "timeout_ms": 15000,
+      "settle_ms": 2500
+    },
+    {
+      "action": "press_key",
+      "selector": "#mat-input-1",
+      "key": "Enter",
+      "wait_after_ms": 2000
+    },
+    {
+      "action": "wait_for_url",
+      "pattern": "details?BsiKey=",
+      "timeout_ms": 20000,
+      "optional": true
+    },
+    {
+      "action": "wait_for",
+      "selector": "text=Item Details",
+      "state": "visible",
+      "timeout_ms": 15000,
+      "optional": true
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "APN:?\\s*\\n?\\s*([0-9]{3}-[0-9]{2}-[0-9]{3})",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "(\\d{4}/\\d{4})\\s+Annual\\s+Tax\\s+Bill",
+      "scope": "body"
+    },
+    "tra": {
+      "regex": "Tax\\s+Rate\\s+Area\\s*\\n?\\s*([0-9]{3}-[0-9]{3})",
+      "scope": "body"
+    },
+    "property_address": {
+      "regex": "Property\\s+Address\\s*\\n?\\s*([0-9][^\\n]+)",
+      "scope": "body"
+    },
+    "annual_total": {
+      "regex": "\\d{4}/\\d{4}\\s+Annual\\s+Tax\\s+Bill[\\s\\S]{0,400}?Tax\\s+Amount\\s*\\n?\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(Installment 1)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "regex": "Installment 1[\\s\\S]{0,300}?Tax\\s+Amount\\s*\\n?\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].status": {
+      "regex": "Installment 1[\\s\\S]{0,500}?Status\\s*\\n?\\s*(PAID|UNPAID|DELINQUENT)",
+      "scope": "body"
+    },
+    "installments[0].paid_date": {
+      "regex": "Installment 1[\\s\\S]{0,500}?Last\\s+Payment\\s+Date\\s*\\n?\\s*(\\d{2}/\\d{2}/\\d{4})",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(Installment 2)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "regex": "Installment 2[\\s\\S]{0,300}?Tax\\s+Amount\\s*\\n?\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[1].status": {
+      "regex": "Installment 2[\\s\\S]{0,500}?Status\\s*\\n?\\s*(PAID|UNPAID|DELINQUENT)",
+      "scope": "body"
+    },
+    "installments[1].paid_date": {
+      "regex": "Installment 2[\\s\\S]{0,500}?Last\\s+Payment\\s+Date\\s*\\n?\\s*(\\d{2}/\\d{2}/\\d{4})",
+      "scope": "body"
+    }
+  },
+  "verification_required": [
+    "apn",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

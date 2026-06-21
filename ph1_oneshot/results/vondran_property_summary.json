@@ -1,0 +1,49 @@
+{
+  "property": {
+    "address": "22 Calle Cabrillo, Foothill Ranch, CA",
+    "county": "Orange",
+    "owners": [
+      "VONDRAN DAVID JOHN",
+      "VONDRAN THERESA ANN"
+    ]
+  },
+  "documents_found": [
+    {
+      "doc_num": "2016000243775",
+      "type": "TRUST DEED",
+      "date": "2016-05-31",
+      "parties": "VONDRAN DAVID JOHN VONDRAN THERESA ANN to BROADVIEW MTG CORP"
+    },
+    {
+      "doc_num": "2018000325101",
+      "type": "TRUST DEED",
+      "date": "2018-09-05",
+      "parties": "VONDRAN DAVID JOHN VONDRAN THERESA ANN to WELLS FARGO BANK N A"
+    },
+    {
+      "doc_num": "2020000187684",
+      "type": "TRUST DEED",
+      "date": "2020-04-27",
+      "parties": "VONDRAN DAVID JOHN VONDRAN THERESA ARM to PARTNERS FEDERAL CREDIT UNION"
+    },
+    {
+      "doc_num": "2020000219276",
+      "type": "RECONVEYANCE",
+      "date": "2020-05-14",
+      "parties": "Release to VONDRAN DAVID JOHN VONDRAN THERESA ANN"
+    },
+    {
+      "doc_num": "2020000219723",
+      "type": "RECONVEYANCE",
+      "date": "2020-05-14",
+      "parties": "Release to VONDRAN DAVID JOHN VONDRAN THERESA ANN"
+    },
+    {
+      "doc_num": "2022000209674",
+      "type": "TRUST DEED",
+      "date": "2022-06-09",
+      "parties": "VONDRAN DAVID JOHN VONDRAN THERESA ANN to PARTNERS FEDERAL CREDIT UNION"
+    }
+  ],
+  "note": "Need to search property tax records or download docs to extract APN and vesting deed"
+}

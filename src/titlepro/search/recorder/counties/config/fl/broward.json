@@ -1,0 +1,65 @@
+{
+  "county_id": "fl_broward",
+  "county_name": "Broward",
+  "state": "FL",
+  "platform": "acclaimweb",
+  "base_url": "https://officialrecords.broward.org/AcclaimWeb/",
+  "search_url": "https://officialrecords.broward.org/AcclaimWeb/search/SearchTypeName",
+  "disclaimer_url": "https://officialrecords.broward.org/AcclaimWeb/",
+  "captcha_required": false,
+  "name_format": "combined",
+  "name_input_format": "last_comma_first",
+  "date_format": "M/D/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d{6,12}$|^\\d{4}-\\d{5,}$|^\\d{8,}$",
+  "http_search_endpoint": "https://officialrecords.broward.org/AcclaimWeb/search/SearchByName",
+  "http_form_fields": {
+    "name": "SearchOnName",
+    "date_from": "RecordDateFrom",
+    "date_to": "RecordDateTo",
+    "doc_type": "DocTypes"
+  },
+  "doc_image_url_pattern": {
+    "jump_url": "details/JumpToInstrumentNumber/{record_type}/{doc_num}",
+    "start_image_retrieval": "Image/StartImageRetrieval/{token}/0",
+    "viewer_url": "Image/DocumentImage1/{token}",
+    "record_type": 27,
+    "token_regex_options": [
+      "id\\s*=\\s*[\\'\"]hdnTransactionItemId[\\'\"]\\s+value\\s*=\\s*[\\'\"]([A-Za-z0-9_\\-]+)[\\'\"]",
+      "value\\s*=\\s*[\\'\"]([A-Za-z0-9_\\-]{40,80})[\\'\"]\\s+[^>]*id\\s*=\\s*[\\'\"]hdnTransactionItemId[\\'\"]",
+      "DocumentImage1/([A-Za-z0-9_\\-]+)",
+      "\"Token\"\\s*:\\s*\"([A-Za-z0-9_\\-]+)\"",
+      "StartImageRetrieval/([A-Za-z0-9_\\-]+)"
+    ],
+    "pdf_href_regex": "[\\'\"]([^\\'\"]*WebAtalaCache/[A-Za-z0-9_\\-]+_\\d+_docPdf\\.pdf)[\\'\"]",
+    "pre_pdf_delay_seconds": 5.5,
+    "pdf_fetch_retries": 3,
+    "pdf_retry_delay_seconds": 3
+  },
+  "doctype_deed_value": "DEED",
+  "antiforgery_token_field": "__RequestVerificationToken",
+  "cloudflare_required": true,
+  "session_acquisition_strategy": "browser_minted_cookies",
+  "cookie_jar_path": "~/.titlepro/cookie_jar/broward.json",
+  "indexed_apn_in_detail_response": true,
+  "supported_party_types": ["All", "Grantor", "Grantee"],
+  "party_types": ["All", "Grantor", "Grantee"],
+  "default_party_type": "All",
+  "party_type_map": {
+    "Grantor/Grantee": "All",
+    "Both": "All",
+    "All": "All",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "selectors": {
+    "disclaimer_accept": "//input[@id='btnButton']",
+    "name_field": "//input[@id='SearchOnName']",
+    "start_date_field": "//input[@id='RecordDateFrom']",
+    "end_date_field": "//input[@id='RecordDateTo']",
+    "search_button": "//input[@id='btnSearch']",
+    "party_type_dropdown": "//select[@id='__not_a_dropdown__']",
+    "result_rows": "//tr[contains(@class, 't-row') or contains(@class, 'k-grid-row') or contains(@class, 't-state-default') or contains(@class, 't-alt')]",
+    "no_results": "//*[contains(text(), 'No records') or contains(text(), 'No documents') or contains(text(), '0 record')]"
+  },
+  "notes": "Broward FL Clerk — custom Telerik MVC skin on AcclaimWeb. Cloudflare-fronted: requires undetected-chromedriver. Form differs from CA AcclaimWeb: single SearchOnName field (Last, First with comma per search tips), no party-type <select> (radio buttons default to All), Telerik t-combobox for Doc Type (NOT a <select>), Telerik datepickers for record dates (JS dispatch change event — adapter already does this). Party-type dropdown selector intentionally invalid so adapter skips with warning; default All radio is pre-selected. Test subjects: SIMMONS SHANTELL+DESTON (2151 NW 93rd Ave Pembroke Pines), ANAND RISHI G+PAYAL (2856 NE 27TH ST Fort Lauderdale). DocType=All is fine for initial test; if needed later, programmatically set via $('#DocTypes').data('tComboBox').value('DEED')."
+}

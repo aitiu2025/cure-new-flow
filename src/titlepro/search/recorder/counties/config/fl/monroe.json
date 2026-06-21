@@ -1,0 +1,60 @@
+{
+  "county_id": "fl_monroe",
+  "county_name": "Monroe",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://or.monroe-clerk.com/LandmarkWeb/",
+  "recorder_root": "https://or.monroe-clerk.com/LandmarkWeb/",
+  "search_url": "https://or.monroe-clerk.com/LandmarkWeb/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": false,
+  "captcha_type": "none",
+  "recaptcha_site_key": "",
+  "allow_automated_captcha_solver": false,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{5,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "sitekey_strategy": "none",
+  "column_map": {
+    "instrument": "12",
+    "doc_id": "29",
+    "doc_type": "9",
+    "location_header": "8",
+    "direct_name": "4",
+    "reverse_name": "5",
+    "record_date": "7",
+    "page_count": "28"
+  },
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found"
+  },
+  "status": "live_validated",
+  "live_validated_date": "2026-06-19",
+  "notes": "Monroe County FL — LIVE-VALIDATED 2026-06-19. search/index is 1.29MB (largest in cohort). ShowCaptcha=True but NOT enforced — NameSearch accepts empty token (2753 rows for CURRY). 31-col row layout: instrument=col12 (6-digit like 621267), doc_id=col29, location_header=col8 (ML/DEED), record_date=col7, direct_name=col4. doc_number_pattern relaxed to \\d{5,} (6-digit instruments). chrome120 sufficient. Tax: Grant Street."
+}

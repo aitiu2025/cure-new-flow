@@ -1,0 +1,51 @@
+[
+  {
+    "url": "https://county-taxes.net/environment",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-2Y53RWJGP0&gtm=45je65l0h2v897934635z89185436349za20gzb9185436349zd9185436349&_p=1779603454147&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=1253875509.1779603454&frm=0&pscdl=noapi&rcb=19&sr=1400x950&uaa=arm&uab=64&uafvl=Chromium%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.5.0&uaw=0&ul=en-us&_s=1&tag_exp=0~115938465~115938468&sid=1779603454&sct=1&seg=0&dl=https%3A%2F%2Fcounty-taxes.net%2Fbroward%2Fproperty-tax&dt=Payments%20%26%20Services&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=627",
+    "status": 204,
+    "content_type": "text/plain",
+    "method": "POST",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://county-taxes.net/environment",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr"
+  },
+  {
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-2Y53RWJGP0&gtm=45je65l0h2v897934635z89185436349za20gzb9185436349zd9185436349&_p=1779603456214&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1253875509.1779603454&frm=0&pscdl=noapi&rcb=13&sr=1400x950&uaa=arm&uab=64&uafvl=Chromium%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.5.0&uaw=0&ul=en-us&tag_exp=0~115938465~115938469&sid=1779603454&sct=1&seg=1&dl=https%3A%2F%2Fcounty-taxes.net%2Fbroward%2Fproperty-tax&dt=Payments%20%26%20Services&_s=1&tfd=5424",
+    "status": 204,
+    "content_type": "text/plain",
+    "method": "POST",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://county-taxes.net/iframe-taxsys/broward.county-taxes.com/govhub/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==/load-amount-due",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "method": "GET",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://county-taxes.net/iframe-taxsys/broward.county-taxes.com/govhub/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==/load-bill-history",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "method": "GET",
+    "resource_type": "fetch"
+  },
+  {
+    "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-2Y53RWJGP0&gtm=45je65l0h2v897934635za20gzb9185436349zd9185436349&_p=1779603456214&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=1253875509.1779603454&frm=0&pscdl=noapi&rcb=13&sr=1400x950&uaa=arm&uab=64&uafvl=Chromium%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.5.0&uaw=0&ul=en-us&_s=2&tag_exp=0~115938465~115938469&dl=https%3A%2F%2Fcounty-taxes.net%2Fbroward%2Fproperty-tax%2FYnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA%3D%3D&dr=https%3A%2F%2Fcounty-taxes.net%2Fbroward%2Fproperty-tax&sid=1779603454&sct=1&seg=1&dt=Broward&en=page_view&_et=9393&tfd=15364",
+    "status": 204,
+    "content_type": "text/plain",
+    "method": "POST",
+    "resource_type": "fetch"
+  }
+]

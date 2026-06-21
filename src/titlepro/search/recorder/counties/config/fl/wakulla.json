@@ -1,0 +1,52 @@
+{
+  "county_id": "fl_wakulla",
+  "county_name": "Wakulla",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "http://wakullaclerk.com/Landmarkweb/",
+  "recorder_root": "http://wakullaclerk.com/Landmarkweb/",
+  "search_url": "http://wakullaclerk.com/Landmarkweb/search/index?theme=.blue&section=searchCriteriaName",
+  "_http_only": true,
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "recaptcha_site_key": "6LdBHOorAAAAALwRLkAZpnNsfcp7qfFS4YIGIRTU",
+  "allow_automated_captcha_solver": true,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "sitekey_strategy": "async_scrape",
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found",
+    "recaptcha_section": ".recaptchasection-Name",
+    "recaptcha_sitekey_attr": "data-sitekey"
+  },
+  "status": "in_progress",
+  "notes": "Wakulla County FL — Landmark Web Official Records. Wave-2 onboarding 2026-05-23 by Implementer C. HTTP-ONLY GOTCHA: portal serves `http://` not `https://` and uses lowercase `Landmarkweb` subpath — DO NOT switch to https or change capitalization (URL will 404). `_http_only: true` flag set for downstream awareness. ESCALATION ITEM: confirm landmark_adapter.py does not hardcode https-only logic when building absolute URLs or normalising base_url; if it does, add a config branch or skip TLS enforcement when `_http_only: true`. recaptcha_site_key provisionally set to Palm Beach value because live probes unavailable in implementer environment (sandbox-denied). MUST live-probe before smoke. Tax-side is VisualGov (stub_pending_recipe at https://wakullacountytaxcollector.com)."
+}

@@ -1,0 +1,5 @@
+{
+  "GRANTOR": ["John Smith", "Jane Doe"],
+  "GRANTEE": ["ACME Corp", "John Smith"],
+  "ALL": ["John Smith", "Jane Doe", "ACME Corp"]
+}

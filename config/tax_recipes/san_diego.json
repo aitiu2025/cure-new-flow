@@ -1,0 +1,86 @@
+{
+  "county": "san_diego",
+  "platform": "playwright_form",
+  "base_url": "https://www.sdttc.com/content/ttc/en/tax-collection/prior-year-tax-records.html",
+  "authoritative_source_hosts": ["www.sdttc.com", "sdttc.com"],
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 30000,
+  "no_results_patterns": [
+    "Record\\s+not\\s+found\\s+or\\s+not\\s+valid\\s+data",
+    "No\\s+results\\s+found"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://www.sdttc.com/content/ttc/en/tax-collection/prior-year-tax-records.html?fiscal_year=2024-07-01%7C2025-06-30&q={apn}&x=12&y=12",
+      "settle_ms": 4000
+    },
+    {
+      "action": "wait_for",
+      "selector": "#ttc-prior-year",
+      "state": "attached",
+      "timeout_ms": 20000,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "ms": 1500
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "selector": "#ttc-prior-year tbody tr:first-child td:nth-child(1)",
+      "type": "string"
+    },
+    "tax_year": {
+      "regex": "Property\\s+Tax\\s+Year\\s+(\\d{4}-\\d{4})",
+      "scope": "body"
+    },
+    "installments[0].label": {
+      "regex": "(1st Installment)",
+      "scope": "body"
+    },
+    "installments[0].paid_date": {
+      "selector": "#ttc-prior-year tbody tr:first-child td:nth-child(2)",
+      "type": "string"
+    },
+    "installments[0].amount": {
+      "selector": "#ttc-prior-year tbody tr:first-child td:nth-child(3)",
+      "type": "currency"
+    },
+    "installments[0].paid_amount": {
+      "selector": "#ttc-prior-year tbody tr:first-child td:nth-child(4)",
+      "type": "currency"
+    },
+    "installments[0].status": {
+      "selector": "#ttc-prior-year tbody tr:first-child td:nth-child(5)",
+      "type": "string"
+    },
+    "installments[1].label": {
+      "regex": "(2nd Installment)",
+      "scope": "body"
+    },
+    "installments[1].paid_date": {
+      "selector": "#ttc-prior-year tbody tr:nth-child(2) td:nth-child(2)",
+      "type": "string"
+    },
+    "installments[1].amount": {
+      "selector": "#ttc-prior-year tbody tr:nth-child(2) td:nth-child(7)",
+      "type": "currency"
+    },
+    "installments[1].paid_amount": {
+      "selector": "#ttc-prior-year tbody tr:nth-child(2) td:nth-child(8)",
+      "type": "currency"
+    },
+    "installments[1].status": {
+      "selector": "#ttc-prior-year tbody tr:nth-child(2) td:nth-child(9)",
+      "type": "string"
+    }
+  },
+  "verification_required": [
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

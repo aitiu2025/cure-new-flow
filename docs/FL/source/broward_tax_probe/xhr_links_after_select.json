@@ -1,0 +1,198 @@
+[
+  {
+    "tag": "BUTTON",
+    "text": "Skip to main content",
+    "href": "",
+    "classes": "skip-link",
+    "role": "link"
+  },
+  {
+    "tag": "A",
+    "text": "Vehicle Registration Renewal",
+    "href": "https://county-taxes.net/dmv/broward/vehicle-registration",
+    "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Property Tax",
+    "href": "https://county-taxes.net/broward/property-tax",
+    "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Business Tax",
+    "href": "https://county-taxes.net/broward/business-tax",
+    "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Reports",
+    "href": "https://county-taxes.net/broward/reports",
+    "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Espa\u00f1ol",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#",
+    "classes": "me-3 fw-light d-none d-lg-inline",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Notifications\n4",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#",
+    "classes": "position-relative py-1 cursor-pointer",
+    "role": "button"
+  },
+  {
+    "tag": "A",
+    "text": "Espa\u00f1ol",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#",
+    "classes": "px-6 py-4 fw-light d-inline d-lg-none",
+    "role": ""
+  },
+  {
+    "tag": "BUTTON",
+    "text": "Help",
+    "href": "",
+    "classes": "nav-link btn-link bg-transparent border-0 fw-normal ps-0 pe-0 me-4 themed-tabs",
+    "role": "tab"
+  },
+  {
+    "tag": "BUTTON",
+    "text": "Terms of Use",
+    "href": "",
+    "classes": "nav-link btn-link bg-transparent border-0 fw-normal px-0 me-4 themed-tabs",
+    "role": "tab"
+  },
+  {
+    "tag": "BUTTON",
+    "text": "Empty Tab",
+    "href": "",
+    "classes": "nav-link btn-link bg-transparent border-0 active d-none",
+    "role": "tab"
+  },
+  {
+    "tag": "A",
+    "text": "Tax Account Help",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#tax",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Vehicle Registration Help",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#registration",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Broward Tax Collector",
+    "href": "https://www.browardtax.org/",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "support@govhub.com",
+    "href": "mailto:GovHub Support<support@govhub.com>",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Info About My Registration",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#section01",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Checkout and Payment",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#section02",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "What Happens After Renewing Online?",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#section03",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "RenewExpress.com",
+    "href": "https://www.renewexpress.com/",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Broward Tax Collector's Office",
+    "href": "https://www.browardtax.org/",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Back to top",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#registration",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Back to top",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#registration",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "form",
+    "href": "https://www.flhsmv.gov/pdf/forms/83146.pdf",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "autotags@browardtax.org",
+    "href": "mailto:autotags@browardtax.org",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "renewals@grantstreet.com",
+    "href": "mailto:Registration Renewals Support <renewals@grantstreet.com>?subject=Registration%20Renewals%20(Broward%20County)&body=Please%20specify%20the%20license%20plate%20number%20or%20PIN,%20and%20the%20details%20regarding%20your%20issue%20or%20question.",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Back to top",
+    "href": "https://county-taxes.net/broward/property-tax/YnJvd2FyZDpyZWFsX2VzdGF0ZTpwYXJlbnRzOjAxNjhhZDkwLWU1MGEtMTFlYi1iYTM4LTAwNTA1NjgxOTMzNA==#registration",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Broward Tax Collector's website",
+    "href": "https://www.browardtax.org/",
+    "classes": "",
+    "role": ""
+  },
+  {
+    "tag": "A",
+    "text": "Powered by Grant Street Group.",
+    "href": "https://www.grantstreet.com/",
+    "classes": "",
+    "role": ""
+  }
+]

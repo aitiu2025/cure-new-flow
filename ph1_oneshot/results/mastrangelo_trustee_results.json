@@ -1,0 +1,101 @@
+{
+  "search_params": {
+    "name1": "Mastrangelo Anthony Michael",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": null,
+    "search_timestamp": "2026-04-03T18:34:25.151315"
+  },
+  "search_breakdown": {
+    "grantor_count": 5,
+    "grantee_count": 4,
+    "total_unique": 9
+  },
+  "all_documents": [
+    {
+      "document_number": "2021000182216",
+      "grantors": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantees": "EMPIRE OF AMERICA CORPORATION MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "3/16/2021",
+      "pages": "25"
+    },
+    {
+      "document_number": "2021000262319",
+      "grantors": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantees": "EMPIRE OF AMERICA CORPORATION MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "4/19/2021",
+      "pages": "22"
+    },
+    {
+      "document_number": "2021000262325",
+      "grantors": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantees": "EMPIRE OF AMERICA CORPORATION MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "4/19/2021",
+      "pages": "26"
+    },
+    {
+      "document_number": "2023000027298",
+      "grantors": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantees": "FLAGSTAR BANK N A",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "2/8/2023",
+      "pages": "21"
+    },
+    {
+      "document_number": "2026000034332",
+      "grantors": "MASTRANGELO ANTHONY MICHAEL MASTRANGELO ANTHONY MICHAEL TR",
+      "grantees": "PARTNERS FEDERAL CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "2/13/2026",
+      "pages": "8"
+    },
+    {
+      "document_number": "2021000182215",
+      "grantors": "PICCIOTTA DANIELA",
+      "grantees": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "3/16/2021",
+      "pages": "2"
+    },
+    {
+      "document_number": "2021000188480",
+      "grantors": "MASTRANGELO ANTHONY M MASTRANGELO GEORGIANN I",
+      "grantees": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantor_grantees": "",
+      "document_type": "DEED",
+      "recording_date": "3/18/2021",
+      "pages": "2"
+    },
+    {
+      "document_number": "2021000188481",
+      "grantors": "MASTRANGELO ANTHONY MASTRANGELO GEORGIANN",
+      "grantees": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantor_grantees": "",
+      "document_type": "DEED",
+      "recording_date": "3/18/2021",
+      "pages": "2"
+    },
+    {
+      "document_number": "2026000053382",
+      "grantors": "",
+      "grantees": "MASTRANGELO ANTHONY MICHAEL TR",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "2/23/2026",
+      "pages": "1"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "search_params": {
+    "name1": "Hench Sandra",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": null,
+    "search_timestamp": "2026-04-03T18:54:46.723992"
+  },
+  "search_breakdown": {
+    "grantor_count": 12,
+    "grantee_count": 11,
+    "total_unique": 23
+  },
+  "all_documents": [
+    {
+      "document_number": "2004000445904",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "OPTION ONE MTG CORP BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "5/19/2004",
+      "pages": "9"
+    },
+    {
+      "document_number": "2005000744958",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "FIRST HORIZON HOME LN CORP MORTGAGE ELEC REGISTR SYSTEMS INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "9/20/2005",
+      "pages": "16"
+    },
+    {
+      "document_number": "2006000528834",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "LENDING CONNECTION INC THE BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "8/8/2006",
+      "pages": "15"
+    },
+    {
+      "document_number": "2007000462578",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "BENEFICIAL CA INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "7/24/2007",
+      "pages": "8"
+    },
+    {
+      "document_number": "2014000029451",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "JPMORGAN CHASE BK N A BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "1/24/2014",
+      "pages": "18"
+    },
+    {
+      "document_number": "2018000132491",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "CARRINGTON MORTGAGE SERVICES LLC MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "4/13/2018",
+      "pages": "14"
+    },
+    {
+      "document_number": "2020000383394",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC UNITED WHOLESALE MORTGAGE",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "8/5/2020",
+      "pages": "16"
+    },
+    {
+      "document_number": "2020000455815",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "FIRST AMERICAN TITLE INSURANCE COMPANY TR",
+      "grantor_grantees": "",
+      "document_type": "SUBSTITUTION TR",
+      "recording_date": "9/1/2020",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000473906",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "KIM DUY",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "7/26/2021",
+      "pages": "2"
+    },
+    {
+      "document_number": "2021000502864",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "MORTGAGE ELECTRONIC REGISTRATION SYSTEMS INC QUICKEN LOANS LLC ROCKET MORTGAGE LLC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "8/10/2021",
+      "pages": "22"
+    },
+    {
+      "document_number": "2023000121368",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "PARTNERS FEDERAL CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "5/24/2023",
+      "pages": "9"
+    },
+    {
+      "document_number": "2026000041247",
+      "grantors": "HENCH SANDRA D",
+      "grantees": "PARTNERS FEDERAL CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "2/18/2026",
+      "pages": "8"
+    },
+    {
+      "document_number": "2004000483573",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "5/28/2004",
+      "pages": "1"
+    },
+    {
+      "document_number": "2004000483601",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "5/28/2004",
+      "pages": "1"
+    },
+    {
+      "document_number": "2005000776202",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "9/30/2005",
+      "pages": "1"
+    },
+    {
+      "document_number": "2007000493745",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "8/8/2007",
+      "pages": "1"
+    },
+    {
+      "document_number": "2011000027269",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "1/14/2011",
+      "pages": "1"
+    },
+    {
+      "document_number": "2014000048965",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "2/6/2014",
+      "pages": "1"
+    },
+    {
+      "document_number": "2018000148573",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "4/25/2018",
+      "pages": "1"
+    },
+    {
+      "document_number": "2020000455816",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "9/1/2020",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000496846",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "8/6/2021",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000502863",
+      "grantors": "LOSKOT CORINNE R TR LOSKOT DANIEL J TR",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "8/10/2021",
+      "pages": "3"
+    },
+    {
+      "document_number": "2026000043728",
+      "grantors": "",
+      "grantees": "HENCH SANDRA D",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "2/18/2026",
+      "pages": "1"
+    }
+  ]
+}

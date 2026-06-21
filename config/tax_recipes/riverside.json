@@ -1,0 +1,132 @@
+{
+  "county": "riverside",
+  "platform": "playwright_form",
+  "base_url": "https://ca-riverside-ttc.publicaccessnow.com/PropertySearch.aspx",
+  "authoritative_source_hosts": ["ca-riverside-ttc.publicaccessnow.com"],
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 40000,
+  "no_results_patterns": [
+    "no\\s+result\\s+found",
+    "no\\s+records\\s+returned"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://ca-riverside-ttc.publicaccessnow.com/PropertySearch.aspx",
+      "settle_ms": 4000
+    },
+    {
+      "action": "split_apn",
+      "format": "XXXXXXXXX",
+      "fields": ["input[title='PIN (9-digits)']"],
+      "timeout_ms": 15000
+    },
+    {
+      "action": "click",
+      "selector": "button:has-text('SEARCH')",
+      "settle_ms": 6000
+    },
+    {
+      "action": "wait_for",
+      "selector": "a:has-text('View Account')",
+      "state": "visible",
+      "timeout_ms": 20000
+    },
+    {
+      "action": "click",
+      "selector": "a:has-text('View Account')",
+      "settle_ms": 20000
+    },
+    {
+      "action": "wait_for_url",
+      "pattern": "AccountSummary.aspx",
+      "timeout_ms": 25000
+    },
+    {
+      "action": "click",
+      "selector": "button:has-text('Click here to view previously paid tax bills')",
+      "settle_ms": 8000,
+      "optional": true
+    },
+    {
+      "action": "wait_for",
+      "selector": "a:has-text('View Bill Detail')",
+      "state": "attached",
+      "timeout_ms": 20000
+    },
+    {
+      "action": "click",
+      "selector": "a:has-text('View Bill Detail')",
+      "settle_ms": 6000
+    },
+    {
+      "action": "wait_for_url",
+      "pattern": "BillDetail.aspx",
+      "timeout_ms": 20000
+    },
+    {
+      "action": "wait_for",
+      "selector": "text=Net Taxable Value",
+      "state": "visible",
+      "timeout_ms": 15000,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "ms": 1500
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "PARCEL\\s+NUMBER[\\s\\S]{0,80}?([0-9]{9})",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "Tax\\s+Year\\s+(\\d{4})",
+      "scope": "body"
+    },
+    "assessed_value.net_taxable": {
+      "regex": "Net\\s+Taxable\\s+Value[^$]*\\$([0-9,]+(?:\\.\\d{2})?)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.exemption": {
+      "regex": "Homeowners\\s+Exemption[\\s\\S]{0,40}?\\$([0-9,]+(?:\\.\\d{2})?)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "annual_total": {
+      "regex": "\\nTotal\\s+[0-9.]+\\s*%\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(Payment)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "regex": "Payment\\s+B\\d+\\.\\d+\\s+\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].paid_date": {
+      "regex": "Payment\\s+B\\d+\\.\\d+\\s+\\$[0-9,.]+\\s+(\\d{1,2}/\\d{1,2}/\\d{4})",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(Payment)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "regex": "Payment\\s+B\\d+\\.\\d+\\s+\\$[0-9,.]+\\s+\\d{1,2}/\\d{1,2}/\\d{4}\\s*\\n?\\s*\\d{4}\\s+\\d+\\s+Payment\\s+B\\d+\\.\\d+\\s+\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    }
+  },
+  "verification_required": [
+    "assessed_value.net_taxable",
+    "annual_total"
+  ]
+}

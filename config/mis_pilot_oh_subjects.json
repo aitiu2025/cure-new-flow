@@ -1,0 +1,98 @@
+{
+  "batch_id": "MIS_PILOT_OH_CUYAHOGA_2026-04-03",
+  "county": "cuyahoga",
+  "state": "OH",
+  "start_date": "01/01/2000",
+  "end_date": "04/03/2026",
+  "recorder_url": "https://cr.cuyahogacounty.us/",
+  "tax_url": "https://myplace.cuyahogacounty.gov/",
+  "subjects": [
+    {
+      "id": 1,
+      "label": "Kincannon-Callister - 3352 Dellwood Rd Cleveland Heights",
+      "address": "3352 Dellwood Rd, Cleveland Heights, OH",
+      "city": "CLEVELAND HEIGHTS",
+      "state": "OH",
+      "county": "CUYAHOGA",
+      "marital_status": "MARRIED",
+      "is_trust": false,
+      "trust_name": null,
+      "borrowers": [
+        {
+          "first": "JOEL R",
+          "last": "KINCANNON",
+          "role": "BORROWER",
+          "search_name_last_first": "Kincannon Joel"
+        },
+        {
+          "first": "REBECCA L",
+          "last": "CALLISTER",
+          "role": "BORROWER",
+          "search_name_last_first": "Callister Rebecca"
+        }
+      ],
+      "search_names": [
+        "Kincannon Joel",
+        "Callister Rebecca"
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Hendricks - 50 Locust Ln Chagrin Falls",
+      "address": "50 Locust Ln, Chagrin Falls, OH",
+      "city": "CHAGRIN FALLS",
+      "state": "OH",
+      "county": "CUYAHOGA",
+      "marital_status": "MARRIED",
+      "is_trust": false,
+      "trust_name": null,
+      "borrowers": [
+        {
+          "first": "BARRY",
+          "last": "HENDRICKS",
+          "role": "BORROWER",
+          "search_name_last_first": "Hendricks Barry"
+        },
+        {
+          "first": "KELLY A",
+          "last": "HENDRICKS",
+          "role": "BORROWER",
+          "search_name_last_first": "Hendricks Kelly"
+        }
+      ],
+      "search_names": [
+        "Hendricks Barry",
+        "Hendricks Kelly"
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Maldonado - 661 Grayton Rd Berea",
+      "address": "661 Grayton Rd, Berea, OH",
+      "city": "BEREA",
+      "state": "OH",
+      "county": "CUYAHOGA",
+      "marital_status": "MARRIED",
+      "is_trust": false,
+      "trust_name": null,
+      "borrowers": [
+        {
+          "first": "ADRIAN",
+          "last": "MALDONADO",
+          "role": "BORROWER",
+          "search_name_last_first": "Maldonado Adrian"
+        },
+        {
+          "first": "LAURIE",
+          "last": "MALDONADO",
+          "role": "BORROWER",
+          "search_name_last_first": "Maldonado Laurie"
+        }
+      ],
+      "search_names": [
+        "Maldonado Adrian",
+        "Maldonado Laurie"
+      ]
+    }
+  ]
+}

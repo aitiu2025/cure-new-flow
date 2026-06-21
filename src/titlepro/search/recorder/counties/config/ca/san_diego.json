@@ -1,0 +1,42 @@
+{
+  "county_id": "san_diego",
+  "county_name": "San Diego",
+  "state": "CA",
+  "platform": "acclaimweb",
+  "base_url": "https://arcc-acclaim.sdcounty.ca.gov/AcclaimWeb/",
+  "search_url": "https://arcc-acclaim.sdcounty.ca.gov/AcclaimWeb/search/SearchTypeName",
+  "disclaimer_url": "https://arcc-acclaim.sdcounty.ca.gov/AcclaimWeb/",
+  "captcha_required": false,
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d{6,12}$",
+  "doc_number_patterns": [
+    "^\\d{4}-\\d{6,12}$",
+    "^\\d{4}-\\d{5,}$"
+  ],
+  "party_types": ["Grantor", "Grantee", "Both"],
+  "default_party_type": "Both",
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "All": "Both",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "selectors": {
+    "disclaimer_checkbox": "//input[@type='checkbox' and (contains(@id,'Disclaimer') or contains(@name,'Disclaimer') or contains(@id,'Agree'))]",
+    "disclaimer_accept": "//a[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'i have read') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'i agree') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'accept')] | //button[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'accept') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'agree') or contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'continue')] | //input[@type='submit' and (contains(translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'accept') or contains(translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'agree'))]",
+    "name_search_link": "//a[contains(@href,'SearchTypeName') or contains(text(),'Name Search') or contains(text(),'Search by Name')]",
+    "last_name_field": "//input[@id='LastName' or @name='LastName']",
+    "first_name_field": "//input[@id='FirstName' or @name='FirstName']",
+    "name_field": "//input[@id='Name' or @name='Name']",
+    "party_type_dropdown": "//select[@id='PartyType' or @name='PartyType']",
+    "start_date_field": "//input[@id='DateFiledFrom' or @name='DateFiledFrom' or contains(@id,'FromDate') or contains(@id,'StartDate')]",
+    "end_date_field": "//input[@id='DateFiledTo' or @name='DateFiledTo' or contains(@id,'ToDate') or contains(@id,'EndDate')]",
+    "search_button": "//button[@id='btnSearch' or contains(@class,'btnSearch') or contains(text(),'Search')] | //input[@type='submit' and (contains(@value,'Search') or contains(@id,'Search'))]",
+    "results_grid": "//div[@id='SearchResultsGrid' or contains(@class,'k-grid')]",
+    "result_rows": "//div[contains(@class,'k-grid')]//table//tr[contains(@class,'k-master-row') or contains(@class,'k-alt')]",
+    "no_results": "//*[contains(text(),'No records') or contains(text(),'No results') or contains(text(),'0 records')]",
+    "back_to_search": "//a[contains(text(),'New Search') or contains(text(),'Back')]"
+  },
+  "notes": "AcclaimWeb (Acclaim Systems Inc.) — ASP.NET MVC + Kendo UI grid. Field IDs inferred from sister AcclaimWeb deployments (Broward, Brevard, Volusia FL); confirm via 1st live Selenium run and tune selectors here. Image-download deferred — San Diego ARCC paywalls unredacted PDFs; rely on TitlePro247 fallback. See docs/acclaimweb_sandiego_probe.md."
+}

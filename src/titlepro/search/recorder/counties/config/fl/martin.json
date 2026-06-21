@@ -1,0 +1,51 @@
+{
+  "county_id": "fl_martin",
+  "county_name": "Martin",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://or.martinclerk.com/LandmarkWeb/",
+  "recorder_root": "https://or.martinclerk.com/LandmarkWeb/",
+  "search_url": "https://or.martinclerk.com/LandmarkWeb/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "recaptcha_site_key": "",
+  "allow_automated_captcha_solver": true,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "sitekey_strategy": "async_scrape",
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found",
+    "recaptcha_section": ".recaptchasection-Name",
+    "recaptcha_sitekey_attr": "data-sitekey"
+  },
+  "status": "in_progress",
+  "notes": "Martin County FL — Landmark Web Official Records. Live-probed 2026-05-23. ShowCaptcha=True, reCAPTCHA v2. CORRECTION 2026-06-18: the hardcoded sitekey 6Lhs18pWCikqtjRfMDvvwzgBT5oy8t6DW6S0vViE was WRONG (2Captcha rejects it as ERROR_WRONG_GOOGLEKEY). The sitekey is NOT embedded in static HTML (data-sitekey or inline) — it is loaded dynamically by JS captcha.data().sitekey — so sitekey_strategy switched from 'inline' to 'async_scrape'. Headless Chrome async_scrape required to obtain real sitekey. Cleared recaptcha_site_key so stale key doesn't fool the solver."
+}

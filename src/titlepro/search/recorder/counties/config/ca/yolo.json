@@ -1,0 +1,16 @@
+{
+  "county_id": "yolo",
+  "county_name": "Yolo",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://yolocountyca-web.tylerhost.net/web/user/disclaimer",
+  "disclaimer_url": "https://yolocountyca-web.tylerhost.net/web/user/disclaimer",
+  "search_url": "https://yolocountyca-web.tylerhost.net/web/search/namesearch",
+  "captcha_required": true,
+  "captcha_type": "image",
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "notes": "Tyler Technologies with IMAGE CAPTCHA (not reCAPTCHA)"
+}

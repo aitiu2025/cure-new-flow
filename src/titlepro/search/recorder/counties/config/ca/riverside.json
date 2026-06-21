@@ -1,0 +1,22 @@
+{
+  "county_id": "riverside",
+  "county_name": "Riverside",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://webselfservice.rivcoacr.org/Web/",
+  "disclaimer_url": "https://webselfservice.rivcoacr.org/Web/",
+  "search_url": "https://webselfservice.rivcoacr.org/Web/search/DOCSEARCH2111S1",
+  "captcha_required": false,
+  "combined_name_search": true,
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "All": "Both",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "notes": "Tyler Technologies, no CAPTCHA per CUREMasterSheet 2026-05-13. Direct search endpoint (DOCSEARCH2111S1) bypasses disclaimer page."
+}

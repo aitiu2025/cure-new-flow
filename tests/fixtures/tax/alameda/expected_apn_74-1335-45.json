@@ -1,0 +1,28 @@
+{
+  "apn": "74-1335-45",
+  "tax_year": "2025-2026",
+  "property_address": "164 PURCELL DR, ALAMEDA 94502-6550",
+  "installments": [
+    {
+      "label": "1st installment",
+      "amount": 6675.32,
+      "status": "Paid",
+      "paid_date": "Dec 10, 2025"
+    },
+    {
+      "label": "2nd Installment",
+      "amount": 6675.32,
+      "status": "Paid",
+      "paid_date": "Apr 10, 2026"
+    }
+  ],
+  "annual_total": 13350.64,
+  "source_url_host": "propertytax.alamedacountyca.gov",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "apn",
+    "annual_total",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

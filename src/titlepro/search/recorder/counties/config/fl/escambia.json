@@ -1,0 +1,60 @@
+{
+  "county_id": "fl_escambia",
+  "county_name": "Escambia",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://dory.escambiaclerk.com/LandmarkWeb1.4.6.134/",
+  "recorder_root": "https://dory.escambiaclerk.com/LandmarkWeb1.4.6.134/",
+  "search_url": "https://dory.escambiaclerk.com/LandmarkWeb1.4.6.134/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": false,
+  "captcha_type": "none",
+  "recaptcha_site_key": "",
+  "allow_automated_captcha_solver": false,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "safari17_2_ios",
+  "sitekey_strategy": "none",
+  "column_map": {
+    "instrument": "12",
+    "doc_id": "16",
+    "doc_type": "9",
+    "location_header": "8",
+    "direct_name": "4",
+    "reverse_name": "5",
+    "record_date": "7",
+    "page_count": "14"
+  },
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found"
+  },
+  "status": "live_validated",
+  "live_validated_date": "2026-06-19",
+  "notes": "Escambia County FL — LIVE-VALIDATED 2026-06-19. VERSIONED subpath /LandmarkWeb1.4.6.134/ preserved verbatim. Cloudflare-fronted: chrome120 gets 403; safari17_2_ios passes landing/SetDisclaimer/search/index/NameSearch. ShowCaptcha=True but NOT enforced — NameSearch accepts empty g-recaptcha-response (85 rows for HILLIS). captcha_required=false, sitekey_strategy=none. 18-col row layout: instrument=col12, doc_id=col16 (hidden_NNNN), location_header=col8 (PROBATE/DEED etc), record_date=col7. Tax: Grant Street (county-taxes.net/fl-escambia/property-tax)."
+}

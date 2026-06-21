@@ -1,0 +1,126 @@
+{
+  "county": "contra_costa",
+  "platform": "playwright_form",
+  "base_url": "https://taxcolp.cccttc.us/",
+  "authoritative_source_hosts": ["taxcolp.cccttc.us"],
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 30000,
+  "no_results_patterns": [
+    "no\\s+parcel\\s+found",
+    "parcel\\s+not\\s+on\\s+file",
+    "invalid\\s+parcel\\s+number",
+    "no\\s+results\\s+found"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://taxcolp.cccttc.us/PTS_TaxbillsHtmlCY?APN={apn}",
+      "settle_ms": 2500
+    },
+    {
+      "action": "wait_for",
+      "selector": "h2:has-text('Property and bill identification'), h1:has-text('Secured property tax bill')",
+      "state": "attached",
+      "timeout_ms": 15000,
+      "optional": true
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "Assessor\\s+parcel\\s+number[^0-9]*([0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9])",
+      "scope": "body"
+    },
+    "apn_short": {
+      "regex": "Assessor\\s+parcel\\s+number[^0-9]*([0-9]{3}-[0-9]{3}-[0-9]{3})",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "Net\\s+taxable\\s+value\\s+as\\s+of\\s+Jan\\s+1,\\s+(\\d{4})",
+      "scope": "body"
+    },
+    "tra": {
+      "regex": "Tax\\s+rate\\s+area\\s+\\(TRA\\)\\s*([0-9A-Z]+)",
+      "scope": "body"
+    },
+    "property_address": {
+      "regex": "Property\\s+address\\s*([^\\n]+)",
+      "scope": "body"
+    },
+    "assessed_value.land": {
+      "regex": "Land\\s*\\$([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.improvements": {
+      "regex": "Improvements\\s*\\$([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.gross": {
+      "regex": "Gross\\s+value\\s*\\$([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.exemptions": {
+      "regex": "Exemptions\\s*\\$([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.net_taxable": {
+      "regex": "Net\\s+taxable\\s+value\\s+as\\s+of\\s+Jan\\s+1,\\s+\\d{4}\\s*\\$([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "annual_total": {
+      "regex": "Total\\s+ad\\s+valorem\\s+taxes\\s*\\$([0-9,]+\\.\\d{2})\\s*Add:\\s*special",
+      "scope": "body",
+      "type": "currency"
+    },
+    "annual_total_with_special": {
+      "regex": "payments\\s+received\\s*\\$([0-9,]+\\.\\d{2})\\s*Total",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(First\\s+installment)",
+      "scope": "body"
+    },
+    "installments[0].status": {
+      "regex": "First\\s+installment\\s*Status\\s*([A-Z]+)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "regex": "First\\s+installment[\\s\\S]{0,400}?Amount\\s+paid\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].paid_date": {
+      "regex": "First\\s+installment[\\s\\S]{0,500}?Paid\\s+date\\s*([0-9/]+)",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(Second\\s+installment)",
+      "scope": "body"
+    },
+    "installments[1].status": {
+      "regex": "Second\\s+installment\\s*Status\\s*([A-Z]+)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "regex": "Second\\s+installment[\\s\\S]{0,400}?Amount\\s+paid\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[1].paid_date": {
+      "regex": "Second\\s+installment[\\s\\S]{0,500}?Paid\\s+date\\s*([0-9/]+)",
+      "scope": "body"
+    }
+  },
+  "verification_required": [
+    "assessed_value.net_taxable",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

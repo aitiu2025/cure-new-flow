@@ -1,0 +1,121 @@
+{
+  "county_id": "fl_marion",
+  "county_name": "Marion",
+  "state": "FL",
+  "platform": "marion_newvision_http",
+  "base_url": "https://nvweb.marioncountyclerk.org/BrowserView/",
+  "api_root": "https://nvweb.marioncountyclerk.org/BrowserView/",
+  "recorder_root": "https://nvweb.marioncountyclerk.org/BrowserView/",
+  "newvision_endpoints": {
+    "clientinfo": "api/search/clientinfo",
+    "search": "api/search",
+    "document": "api/document",
+    "pdf": "api/pdf"
+  },
+  "search_fields": {
+    "party": "Party",
+    "doc_types": "DocTypes",
+    "from_date": "FromDate",
+    "to_date": "ToDate",
+    "file_number": "FileNumber",
+    "max_rows": "MaxRows",
+    "rows_per_page": "RowsPerPage",
+    "start_row": "StartRow",
+    "recaptcha_token": "RecaptchaResponseV3"
+  },
+  "recaptcha_site_key": "6Lf8mbYqAAAAAEulk1OddVBA4uAafBD5ppKP6CoE",
+  "recaptcha_page_url": "https://nvweb.marioncountyclerk.org/BrowserView/",
+  "recaptcha_action": "Search_partySearchForm",
+  "enable_server_recaptcha": false,
+  "_note_recaptcha": "Field name is RecaptchaResponseV3 (NOT RecaptchaToken \u2014 that returns HTTP 400 'No V3 token found in resonsped'). enableServerRecaptcha=0 does NOT disable token validation. Live probe 2026-06-18: server calls GoogleRecaptchaV3Api.VerifyToken() regardless. Real 2Captcha token required; datacenter IPs score 0 (residential egress needed). Sitekey: 6Lf8mbYqAAAAAEulk1OddVBA4uAafBD5ppKP6CoE. Action: Search_partySearchForm.",
+  "max_search_count_before_expired": 5,
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v3",
+  "captcha_timeout_seconds": 180,
+  "recaptcha_token_max_age_seconds": 110,
+  "encrypt_data": false,
+  "name_format": "last_first_no_comma",
+  "wire_date_format": "%Y%m%d",
+  "date_format": "MM/DD/YYYY",
+  "doctype_deed_value": "WD",
+  "doc_type_map": {
+    "DEED": "WD",
+    "WD": "WD",
+    "QCD": "QC",
+    "QC": "QC",
+    "MTG": "MTG",
+    "MORTGAGE": "MTG",
+    "SATISFACTION": "SAT",
+    "SAT": "SAT",
+    "LIEN": "LN",
+    "JUDGMENT": "JDG"
+  },
+  "result_field_map": {
+    "document_number": [
+      "file_num",
+      "doc_number",
+      "document_number",
+      "instrument",
+      "instrument_number",
+      "file_number",
+      "fileNumber",
+      "FileNumber"
+    ],
+    "grantors": [
+      "grantor",
+      "grantors",
+      "direct_name",
+      "party1",
+      "party_name"
+    ],
+    "grantees": [
+      "grantee",
+      "grantees",
+      "reverse_name",
+      "party2",
+      "party_name"
+    ],
+    "document_type": [
+      "doc_type",
+      "document_type",
+      "doctype",
+      "type",
+      "DocType"
+    ],
+    "recording_date": [
+      "record_date",
+      "recording_date",
+      "recorded_date",
+      "rec_date",
+      "file_date"
+    ],
+    "pages": [
+      "pages",
+      "page_count",
+      "img_pg_cnt"
+    ],
+    "doc_id": [
+      "id",
+      "doc_id",
+      "document_id",
+      "RowID",
+      "row_id"
+    ]
+  },
+  "max_rows": 200,
+  "rows_per_page": 200,
+  "cloudflare": false,
+  "impersonate_profile": "safari17_2_ios",
+  "doc_number_pattern": "^[A-Za-z0-9\\-]{4,}$",
+  "supports_parcel_id_search": false,
+  "supports_file_number_search": true,
+  "party_types": [
+    "Both",
+    "Grantor",
+    "Grantee"
+  ],
+  "default_party_type": "Both",
+  "live_confirmed": false,
+  "status": "in_progress",
+  "notes": "Marion County FL \u2014 NewVision Systems BrowserView AngularJS SPA (nvweb.marioncountyclerk.org/BrowserView/). Clerk: Gregory C. Harrell. No Cloudflare, no disclaimer gate, no RSA encryption (encryptData=0). reCAPTCHA v3 required (useRecaptchaV3=1) but enableServerRecaptcha=0 \u2014 server validates token PRESENCE only, not Google response. Sitekey: 6Lf8mbYqAAAAAEulk1OddVBA4uAafBD5ppKP6CoE. maxSearchCountBeforeExpired=5. POST /BrowserView/api/search with {Party, DocTypes, FromDate, ToDate, MaxRows, RowsPerPage, StartRow, RecaptchaToken}. Dates: YYYYMMDD compact. DEED doctype = WD. Adapter: adapters/marion_newvision_http_adapter.py. Test subject: MADRIGAL NELSON."
+}

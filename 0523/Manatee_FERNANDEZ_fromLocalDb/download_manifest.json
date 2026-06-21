@@ -1,0 +1,161 @@
+{
+  "subject": "4837 SABAL HARBOUR DR, BRADENTON FL",
+  "apn": "1697719559",
+  "totals": {
+    "requested": 15,
+    "ok": 14,
+    "skipped": 1,
+    "failed": 0
+  },
+  "documents": [
+    {
+      "instrument": "201541003454395",
+      "doc_id": "3819629",
+      "status": "OK",
+      "slug": "A1-Toivanen-NOC-2015",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "12-01-2015",
+      "pages": 1,
+      "path": "downloads/MCCCC-201541003454395-A1-Toivanen-NOC-2015.pdf"
+    },
+    {
+      "instrument": "201841020434",
+      "doc_id": "4098479",
+      "status": "OK",
+      "slug": "A2-VESTING-DEED-Toivanen-to-Fernandez-2018",
+      "doc_type": "DEED",
+      "record_date": "03-01-2018",
+      "pages": 1,
+      "path": "downloads/MCCCC-201841020434-A2-VESTING-DEED-Toivanen-to-Fernandez-2018.pdf"
+    },
+    {
+      "instrument": "201841020435",
+      "doc_id": "4098480",
+      "status": "OK",
+      "slug": "A3-Purchase-Mortgage-Fairway-2018",
+      "doc_type": "MORTGAGE",
+      "record_date": "03-01-2018",
+      "pages": 20,
+      "path": "downloads/MCCCC-201841020435-A3-Purchase-Mortgage-Fairway-2018.pdf"
+    },
+    {
+      "instrument": "202041027841",
+      "doc_id": "4369292",
+      "status": "OK",
+      "slug": "A4-Affidavit-2020",
+      "doc_type": "AFFIDAVIT",
+      "record_date": "03-13-2020",
+      "pages": 1,
+      "path": "downloads/MCCCC-202041027841-A4-Affidavit-2020.pdf"
+    },
+    {
+      "instrument": "202041027842",
+      "doc_id": "4369293",
+      "status": "OK",
+      "slug": "A5-Termination-of-2019-NOC",
+      "doc_type": "TERMINATION",
+      "record_date": "03-13-2020",
+      "pages": 2,
+      "path": "downloads/MCCCC-202041027842-A5-Termination-of-2019-NOC.pdf"
+    },
+    {
+      "instrument": "201941092835",
+      "doc_id": "4302569",
+      "status": "OK",
+      "slug": "A6-NOC-FERNADEZ-misspelled-2019",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "09-17-2019",
+      "pages": 1,
+      "path": "downloads/MCCCC-201941092835-A6-NOC-FERNADEZ-misspelled-2019.pdf"
+    },
+    {
+      "instrument": "202041027843",
+      "doc_id": "4369294",
+      "status": "OK",
+      "slug": "A7-Suncoast-HELOC-2020",
+      "doc_type": "MORTGAGE",
+      "record_date": "03-13-2020",
+      "pages": 17,
+      "path": "downloads/MCCCC-202041027843-A7-Suncoast-HELOC-2020.pdf"
+    },
+    {
+      "instrument": "202041043360",
+      "doc_id": "4384910",
+      "status": "OK",
+      "slug": "A8-Satisfaction-of-2018-Fairway-MTG",
+      "doc_type": "SATISFACTION",
+      "record_date": "04-28-2020",
+      "pages": 1,
+      "path": "downloads/MCCCC-202041043360-A8-Satisfaction-of-2018-Fairway-MTG.pdf"
+    },
+    {
+      "instrument": "202541032476",
+      "doc_id": "5130228",
+      "status": "OK",
+      "slug": "A9-NOC-Freedom-Forever-Solar-2025",
+      "doc_type": "NOTICE OF COMMENCEMENT",
+      "record_date": "03-13-2025",
+      "pages": 1,
+      "path": "downloads/MCCCC-202541032476-A9-NOC-Freedom-Forever-Solar-2025.pdf"
+    },
+    {
+      "instrument": "202541046441",
+      "doc_id": "5144257",
+      "status": "OK",
+      "slug": "A10-UCC-Solar-Mosaic-2025",
+      "doc_type": "FINANCING STATEMENT UCC",
+      "record_date": "04-11-2025",
+      "pages": 3,
+      "path": "downloads/MCCCC-202541046441-A10-UCC-Solar-Mosaic-2025.pdf"
+    },
+    {
+      "instrument": "202641010612",
+      "doc_id": "5264681",
+      "status": "OK",
+      "slug": "A11-Solar-Affidavit-2026",
+      "doc_type": "AFFIDAVIT",
+      "record_date": "01-30-2026",
+      "pages": 1,
+      "path": "downloads/MCCCC-202641010612-A11-Solar-Affidavit-2026.pdf"
+    },
+    {
+      "instrument": "202641040260",
+      "doc_id": "5294441",
+      "status": "OK",
+      "slug": "A12-SouthState-Mortgage-2026-CURRENT-1st",
+      "doc_type": "MORTGAGE",
+      "record_date": "04-09-2026",
+      "pages": 10,
+      "path": "downloads/MCCCC-202641040260-A12-SouthState-Mortgage-2026-CURRENT-1st.pdf"
+    },
+    {
+      "instrument": "202641040261",
+      "doc_id": "5294442",
+      "status": "OK",
+      "slug": "A13-Subordination-of-Suncoast-HELOC-2026",
+      "doc_type": "NOTICE",
+      "record_date": "04-09-2026",
+      "pages": 3,
+      "path": "downloads/MCCCC-202641040261-A13-Subordination-of-Suncoast-HELOC-2026.pdf"
+    },
+    {
+      "instrument": "202641050708",
+      "doc_id": "5304909",
+      "status": "OK",
+      "slug": "A14-Termination-of-Solar-Mosaic-UCC-2026",
+      "doc_type": "TERMINATION",
+      "record_date": "05-04-2026",
+      "pages": 2,
+      "path": "downloads/MCCCC-202641050708-A14-Termination-of-Solar-Mosaic-UCC-2026.pdf"
+    },
+    {
+      "instrument": "202141142133",
+      "doc_id": "N/A",
+      "status": "NO_DOC_ID",
+      "slug": "C1-DR-Judgment-FERNANDEZ-PABLO-C-2021",
+      "doc_type": "JUDGMENT",
+      "record_date": "10-26-2021",
+      "note": "Cache has no doc_id \u2014 likely sealed (DR/Family Court privacy) or pre-image-system record"
+    }
+  ]
+}

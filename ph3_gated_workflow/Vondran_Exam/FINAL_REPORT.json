@@ -1,0 +1,185 @@
+{
+  "report_date": "2026-04-13",
+  "property": {
+    "address": "22 CALLE CABRILLO, FOOTHILL RANCH",
+    "county": "Orange"
+  },
+  "current_owners": {
+    "names": "VONDRAN DAVID"
+  },
+  "documents_downloaded": [
+    {
+      "instrument_number": "2026000059280",
+      "filename": "B48473274.pdf",
+      "year": "2026",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:25:21.392774"
+    },
+    {
+      "instrument_number": "2022000209674",
+      "filename": "B48473281.pdf",
+      "year": "2022",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:27:23.726669"
+    },
+    {
+      "instrument_number": "2020000219723",
+      "filename": "B48473282.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:28:13.592131"
+    },
+    {
+      "instrument_number": "2020000219276",
+      "filename": "B48473285.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:29:01.569182"
+    },
+    {
+      "instrument_number": "2020000187684",
+      "filename": "B48473287.pdf",
+      "year": "2020",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:29:49.710300"
+    },
+    {
+      "instrument_number": "2018000325101",
+      "filename": "B48473292.pdf",
+      "year": "2018",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:30:38.335029"
+    },
+    {
+      "instrument_number": "2016000243775",
+      "filename": "B48473294.pdf",
+      "year": "2016",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:31:24.298396"
+    },
+    {
+      "instrument_number": "2016000243774",
+      "filename": "B48473295.pdf",
+      "year": "2016",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:32:12.536862"
+    },
+    {
+      "instrument_number": "2026000053140",
+      "filename": "D215254771.pdf",
+      "year": "2026",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T11:45:41.466948"
+    }
+  ],
+  "documents_metadata": {
+    "2026000059280": {
+      "filename": "B48473274.pdf",
+      "year": "2026",
+      "downloaded_at": "2026-04-13T11:25:21.392774",
+      "all_files": [
+        "B48473274.pdf",
+        "D215254601.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2022000209674": {
+      "filename": "B48473281.pdf",
+      "year": "2022",
+      "downloaded_at": "2026-04-13T11:27:23.726669",
+      "all_files": [
+        "B48473281.pdf",
+        "D215254638.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000219723": {
+      "filename": "B48473282.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T11:28:13.592131",
+      "all_files": [
+        "B48473282.pdf",
+        "D215254639.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000219276": {
+      "filename": "B48473285.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T11:29:01.569182",
+      "all_files": [
+        "B48473285.pdf",
+        "D215254654.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2020000187684": {
+      "filename": "B48473287.pdf",
+      "year": "2020",
+      "downloaded_at": "2026-04-13T11:29:49.710300",
+      "all_files": [
+        "B48473287.pdf",
+        "D215254656.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2018000325101": {
+      "filename": "B48473292.pdf",
+      "year": "2018",
+      "downloaded_at": "2026-04-13T11:30:38.335029",
+      "all_files": [
+        "B48473292.pdf",
+        "D215254683.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2016000243775": {
+      "filename": "B48473294.pdf",
+      "year": "2016",
+      "downloaded_at": "2026-04-13T11:31:24.298396",
+      "all_files": [
+        "B48473294.pdf",
+        "D215254695.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2016000243774": {
+      "filename": "B48473295.pdf",
+      "year": "2016",
+      "downloaded_at": "2026-04-13T11:32:12.536862",
+      "all_files": [
+        "B48473295.pdf",
+        "D215254696.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2026000053140": {
+      "filename": "D215254771.pdf",
+      "year": "2026",
+      "downloaded_at": "2026-04-13T11:45:41.466948",
+      "all_files": [
+        "D215254771.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    }
+  },
+  "source_files": [
+    "B48473274.pdf",
+    "B48473281.pdf",
+    "B48473282.pdf",
+    "B48473285.pdf",
+    "B48473287.pdf",
+    "B48473292.pdf",
+    "B48473294.pdf",
+    "B48473295.pdf",
+    "D215254601.pdf",
+    "D215254638.pdf",
+    "D215254639.pdf",
+    "D215254654.pdf",
+    "D215254656.pdf",
+    "D215254683.pdf",
+    "D215254695.pdf",
+    "D215254696.pdf",
+    "D215254771.pdf"
+  ]
+}

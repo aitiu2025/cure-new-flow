@@ -1,0 +1,35 @@
+{
+  "county_id": "fresno",
+  "county_name": "Fresno",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://fresnocountyca-web.tylerhost.net/web/user/disclaimer",
+  "disclaimer_url": "https://fresnocountyca-web.tylerhost.net/web/user/disclaimer",
+  "search_url": "https://fresnocountyca-web.tylerhost.net/web/search/DOCSEARCH377S1",
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "requires_manual_captcha": true,
+  "manual_captcha_timeout_seconds": 900,
+  "allow_captcha_timeout_renewal": true,
+  "allow_automated_captcha_solver": true,
+  "checkpoint_key_scope": "case_job_search_unit",
+  "resume_detection": {
+    "success_url_contains": "/web/search",
+    "success_selector": "input[name='SearchCriteria'], input[id*='BothNames'], input[id*='LastName']",
+    "failure_selector": "//iframe[contains(@src, 'recaptcha')]"
+  },
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "All": "Both",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "combined_name_search": true,
+  "supports_party_type_filter": false,
+  "name_search_returns_all_roles": true,
+  "notes": "Tyler Technologies with reCAPTCHA v2. DOCSEARCH377S1 is a *combined-name* search page (single BothNames field, no Grantor/Grantee toggle). One query per name returns hits in any role, so the pipeline collapses the 3-party-type loop into one run per name. Fresno also returns a result-count cap message ('more documents than the maximum allowed') when too many docs match; refine by date if encountered."
+}

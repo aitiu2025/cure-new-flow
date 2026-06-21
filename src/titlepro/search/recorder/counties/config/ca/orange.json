@@ -1,0 +1,28 @@
+{
+  "county_id": "orange",
+  "county_name": "Orange",
+  "state": "CA",
+  "platform": "recorderworks",
+  "base_url": "https://cr.occlerkrecorder.gov/RecorderWorksInternet/",
+  "search_url": "https://cr.occlerkrecorder.gov/RecorderWorksInternet/",
+  "captcha_required": false,
+  "name_format": "Last First",
+  "name_separator": " ",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^20\\d{10,11}$",
+  "party_types": ["All", "Grantor", "Grantee", "Grantor/Grantee"],
+  "selectors": {
+    "name_tab": "//a[contains(text(), 'Name')]",
+    "party_type_dropdown": "MainContent_MainMenu1_SearchByName1_partytype",
+    "name_field": "MainContent_MainMenu1_SearchByName1_nameForSearch",
+    "start_date_field": "MainContent_MainMenu1_SearchByName1_startdate",
+    "end_date_field": "MainContent_MainMenu1_SearchByName1_enddate",
+    "partial_match_checkbox": "MainContent_MainMenu1_SearchByName1_allowPartial",
+    "search_button": "MainContent_MainMenu1_SearchByName1_btnSearch",
+    "results_table": "//table[contains(@class, 'rgMasterTable')]",
+    "result_rows": "//table[contains(@class, 'rgMasterTable')]//tbody//tr[contains(@class, 'rgRow') or contains(@class, 'rgAltRow')]",
+    "no_results": "//*[contains(text(), '0 Result')]",
+    "back_to_search": "//a[contains(text(), 'Back to Search')]"
+  },
+  "notes": "Original CURE implementation county. RecorderWorks with RadGrid tables."
+}

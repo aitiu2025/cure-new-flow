@@ -1,0 +1,52 @@
+{
+  "county_id": "fl_manatee",
+  "county_name": "Manatee",
+  "state": "FL",
+  "platform": "manatee_http",
+  "base_url": "https://records.manateeclerk.com/OfficialRecords/Search",
+  "search_url": "https://records.manateeclerk.com/OfficialRecords/Search/Party",
+  "search_url_instrument": "https://records.manateeclerk.com/OfficialRecords/Search/InstrumentNumber",
+  "search_url_bookpage": "https://records.manateeclerk.com/OfficialRecords/Search/InstrumentBookPage",
+  "post_search_url": "https://records.manateeclerk.com/OfficialRecords/Search/DoSearch",
+  "download_base_url": "https://records.manateeclerk.com/OfficialRecords/DisplayInstrument/InstrumentResultFile/",
+  "doc_image_url_pattern": {
+    "pdf_url_template": "https://records.manateeclerk.com/OfficialRecords/DisplayInstrument/InstrumentResultFile/{doc_id}/1/1",
+    "assert_pdf_magic": true
+  },
+  "captcha_required": false,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "yyyy-mm-dd",
+  "default_start_date": "1986-01-01",
+  "doc_number_pattern": "^\\d{12,15}$",
+  "antiforgery_token_field": "__RequestVerificationToken",
+  "cloudflare_required": false,
+  "session_acquisition_strategy": "anti_forgery_token_two_stage",
+  "http_form_fields": {
+    "name": "SearchInputs.Party",
+    "date_from": "SearchInputs.StartDate",
+    "date_to": "SearchInputs.EndDate",
+    "doc_type": "SearchInputs.InstrumentTypeId",
+    "instrument": "SearchInputs.InstrumentNumber",
+    "book": "SearchInputs.BookNumber",
+    "page": "SearchInputs.PageNumber",
+    "page_num": "SearchInputs.Page",
+    "page_size": "SearchInputs.PageSize",
+    "search_type": "SearchInputs.SearchType"
+  },
+  "doctype_codes": {
+    "DEED": "11",
+    "MORTGAGE": "21",
+    "SATISFACTION": "30"
+  },
+  "supported_party_types": ["Party", "Grantor", "Grantee"],
+  "default_party_type": "Party",
+  "tax_url": "https://secure.taxcollector.com/ptaxweb/editPropertySearch2.action",
+  "tax_platform": "Grant Street",
+  "local_cache_path": "/Users/ag/Desktop/AIProjectsJuly2025/TIUConsulting/US_Counties_Data/FL/AIProjects/Manatee_Title_Abstractor_Tools/manatee_cache.db",
+  "local_cache_table": "clerk_records",
+  "local_cache_coverage": "2007-01-02 to 2025-12-31",
+  "status": "live",
+  "impersonate_profile": "chrome120",
+  "notes": "Manatee FL Clerk (MCCCC) — custom ASP.NET MVC backend (records.manateeclerk.com). Two-stage HTTP flow: (1) GET search page to extract __RequestVerificationToken from hidden form input, (2) POST to /OfficialRecords/Search/DoSearch with token + search parameters in same cookie jar. Document image download via GET to /DisplayInstrument/InstrumentResultFile/{doc_id}/1/1 (requires same session cookies). No CAPTCHA, no Cloudflare. Reference client implementation: /Users/ag/Desktop/AIProjectsJuly2025/TIUConsulting/US_Counties_Data/FL/AIProjects/Manatee_Title_Abstractor_Tools/query_manatee_clerk.py (stdlib-only urllib + cookiejar). Local cache exists at manatee_cache.db with 2,682,351 records (2007-01-02 to 2025-12-31) for offline searches. NO PRODUCTION ADAPTER YET — search_results.json compatible runs require building a manatee_adapter.py wrapping the two-stage HTTP flow. Test subject: FERNANDEZ PABLO + ROZANES DANIELA (4837 SABAL HARBOUR DR BRADENTON) — verified via local-DB pipeline 2026-05-23 in titlePro/0523/Manatee_FERNANDEZ_fromLocalDb/. DR judgments return doc_id=N/A (FL Ch. 119.0714 + AOSC e-access restriction on Domestic Relations records — courthouse retrieval required)."
+}

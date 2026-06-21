@@ -1,0 +1,38 @@
+{
+  "_known_status": "Iframe support landed 2026-05-13 (recipe rewritten to use enter_frame). Live re-verification required against the SBD portal before flipping to fully-green. The recipe drives the runner into the innermost iframe (sanbernardino-ca.county-taxes.com) and extracts from there; source_url_host below reflects that innermost frame.",
+  "apn": "0298501220000",
+  "tax_year": "2025-26",
+  "property_address": "2191 LARIMORE LN MENTONE",
+  "tra": "104-101",
+  "assessed_value": {
+    "land": 149257.0,
+    "improvements": 348266.0,
+    "exemptions": 7000.0,
+    "net_taxable": 490523.0
+  },
+  "installments": [
+    {
+      "label": "1st Installment",
+      "amount": 3336.98,
+      "status": "PAID",
+      "paid_date": "12/09/2025",
+      "delinquent_after": "12/10/2025"
+    },
+    {
+      "label": "2nd Installment",
+      "amount": 3336.98,
+      "status": "PAID",
+      "paid_date": "04/08/2026",
+      "delinquent_after": "04/10/2026"
+    }
+  ],
+  "annual_total": 6673.96,
+  "source_url_host": "gsgprod.sbcountyatc.gov",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "assessed_value.net_taxable",
+    "installments[0].amount",
+    "installments[1].amount",
+    "annual_total"
+  ]
+}

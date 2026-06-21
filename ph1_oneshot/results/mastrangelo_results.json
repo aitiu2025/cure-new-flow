@@ -1,0 +1,108 @@
+{
+  "search_params": {
+    "name1": "Mastrangelo Anthony",
+    "name2": "Mastrangelo Georgiann",
+    "county": "Orange",
+    "party_type": "Grantor/Grantee",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "search_timestamp": "2026-04-03T18:32:32.933888"
+  },
+  "summary": {
+    "total_common": 1,
+    "total_name1_only": 2,
+    "total_name2_only": 0
+  },
+  "common_documents": [
+    {
+      "document_number": "2017000154868",
+      "grantors": "QUICKEN LOANS INC",
+      "grantees": "CHARLES SCHWAB BANK",
+      "grantor_grantees": "MASTRANGELO ANTHONY",
+      "document_type": "ASGT TRUST DEED",
+      "recording_date": "4/18/2017",
+      "pages": "3"
+    }
+  ],
+  "name1_only_documents": [
+    {
+      "document_number": "2007000731113",
+      "grantors": "WELLS FARGO BK N A",
+      "grantees": "U S BK N A TR",
+      "grantor_grantees": "MASTRANGELO ANTHONY J",
+      "document_type": "ASGT TRUST DEED",
+      "recording_date": "12/12/2007",
+      "pages": "1"
+    },
+    {
+      "document_number": "2008000415094",
+      "grantors": "WASHINGTON MUTL BK FA",
+      "grantees": "LASALLE BK NA TR",
+      "grantor_grantees": "MASTRANGELO ANTHONY J",
+      "document_type": "ASGT TRUST DEED",
+      "recording_date": "9/2/2008",
+      "pages": "1"
+    }
+  ],
+  "name2_only_documents": [],
+  "full_results": {
+    "name1": {
+      "name_searched": "Mastrangelo Anthony",
+      "party_type": "Grantor/Grantee",
+      "start_date": "01/01/2000",
+      "end_date": "04/03/2026",
+      "search_timestamp": "2026-04-03T18:32:00.709577",
+      "result_count": 3,
+      "documents": [
+        {
+          "document_number": "2007000731113",
+          "grantors": "WELLS FARGO BK N A",
+          "grantees": "U S BK N A TR",
+          "grantor_grantees": "MASTRANGELO ANTHONY J",
+          "document_type": "ASGT TRUST DEED",
+          "recording_date": "12/12/2007",
+          "pages": "1"
+        },
+        {
+          "document_number": "2008000415094",
+          "grantors": "WASHINGTON MUTL BK FA",
+          "grantees": "LASALLE BK NA TR",
+          "grantor_grantees": "MASTRANGELO ANTHONY J",
+          "document_type": "ASGT TRUST DEED",
+          "recording_date": "9/2/2008",
+          "pages": "1"
+        },
+        {
+          "document_number": "2017000154868",
+          "grantors": "QUICKEN LOANS INC",
+          "grantees": "CHARLES SCHWAB BANK",
+          "grantor_grantees": "MASTRANGELO ANTHONY",
+          "document_type": "ASGT TRUST DEED",
+          "recording_date": "4/18/2017",
+          "pages": "3"
+        }
+      ]
+    },
+    "name2": {
+      "name_searched": "Mastrangelo Georgiann",
+      "party_type": "Grantor/Grantee",
+      "start_date": "01/01/2000",
+      "end_date": "04/03/2026",
+      "search_timestamp": "2026-04-03T18:32:32.933823",
+      "result_count": 1,
+      "documents": [
+        {
+          "document_number": "2017000154868",
+          "grantors": "QUICKEN LOANS INC",
+          "grantees": "CHARLES SCHWAB BANK",
+          "grantor_grantees": "MASTRANGELO GEORGIANN",
+          "document_type": "ASGT TRUST DEED",
+          "recording_date": "4/18/2017",
+          "pages": "3"
+        }
+      ]
+    }
+  }
+}

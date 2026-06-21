@@ -1,0 +1,20 @@
+{
+  "search_params": {
+    "name1": "Vondran",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": "Calle Cabrillo",
+    "search_timestamp": "2026-04-03T18:44:19.422208"
+  },
+  "search_breakdown": {
+    "grantor_count": 20,
+    "grantee_count": 20,
+    "total_unique": 39
+  },
+  "all_documents": [],
+  "filter_applied": "Address filter: Calle Cabrillo"
+}

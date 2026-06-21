@@ -1,0 +1,118 @@
+{
+  "county": "fresno",
+  "platform": "playwright_form",
+  "base_url": "https://fcacttcptr.fresnocountyca.gov/",
+  "authoritative_source_hosts": ["fcacttcptr.fresnocountyca.gov"],
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 30000,
+  "no_results_patterns": [
+    "APN\\s+is\\s+inactive",
+    "no\\s+tax\\s+bill\\s+to\\s+display",
+    "no\\s+parcel\\s+found",
+    "parcel\\s+not\\s+on\\s+file"
+  ],
+  "navigation_steps": [
+    { "action": "goto", "url": "{base_url}", "settle_ms": 1500 },
+    {
+      "action": "click",
+      "selector": "button:has-text('Agree')",
+      "optional": true,
+      "settle_ms": 800,
+      "timeout_ms": 4000
+    },
+    {
+      "action": "split_apn",
+      "format": "XXX-XXX-XX",
+      "fields": ["#APNField1", "#APNField2", "#APNField3"]
+    },
+    {
+      "action": "click",
+      "selector": "button[name='ssSearch']",
+      "settle_ms": 1500
+    },
+    {
+      "action": "wait_for",
+      "selector": "#securiedFullValueGrid",
+      "state": "attached",
+      "timeout_ms": 20000
+    },
+    {
+      "action": "sleep",
+      "ms": 1500
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "APN[^0-9]*([0-9]{3}-[0-9]{3}-[0-9]{2})",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "Secured Tax Roll For\\s+(\\d{4}-\\d{2})",
+      "scope": "body"
+    },
+    "tra": {
+      "regex": "TRA[\\s\\S]{0,80}?([0-9]{3}-[0-9]{3})",
+      "scope": "body"
+    },
+    "property_address": {
+      "selector": "#securiedNameAddressGrid tr:has(td:has-text('Location')) td:nth-child(2)",
+      "type": "string"
+    },
+    "assessed_value.land": {
+      "selector": "#securiedFullValueGrid tr:has(td:has-text('LAND')) td:nth-child(3)",
+      "type": "currency"
+    },
+    "assessed_value.improvements": {
+      "selector": "#securiedFullValueGrid tr:has(td:has-text('IMPS')) td:nth-child(3)",
+      "type": "currency"
+    },
+    "assessed_value.subtotal": {
+      "selector": "#securiedFullValueGrid tr:has(td:has-text('SUB TOTAL')) td:nth-child(3)",
+      "type": "currency"
+    },
+    "assessed_value.net_taxable": {
+      "selector": "#securiedFullValueGrid tr:has(td:has-text('NET')) td:nth-child(3)",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(Installment 1)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "selector": "#securiedCollectionGrid tr:has(td:has-text('TOTAL')) td:nth-child(2)",
+      "type": "currency"
+    },
+    "installments[0].paid_date": {
+      "selector": "#securiedCollectionGrid tr:has(td:has-text('PD')) td:nth-child(2)",
+      "type": "string"
+    },
+    "installments[0].status": {
+      "regex": "PD\\s+(\\d{2}/\\d{2}/\\d{4})\\s+\\d{2}/\\d{2}/\\d{4}",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(Installment 2)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "selector": "#securiedCollectionGrid tr:has(td:has-text('TOTAL')) td:nth-child(3)",
+      "type": "currency"
+    },
+    "installments[1].paid_date": {
+      "selector": "#securiedCollectionGrid tr:has(td:has-text('PD')) td:nth-child(3)",
+      "type": "string"
+    },
+    "annual_total": {
+      "selector": "#securiedCollectionGrid tr:has(td:has-text('TOTAL')) td:nth-child(4)",
+      "type": "currency"
+    }
+  },
+  "verification_required": [
+    "assessed_value.net_taxable",
+    "installments[0].amount",
+    "installments[1].amount",
+    "annual_total"
+  ]
+}

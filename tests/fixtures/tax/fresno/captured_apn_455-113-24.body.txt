@@ -1,0 +1,175 @@
+ Auditor-Controller / Treasurer-Tax Collector -- Property Taxes
+Secured Tax Roll
+Unsecured Tax Roll
+Secured
+COUNTY OF FRESNO
+Secured Tax Roll For 2025-26
+APN        Search  
+APN
+455-113-24 -1
+TRA
+005-427
+STATUS
+INT
+TAX RATE
+1.2913360
+CORTAC
+5212-3145-5
+SUP PEND
+NO
+SUP BILLED
+YES
+
+
+R/C
+NO
+ 
+EXT DEL DATE
+1. 
+2. 
+ESCAPES
+NO
+BOND/WEED
+$34.20
+
+
+Roll Years	Tax Bill Report  2025-26	2024-25	2023-24	2022-23	2021-22	2020-21	2019-20	2018-19	2017-18	2016-17	2015-16	2014-15	2013-14
+
+
+Supplmental
+ 
+	
+Activity Date
+	
+Assessee
+
+455-113-24 -ZZ	04/20/2010	Blank pursuant to CA GC7928.205
+
+
+Information
+ 
+	
+Line 1
+	
+Line 2
+
+Assessee	
+Blank pursuant to CA GC7928.205
+	
+Blank pursuant to CA GC7928.205
+
+Mail Name	
+Blank pursuant to CA GC7928.205
+	
+Blank pursuant to CA GC7928.205
+
+Mail Address	
+Blank pursuant to CA GC7928.205
+	
+
+Location	
+5041 E HEDGES FR
+	
+
+
+Full Value
+ 
+	
+Line 1
+	
+Line 2
+
+LAND		64,524
+IMPS		164,045
+TFI	0	
+P/P		0
+MH		0
+REG		0
+SUB TOTAL		228,569
+EX HOX	0	
+EX BI	0	
+EX TOTAL		0
+NET		228,569
+Pest	0	
+Eval	0	
+Tax Section
+ 
+	
+Installment 1
+	
+Installment 2
+	
+Total Tax
+
+TAX	1,492.75	1,492.75	2,985.50
+PEN	.00	.00	.00
+TOTAL	1,492.75	1,492.75	2,985.50
+PD	12/08/2025	04/08/2026	
+COL#	25904481	43404551	
+AMT	1,492.75	1,492.75	2,985.50
+
+
+Taxes Section
+Tax Code
+	
+Description
+	
+Installment 1
+	
+Installment 2
+	
+Total Tax
+
+0001	FR COUNTYWIDE TAX	1,475.65	1,475.65	2,951.30
+6805	MET FLOOD ASSMT	14.10	14.10	28.20
+6816	FRES MOSQ & VECTR	3.00	3.00	6.00
+Totals		1,492.75	1,492.75	2,985.50
+
+
+Payment Distribution Section
+Property Taxes, Bonds, and Special Assessments
+	
+Value Base
+	
+Rate/$100
+	
+Amount
+
+FR COUNTYWIDE TAX	1	1.0000000	2,285.68
+FRESNO USD 16 B	1	0.0052280	11.94
+FRESNO USD 02A	1	0.0032180	7.34
+FRESNO USD 04B	1	0.0112080	25.60
+FRESNO USD 10 E	1	0.0012740	2.90
+FRESNO USD 16 A	1	0.0016600	3.78
+FRESNO USD 10 F	1	0.0021960	5.00
+FRESNO USD 16 C	1	0.0099640	22.76
+FRESNO USD 20 A	1	0.0057960	13.24
+FRESNO USD 16A REF	1	0.0066820	15.26
+FRESNO USD 20 REFI	1	0.0158660	36.26
+FRESNO USD 16 D	1	0.0120400	27.50
+FRESNO USD 20 B	1	0.0124340	28.42
+FRESNO USD 21A REF	1	0.0116600	26.64
+FRESNO USD 21B REF	1	0.0060100	13.72
+FRESNO USD 19 REF	1	0.0130440	29.80
+FRESNO USD 16B REF	1	0.0047420	10.82
+FRESNO USD 25 REFI	1	0.0140720	32.16
+FRESNO USD 20D	1	0.0417700	95.46
+FRESNO USD 24A	1	0.0600000	137.14
+STATE CCC 15 REFI	1	0.0026080	5.96
+STATE CCC 16 A	1	0.0013240	3.02
+STATE CCC 17 REFI	1	0.0009820	2.24
+STATE CCC 02 S 18A	1	0.0019460	4.44
+STATE CCC 16 B	1	0.0041160	9.40
+STATE CCC 20 REFI	1	0.0012480	2.84
+STATE CCC 16 C	1	0.0078100	17.84
+FRES PEN OVERRIDE	1	0.0324380	74.14
+TOTAL TAX RATE		1.2913360	
+MET FLOOD ASSMT	6		28.20
+FRES MOSQ & VECTR	6		6.00
+TOTAL TAX			2,985.50
+
+© 2026 Property Tax Data - v - 1.0.0
+
+Disclaimer: User understands that data is being maintained in an "on-line" environment, which is not reflected in real time and may not contain the most current information.
+At any time data may be modified by the COUNTY. User understands that information obtained herein is at User's own risk.
+The County of Fresno's full privacy and security policy disclaimer is on the Tax Collection Division main webpage.

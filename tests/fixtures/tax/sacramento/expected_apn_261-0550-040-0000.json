@@ -1,0 +1,34 @@
+{
+  "apn": "261-0550-040-0000",
+  "tax_year": "2025-26",
+  "property_address": "8244 NORTHWIND WAY UNINCORPORATED - ORANGEVALE",
+  "tra": "054-476",
+  "assessed_value": {
+    "land": 98426.0,
+    "improvements": 399179.0,
+    "exemptions": 7000.0,
+    "net_taxable": 490605.0
+  },
+  "installments": [
+    {
+      "label": "1st Installment",
+      "amount": 2947.75,
+      "status": "PAID"
+    },
+    {
+      "label": "2nd Installment",
+      "amount": 2947.75,
+      "status": "PAID"
+    }
+  ],
+  "annual_total": 5895.50,
+  "source_url_host": "county-taxes.net",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "apn",
+    "assessed_value.net_taxable",
+    "annual_total",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

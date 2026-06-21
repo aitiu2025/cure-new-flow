@@ -1,0 +1,57 @@
+{
+  "county_id": "trinity",
+  "county_name": "Trinity",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://trinitycountyca-web.tylerhost.net/web/user/disclaimer",
+  "disclaimer_url": "https://trinitycountyca-web.tylerhost.net/web/user/disclaimer",
+  "search_url": "https://trinitycountyca-web.tylerhost.net/web/search/namesearch",
+  "captcha_required": false,
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "All": "Both",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "navigation_steps": [
+    {
+      "action": "accept_disclaimer",
+      "description": "Accept disclaimer page"
+    },
+    {
+      "action": "click_link",
+      "selector": "//a[contains(text(), 'Official Records') or contains(text(), 'Records Search')]",
+      "text_match": "Official Records",
+      "fallback_url": "https://trinitycountyca-web.tylerhost.net/web/search",
+      "wait_after": 3,
+      "description": "Click Official Records Search link"
+    },
+    {
+      "action": "click_link",
+      "selector": "//a[contains(text(), 'Name Search') or contains(text(), 'Name')]",
+      "text_match": "Name Search",
+      "fallback_url": "https://trinitycountyca-web.tylerhost.net/web/search/namesearch",
+      "wait_after": 3,
+      "description": "Click Name Search link"
+    }
+  ],
+  "selectors": {
+    "disclaimer_checkbox": "//input[@type='checkbox']",
+    "disclaimer_accept": "//button[contains(text(), 'Accept') or contains(text(), 'Continue') or contains(text(), 'I Accept')]",
+    "name_search_link": "//a[contains(@href, 'namesearch') or contains(@href, 'DOCSEARCH') or contains(text(), 'Name Search') or contains(text(), 'Name')]",
+    "party_type_dropdown": "//select[contains(@id, 'PartyType') or contains(@name, 'partyType')]",
+    "last_name_field": "//input[contains(@id, 'LastName') or contains(@name, 'lastName')]",
+    "first_name_field": "//input[contains(@id, 'FirstName') or contains(@name, 'firstName')]",
+    "start_date_field": "//input[contains(@id, 'StartDate') or contains(@name, 'startDate') or contains(@id, 'RecordingDateStart') or contains(@id, 'recordingDateStart')]",
+    "end_date_field": "//input[contains(@id, 'EndDate') or contains(@name, 'endDate') or contains(@id, 'RecordingDateEnd') or contains(@id, 'recordingDateEnd')]",
+    "search_button": "//button[contains(text(), 'Search')] | //input[@type='submit']",
+    "results_table": "//table[contains(@class, 'table')]",
+    "no_results": "//*[contains(text(), 'No records') or contains(text(), '0 records')]",
+    "back_to_search": "//a[contains(text(), 'Back') or contains(text(), 'New Search')]"
+  },
+  "notes": "Tyler Technologies - standard /web/ path, requires multi-step navigation, no CAPTCHA"
+}

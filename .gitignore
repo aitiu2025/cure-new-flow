@@ -1,0 +1,96 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets and credentials - NEVER commit these
+secrets.json
+secrets.json.*
+secrets.*.json
+*.secrets.json
+titlepro247_config.json
+
+# Backup files (often contain credential snapshots)
+*.bak
+*.bak.*
+*.bak_pre_*
+*~
+
+# Unrelated personal exports
+whatsapp_*.csv
+
+# Downloaded documents (large binary files, per-run data)
+downloaded_doc/
+
+# Confidential engagement PII — borrower order book (do NOT distribute / push)
+docs/FL/FL_Test_Subjects_*.md
+docs/source_sheets/
+docs/INGEST_SUMMARY_*.md
+tests/CURE_County_Test_Subjects.json
+
+# Debug / failure screenshots
+*.failure.html
+*.failure.png
+failure.png
+
+# Logs
+*.log
+cure_test_execution.log
+test_suite_results.log
+
+# Test results (generated per run)
+test_results/
+
+# Local archive for stale/generated project artifacts
+Archive/
+
+# Deduplication state (runtime data)
+deduplication_log.json
+document_metadata.json
+
+# Task files (Claude agent artifacts)
+.task_*.txt
+
+# Claude settings
+.claude/
+
+# Screenshots (not source code)
+Screenshot*.png
+titlepro_documents_tab.png
+titlepro_documents_tab.html
+
+# Miscellaneous generated files
+*.html
+!src/titlepro/search/ca_recorder/CURE.html
+
+# Environment secrets (2Captcha API key etc.)
+.env
+
+# macOS Finder duplicate artifacts ("name 2.ext") — never commit
+* 2.*
+* 2/
+.finder_dupes_quarantine/
+cricai-site/

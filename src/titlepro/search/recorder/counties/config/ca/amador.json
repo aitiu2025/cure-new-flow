@@ -1,0 +1,27 @@
+{
+  "county_id": "amador",
+  "county_name": "Amador",
+  "state": "CA",
+  "platform": "recorderworks",
+  "base_url": "https://mint.amadorgov.org/RecorderWorksInternet/",
+  "search_url": "https://mint.amadorgov.org/RecorderWorksInternet/",
+  "captcha_required": false,
+  "name_format": "Last, First",
+  "name_separator": ", ",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d{7}$",
+  "doc_number_patterns": ["^\\d{4}-\\d{7}$", "^\\d{4}-\\d+$"],
+  "party_types": ["All", "Grantor", "Grantee"],
+  "default_party_type": "All",
+  "selectors": {
+    "name_tab": "//a[contains(text(), 'Name')]",
+    "party_type_dropdown": "MainContent_MainMenu1_SearchByName1_partytype",
+    "name_field": "MainContent_MainMenu1_SearchByName1_nameForSearch",
+    "partial_match_checkbox": "MainContent_MainMenu1_SearchByName1_allowPartial",
+    "search_button": "MainContent_MainMenu1_SearchByName1_btnSearch",
+    "results_table": "//table[contains(@class, 'rgMasterTable')]",
+    "no_results": "//*[contains(text(), '0 Result')]",
+    "back_to_search": "//a[contains(text(), 'Back to Search')]"
+  },
+  "notes": "RecorderWorks platform with 'mint' subdomain. Doc numbers use YYYY-NNNNNNN format."
+}

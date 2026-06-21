@@ -1,0 +1,642 @@
+[
+  {
+    "url": "https://county-taxes.net/broward/property-tax",
+    "status": 200,
+    "content_type": "text/html",
+    "method": "GET",
+    "resource_type": "document",
+    "body_preview": null
+  },
+  {
+    "url": "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700,900",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "method": "GET",
+    "resource_type": "stylesheet",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtm.js?id=GTM-K2K9KM3M",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtag/js?id=G-2Y53RWJGP0&cx=c&gtm=4e65k1",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://county-taxes.net/environment",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{ \"environment\": \"prod\" }"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{}"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/clients/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/meta/clients/broward/defaultSiteUrl\":\"broward\",\"/payhub/data-pub/meta/clients/broward/id\":\"broward\",\"/payhub/data-pub/meta/clients/broward/logoUrl\":\"https://cdn-grantstreet-com.s3.amazonaws.com/795828fc-952e-4e17-b176-20e9b5623314broward.jpeg\",\"/payhub/data-pub/meta/clients/broward/name\":\"Broward\",\"/payhub/data-pub/meta/clients/broward/useClientOnlyUrl\":false}\n"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/sites/broward/property-tax",
+    "status": 404,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"errorCode\":\"NotFound\",\"errorMessage\":\"Unknown config key\"}"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/sites/broward/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/meta/sites/broward/broward/clientId\":\"broward\",\"/payhub/data-pub/meta/sites/broward/broward/id\":\"broward\",\"/payhub/data-pub/meta/sites/broward/broward/inNonProd\":true,\"/payhub/data-pub/meta/sites/broward/broward/inProd\":true,\"/payhub/data-pub/meta/sites/broward/broward/lastUpdated\":1779223824236,\"/payhub/data-pub/meta/sites/broward/broward/title\":\"New TaxSys Public Site\",\"/payhub/data-pub/meta/sites/broward/broward/type\":\"multi-department\"}\n"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/settings/broward/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/settings/broward/broward/announcements/enableBanners/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableBanners/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/enableFooters/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableFooters/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/enableNotifications/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableNotifications/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/meta/enabled\":true,\"/payhub/data-pub/settings/broward/broward/announcements/meta/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandFooters/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandFooters/value\":false,\"/payhub/data-pub/settings/broward/broward/announcements/preExpandNotifications/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandNotifications/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/tags/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/tags/value\":[{\"id\":\"10436efc-c48d-4e13-a246-514a63c4769e\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Vehicle_Registration\"},{\"id\":\"c93a0232-6255-4b36-b236-357169e7c40a\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Property_Tax\"},{\"id\":\"06290acf-877a-4cd0-8480-a2a4e9ad50d6\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Business_Tax\"}],\"/payhub/data-pub/settings/broward/broward/cart/autoVoidWorkflow/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/cart/autoVoidWorkflow/value\":false,\"/payhub/data-pub/settings/broward/broward/cart/cancelButtonUrl/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/cart/cancelButtonUrl/value\":\"\",\"/payhub/data-pub/settings/broward/broward/cart/client/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/cart/client/value\":\"broward\",\"/"
+  },
+  {
+    "url": "https://app.launchdarkly.com/sdk/goals/5cbb2d789e851908187acbeb",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "[{\"key\":\"568462af-0541-43a8-8acc-e077d6a0712f\",\"kind\":\"click\",\"selector\":\"#e-wallet .save-method-checkbox\",\"urls\":[{\"kind\":\"regex\",\"pattern\":\"/checkout$\"}]},{\"key\":\"18e465d1-b5a7-46fb-bc31-3d62b5d302a7\",\"kind\":\"click\",\"selector\":\".login-required-login-button\",\"urls\":[{\"kind\":\"regex\",\"pattern\":\"/checkout$\"}]}]"
+  },
+  {
+    "url": "https://app.launchdarkly.com/sdk/evalx/5cbb2d789e851908187acbeb/contexts/eyJraW5kIjoidXNlciIsImtleSI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSIsImlwIjoiNTAuNDcuMjAzLjE0MCIsImN1c3RvbSI6eyJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiZGVza3RvcCIsInNlc3Npb25JZCI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSJ9fQ",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"ab-cost-linked-pricing.brevard-brevard\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-bay-fl-bay\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-martin-fl-martin\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-miamidade-fl-miamidade\":{\"flagVersion\":7,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.pinellas\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"ab-cost-linked-pricing.pinellas-pinellas\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.sunshine-design\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.al-jefferson-services\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.ma-housingcourt\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"allow-mobile-pay-for-mds-carts.sacramento-sacramento\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.sumter-sumter\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.sunshine-county\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"allow-mobile-pay-for-mds-carts.sunshine-demo\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.al-jefferson-revenue\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.al-jefferson-services\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"cart-redirect.ca-alameda-treasurer-tax\":{\"flagVersion\":7,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.ca"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{}"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{}"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://events.launchdarkly.com/events/diagnostic/5cbb2d789e851908187acbeb",
+    "status": 202,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": ""
+  },
+  {
+    "url": "https://clientstream.launchdarkly.com/eval/5cbb2d789e851908187acbeb/eyJraW5kIjoidXNlciIsImtleSI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSIsImlwIjoiNTAuNDcuMjAzLjE0MCIsImN1c3RvbSI6eyJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiZGVza3RvcCIsInNlc3Npb25JZCI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSJ9fQ",
+    "status": 200,
+    "content_type": "text/event-stream; charset=utf-8",
+    "method": "GET",
+    "resource_type": "eventsource",
+    "body_preview": null
+  },
+  {
+    "url": "https://govhub.com/svc/login/oidc/auth?client_id=payhub-spa&redirect_uri=https%3A%2F%2Fcounty-taxes.net%2Fcallback&response_type=code&scope=openid+email+profile+offline_access&state=09db26cbfb094b71ad81a2e08f9bae09&code_challenge=0_L6ycnW5LRDtCz3xobx3hmbutw53p00NQx4uzyxDsQ&code_challenge_method=S256&response_mode=query&prompt=none&client_site=broward%2Fbroward&client_display=Broward&site_display=&display_logo_url=https%3A%2F%2Fcdn-grantstreet-com.s3.amazonaws.com%2F4c8ea075-1d5a-47c5-8ce5-ef0280cb96a0Ajayi_Logo1_Color-3x.png&email_param_site=broward%2Fbroward&origin_url=https%3A%2F%2Fcounty-taxes.net%2Fbroward%2Fproperty-tax%3Ftried_silent_auth%3D1",
+    "status": 302,
+    "content_type": "text/html; charset=utf-8",
+    "method": "GET",
+    "resource_type": "document",
+    "body_preview": null
+  },
+  {
+    "url": "https://county-taxes.net/callback?error=login_required&error_description=End-User%20authentication%20is%20required&state=09db26cbfb094b71ad81a2e08f9bae09",
+    "status": 200,
+    "content_type": "text/html",
+    "method": "GET",
+    "resource_type": "document",
+    "body_preview": null
+  },
+  {
+    "url": "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700,900",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "method": "GET",
+    "resource_type": "stylesheet",
+    "body_preview": null
+  },
+  {
+    "url": "https://govhub.com/svc/login/oidc/.well-known/openid-configuration",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "fetch",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtm.js?id=GTM-K2K9KM3M",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtag/js?id=G-2Y53RWJGP0&cx=c&gtm=4e65k1",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://county-taxes.net/environment",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{ \"environment\": \"prod\" }"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{}"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/clients/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/meta/clients/broward/defaultSiteUrl\":\"broward\",\"/payhub/data-pub/meta/clients/broward/id\":\"broward\",\"/payhub/data-pub/meta/clients/broward/logoUrl\":\"https://cdn-grantstreet-com.s3.amazonaws.com/795828fc-952e-4e17-b176-20e9b5623314broward.jpeg\",\"/payhub/data-pub/meta/clients/broward/name\":\"Broward\",\"/payhub/data-pub/meta/clients/broward/useClientOnlyUrl\":false}\n"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/sites/broward/property-tax",
+    "status": 404,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"errorCode\":\"NotFound\",\"errorMessage\":\"Unknown config key\"}"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/meta/sites/broward/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/meta/sites/broward/broward/clientId\":\"broward\",\"/payhub/data-pub/meta/sites/broward/broward/id\":\"broward\",\"/payhub/data-pub/meta/sites/broward/broward/inNonProd\":true,\"/payhub/data-pub/meta/sites/broward/broward/inProd\":true,\"/payhub/data-pub/meta/sites/broward/broward/lastUpdated\":1779223824236,\"/payhub/data-pub/meta/sites/broward/broward/title\":\"New TaxSys Public Site\",\"/payhub/data-pub/meta/sites/broward/broward/type\":\"multi-department\"}\n"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/settings/broward/broward",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/settings/broward/broward/announcements/enableBanners/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableBanners/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/enableFooters/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableFooters/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/enableNotifications/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/enableNotifications/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/meta/enabled\":true,\"/payhub/data-pub/settings/broward/broward/announcements/meta/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandFooters/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandFooters/value\":false,\"/payhub/data-pub/settings/broward/broward/announcements/preExpandNotifications/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/announcements/preExpandNotifications/value\":true,\"/payhub/data-pub/settings/broward/broward/announcements/tags/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/announcements/tags/value\":[{\"id\":\"10436efc-c48d-4e13-a246-514a63c4769e\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Vehicle_Registration\"},{\"id\":\"c93a0232-6255-4b36-b236-357169e7c40a\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Property_Tax\"},{\"id\":\"06290acf-877a-4cd0-8480-a2a4e9ad50d6\",\"immutable\":true,\"name\":\"Tag\",\"type\":\"text\",\"value\":\"Business_Tax\"}],\"/payhub/data-pub/settings/broward/broward/cart/autoVoidWorkflow/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/cart/autoVoidWorkflow/value\":false,\"/payhub/data-pub/settings/broward/broward/cart/cancelButtonUrl/source\":\"client\",\"/payhub/data-pub/settings/broward/broward/cart/cancelButtonUrl/value\":\"\",\"/payhub/data-pub/settings/broward/broward/cart/client/source\":\"site\",\"/payhub/data-pub/settings/broward/broward/cart/client/value\":\"broward\",\"/"
+  },
+  {
+    "url": "https://app.launchdarkly.com/sdk/goals/5cbb2d789e851908187acbeb",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "[{\"key\":\"568462af-0541-43a8-8acc-e077d6a0712f\",\"kind\":\"click\",\"selector\":\"#e-wallet .save-method-checkbox\",\"urls\":[{\"kind\":\"regex\",\"pattern\":\"/checkout$\"}]},{\"key\":\"18e465d1-b5a7-46fb-bc31-3d62b5d302a7\",\"kind\":\"click\",\"selector\":\".login-required-login-button\",\"urls\":[{\"kind\":\"regex\",\"pattern\":\"/checkout$\"}]}]"
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtag/js?id=G-2Y53RWJGP0&l=dataLayer",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://app.launchdarkly.com/sdk/evalx/5cbb2d789e851908187acbeb/contexts/eyJraW5kIjoidXNlciIsImtleSI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSIsImlwIjoiNTAuNDcuMjAzLjE0MCIsImN1c3RvbSI6eyJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiZGVza3RvcCIsInNlc3Npb25JZCI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSJ9fQ",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"ab-cost-linked-pricing.brevard-brevard\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-bay-fl-bay\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-martin-fl-martin\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.fl-miamidade-fl-miamidade\":{\"flagVersion\":7,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.pinellas\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"ab-cost-linked-pricing.pinellas-pinellas\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"ab-cost-linked-pricing.sunshine-design\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.al-jefferson-services\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.ma-housingcourt\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"allow-mobile-pay-for-mds-carts.sacramento-sacramento\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.sumter-sumter\":{\"flagVersion\":4,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"allow-mobile-pay-for-mds-carts.sunshine-county\":{\"flagVersion\":2,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"allow-mobile-pay-for-mds-carts.sunshine-demo\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.al-jefferson-revenue\":{\"flagVersion\":5,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.al-jefferson-services\":{\"flagVersion\":3,\"trackEvents\":false,\"value\":false,\"variation\":1,\"version\":863},\"cart-redirect.ca-alameda-treasurer-tax\":{\"flagVersion\":7,\"trackEvents\":false,\"value\":true,\"variation\":0,\"version\":863},\"cart-redirect.ca"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://clientstream.launchdarkly.com/eval/5cbb2d789e851908187acbeb/eyJraW5kIjoidXNlciIsImtleSI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSIsImlwIjoiNTAuNDcuMjAzLjE0MCIsImN1c3RvbSI6eyJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiZGVza3RvcCIsInNlc3Npb25JZCI6Ijk1MGRmODM3LWQ5MjYtNGZhMC04ZjY3LWUyOWYwMjQxMmQ3ZSJ9fQ",
+    "status": 200,
+    "content_type": "text/event-stream; charset=utf-8",
+    "method": "GET",
+    "resource_type": "eventsource",
+    "body_preview": null
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.diag",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://govhub.com/svc/cart/api/v3/carts/broward/broward/vivify",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "{\"id\":\"d729d768-cb70-40f8-86d6-0b47c97d7fda\",\"client\":\"broward\",\"site\":\"broward\",\"user_id\":\"\",\"created\":\"2026-05-24T06:21:00Z\",\"modified\":\"2026-05-24T06:21:00Z\",\"items\":[],\"billing\":{\"name\":\"\",\"address1\":\"\",\"address2\":\"\",\"city\":\"\",\"state\":\"\",\"postal_code\":\"\",\"country\":\"\",\"phone\":\"\",\"email\":\"\"},\"urls\":{\"cancel\":\"\",\"return\":\"\",\"postback\":\"\",\"receipt\":\"\"},\"metadata\":{},\"locked\":false,\"submitting\":false,\"checkout_datetime\":null,\"payables_driven\":true,\"mode\":\"immediate_capture\"}\n"
+  },
+  {
+    "url": "https://govhub.com/svc/announcements/v1/pub/broward/broward/footers",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "null\n"
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/tax-cbs-public-site.request",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://govhub.com/svc/announcements/v1/pub/broward/broward/notifications",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "[{\"id\":\"b9fdea38-3351-4715-858f-dc8fa2f7a9e3\",\"active\":true,\"createdAt\":\"2026-05-21T16:06:37Z\",\"futureDate\":null,\"clientSites\":[{\"client\":\"broward\",\"site\":\"broward\"}],\"tags\":[],\"subject\":{\"en\":\"Holiday Office Closure Notice: Monday, May 25, 2026\",\"es\":\"\"},\"text\":{\"en\":\"<p>Our office will be closed on Monday, May 25, in observance of Memorial Day.</p><p>We will reopen on Tuesday, May 26.</p>\",\"es\":\"\"}},{\"id\":\"acf14480-f521-4ae1-ab6f-00e1c71e4aa6\",\"active\":true,\"createdAt\":\"2026-04-01T14:30:59Z\",\"futureDate\":null,\"clientSites\":[{\"client\":\"broward\",\"site\":\"broward\"}],\"tags\":[],\"subject\":{\"en\":\"FINAL DELINQUENT PAYMENT DEADLINE\",\"es\":\"\"},\"text\":{\"en\":\"<p>The final deadline to pay delinquent 2025 Real Estate balances online or in person before a Tax Certificate is issued, with added Certificate interest, is May 26, 2026, at 5:00 PM (EDT). <strong>No partial payments</strong> are accepted; online payments must cover the full balance shown on the account.</p>\",\"es\":\"\"}},{\"id\":\"d5fd9e1b-a6fe-460a-8b37-227eab20807e\",\"active\":true,\"createdAt\":\"2026-04-01T14:31:08Z\",\"futureDate\":null,\"clientSites\":[{\"client\":\"broward\",\"site\":\"broward\"}],\"tags\":[],\"subject\":{\"en\":\"All unpaid 2025 Tax Bills are now Delinquent\",\"es\":\"\"},\"text\":{\"en\":\"<p>IMPORTANT NOTICE: All unpaid 2025 Tax Bills are delinquent as of April 1, 2026. Per Florida Statute 197.172, unpaid Real Estate accounts incur 3% delinquency interest, and Tangible Personal Property accounts incur 1.5% monthly. Accounts unpaid by <strong>April 8</strong> will be publicly advertised on May 27 and incur additional advertising, auction, and collection fees.</p>\",\"es\":\"\"}},{\"id\":\"aabbafb7-6a8d-4e93-9e87-43d38691548c\",\"active\":true,\"createdAt\":\"2025-11-30T11:47:59Z\",\"futureDate\":null,\"clientSites\":[{\"client\":\"broward\",\"site\":\"broward\"},{\"client\":\"broward\",\"site\":\"taxsys-internal\"},{\"client\":\"broward\",\"site\":\"taxsys-landing\"}],\"tags\":[],\"subject\":{\"en\":\"Welcome to your new Tax Collector\u2019s Office\",\"es\":\"\"},\"text\":{\"en\":\"<span style=\\\"fon"
+  },
+  {
+    "url": "https://govhub.com/svc/announcements/v1/pub/broward/broward/banners",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "[]\n"
+  },
+  {
+    "url": "https://config.grantstreet.com/api/v1/payhub/data-pub/globals/",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "{\"/payhub/data-pub/globals/algolia/algoliaOutage\":false,\"/payhub/data-pub/globals/heap/enableHeap\":false,\"/payhub/data-pub/globals/login/oktaOutage\":false,\"/payhub/data-pub/globals/renewexpress/disableRES\":false}\n"
+  },
+  {
+    "url": "https://pay.google.com/gp/p/ui/payframe?origin=https%3A%2F%2Fcounty-taxes.net&mid=",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "method": "GET",
+    "resource_type": "document",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.gstatic.com/_/mss/boq-payments-consumer/_/js/k=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.en_US.sxh0fEET16g.2018.O/am=AAAAALAB/d=1/excm=_b,_tp,payframeview/ed=1/dg=0/wt=2/ujg=1/rs=AMitfrgeQJJYzBhdQPTpq7zv6uUa83KRmA/dti=1/m=_b,_tp",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://mq-gateway.grantstreet.com/v1/request/govhub-ui.request",
+    "status": 202,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "Accepted"
+  },
+  {
+    "url": "https://www.gstatic.com/_/mss/boq-payments-consumer/_/js/k=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.en_US.sxh0fEET16g.2018.O/ck=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.XN-J4bJfDms.L.B1.O/am=AAAAALAB/d=1/exm=_b,_tp/excm=_b,_tp,payframeview/ed=1/wt=2/ujg=1/rs=AMitfrgE5VIuRyws02yhNNpRKGIy6fkt8w/ee=EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:XVMNvd;Me32dd:MEeYgc;NJ1rfe:yGfSdd;NPKaK:PVlQOd;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:vfuNJf;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;qQEoOc:KUM7Z;qafBPd:yDVVkb;qddgKe:xQtZb;wR5FRb:siKnQd;yEQyxe:p8L0ob;yxTchf:KUM7Z/dti=1/m=uZmJdd",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://govhub.com/svc/cart/api/v3/carts/broward/broward/d729d768-cb70-40f8-86d6-0b47c97d7fda/get_tokens",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "{\"dv_token\":\"hQETMEDeVu1pFEd_vCTnwuYMSV8gbLvSjkDmx8a7\",\"ewallet_token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfaWQiOiJwYXlodWIiLCJleHAiOjE3Nzk2MzI0NjAsImlhdCI6MTc3OTYwMzY2MCwiaXNzIjoiZS13YWxsZXQuZ3JhbnRzdHJlZXQuY29tIiwib3JpZ2luIjoiaHR0cHM6Ly9lLXdhbGxldC5ncmFudHN0cmVldC5jb20vIiwicHVibGljX2R2X3Rva2VuIjoiaFFFVE1FRGVWdTFwRkVkX3ZDVG53dVlNU1Y4Z2JMdlNqa0RteDhhNyIsInNlY3VyZV9pZCI6InBheWh1YiIsInNlc3Npb25faWQiOiIxNmY0MTFlMS1iZDE0LTRhNzAtYTIwZC1mYWJkZWUzNjAwYWEiLCJ1c2VyX2lkIjoiYW5vbnwxNjVmZmU0NS1lMDE2LTQ4NzQtYjY0Ni1kOTQ1OWQ3MTM0NzUifQ.04-O3OKjXCxCMzZNZ37Ua82I2ezWv01-cl34axJSfyKhUauXNbV7Gh4SNPjBAAz33ajYppcTAEn9yqId7VQoNEqlm-b7fKtoSjFkov1BgMqKXoBVrvQd53dXOX9MYCOfqu6mMqZuglHg5z92YEbc_Dl-qablyB-LefbAWxaBnh59hKAcFC9LjPBKsNCojaNfbC_D9_ZNSGMb55uW3TT4Ufz_7VnR_dgJTggyBDbdKTqWZUtsxtK8EMUwrnaEWqZG7Ya2Woy4T0uocRLNGl9pSq6ZYddzOQe6dgpGFLr7_akyjIeeU-Js31nDpoB2qn6-sIrsK7Hz0R18q6dM_n1hIolY3jPcQ2LLyprQ5H1hQqKH-17aLWCjg742CqsbIFp5TP0yAFxgrbCbN8DaXc4vvuq_s7hR_JAZ8pF2LbIbLdzztm3l-iFrFTUEltfI0Ve18ho0QxVPwKQYXs0BQpDMA7WvIwhbhp23SHIujieaCLdsFdjgO0d7BySqExNt41uzTauGnLs0NrrctkTeb10DQMFPUCBu0UuxXP_LOVVxT6x1W_hYNRfECFCDB3EaDSO5fdB4ZGHWQObyusaoFWYAgh8V8Y7foLLH8rUXbbJkwdiX8dH5qo66W_HxB-_I_HnF12-JfXjT95pTvAlQNRp1rVBzDdghf89l7p4795vofp4\"}\n"
+  },
+  {
+    "url": "https://www.gstatic.com/_/mss/boq-payments-consumer/_/js/k=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.en_US.sxh0fEET16g.2018.O/ck=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.XN-J4bJfDms.L.B1.O/am=AAAAALAB/d=1/exm=_b,_tp,uZmJdd/excm=_b,_tp,payframeview/ed=1/wt=2/ujg=1/rs=AMitfrgE5VIuRyws02yhNNpRKGIy6fkt8w/ee=EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:XVMNvd;Me32dd:MEeYgc;NJ1rfe:yGfSdd;NPKaK:PVlQOd;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:vfuNJf;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;qQEoOc:KUM7Z;qafBPd:yDVVkb;qddgKe:xQtZb;wR5FRb:siKnQd;yEQyxe:p8L0ob;yxTchf:KUM7Z/dti=1/m=Wt6vjf,hhhU8,FCpbqb,WhJNk",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.gstatic.com/_/mss/boq-payments-consumer/_/js/k=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.en_US.sxh0fEET16g.2018.O/ck=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.XN-J4bJfDms.L.B1.O/am=AAAAALAB/d=1/exm=FCpbqb,WhJNk,Wt6vjf,_b,_tp,hhhU8,uZmJdd/excm=_b,_tp,payframeview/ed=1/wt=2/ujg=1/rs=AMitfrgE5VIuRyws02yhNNpRKGIy6fkt8w/ee=EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:XVMNvd;Me32dd:MEeYgc;NJ1rfe:yGfSdd;NPKaK:PVlQOd;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:vfuNJf;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;qQEoOc:KUM7Z;qafBPd:yDVVkb;qddgKe:xQtZb;wR5FRb:siKnQd;yEQyxe:p8L0ob;yxTchf:KUM7Z/dti=1/m=byfTOb,lsjVmc,LEikZe,lwddkf,EFQ78c",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://www.gstatic.com/_/mss/boq-payments-consumer/_/js/k=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.en_US.sxh0fEET16g.2018.O/ck=boq-payments-consumer.InstantbuyFrontendBuyflowPayframeUi.XN-J4bJfDms.L.B1.O/am=AAAAALAB/d=1/exm=EFQ78c,FCpbqb,LEikZe,WhJNk,Wt6vjf,_b,_tp,byfTOb,hhhU8,lsjVmc,lwddkf,uZmJdd/excm=_b,_tp,payframeview/ed=1/wt=2/ujg=1/rs=AMitfrgE5VIuRyws02yhNNpRKGIy6fkt8w/ee=EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:XVMNvd;Me32dd:MEeYgc;NJ1rfe:yGfSdd;NPKaK:PVlQOd;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:vfuNJf;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;qQEoOc:KUM7Z;qafBPd:yDVVkb;qddgKe:xQtZb;wR5FRb:siKnQd;yEQyxe:p8L0ob;yxTchf:KUM7Z/dti=1/m=p3hmRc,LvGhrf,RqjULd",
+    "status": 200,
+    "content_type": "text/javascript; charset=utf-8",
+    "method": "GET",
+    "resource_type": "script",
+    "body_preview": null
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "[\"-1\",null,[[[\"ANDROID_BACKUP\",0],[\"BATTERY_STATS\",0],[\"SMART_SETUP\",0],[\"TRON\",0]],-3334737594024971225],[],{\"175237375\":[10000]}]"
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "[\"-1\",null,[[[\"ANDROID_BACKUP\",0],[\"BATTERY_STATS\",0],[\"SMART_SETUP\",0],[\"TRON\",0]],-3334737594024971225],[],{\"175237375\":[10000]}]"
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "[\"-1\",null,[[[\"ANDROID_BACKUP\",0],[\"BATTERY_STATS\",0],[\"SMART_SETUP\",0],[\"TRON\",0]],-3334737594024971225],[],{\"175237375\":[10000]}]"
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "[\"-1\",null,[[[\"ANDROID_BACKUP\",0],[\"BATTERY_STATS\",0],[\"SMART_SETUP\",0],[\"TRON\",0]],-3334737594024971225],[],{\"175237375\":[10000]}]"
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "[\"-1\",null,[[[\"ANDROID_BACKUP\",0],[\"BATTERY_STATS\",0],[\"SMART_SETUP\",0],[\"TRON\",0]],-3334737594024971225],[],{\"175237375\":[10000]}]"
+  },
+  {
+    "url": "https://e-wallet.grantstreet.com/api/v1/probe",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "\"Probe successful\""
+  },
+  {
+    "url": "https://e-wallet.grantstreet.com/api/v1/get_tenders",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "[]"
+  },
+  {
+    "url": "https://pay.google.com/gp/p/ui/pay",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "method": "GET",
+    "resource_type": "xhr",
+    "body_preview": "<!doctype html><html lang=\"en-US\" dir=\"ltr\"><head><base href=\"https://pay.google.com/gp/p/\"><link rel=\"preconnect\" href=\"//www.gstatic.com\"><meta name=\"referrer\" content=\"origin\"><script nonce=\"9LkDWH6k8fiOxQjBXadv6g\">window['ppConfig'] = {productName: 'InstantbuyFrontendBuyflowPayUi', deleteIsEnforced:  true , sealIsEnforced:  true , heartbeatRate:  0.5 , periodicReportingRateMillis:  60000.0 , disableAllReporting:  false };(function(){'use strict';function k(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}}function l(a){var b=typeof Symbol!=\"undefined\"&&Symbol.iterator&&a[Symbol.iterator];if(b)return b.call(a);if(typeof a.length==\"number\")return{next:k(a)};throw Error(String(a)+\" is not an iterable or ArrayLike\");}var m=typeof Object.defineProperties==\"function\"?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};\nfunction n(a){a=[\"object\"==typeof globalThis&&globalThis,a,\"object\"==typeof window&&window,\"object\"==typeof self&&self,\"object\"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error(\"Cannot find global object\");}var p=n(this);function q(a,b){if(b)a:{var c=p;a=a.split(\".\");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&b!=null&&m(c,a,{configurable:!0,writable:!0,value:b})}}\nq(\"Object.is\",function(a){return a?a:function(b,c){return b===c?b!==0||1/b===1/c:b!==b&&c!==c}});q(\"Array.prototype.includes\",function(a){return a?a:function(b,c){var d=this;d instanceof String&&(d=String(d));var e=d.length;c=c||0;for(c<0&&(c=Math.max(c+e,0));c<e;c++){var f=d[c];if(f===b||Object.is(f,b))return!0}return!1}});\nq(\"String.prototype.includes\",function(a){return a?a:function(b,c){if(this==null)throw new TypeError(\"The 'this' value for String.prototype.includes must not be null or undefined\");if(b instanceof RegExp)throw new TypeError(\"First argument to String.prototype.includes "
+  },
+  {
+    "url": "https://events.launchdarkly.com/events/bulk/5cbb2d789e851908187acbeb",
+    "status": 202,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": ""
+  },
+  {
+    "url": "https://0lwzo52ls2-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.23.3)%3B%20Browser%20(lite)%3B%20instantsearch.js%20(4.66.1)%3B%20Vue%20(3.3.4)%3B%20Vue%20InstantSearch%20(4.15.0)%3B%20JS%20Helper%20(3.17.0)&x-algolia-api-key=c0745578b56854a1b90ed57b63fbf0ba&x-algolia-application-id=0LWZO52LS2",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "{\"results\":[{\"hits\":[{\"child_groups\":[{\"children\":[{\"external_id\":\"494225-04-0800\",\"custom_parameters\":{\"roll_year\":\"2025\",\"external_type\":\"Account\",\"custom_payable_type\":\"accounts\"},\"external_id_tokens\":[\"494225040800\",\"494225 04 0800\",\"494225 040800\",\"49422504 0800\"]}]}],\"custom_parameters\":{\"public_url\":\"/public/real_estate/parcels/494225-04-0800/bills?parcel=0168ad90-e50a-11eb-ba38-005056819334\",\"custom_payable_type\":\"parents\",\"alternate_keys\":[{\"external_id\":\"338251\",\"external_type\":\"Alternate Key\"}],\"external_type\":\"Account\",\"entities\":[{\"external_id\":\"ANAND,RISHI & PAYAL, 2856 NE 27 ST, FORT LAUDERDALE, FL 33306\",\"address\":\"2856 NE 27 ST\",\"province\":\"\",\"external_type\":\"Owner/Address\",\"country\":\"\",\"state\":\"FL\",\"zip\":\"33306\",\"name\":\"ANAND,RISHI & PAYAL\",\"city\":\"FORT LAUDERDALE\"},{\"external_id\":\"\",\"address\":\"\",\"province\":\"\",\"external_type\":\"Billing Address\",\"country\":\"\",\"state\":\"\",\"zip\":\"\",\"name\":\"\",\"city\":\"\"},{\"external_id\":\"2856 NE 27 ST\",\"address\":\"2856 NE 27 ST\",\"province\":\"\",\"external_type\":\"Address\",\"country\":\"\",\"state\":\"\",\"zip\":\"\",\"name\":\"\",\"city\":\"\"}]},\"display_name\":\"ANAND,RISHI & PAYAL\",\"display_type\":\"property_tax\",\"external_id\":\"494225-04-0800\",\"item_category\":\"Real Estate\",\"objectID\":\"/Taxsys-GovHub/v0/items/broward:real_estate:parents:0168ad90-e50a-11eb-ba38-005056819334\",\"_highlightResult\":{\"child_groups\":[{\"children\":[{\"external_id\":{\"value\":\"494225-04-0800\",\"matchLevel\":\"none\",\"matchedWords\":[]},\"external_id_tokens\":[{\"value\":\"__ais-highlight__494225040800__/ais-highlight__\",\"matchLevel\":\"full\",\"fullyHighlighted\":true,\"matchedWords\":[\"49\",\"42\",\"25\",\"04\",\"0800\"]},{\"value\":\"494225 04 0800\",\"matchLevel\":\"none\",\"matchedWords\":[]},{\"value\":\"494225 040800\",\"matchLevel\":\"none\",\"matchedWords\":[]},{\"value\":\"49422504 0800\",\"matchLevel\":\"none\",\"matchedWords\":[]}]}]}],\"custom_parameters\":{\"alternate_keys\":[{\"external_id\":{\"value\":\"338251\",\"matchLevel\":\"none\",\"matchedWords\":[]}}],\"entities\":[{\"external_id\":{\"value\":\"ANAND,RISHI & PAYAL, 2856 NE 27 ST, FORT L"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{}"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{\"id\":\"ee29f951083948228857d48a4ad76ec2\"}"
+  },
+  {
+    "url": "https://insights.algolia.io/1/events?X-Algolia-Application-Id=0LWZO52LS2&X-Algolia-API-Key=c0745578b56854a1b90ed57b63fbf0ba&X-Algolia-Agent=insights-js%20(2.13.0)%3B%20insights-js-browser-cjs%20(2.13.0)%3B%20insights-middleware",
+    "status": 200,
+    "content_type": "",
+    "method": "POST",
+    "resource_type": "ping",
+    "body_preview": null
+  },
+  {
+    "url": "https://insights.algolia.io/1/events?X-Algolia-Application-Id=0LWZO52LS2&X-Algolia-API-Key=c0745578b56854a1b90ed57b63fbf0ba&X-Algolia-Agent=insights-js%20(2.13.0)%3B%20insights-js-browser-cjs%20(2.13.0)%3B%20insights-middleware",
+    "status": 200,
+    "content_type": "",
+    "method": "POST",
+    "resource_type": "ping",
+    "body_preview": null
+  },
+  {
+    "url": "https://0lwzo52ls2-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.23.3)%3B%20Browser%20(lite)%3B%20instantsearch.js%20(4.66.1)%3B%20Vue%20(3.3.4)%3B%20Vue%20InstantSearch%20(4.15.0)%3B%20JS%20Helper%20(3.17.0)&x-algolia-api-key=c0745578b56854a1b90ed57b63fbf0ba&x-algolia-application-id=0LWZO52LS2",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "method": "POST",
+    "resource_type": "xhr",
+    "body_preview": "{\"results\":[{\"hits\":[{\"child_groups\":[{\"children\":[{\"external_id\":\"494225-04-0800\",\"custom_parameters\":{\"roll_year\":\"2025\",\"external_type\":\"Account\",\"custom_payable_type\":\"accounts\"},\"external_id_tokens\":[\"494225040800\",\"494225 04 0800\",\"494225 040800\",\"49422504 0800\"]}]}],\"custom_parameters\":{\"public_url\":\"/public/real_estate/parcels/494225-04-0800/bills?parcel=0168ad90-e50a-11eb-ba38-005056819334\",\"custom_payable_type\":\"parents\",\"alternate_keys\":[{\"external_id\":\"338251\",\"external_type\":\"Alternate Key\"}],\"external_type\":\"Account\",\"entities\":[{\"external_id\":\"ANAND,RISHI & PAYAL, 2856 NE 27 ST, FORT LAUDERDALE, FL 33306\",\"address\":\"2856 NE 27 ST\",\"province\":\"\",\"external_type\":\"Owner/Address\",\"country\":\"\",\"state\":\"FL\",\"zip\":\"33306\",\"name\":\"ANAND,RISHI & PAYAL\",\"city\":\"FORT LAUDERDALE\"},{\"external_id\":\"\",\"address\":\"\",\"province\":\"\",\"external_type\":\"Billing Address\",\"country\":\"\",\"state\":\"\",\"zip\":\"\",\"name\":\"\",\"city\":\"\"},{\"external_id\":\"2856 NE 27 ST\",\"address\":\"2856 NE 27 ST\",\"province\":\"\",\"external_type\":\"Address\",\"country\":\"\",\"state\":\"\",\"zip\":\"\",\"name\":\"\",\"city\":\"\"}]},\"display_name\":\"ANAND,RISHI & PAYAL\",\"display_type\":\"property_tax\",\"external_id\":\"494225-04-0800\",\"item_category\":\"Real Estate\",\"objectID\":\"/Taxsys-GovHub/v0/items/broward:real_estate:parents:0168ad90-e50a-11eb-ba38-005056819334\",\"_highlightResult\":{\"child_groups\":[{\"children\":[{\"external_id\":{\"value\":\"494225-04-0800\",\"matchLevel\":\"none\",\"matchedWords\":[]},\"external_id_tokens\":[{\"value\":\"__ais-highlight__494225040800__/ais-highlight__\",\"matchLevel\":\"full\",\"fullyHighlighted\":true,\"matchedWords\":[\"49\",\"42\",\"25\",\"04\",\"0800\"]},{\"value\":\"494225 04 0800\",\"matchLevel\":\"none\",\"matchedWords\":[]},{\"value\":\"494225 040800\",\"matchLevel\":\"none\",\"matchedWords\":[]},{\"value\":\"49422504 0800\",\"matchLevel\":\"none\",\"matchedWords\":[]}]}]}],\"custom_parameters\":{\"alternate_keys\":[{\"external_id\":{\"value\":\"338251\",\"matchLevel\":\"none\",\"matchedWords\":[]}}],\"entities\":[{\"external_id\":{\"value\":\"ANAND,RISHI & PAYAL, 2856 NE 27 ST, FORT L"
+  },
+  {
+    "url": "https://o168195.ingest.us.sentry.io/api/4509249438810112/envelope/?sentry_version=7&sentry_key=9c02d60845fd348125681bc62b679e06",
+    "status": 200,
+    "content_type": "application/json",
+    "method": "POST",
+    "resource_type": "fetch",
+    "body_preview": "{\"id\":\"5045e357378c41a5bf85041be7b52d44\"}"
+  },
+  {
+    "url": "https://insights.algolia.io/1/events?X-Algolia-Application-Id=0LWZO52LS2&X-Algolia-API-Key=c0745578b56854a1b90ed57b63fbf0ba&X-Algolia-Agent=insights-js%20(2.13.0)%3B%20insights-js-browser-cjs%20(2.13.0)%3B%20insights-middleware",
+    "status": 200,
+    "content_type": "",
+    "method": "POST",
+    "resource_type": "ping",
+    "body_preview": null
+  },
+  {
+    "url": "https://insights.algolia.io/1/events?X-Algolia-Application-Id=0LWZO52LS2&X-Algolia-API-Key=c0745578b56854a1b90ed57b63fbf0ba&X-Algolia-Agent=insights-js%20(2.13.0)%3B%20insights-js-browser-cjs%20(2.13.0)%3B%20insights-middleware",
+    "status": 200,
+    "content_type": "",
+    "method": "POST",
+    "resource_type": "ping",
+    "body_preview": null
+  }
+]

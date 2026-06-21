@@ -1,0 +1,435 @@
+<?xml version="1.0" ?>
+<AbstractorNotesReport>
+  <report_metadata>
+    <report_type>Title Examination Abstractor Notes</report_type>
+    <report_version>2.0</report_version>
+    <cure_order_number>CURE-2026-HERRON-001</cure_order_number>
+    <exam_date>04/14/2026</exam_date>
+    <effective_date>04/13/2026</effective_date>
+    <examiner>CURE TitlePro (Automated Agent)</examiner>
+    <recorder_search_date>04/13/2026</recorder_search_date>
+    <document_review_date>04/14/2026</document_review_date>
+    <report_status>UPDATED — Full document image review completed</report_status>
+    <report_generated>2026-04-14T14:00:00Z</report_generated>
+    <data_sources>
+      <item index="0">Orange County Clerk-Recorder (cr.occlerkrecorder.gov)</item>
+      <item index="1">Public Property Records</item>
+      <item index="2">OCR Document Extraction (22 PDFs processed)</item>
+    </data_sources>
+    <search_parameters>
+      <date_range_start>01/01/2000</date_range_start>
+      <date_range_end>04/13/2026</date_range_end>
+      <names_searched>
+        <item index="0">HERRON DAVID R</item>
+      </names_searched>
+      <total_searches>1</total_searches>
+      <total_unique_documents>11</total_unique_documents>
+      <total_documents_downloaded>22</total_documents_downloaded>
+      <documents_ocr_reviewed>11</documents_ocr_reviewed>
+    </search_parameters>
+  </report_metadata>
+  <property>
+    <address>21942 Via del Lago</address>
+    <city>Trabuco Canyon</city>
+    <state>CA</state>
+    <zip>92679</zip>
+    <county>Orange</county>
+    <apn>833-551-29</apn>
+    <property_type>Single Family Residence</property_type>
+    <tract>12217</tract>
+    <lot>18</lot>
+    <pud>Rancho Cielo</pud>
+    <city_official>Rancho Santa Margarita</city_official>
+    <legal_description>
+      <parcel_1>LOT 18 OF TRACT NO. 12217, IN THE CITY OF RANCHO SANTA MARGARITA, COUNTY OF ORANGE, STATE OF CALIFORNIA, AS SHOWN ON A MAP RECORDED IN BOOK 611, PAGES 39 THROUGH 42, INCLUSIVE OF MISCELLANEOUS MAPS, RECORDS OF SAID COUNTY, CALIFORNIA. EXCEPTING FROM SAID LAND ABOVE ALL RIPARIAN RIGHTS IN THE WATER OF TRABUCO CREEK AND ANY OTHER RIGHTS IN SAID WATERS APPURTENANT TO SAID PROPERTY.</parcel_1>
+      <source_document>Grant Deed Inst. #2021000502863</source_document>
+    </legal_description>
+  </property>
+  <borrowers>
+    <borrower_1>
+      <full_name>DAVID R. HERRON</full_name>
+      <vesting>A married man, as his sole and separate property</vesting>
+      <name_variants_found>
+        <item index="0">HERRON DAVID R</item>
+        <item index="1">HERRON DAVID RUSSELL TR</item>
+        <item index="2">DAVID R. HERRON</item>
+        <item index="3">DAVID R HERRON</item>
+      </name_variants_found>
+    </borrower_1>
+    <borrower_2>
+      <full_name>SANDRA D. HENCH</full_name>
+      <vesting>A single woman</vesting>
+      <name_variants_found>
+        <item index="0">HENCH SANDRA D</item>
+        <item index="1">SANDRA D. HENCH</item>
+        <item index="2">SANDRA D HENCH</item>
+      </name_variants_found>
+    </borrower_2>
+    <joint_tenancy>True</joint_tenancy>
+    <prior_spouse>
+      <name>YVONNE B. FRITZ HERRON</name>
+      <note>Former spouse — appears on prior property documents (21591 Partridge St). Not on subject property.</note>
+    </prior_spouse>
+  </borrowers>
+  <title_examination_summary>
+    <title_status>ENCUMBERED</title_status>
+    <title_status_explanation>Property has 1 potentially open lien ($770,000 Rocket Mortgage — no reconveyance found) and 1 confirmed open lien ($100,000 Partners FCU HELOC). Maximum exposure: $870,000.</title_status_explanation>
+    <insurable>PENDING — requires resolution of Rocket Mortgage DOT status</insurable>
+    <current_owner>
+      <entity>DAVID R. HERRON, A MARRIED MAN, AS HIS SOLE AND SEPARATE PROPERTY AND SANDRA D. HENCH, A SINGLE WOMAN AS JOINT TENANTS</entity>
+      <vesting_type>Joint Tenants</vesting_type>
+      <vesting_deed_type>GRANT DEED</vesting_deed_type>
+      <vesting_instrument>2021000502863</vesting_instrument>
+      <vesting_date>08/10/2021</vesting_date>
+    </current_owner>
+    <prior_owners>
+      <item index="0">
+        <name>DANIEL J. LOSKOT AND CORINNE R. LOSKOT, TRUSTEES OF THE LOSKOT LIVING TRUST</name>
+        <disposition>Conveyed via Grant Deed #2021000502863</disposition>
+      </item>
+    </prior_owners>
+    <liens_summary>
+      <open_liens_on_subject>2</open_liens_on_subject>
+      <confirmed_open>1</confirmed_open>
+      <potentially_open>1</potentially_open>
+      <maximum_exposure_subject>870000</maximum_exposure_subject>
+      <minimum_exposure_subject>100000</minimum_exposure_subject>
+      <reconveyed_on_subject>1</reconveyed_on_subject>
+      <liens_on_other_properties>2</liens_on_other_properties>
+      <tax_liens>None found</tax_liens>
+      <judgment_liens>None found</judgment_liens>
+      <mechanics_liens>None found</mechanics_liens>
+      <lis_pendens>None found</lis_pendens>
+    </liens_summary>
+  </title_examination_summary>
+  <chain_of_title>
+    <item index="0">
+      <order>1</order>
+      <instrument>2021000502863</instrument>
+      <recording_date>08/10/2021</recording_date>
+      <document_type>GRANT DEED</document_type>
+      <grantor>DANIEL J. LOSKOT AND CORINNE R. LOSKOT, TRUSTEES OF THE LOSKOT LIVING TRUST DATED SEPTEMBER 8, 2020</grantor>
+      <grantee>DAVID R. HERRON, A MARRIED MAN, AS HIS SOLE AND SEPARATE PROPERTY AND SANDRA D. HENCH, A SINGLE WOMAN AS JOINT TENANTS</grantee>
+      <dtt>1706.1</dtt>
+      <estimated_purchase_price>1551000</estimated_purchase_price>
+      <confirmed_property>21942 Via del Lago, Trabuco Canyon, CA 92679</confirmed_property>
+      <apn>833-551-29</apn>
+      <notes>CONTROLLING VESTING DEED</notes>
+    </item>
+  </chain_of_title>
+  <deeds_of_trust>
+    <open_on_subject>
+      <item index="0">
+        <instrument>2021000502864</instrument>
+        <recording_date>08/10/2021</recording_date>
+        <note_date>08/05/2021</note_date>
+        <document_type>DEED OF TRUST</document_type>
+        <trustor>DAVID R. HERRON AND SANDRA D. HENCH, AS JOINT TENANTS</trustor>
+        <beneficiary>ROCKET MORTGAGE LLC (FKA QUICKEN LOANS LLC) / MERS</beneficiary>
+        <trustee>HEATHER LOVIER</trustee>
+        <original_amount>770000.0</original_amount>
+        <loan_type>Conventional — Purchase Money</loan_type>
+        <maturity_date>09/01/2051</maturity_date>
+        <loan_number>3483630408</loan_number>
+        <min_number>100039034836304081</min_number>
+        <property_address>21942 Via Del Lago, Trabuco Canyon, CA 92679-3437</property_address>
+        <apn>833-551-29</apn>
+        <status>POTENTIALLY OPEN</status>
+        <status_detail>NO RECONVEYANCE FOUND — recorded nearly 5 years ago</status_detail>
+        <document_reviewed>True</document_reviewed>
+        <pdf_filename>B48473449.pdf</pdf_filename>
+      </item>
+      <item index="1">
+        <instrument>2026000041247</instrument>
+        <recording_date>02/18/2026</recording_date>
+        <deed_date>02/09/2026</deed_date>
+        <document_type>REVOLVING CREDIT DEED OF TRUST (HELOC)</document_type>
+        <trustor>DAVID R. HERRON AND SANDRA D. HENCH, AS JOINT TENANTS</trustor>
+        <beneficiary>PARTNERS FEDERAL CREDIT UNION</beneficiary>
+        <trustee>T.D. SERVICE COMPANY, A CALIFORNIA CORPORATION</trustee>
+        <original_amount>100000.0</original_amount>
+        <loan_type>HELOC — Revolving Credit (LOANLINER)</loan_type>
+        <term>20 years</term>
+        <property_address>21942 Via del Lago, Trabuco Canyon, CA 92679</property_address>
+        <apn>833-551-29</apn>
+        <status>OPEN</status>
+        <status_detail>CONFIRMED ACTIVE LIEN</status_detail>
+        <document_reviewed>True</document_reviewed>
+        <pdf_filename>B48473444.pdf</pdf_filename>
+      </item>
+    </open_on_subject>
+    <reconveyed_on_subject>
+      <item index="0">
+        <original_instrument>2023000121368</original_instrument>
+        <original_recording_date>05/24/2023</original_recording_date>
+        <original_beneficiary>PARTNERS FEDERAL CREDIT UNION</original_beneficiary>
+        <original_amount>75000.0</original_amount>
+        <loan_type>HELOC</loan_type>
+        <loan_number>3000222731</loan_number>
+        <reconveyance_instrument>2026000043728</reconveyance_instrument>
+        <reconveyance_date>02/18/2026</reconveyance_date>
+        <status>RECONVEYED</status>
+      </item>
+    </reconveyed_on_subject>
+    <on_other_properties>
+      <item index="0">
+        <instrument>2008000473486</instrument>
+        <recording_date>10/14/2008</recording_date>
+        <beneficiary>AMTRUST BANK / MERS</beneficiary>
+        <original_amount>504000.0</original_amount>
+        <property_address>21591 Partridge St, Trabuco Canyon, CA 92679</property_address>
+        <apn>833-691-49</apn>
+        <status>RECONVEYED via 2010000706590 (12/29/2010)</status>
+      </item>
+      <item index="1">
+        <instrument>2012000725348</instrument>
+        <recording_date>11/27/2012</recording_date>
+        <beneficiary>INTERBANK MORTGAGE / NATIONSTAR</beneficiary>
+        <original_amount/>
+        <property_address>21591 Partridge St, Trabuco Canyon, CA 92679</property_address>
+        <apn>833-691-49</apn>
+        <status>RECONVEYED via 2014000234691 (06/16/2014)</status>
+      </item>
+    </on_other_properties>
+  </deeds_of_trust>
+  <liens_and_encumbrances>
+    <federal_tax_liens/>
+    <state_tax_liens/>
+    <mechanics_liens/>
+    <judgment_liens/>
+    <lis_pendens/>
+    <other_encumbrances>
+      <item index="0">
+        <type>RIPARIAN RIGHTS EXCEPTION</type>
+        <description>All riparian rights in Trabuco Creek excepted from legal description</description>
+      </item>
+      <item index="1">
+        <type>PUD</type>
+        <description>Rancho Cielo — HOA assessments likely apply</description>
+      </item>
+      <item index="2">
+        <type>PROPERTY TAXES</type>
+        <description>Subject to General and Special County and City taxes</description>
+      </item>
+    </other_encumbrances>
+  </liens_and_encumbrances>
+  <tax_information>
+    <apn>833-551-29</apn>
+    <tax_portal>taxbill.octreasurer.gov</tax_portal>
+    <current_year>
+      <tax_year>2025-2026</tax_year>
+      <annual_tax>10931.0</annual_tax>
+      <first_installment>
+        <amount>5466</amount>
+        <due_date>12/10/2025</due_date>
+        <status>PAYMENT STATUS UNVERIFIED</status>
+      </first_installment>
+      <second_installment>
+        <amount>5465</amount>
+        <due_date>04/10/2026</due_date>
+        <status>PAYMENT STATUS UNVERIFIED</status>
+      </second_installment>
+      <assessed_values>
+        <land>598518</land>
+        <improvements>464366</improvements>
+        <total>1062884</total>
+      </assessed_values>
+    </current_year>
+    <prior_year>
+      <tax_year>2024-2025</tax_year>
+      <annual_tax>10734.0</annual_tax>
+      <assessed_values>
+        <land>598518</land>
+        <improvements>464366</improvements>
+        <total>1062884</total>
+      </assessed_values>
+    </prior_year>
+    <tax_history>
+      <item index="0">
+        <year>2023</year>
+        <tax>10481</tax>
+        <assessed>1042044</assessed>
+      </item>
+      <item index="1">
+        <year>2022</year>
+        <tax>10294</tax>
+        <assessed>1021612</assessed>
+      </item>
+      <item index="2">
+        <year>2021</year>
+        <tax>6844</tax>
+        <assessed>1001581</assessed>
+      </item>
+      <item index="3">
+        <year>2020</year>
+        <tax>6782</tax>
+        <assessed>672427</assessed>
+      </item>
+    </tax_history>
+  </tax_information>
+  <documents_examined>
+    <item index="0">
+      <instrument>2021000502863</instrument>
+      <type>GRANT DEED</type>
+      <recording_date>08/10/2021</recording_date>
+      <reviewed>True</reviewed>
+      <property>Subject</property>
+      <notes>VESTING DEED. Loskot Trust to Herron/Hench. DTT $1,706.10.</notes>
+    </item>
+    <item index="1">
+      <instrument>2021000502864</instrument>
+      <type>DEED OF TRUST</type>
+      <recording_date>08/10/2021</recording_date>
+      <reviewed>True</reviewed>
+      <property>Subject</property>
+      <notes>Rocket Mortgage — $770,000 — POTENTIALLY OPEN</notes>
+    </item>
+    <item index="2">
+      <instrument>2026000041247</instrument>
+      <type>DEED OF TRUST (HELOC)</type>
+      <recording_date>02/18/2026</recording_date>
+      <reviewed>True</reviewed>
+      <property>Subject</property>
+      <notes>Partners FCU — $100,000 — OPEN</notes>
+    </item>
+    <item index="3">
+      <instrument>2023000121368</instrument>
+      <type>DEED OF TRUST (HELOC)</type>
+      <recording_date>05/24/2023</recording_date>
+      <reviewed>True</reviewed>
+      <property>Subject</property>
+      <notes>Partners FCU — $75,000 — RECONVEYED</notes>
+    </item>
+    <item index="4">
+      <instrument>2026000043728</instrument>
+      <type>RECONVEYANCE</type>
+      <recording_date>02/18/2026</recording_date>
+      <reviewed>True</reviewed>
+      <property>Subject</property>
+      <notes>Releases DOT #2023000121368</notes>
+    </item>
+    <item index="5">
+      <instrument>2008000473485</instrument>
+      <type>GRANT DEED</type>
+      <recording_date>10/14/2008</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>Deutsche Bank to Herrons. Different property.</notes>
+    </item>
+    <item index="6">
+      <instrument>2008000473486</instrument>
+      <type>DEED OF TRUST</type>
+      <recording_date>10/14/2008</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>AmTrust — $504,000 — RECONVEYED</notes>
+    </item>
+    <item index="7">
+      <instrument>2008000576504</instrument>
+      <type>GRANT DEED</type>
+      <recording_date>12/16/2008</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>Herrons to Fritz Herron Family Trust</notes>
+    </item>
+    <item index="8">
+      <instrument>2010000706590</instrument>
+      <type>RECONVEYANCE</type>
+      <recording_date>12/29/2010</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>Releases DOT #2008000473486</notes>
+    </item>
+    <item index="9">
+      <instrument>2014000234690</instrument>
+      <type>SUBSTITUTION TR</type>
+      <recording_date>06/16/2014</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>MERS/Interbank to Nationstar</notes>
+    </item>
+    <item index="10">
+      <instrument>2014000234691</instrument>
+      <type>RECONVEYANCE</type>
+      <recording_date>06/16/2014</recording_date>
+      <reviewed>True</reviewed>
+      <property>Partridge St</property>
+      <notes>Releases DOT #2012000725348</notes>
+    </item>
+  </documents_examined>
+  <remaining_issues>
+    <item index="0">
+      <id>1</id>
+      <severity>CRITICAL</severity>
+      <title>$770K ROCKET MORTGAGE DOT — NO RECONVEYANCE FOUND</title>
+      <description>Purchase money DOT (Inst. #2021000502864, $770,000) recorded 08/10/2021 has no reconveyance on record.</description>
+      <action_required>Contact MERS at (888) 679-6377, MIN 100039034836304081</action_required>
+    </item>
+    <item index="1">
+      <id>2</id>
+      <severity>MEDIUM</severity>
+      <title>Tax payment status unverified</title>
+      <description>2025-2026 annual tax is $10,931. Payment status (paid/delinquent) not confirmed.</description>
+      <action_required>Verify at taxbill.octreasurer.gov using APN 833-551-29</action_required>
+    </item>
+    <item index="2">
+      <id>3</id>
+      <severity>MEDIUM</severity>
+      <title>Prior owner not searched</title>
+      <description>LOSKOT TRUST was not searched in recorder.</description>
+      <action_required>Search LOSKOT in recorder for unreleased encumbrances</action_required>
+    </item>
+    <item index="3">
+      <id>4</id>
+      <severity>LOW</severity>
+      <title>Co-owner not separately searched</title>
+      <description>SANDRA D. HENCH not searched separately.</description>
+      <action_required>Search HENCH SANDRA D in recorder</action_required>
+    </item>
+    <item index="4">
+      <id>5</id>
+      <severity>LOW</severity>
+      <title>Judgment search not performed</title>
+      <description>No separate judgment search at OC Superior Court or CA SOS (UCC).</description>
+      <action_required>Perform judgment search for both borrowers</action_required>
+    </item>
+  </remaining_issues>
+  <examiner_recommendations>
+    <item index="0">
+      <id>1</id>
+      <priority>HIGHEST</priority>
+      <action>Resolve Rocket Mortgage DOT</action>
+      <detail>Obtain reconveyance or payoff confirmation for DOT #2021000502864 ($770,000). MERS MIN 100039034836304081.</detail>
+    </item>
+    <item index="1">
+      <id>2</id>
+      <priority>MEDIUM</priority>
+      <action>Verify tax payments</action>
+      <detail>Confirm 2025-2026 tax payment status at taxbill.octreasurer.gov using APN 833-551-29.</detail>
+    </item>
+    <item index="2">
+      <id>3</id>
+      <priority>MEDIUM</priority>
+      <action>Search prior owner</action>
+      <detail>Run recorder name search for LOSKOT.</detail>
+    </item>
+    <item index="3">
+      <id>4</id>
+      <priority>MEDIUM</priority>
+      <action>HOA verification</action>
+      <detail>Confirm Rancho Cielo HOA assessment status.</detail>
+    </item>
+    <item index="4">
+      <id>5</id>
+      <priority>LOW</priority>
+      <action>Judgment search</action>
+      <detail>OC Superior Court + CA SOS UCC for both borrowers.</detail>
+    </item>
+    <item index="5">
+      <id>6</id>
+      <priority>STANDARD</priority>
+      <action>Title insurance</action>
+      <detail>Obtain full CLTA/ALTA title insurance commitment.</detail>
+    </item>
+  </examiner_recommendations>
+</AbstractorNotesReport>

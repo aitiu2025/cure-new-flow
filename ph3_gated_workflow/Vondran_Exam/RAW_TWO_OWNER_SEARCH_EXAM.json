@@ -1,0 +1,157 @@
+{
+  "reportType": "RAW TWO OWNER SEARCH EXAM",
+  "orderNumber": "Not Provided",
+  "subjectProperty": "22 CALLE CABRILLO, FOOTHILL RANCH, CA 92610",
+  "effectiveDate": "April 13, 2026",
+  "county": "Orange",
+  "preparedBy": "CURE Title Pro AI System",
+  "propertyAndOwnershipInformation": {
+    "currentOwners": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+    "streetAddress": "22 CALLE CABRILLO",
+    "cityStateZip": "FOOTHILL RANCH, CA 92610",
+    "apn": "601-162-01",
+    "county": "Orange County",
+    "state": "California",
+    "propertyType": "Single Family Residence",
+    "bedsBaths": "4 Beds / 3 Baths",
+    "yearBuilt": 1994,
+    "squareFootage": "2,637 sq ft",
+    "lotSize": "5,400 sq ft"
+  },
+  "fullLegalDescription": {
+    "parcel1": "PARCEL 2, IN THE CITY OF LAKE FOREST, COUNTY OF ORANGE, STATE OF CALIFORNIA, AS SHOWN ON A EXHIBIT 'B' ATTACHED TO THAT CERTAIN LOT LINE ADJUSTMENT LL 92-029 RECORDED SEPTEMBER 10, 1992 AS INSTRUMENT NO. 92-605883 OF OFFICIAL RECORDS OF ORANGE COUNTY, CALIFORNIA.",
+    "parcel2": "NON-EXCLUSIVE EASEMENTS FOR ACCESS, INGRESS, EGRESS, MAINTENANCE, REPAIR, DRAINAGE, ENCROACHMENT, AND FOR OTHER PURPOSES, ALL AS DESCRIBED IN THE MASTER DECLARATION OF COVENANTS, CONDITIONS AND RESTRICTIONS AND RESERVATION OF EASEMENTS FOR FOOTHILL RANCH (\"MASTER DECLARATION\") RECORDED MARCH 26, 1990 AS INSTRUMENT NO. 90-156802 OF OFFICIAL RECORDS OF ORANGE COUNTY, CALIFORNIA, IN THE AMENDED AND RESTATED NOTICE OF ANNEXATION AND ADDITIONAL DECLARATION OF COVENANTS, CONDITIONS AND RESTRICTIONS AND RESERVATION OF EASEMENTS FOR PHASE OF DEVELOPMENT OF FOOTHILL RANCH (\"ADDITIONAL DECLARATION\") RECORDED JULY 16, 1990 AS INSTRUMENT NO. 90-373146 OF SAID OFFICIAL RECORDS, AND IN THE NOTICE OF ANNEXATION AND SUPPLEMENTAL DECLARATION OF COVENANTS, CONDITIONS AND RESERVATION OF EASEMENTS FOR A PHASE OF DEVELOPMENT OF FOOTHILL RANCH (CANYON OAKS DELEGATE DISTRICT-PHASE 7) RECORDED APRIL 1, 1994 AS INSTRUMENT NO. 94-230211 OF SAID OFFICIAL RECORDS.",
+    "sourceDocument": "GRANT DEED, Instrument No. 2016000243774, Recorded 5/31/2016",
+    "legalType": "Lot/Tract",
+    "subdivisionTract": "Foothill Ranch (Canyon Oaks Delegate District-Phase 7)",
+    "parcelLot": "Parcel 2"
+  },
+  "deedChain": {
+    "currentVestingDeed": {
+      "grantor": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE, HUSBAND AND WIFE AS JOINT TENANTS",
+      "grantee": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, HUSBAND AND WIFE AS JOINT TENANTS",
+      "documentType": "GRANT DEED",
+      "instrumentNumber": "2016000243774",
+      "recordingDate": "5/31/2016",
+      "bookPage": "[NOT FOUND IN RECORDS]",
+      "consideration": "$986.70 Documentary Transfer Tax (implies sale price of approximately $493,350)",
+      "vesting": "as joint tenants"
+    },
+    "priorVestingDeed": {
+      "grantor": "[NOT FOUND IN RECORDS]",
+      "grantee": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE",
+      "documentType": "[NOT FOUND IN RECORDS]",
+      "instrumentNumber": "[NOT FOUND IN RECORDS]",
+      "recordingDate": "[Prior to 5/31/2016]",
+      "bookPage": "[NOT FOUND IN RECORDS]",
+      "consideration": "[NOT FOUND IN RECORDS]",
+      "vesting": "as joint tenants"
+    }
+  },
+  "taxInformation": {
+    "apn": "601-162-01",
+    "taxYear": 2025,
+    "annualTaxAmount": "$11,109",
+    "firstInstallmentDue": "[NOT FOUND IN RECORDS]",
+    "secondInstallmentDue": "[NOT FOUND IN RECORDS]",
+    "lastSalePrice": "$896,888 (per Redfin records)",
+    "lastSaleDate": "5/31/2016",
+    "assessedValueLand": "$678,230",
+    "assessedValueImprovements": "$383,499",
+    "totalAssessedValue": "$1,061,729",
+    "taxLiensIrsLiens": "NONE FOUND",
+    "hoaSpecialAssessments": "Property subject to Foothill Ranch CC&Rs and assessments"
+  },
+  "deedsOfTrust": {
+    "openEncumbrances": [
+      {
+        "label": "DOT #1",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, HUSBAND AND WIFE AS JOINT TENANTS",
+        "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "trustee": "T.D. SERVICE COMPANY, A CALIFORNIA CORPORATION",
+        "originalAmount": "$230,000.00 (Credit Limit)",
+        "instrumentNumber": "2026000053140",
+        "recordingDate": "2/23/2026",
+        "bookPage": "[NOT FOUND IN RECORDS]",
+        "loanType": "REVOLVING CREDIT DEED OF TRUST",
+        "status": "OPEN"
+      }
+    ],
+    "reconveyedReleasedEncumbrances": [
+      {
+        "label": "DOT #2",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "trustee": "T.D. SERVICE COMPANY, A CALIFORNIA CORPORATION",
+        "originalAmount": "$200,000.00 (Credit Limit)",
+        "instrumentNumber": "2022000209674",
+        "recordingDate": "6/9/2022",
+        "loanType": "HOME EQUITY LINE OF CREDIT DEED OF TRUST",
+        "reconveyance": {
+          "instrumentNumber": "2026000059280",
+          "recordingDate": "2/27/2026"
+        }
+      },
+      {
+        "label": "DOT #3",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "trustee": "T.D. SERVICE COMPANY, A CALIFORNIA CORPORATION",
+        "originalAmount": "$778,800.00",
+        "instrumentNumber": "2020000187684",
+        "recordingDate": "4/27/2020",
+        "loanType": "FIXED/ADJUSTABLE RATE MORTGAGE",
+        "reconveyance": {
+          "instrumentNumber": "2020000219723",
+          "recordingDate": "5/14/2020"
+        }
+      },
+      {
+        "label": "DOT #4",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "beneficiary": "WELLS FARGO BANK N.A.",
+        "trustee": "AMERICAN SECURITIES COMPANY",
+        "originalAmount": "$95,700.00",
+        "instrumentNumber": "2018000325101",
+        "recordingDate": "9/5/2018",
+        "loanType": "SHORT FORM OPEN-END DEED OF TRUST",
+        "reconveyance": {
+          "instrumentNumber": "2020000219723",
+          "recordingDate": "5/14/2020"
+        }
+      },
+      {
+        "label": "DOT #5",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "beneficiary": "MORTGAGE ELECTRONIC REGISTRATION SYSTEMS, INC. (MERS) AS NOMINEE FOR BROADVIEW MORTGAGE CORPORATION",
+        "trustee": "BROADVIEW MORTGAGE CORP",
+        "originalAmount": "$717,510.00",
+        "instrumentNumber": "2016000243775",
+        "recordingDate": "5/31/2016",
+        "loanType": "CONVENTIONAL WITH PLANNED UNIT DEVELOPMENT RIDER",
+        "reconveyance": {
+          "instrumentNumber": "2020000219276",
+          "recordingDate": "5/14/2020"
+        }
+      }
+    ]
+  },
+  "judgmentsLiensAndEncumbrances": "NO JUDGMENTS, LIENS, OR UCC FILINGS FOUND IN THE SEARCH PERIOD.",
+  "criticalAnalysisAndObservations": {
+    "chainOfTitleAssessment": {
+      "level": "INFO",
+      "detail": "The two-owner chain appears clean with a clear transfer from Julian Samuel Love and Kimberlee Brandy Burton-Love to David John Vondran and Theresa Ann Vondran via Grant Deed recorded 5/31/2016. Both owners hold title as joint tenants, which provides proper vesting continuity. Property is subject to extensive CC&Rs and easements for the Foothill Ranch planned unit development. The current owner has engaged in significant refinancing activity with multiple deeds of trust over the years. All prior deeds of trust have been properly reconveyed except for the most recent HELOC from Partners Federal Credit Union. Documentary transfer tax calculation suggests purchase price of approximately $493,350."
+    },
+    "nameVariation": {
+      "level": "WARNING",
+      "detail": "Document Inst# 2020000187684 lists \"THERESA ANN ARM\" while other documents list \"THERESA ANN VONDRAN.\" Clarification needed to confirm this is the same person."
+    },
+    "openItemsTitleDefects": {
+      "level": "INFO",
+      "detail": "NO TITLE DEFECTS OR OPEN ITEMS IDENTIFIED. The only open encumbrance is the current HELOC (Instrument No. 2026000053140)."
+    }
+  },
+  "disclaimer": "This report is for informational purposes only and does not guarantee title. This is not a commitment to insure title. The information contained herein has been obtained from public records and is believed to be accurate but is not warranted.",
+  "reportGenerated": "April 13, 2026",
+  "countySearched": "Orange County, California"
+}

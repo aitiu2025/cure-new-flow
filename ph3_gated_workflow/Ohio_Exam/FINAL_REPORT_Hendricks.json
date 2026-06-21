@@ -1,0 +1,170 @@
+{
+  "exam_metadata": {
+    "exam_date": "04/10/2026",
+    "subject_id": null,
+    "property_address": "50 Locust Ln, Chagrin Falls, OH 44022",
+    "county": "Cuyahoga",
+    "state": "OH",
+    "borrower_1": "Barry Hendricks",
+    "borrower_2": "Kelly A Hendricks",
+    "marital_status": "Married",
+    "search_period_start": "01/01/2000",
+    "search_period_end": "04/10/2026",
+    "certified_through": "03/30/2026"
+  },
+  "parcels": [
+    {
+      "parcel_id": "931-05-032",
+      "subdivision": "Davis & Hughes Hilltop Estates Subd",
+      "lot": "10",
+      "address": "50 Locust Ln, Chagrin Falls Village, OH 44022",
+      "primary": true
+    },
+    {
+      "parcel_id": "931-05-072",
+      "subdivision": "Locust Lane Estates Subd",
+      "block": "A",
+      "address": "50 Locust Ln, Chagrin Falls Village, OH 44022",
+      "primary": false,
+      "note": "Second parcel encumbered by current KeyBank mortgage 202602100279"
+    }
+  ],
+  "vesting": {
+    "current_owners": ["Barry J. Hendricks", "Kelly A. Hendricks"],
+    "vesting_instrument": "PRE-2000 (NOT FOUND IN SEARCH PERIOD)",
+    "vesting_type": "UNKNOWN - predates search window",
+    "flag": "VESTING_DEED_OUTSIDE_SEARCH_PERIOD",
+    "tod_affidavit": {
+      "instrument": "202505060166",
+      "recorded_date": "05/06/2025",
+      "grantors": ["Barry J. Hendricks", "Kelly A. Hendricks"],
+      "beneficiary": "DESIGNATED IN DOCUMENT (not indexed)",
+      "status": "ACTIVE"
+    }
+  },
+  "open_liens": [
+    {
+      "severity": "CRITICAL",
+      "instrument": "201302140048",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "02/14/2013",
+      "grantor": "Hendricks Barry J Etal",
+      "grantee_mers": "Mortgage Electronic Registration Systems Inc",
+      "grantee_lender": "CitiBank",
+      "amount": null,
+      "parcel": "931-05-032",
+      "marginal_references": "NONE",
+      "status": "OPEN - NO RELEASE FOUND",
+      "flag": "UNRELEASED_PRIOR_MORTGAGE",
+      "action_required": "Obtain payoff letter or recorded release from CitiBank / CitiMortgage"
+    },
+    {
+      "severity": "WARNING",
+      "instrument": "202602100279",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "02/10/2026",
+      "instrument_date": "02/10/2026",
+      "grantor": "Hendricks Barry J and Kelly A",
+      "grantee": "KeyBank National Association",
+      "amount": 119646.04,
+      "maturity_date": "02/10/2036",
+      "parcels": ["931-05-032", "931-05-072"],
+      "master_form_reference": "201310280632",
+      "status": "OPEN - CURRENT ACTIVE LOAN",
+      "flag": "CURRENT_OPEN_MORTGAGE"
+    }
+  ],
+  "released_liens": [
+    {
+      "instrument": "200302040229",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "02/04/2003",
+      "grantor": "Hendricks Barry J",
+      "grantee": "ABN AMRO Mortgage Group Inc",
+      "amount": 130000.00,
+      "parcel": "931-05-032",
+      "release_instrument": "201012060144",
+      "release_date": "12/06/2010",
+      "released_by": "CitiMortgage Inc",
+      "status": "RELEASED"
+    },
+    {
+      "instrument": "201010290156",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "10/29/2010",
+      "grantor": "Hendricks Barry J Etal",
+      "grantee": "Mortgage Electronic Registration Systems Inc Etal",
+      "parcel": "931-05-032",
+      "release_instrument": "201303180497",
+      "release_date": "03/18/2013",
+      "released_by": "Mortgage Electronic Registration Systems Inc",
+      "status": "RELEASED"
+    }
+  ],
+  "administrative_instruments": [
+    {
+      "instrument": "201310280632",
+      "doc_type": "MASTER MORTGAGE FORM",
+      "recorded_date": "10/28/2013",
+      "grantor": "Master Mortgage Form",
+      "grantee": "KeyBank National Association",
+      "note": "Boilerplate master form referenced by current mortgage 202602100279. Not a lien."
+    },
+    {
+      "instrument": "202504240249",
+      "doc_type": "PLAT",
+      "recorded_date": "04/24/2025",
+      "grantor": "Nay Janice Ann",
+      "note": "Neighboring property plat (40 Locust Ln, parcel 931-05-003). Not related to subject property."
+    }
+  ],
+  "tax_status": {
+    "status": "PENDING",
+    "note": "MyPlace portal inaccessible during automated exam. Manual lookup required at myplace.cuyahogacounty.gov for parcel 931-05-032 and 931-05-072.",
+    "assessed_value": null,
+    "annual_tax": null,
+    "delinquency": null
+  },
+  "flags": [
+    {
+      "code": "UNRELEASED_PRIOR_MORTGAGE",
+      "severity": "CRITICAL",
+      "instrument": "201302140048",
+      "description": "2013 MERS/CitiBank mortgage has no recorded release. Must be satisfied or released before closing."
+    },
+    {
+      "code": "TOD_AFFIDAVIT_ACTIVE",
+      "severity": "WARNING",
+      "instrument": "202505060166",
+      "description": "Active Transfer on Death Affidavit filed 05/06/2025 by both owners. Property will pass to designated beneficiary upon death of owners. Beneficiary should be disclosed."
+    },
+    {
+      "code": "MULTI_PARCEL_MORTGAGE",
+      "severity": "WARNING",
+      "instrument": "202602100279",
+      "description": "Current KeyBank mortgage encumbers two parcels: 931-05-032 and 931-05-072. Verify that both parcels are part of the subject property."
+    },
+    {
+      "code": "VESTING_DEED_OUTSIDE_SEARCH_PERIOD",
+      "severity": "INFO",
+      "description": "Vesting deed predates 01/01/2000 search window. Ownership confirmed via subsequent instruments."
+    },
+    {
+      "code": "TAX_STATUS_PENDING",
+      "severity": "WARNING",
+      "description": "Tax status could not be verified. Manual lookup required at myplace.cuyahogacounty.gov."
+    }
+  ],
+  "exam_summary": {
+    "overall_status": "REQUIRES_ACTION",
+    "critical_issues": 1,
+    "warnings": 3,
+    "info": 1,
+    "action_items": [
+      "Obtain payoff letter or recorded release for 2013 CitiBank/MERS mortgage (Instrument 201302140048)",
+      "Verify tax status and delinquency for parcels 931-05-032 and 931-05-072 via MyPlace",
+      "Confirm parcel 931-05-072 is part of the subject property",
+      "Review TOD Affidavit (202505060166) and disclose beneficiary to all parties"
+    ]
+  }
+}

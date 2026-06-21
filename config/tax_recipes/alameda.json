@@ -1,0 +1,130 @@
+{
+  "county": "alameda",
+  "platform": "playwright_form",
+  "base_url": "https://propertytax.alamedacountyca.gov/search",
+  "authoritative_source_hosts": ["propertytax.alamedacountyca.gov"],
+  "host_whitelist_mode": "strict",
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 30000,
+  "_portal_topology": "Astro-rendered SPA with two tabs: Address (#toggleAddress) and Parcel Number (#toggleParcel). Suggestion list populates via POST to /search (same URL) with {type:'apn'|'address', query}. Selecting a suggestion populates hidden #apn input, then #searchButton submits form (POST /api/account-summary) which redirects to /account-summary showing Secured Property Summary card.",
+  "_known_artifact": "The summary page does NOT include assessed value — that is in the PDF accessed via 'View Bill - Tracer #...'. The View Bill Details accordion only contains 1st/2nd installment + total. Recipe extracts what is visible on /account-summary.",
+  "no_results_patterns": [
+    "no\\s+matching\\s+parcel",
+    "parcel\\s+not\\s+found",
+    "no\\s+results\\s+found",
+    "could not find any results",
+    "Sorry, we couldn't find"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://propertytax.alamedacountyca.gov/search",
+      "settle_ms": 3000
+    },
+    {
+      "action": "click",
+      "selector": "#toggleParcel",
+      "settle_ms": 600
+    },
+    {
+      "action": "fill",
+      "selector": "#displayApn",
+      "value": "{apn}",
+      "timeout_ms": 15000
+    },
+    {
+      "action": "sleep",
+      "ms": 3000
+    },
+    {
+      "action": "click",
+      "selector": ".suggestion",
+      "timeout_ms": 15000,
+      "settle_ms": 800
+    },
+    {
+      "action": "click",
+      "selector": "#searchButton",
+      "settle_ms": 6000
+    },
+    {
+      "action": "wait_for_url",
+      "pattern": "account-summary",
+      "timeout_ms": 20000
+    },
+    {
+      "action": "wait_for",
+      "selector": "text=Secured Property Summary",
+      "state": "visible",
+      "timeout_ms": 15000,
+      "optional": true
+    },
+    {
+      "action": "click",
+      "selector": "button.accordion__button:has-text('View Bill Details')",
+      "optional": true,
+      "settle_ms": 1500
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "Parcel\\s+Number\\s*\\(APN\\)\\s*:?\\s*([0-9]{1,3}-[0-9]{3,4}-[0-9]{1,3})",
+      "scope": "body"
+    },
+    "property_address": {
+      "regex": "Address\\s*:?\\s*\\n?\\s*([0-9][^\\n]+?(?:\\d{5}(?:-\\d{4})?))",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "(\\d{4}-\\d{4})\\s+Secured\\s+Tracer",
+      "scope": "body"
+    },
+    "annual_total": {
+      "regex": "\\d{4}-\\d{4}\\s+Secured\\s+Tracer[\\s\\S]{0,200}?Total:\\s*\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(1st installment)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "regex": "1st installment\\s+of\\s+\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].status": {
+      "regex": "1st installment[\\s\\S]{0,100}?(Paid|UNPAID|DELINQUENT)",
+      "scope": "body"
+    },
+    "installments[0].paid_date": {
+      "regex": "1st installment[\\s\\S]{0,150}?Paid\\s+([A-Z][a-z]{2}\\s+\\d{1,2},?\\s+\\d{4})",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(2nd installment)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "regex": "2nd installment\\s+of\\s+\\$([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[1].status": {
+      "regex": "2nd installment[\\s\\S]{0,100}?(Paid|UNPAID|DELINQUENT)",
+      "scope": "body"
+    },
+    "installments[1].paid_date": {
+      "regex": "2nd installment[\\s\\S]{0,150}?Paid\\s+([A-Z][a-z]{2}\\s+\\d{1,2},?\\s+\\d{4})",
+      "scope": "body"
+    }
+  },
+  "verification_required": [
+    "apn",
+    "annual_total",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

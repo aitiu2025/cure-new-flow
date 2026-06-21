@@ -1,0 +1,371 @@
+{
+  "search_params": {
+    "name1": "Vondran",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": null,
+    "search_timestamp": "2026-04-03T18:45:14.217630"
+  },
+  "search_breakdown": {
+    "grantor_count": 20,
+    "grantee_count": 20,
+    "total_unique": 39
+  },
+  "all_documents": [
+    {
+      "document_number": "2004001101041",
+      "grantors": "VONDRAN THOMAS R",
+      "grantees": "AMERICAN HOME EQUITY CORP BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "12/10/2004",
+      "pages": "20"
+    },
+    {
+      "document_number": "2009000364439",
+      "grantors": "MAGILL JENNIFER L VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "7/9/2009",
+      "pages": "3"
+    },
+    {
+      "document_number": "2009000364440",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "BANK OF AMER N A MORTGAGE ELEC REGISTR SYSTEMS INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "7/9/2009",
+      "pages": "17"
+    },
+    {
+      "document_number": "2010000139427",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "AMERICAN HOME EQUITY CORP MORTGAGE ELEC REGISTR SYSTEMS INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "3/25/2010",
+      "pages": "20"
+    },
+    {
+      "document_number": "2010000147977",
+      "grantors": "VONDRAN STEVEN C",
+      "grantees": "CA ST FRANCHISE TAX",
+      "grantor_grantees": "",
+      "document_type": "LIEN STATE",
+      "recording_date": "3/30/2010",
+      "pages": "1"
+    },
+    {
+      "document_number": "2010000392959",
+      "grantors": "VONDRAN STEVEN C",
+      "grantees": "CA ST FRANCHISE TAX",
+      "grantor_grantees": "",
+      "document_type": "LIEN STATE",
+      "recording_date": "8/13/2010",
+      "pages": "1"
+    },
+    {
+      "document_number": "2011000681058",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "BANK OF AMER N A MORTGAGE ELEC REGISTR SYSTEMS INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "12/28/2011",
+      "pages": "22"
+    },
+    {
+      "document_number": "2012000656925",
+      "grantors": "VONDRAN STEVEN C",
+      "grantees": "CA ST FRANCHISE TAX",
+      "grantor_grantees": "",
+      "document_type": "NOTICE ST LIEN",
+      "recording_date": "10/26/2012",
+      "pages": "1"
+    },
+    {
+      "document_number": "2016000243775",
+      "grantors": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantees": "BROADVIEW MTG CORP MORTGAGE ELEC REGISTR SYST INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "5/31/2016",
+      "pages": "22"
+    },
+    {
+      "document_number": "2016000366054",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "MORTGAGE ELEC REGISTR SYST INC SUN WEST MTG CO INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "8/8/2016",
+      "pages": "22"
+    },
+    {
+      "document_number": "2016000423182",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "NATIONSTAR MTG LLC TR",
+      "grantor_grantees": "",
+      "document_type": "SUBSTITUTION TR",
+      "recording_date": "9/2/2016",
+      "pages": "1"
+    },
+    {
+      "document_number": "2016000509655",
+      "grantors": "VONDRAN STEVEN",
+      "grantees": "CA ST FRANCHISE TAX",
+      "grantor_grantees": "",
+      "document_type": "NOTICE ST LIEN",
+      "recording_date": "10/18/2016",
+      "pages": "1"
+    },
+    {
+      "document_number": "2017000383040",
+      "grantors": "VONDRAN STEVEN",
+      "grantees": "FRANCHISE TAX BOARD OF THE STATE OF CALIFORNIA",
+      "grantor_grantees": "",
+      "document_type": "NOTICE ST LIEN",
+      "recording_date": "9/8/2017",
+      "pages": "1"
+    },
+    {
+      "document_number": "2017000533720",
+      "grantors": "VONDRAN JANA",
+      "grantees": "JPMORGAN CHASE BANK N A",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "12/12/2017",
+      "pages": "26"
+    },
+    {
+      "document_number": "2018000325101",
+      "grantors": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantees": "WELLS FARGO BANK N A",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "9/5/2018",
+      "pages": "7"
+    },
+    {
+      "document_number": "2020000133037",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "ORANGE COUNTYS CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "3/24/2020",
+      "pages": "21"
+    },
+    {
+      "document_number": "2020000187684",
+      "grantors": "VONDRAN DAVID JOHN VONDRAN THERESA ARM",
+      "grantees": "PARTNERS FEDERAL CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "4/27/2020",
+      "pages": "23"
+    },
+    {
+      "document_number": "2021000541268",
+      "grantors": "VONDRAN JANA",
+      "grantees": "JPMORGAN CHASE BANK N A",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "8/30/2021",
+      "pages": "19"
+    },
+    {
+      "document_number": "2022000209674",
+      "grantors": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantees": "PARTNERS FEDERAL CREDIT UNION",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "6/9/2022",
+      "pages": "14"
+    },
+    {
+      "document_number": "2024000339596",
+      "grantors": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantees": "NAKAMA RYNE WEBBER RILEY",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/31/2024",
+      "pages": "3"
+    },
+    {
+      "document_number": "2004001101040",
+      "grantors": "REED CHARLES REED KIM N",
+      "grantees": "VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/10/2004",
+      "pages": "2"
+    },
+    {
+      "document_number": "2009000370554",
+      "grantors": "",
+      "grantees": "VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "7/13/2009",
+      "pages": "1"
+    },
+    {
+      "document_number": "2010000144098",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "3/26/2010",
+      "pages": "1"
+    },
+    {
+      "document_number": "2012000070553",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "2/7/2012",
+      "pages": "1"
+    },
+    {
+      "document_number": "2013000023845",
+      "grantors": "CA ST FRANCHISE TAX",
+      "grantees": "VONDRAN STEVEN C",
+      "grantor_grantees": "",
+      "document_type": "RELEASE",
+      "recording_date": "1/11/2013",
+      "pages": "1"
+    },
+    {
+      "document_number": "2016000243774",
+      "grantors": "BURTON-LOVE KIMBERLEE BRANDY LOVE JULIAN SAMUEL",
+      "grantees": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "5/31/2016",
+      "pages": "3"
+    },
+    {
+      "document_number": "2016000423183",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "9/2/2016",
+      "pages": "1"
+    },
+    {
+      "document_number": "2017000123324",
+      "grantors": "FRANCHISE TAX BOARD OF THE STATE OF CALIFORNIA",
+      "grantees": "VONDRAN STEVEN",
+      "grantor_grantees": "",
+      "document_type": "RELEASE",
+      "recording_date": "3/28/2017",
+      "pages": "1"
+    },
+    {
+      "document_number": "2017000533719",
+      "grantors": "ALLEN FORREST ALLEN KAYLA",
+      "grantees": "VONDRAN JANA",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/12/2017",
+      "pages": "4"
+    },
+    {
+      "document_number": "2018000188224",
+      "grantors": "FRANCHISE TAX BOARD OF THE STATE OF CALIFORNIA",
+      "grantees": "VONDRAN STEVEN",
+      "grantor_grantees": "",
+      "document_type": "RELEASE",
+      "recording_date": "5/23/2018",
+      "pages": "1"
+    },
+    {
+      "document_number": "2018000332749",
+      "grantors": "FRANCHISE TAX BOARD OF THE STATE OF CALIFORNIA",
+      "grantees": "VONDRAN STEVEN C",
+      "grantor_grantees": "",
+      "document_type": "RELEASE",
+      "recording_date": "9/11/2018",
+      "pages": "1"
+    },
+    {
+      "document_number": "2019000502950",
+      "grantors": "FRANCHISE TAX BOARD OF THE STATE OF CALIFORNIA",
+      "grantees": "VONDRAN STEVEN C",
+      "grantor_grantees": "",
+      "document_type": "RELEASE",
+      "recording_date": "12/3/2019",
+      "pages": "1"
+    },
+    {
+      "document_number": "2020000180947",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "4/22/2020",
+      "pages": "2"
+    },
+    {
+      "document_number": "2020000219276",
+      "grantors": "",
+      "grantees": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "5/14/2020",
+      "pages": "1"
+    },
+    {
+      "document_number": "2020000219723",
+      "grantors": "",
+      "grantees": "VONDRAN DAVID JOHN VONDRAN THERESA ANN",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "5/14/2020",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000569431",
+      "grantors": "",
+      "grantees": "VONDRAN JANA",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "9/13/2021",
+      "pages": "1"
+    },
+    {
+      "document_number": "2025000036072",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "1/24/2025",
+      "pages": "2"
+    },
+    {
+      "document_number": "2025000043967",
+      "grantors": "CHRISTIE L TROMBINO ESTATE CHRISTIE LYNN TROMBINO ESTATE TROMBINO MARK ADMR",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "2/3/2025",
+      "pages": "3"
+    },
+    {
+      "document_number": "2025000139547",
+      "grantors": "",
+      "grantees": "VONDRAN JENNIFER MAGILL VONDRAN THOMAS R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "5/15/2025",
+      "pages": "2"
+    }
+  ]
+}

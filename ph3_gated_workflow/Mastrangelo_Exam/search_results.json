@@ -1,0 +1,55 @@
+{
+  "search_info": {
+    "property_address": "5915 E CALLE PRINCIPIA, ANAHEIM, CA 92869",
+    "county": "Orange",
+    "state": "CA",
+    "owners": [
+      "ANTHONY MICHAEL MASTRANGELO",
+      "GEORGIANN IRENE MASTRANGELO",
+      "MASTRANGELO FAMILY TRUST"
+    ],
+    "search_date_range": ["01/01/2000", "04/03/2026"],
+    "search_timestamp": "2026-04-13T08:30:00",
+    "source": "Orange County Clerk-Recorder (cr.occlerkrecorder.gov)"
+  },
+  "names_searched": {
+    "MASTRANGELO ANTHONY": {
+      "search_type": "Grantor/Grantee",
+      "documents_found": 3,
+      "search_date": "2026-04-03"
+    },
+    "MASTRANGELO GEORGIANN": {
+      "search_type": "Grantor/Grantee",
+      "documents_found": 1,
+      "search_date": "2026-04-03"
+    },
+    "MASTRANGELO ANTHONY MICHAEL": {
+      "search_type": "Combined (Grantor + Grantee)",
+      "documents_found": 9,
+      "search_date": "2026-04-03"
+    },
+    "MASTRANGELO FAMILY TRUST": {
+      "search_type": "Combined (Grantor + Grantee)",
+      "documents_found": 1,
+      "search_date": "2026-04-03"
+    }
+  },
+  "summary": {
+    "total_documents_found": 14,
+    "unique_documents": 13,
+    "duplicates_removed": 1,
+    "document_types": {
+      "GRANT DEED": 1,
+      "DEED": 2,
+      "TRUST DEED": 5,
+      "ASGT TRUST DEED": 3,
+      "RECONVEYANCE": 1,
+      "AFFIDAVIT": 1
+    },
+    "date_range_of_documents": {
+      "earliest": "12/12/2007",
+      "latest": "02/23/2026"
+    },
+    "total_pages": 120
+  }
+}

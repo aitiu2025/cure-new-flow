@@ -1,0 +1,63 @@
+{
+  "county_id": "fl_lee",
+  "county_name": "Lee",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://or.leeclerk.org/LandMarkWeb/",
+  "recorder_root": "https://or.leeclerk.org/LandMarkWeb/",
+  "search_url": "https://or.leeclerk.org/LandMarkWeb/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "recaptcha_site_key": "_TODO_live_probe_with_safari17",
+  "allow_automated_captcha_solver": true,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "safari17_2_ios",
+  "sitekey_strategy": "async_scrape",
+  "requires_warmed_cookies": true,
+  "cookie_jar_path": "~/.titlepro/chrome_profile_lee/cookies.json",
+  "cookie_jar_ttl_days": 30,
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found",
+    "recaptcha_section": ".recaptchasection-Name",
+    "recaptcha_sitekey_attr": "data-sitekey"
+  },
+  "warmed_session_recipe": {
+    "mint": "src/titlepro/api/downloaded_doc/0610/Lee_OSTIGUY_v1/mint_lee_cookies.py --headed",
+    "reuse": "src/titlepro/api/downloaded_doc/0610/Lee_OSTIGUY_v1/reuse_lee_cookies.py",
+    "jar_path": "~/.titlepro/lee_cookies.json",
+    "validation_marker": "_abck cookie segment must be '0' or 'N' (NOT '-1'); -1 means the Akamai sensor never validated",
+    "akamai_sensor_url": "https://or.leeclerk.org/akam/13/78216837",
+    "disclaimer_flow": "in-app: evaluate LaunchDisclaimer('searchCriteriaName') -> click #idAcceptYes (-> SetDisclaimer AJAX). A hard GET to search/index bypasses this and 403s.",
+    "status": "BLOCKED_2026-06-10: 4 vectors tried (curl_cffi safari17, headless bundled chromium, headless real-Chrome, HEADED real-Chrome) — _abck stayed -1 on all; search/index 403 on all. Akamai Bot Manager is detecting the automation/datacenter context. Needs a headed mint from a RESIDENTIAL IP / operator workstation, or a commercial unblocker."
+  },
+  "status": "stub_pending_akamai_unblock",
+  "notes": "Lee County FL — Landmark Web Official Records, Akamai-fronted. Wave-1 probe 2026-06-10 (OSTIGUY): leeclerk.org main site GETs clean (safari17_2_ios; sets ak_bmsc). LandMarkWeb/ landing GET also 200 (sets ASP.NET_SessionId + _abck + bm_* ). SetDisclaimer POST 200. BUT the deep search/index GET 403s because Akamai's _abck bot-manager cookie stays UNVALIDATED (~-1~) — pure HTTP can't run the sensor JS, and even headed real-Chrome from this environment did not flip _abck (Akamai detecting automation/datacenter IP). chrome120 returns empty body on the landing (Akamai fingerprint check) — safari17_2_ios required. Sitekey NOT in landing HTML (async-rendered on the 403'd search form), so the recaptcha_site_key remains TODO until the Akamai unblock lands. Warmed-session recipe scripts + status under warmed_session_recipe above. Tax: Grant Street — LIVE-VALIDATED 2026-06-10 (OSTIGUY 2025 annual $4,026.40, not delinquent) BUT grant_street_http.COUNTY_DEFAULTS needs a 'lee' entry added (see case-folder shared_config_snippets.json). PA: leepa.org adapter (leepa_http) built + live-validated this session."
+}

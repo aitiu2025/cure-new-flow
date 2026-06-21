@@ -1,0 +1,317 @@
+{
+  "search_params": {
+    "name1": "Herron David",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": null,
+    "search_timestamp": "2026-04-03T18:53:54.227465"
+  },
+  "search_breakdown": {
+    "grantor_count": 20,
+    "grantee_count": 20,
+    "total_unique": 33
+  },
+  "all_documents": [
+    {
+      "document_number": "2002000258363",
+      "grantors": "HERRON DAVID HUBERT",
+      "grantees": "ABN AMRO MTG GROUP INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "3/28/2002",
+      "pages": "17"
+    },
+    {
+      "document_number": "2003000260673",
+      "grantors": "HERRON DAVID HUBERT",
+      "grantees": "ABN AMRO MTG GROUP INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "3/10/2003",
+      "pages": "20"
+    },
+    {
+      "document_number": "2004001039803",
+      "grantors": "HERRON DAVID RUSSELL",
+      "grantees": "FRITZ YVONNE B",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "11/19/2004",
+      "pages": "4"
+    },
+    {
+      "document_number": "2006000781299",
+      "grantors": "HERRON DAVID EST HERRON DAVID H EST HERRON DAVID HUBERT EST",
+      "grantees": "BERRY ELIZABETH ANN ADMR HERRON DANIEL HUBERT ADMR",
+      "grantor_grantees": "",
+      "document_type": "LETTER ADMN",
+      "recording_date": "11/17/2006",
+      "pages": "2"
+    },
+    {
+      "document_number": "2006000781300",
+      "grantors": "HERRON DAVID HUBERT EST",
+      "grantees": "TWEEDT BRIAN J TWEEDT KIMBERLY M",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "11/17/2006",
+      "pages": "2"
+    },
+    {
+      "document_number": "2006000842773",
+      "grantors": "HERRON DAVID RUSSELL HERRON YVONNE BETTINA FRITZ",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/15/2006",
+      "pages": "2"
+    },
+    {
+      "document_number": "2008000473486",
+      "grantors": "HERRON DAVID R",
+      "grantees": "AMTRUST BK BFC MORTGAGE ELEC REGISTR SYSTEMS INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "10/14/2008",
+      "pages": "18"
+    },
+    {
+      "document_number": "2008000545346",
+      "grantors": "HERRON DAVID RUSSELL TR",
+      "grantees": "ABDELMALIK FIBY S SIDHUM MARCOS",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "11/21/2008",
+      "pages": "2"
+    },
+    {
+      "document_number": "2008000576504",
+      "grantors": "HERRON DAVID R HERRON YVONNE B FRITZ",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/16/2008",
+      "pages": "2"
+    },
+    {
+      "document_number": "2010000592363",
+      "grantors": "HERRON DAVID RUSSELL HERRON DAVID RUSSELL TR",
+      "grantees": "WELLS FARGO BK N A BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "11/8/2010",
+      "pages": "23"
+    },
+    {
+      "document_number": "2012000030655",
+      "grantors": "HERRON DAVID RUSSELL TR HERRON YVONNE BETTINA FRITZ TR",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "1/19/2012",
+      "pages": "2"
+    },
+    {
+      "document_number": "2012000030656",
+      "grantors": "HERRON DAVID RUSSELL",
+      "grantees": "MORTGAGE ELEC REGISTR SYSTEMS INC BFC REUNION MTG INC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "1/19/2012",
+      "pages": "16"
+    },
+    {
+      "document_number": "2012000031377",
+      "grantors": "HERRON DAVID RUSSELL HERRON YVONNE BETTINA FRITZ",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "1/20/2012",
+      "pages": "2"
+    },
+    {
+      "document_number": "2012000725347",
+      "grantors": "HERRON DAVID RUSSELL TR HERRON YVONNE BETTINA FRITZ TR",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "11/27/2012",
+      "pages": "2"
+    },
+    {
+      "document_number": "2012000725348",
+      "grantors": "HERRON DAVID RUSSELL",
+      "grantees": "INTERBANK MTG CO MORTGAGE ELEC REGISTR SYST INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "11/27/2012",
+      "pages": "15"
+    },
+    {
+      "document_number": "2012000734153",
+      "grantors": "HERRON DAVID RUSSELL HERRON YVONNE BETTINA FRITZ",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "11/29/2012",
+      "pages": "2"
+    },
+    {
+      "document_number": "2014000209361",
+      "grantors": "HERRON DAVID RUSSELL TR HERRON FRITZ FAM TRUST HERRON YVONNE BETTINA FRITZ TR",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "5/29/2014",
+      "pages": "2"
+    },
+    {
+      "document_number": "2014000209362",
+      "grantors": "HERRON DAVID RUSSELL",
+      "grantees": "INTERBANK MTG CO MORTGAGE ELEC REGISTR SYST INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "5/29/2014",
+      "pages": "15"
+    },
+    {
+      "document_number": "2014000234690",
+      "grantors": "HERRON DAVID R",
+      "grantees": "NATIONSTAR MTG LLC TR",
+      "grantor_grantees": "",
+      "document_type": "SUBSTITUTION TR",
+      "recording_date": "6/16/2014",
+      "pages": "1"
+    },
+    {
+      "document_number": "2014000540857",
+      "grantors": "HERRON DAVID RUSSELL",
+      "grantees": "LENOX FINL MTG CORP MORTGAGE ELEC REGISTR SYST INC BFC",
+      "grantor_grantees": "",
+      "document_type": "TRUST DEED",
+      "recording_date": "12/15/2014",
+      "pages": "16"
+    },
+    {
+      "document_number": "2002000317368",
+      "grantors": "",
+      "grantees": "HERRON DAVID HUBERT",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "4/16/2002",
+      "pages": "1"
+    },
+    {
+      "document_number": "2003000363058",
+      "grantors": "",
+      "grantees": "HERRON DAVID HUBERT",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "4/2/2003",
+      "pages": "1"
+    },
+    {
+      "document_number": "2006000814692",
+      "grantors": "FRITZ VYONNE B",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/5/2006",
+      "pages": "2"
+    },
+    {
+      "document_number": "2006000816700",
+      "grantors": "",
+      "grantees": "HERRON DAVID H",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "12/6/2006",
+      "pages": "1"
+    },
+    {
+      "document_number": "2008000473485",
+      "grantors": "DEUTSCHE BK NATL TR CO TR",
+      "grantees": "HERRON DAVID R",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "10/14/2008",
+      "pages": "2"
+    },
+    {
+      "document_number": "2010000706590",
+      "grantors": "",
+      "grantees": "HERRON DAVID R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "12/29/2010",
+      "pages": "1"
+    },
+    {
+      "document_number": "2012000094772",
+      "grantors": "",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "2/21/2012",
+      "pages": "1"
+    },
+    {
+      "document_number": "2012000757494",
+      "grantors": "",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "12/7/2012",
+      "pages": "1"
+    },
+    {
+      "document_number": "2014000234691",
+      "grantors": "",
+      "grantees": "HERRON DAVID R",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "6/16/2014",
+      "pages": "1"
+    },
+    {
+      "document_number": "2014000542438",
+      "grantors": "HERRON DAVID RUSSELL HERRON YVONNE BETTINA FRITZ",
+      "grantees": "HERRON DAVID RUSSELL TR",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "12/16/2014",
+      "pages": "2"
+    },
+    {
+      "document_number": "2015000040915",
+      "grantors": "",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "1/27/2015",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000457908",
+      "grantors": "",
+      "grantees": "HERRON DAVID RUSSELL",
+      "grantor_grantees": "",
+      "document_type": "RECONVEYANCE",
+      "recording_date": "7/16/2021",
+      "pages": "1"
+    },
+    {
+      "document_number": "2021000502862",
+      "grantors": "HERRON YVONNE B F",
+      "grantees": "HERRON DAVID",
+      "grantor_grantees": "",
+      "document_type": "GRANT DEED",
+      "recording_date": "8/10/2021",
+      "pages": "2"
+    }
+  ]
+}

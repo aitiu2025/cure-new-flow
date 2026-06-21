@@ -1,0 +1,60 @@
+{
+  "county_id": "fl_indian_river",
+  "county_name": "Indian River",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://ori.indian-river.org/",
+  "recorder_root": "https://ori.indian-river.org/",
+  "search_url": "https://ori.indian-river.org/search/index?theme=.blue&section=searchCriteriaName",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": false,
+  "captcha_type": "none",
+  "recaptcha_site_key": "",
+  "allow_automated_captcha_solver": false,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{10,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "sitekey_strategy": "none",
+  "column_map": {
+    "instrument": "12",
+    "doc_id": "25",
+    "doc_type": "9",
+    "location_header": "8",
+    "direct_name": "4",
+    "reverse_name": "5",
+    "record_date": "7",
+    "page_count": "23"
+  },
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found"
+  },
+  "status": "live_validated",
+  "live_validated_date": "2026-06-19",
+  "notes": "Indian River County FL — LIVE-VALIDATED 2026-06-19. Bare-host Landmark (302 redirect from / to /Home/RedirectToHome). ShowCaptcha=True but NOT enforced — NameSearch accepts empty token (53 rows for POGANY). 27-col row layout: instrument=col12 (13-digit like 3120160069572), doc_id=col25, location_header=col8 (DEED/MORTGAGE), record_date=col7, direct_name=col4. doc_number_pattern set to \\d{10,} (instrument numbers are 13 digits). chrome120 sufficient. Tax: Grant Street (county-taxes.net/indianriver/property-tax — NO fl- prefix)."
+}

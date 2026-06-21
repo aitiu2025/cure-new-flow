@@ -1,0 +1,21 @@
+# Web framework
+Flask>=2.3.0
+flask-cors>=4.0.0
+
+# Browser automation
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# PDF processing
+PyMuPDF>=1.23.0        # imported as 'fitz'
+reportlab>=4.0.0
+
+# Image processing (CAPTCHA solving)
+Pillow>=10.0.0
+pytesseract>=0.3.13
+
+# HTTP client
+requests>=2.31.0
+
+# Testing
+pytest>=7.4.0

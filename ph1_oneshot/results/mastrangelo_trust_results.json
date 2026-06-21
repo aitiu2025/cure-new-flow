@@ -1,0 +1,29 @@
+{
+  "search_params": {
+    "name1": "Mastrangelo Family Trust",
+    "county": "Orange",
+    "party_type": "Combined (Grantor + Grantee)",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "address_filter": null,
+    "search_timestamp": "2026-04-03T18:33:31.009204"
+  },
+  "search_breakdown": {
+    "grantor_count": 1,
+    "grantee_count": 0,
+    "total_unique": 1
+  },
+  "all_documents": [
+    {
+      "document_number": "2025000155224",
+      "grantors": "MASTRANGELO FAMILY TRUST",
+      "grantees": "MASTRANGELO ANTHONY MARIO COTR MASTRANGELO JO ANNE COTR",
+      "grantor_grantees": "",
+      "document_type": "AFFIDAVIT",
+      "recording_date": "6/2/2025",
+      "pages": "6"
+    }
+  ]
+}

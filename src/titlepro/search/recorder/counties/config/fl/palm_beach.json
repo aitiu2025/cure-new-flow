@@ -1,0 +1,52 @@
+{
+  "county_id": "fl_palm_beach",
+  "county_name": "Palm Beach",
+  "state": "FL",
+  "platform": "landmark",
+  "base_url": "https://erec.mypalmbeachclerk.com/",
+  "recorder_root": "https://erec.mypalmbeachclerk.com/",
+  "search_url": "https://erec.mypalmbeachclerk.com/search/index?theme=.blue&section=searchCriteriaName",
+  "disclaimer_url": "https://www.mypalmbeachclerk.com/records/official-records",
+  "landmark_endpoints": {
+    "disclaimer": "Search/SetDisclaimer",
+    "show_captcha": "Search/ShowCaptcha",
+    "name_search": "Search/NameSearch",
+    "parcel_search": "Search/ParcelIdSearch",
+    "detail": "Document/Index",
+    "search_index": "search/index?theme=.blue&section=searchCriteriaName"
+  },
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "recaptcha_site_key": "6LdBHOorAAAAALwRLkAZpnNsfcp7qfFS4YIGIRTU",
+  "allow_automated_captcha_solver": true,
+  "name_format": "combined",
+  "name_input_format": "last_first_no_comma",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{8,}$|^\\d{4}-\\d{4,}$",
+  "default_match_type": "0",
+  "record_cap": "200",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "default_party_type": "Both",
+  "supported_party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Both": "0",
+    "All": "0",
+    "Grantor/Grantee": "0",
+    "Grantor": "1",
+    "Grantee": "2",
+    "Direct Name": "1",
+    "Reverse Name": "2"
+  },
+  "supports_parcel_id_search": true,
+  "impersonate_profile": "chrome120",
+  "sitekey_strategy": "inline",
+  "selectors": {
+    "result_table": "#resultsTable, #resultsGridDiv, table.results",
+    "result_rows": "#resultsTable tr, tr[id^='doc_']",
+    "no_results_banner": "No records found",
+    "recaptcha_section": ".recaptchasection-Name",
+    "recaptcha_sitekey_attr": "data-sitekey"
+  },
+  "status": "in_progress",
+  "notes": "Palm Beach County FL — Landmark Web Official Records (live-validated 2026-05-26). Pure-HTTP adapter at src/titlepro/search/recorder/counties/adapters/landmark_adapter.py. Flow: GET landing -> POST /Search/SetDisclaimer -> GET /search/index?theme=.blue&section=searchCriteriaName -> POST /Search/NameSearch with g-recaptcha-response token. ShowCaptcha returns 'True' for every cold session so reCAPTCHA v2 IS REQUIRED on the first search (sitekey 6LdBHOorAAAAALwRLkAZpnNsfcp7qfFS4YIGIRTU). Without a 2Captcha solution the server returns HTTP 500 from NameSearch. Set CAPTCHA_API_KEY in env and allow_automated_captcha_solver:true (already set here) to auto-solve. Parcel-ID search is the recommended fallback when name search hits the result cap (Tony Roveda 2026-05-21). Test subjects: VOLLMAN+WU (102 SEGOVIA WAY, JUPITER), HABER (DANA + MARK, 21831 PALM GRASS DR, BOCA RATON)."
+}

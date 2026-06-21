@@ -1,0 +1,47 @@
+{
+  "county_id": "fl_osceola",
+  "county_name": "Osceola",
+  "state": "FL",
+  "platform": "kofile_browserview",
+  "status": "paywall_blocked",
+  "live_confirmed": null,
+  "base_url": "https://OfficialRecords.OsceolaClerk.org/browserview/",
+  "api_base": "https://OfficialRecords.OsceolaClerk.org/browserview/api/search",
+  "client_info_url": "https://OfficialRecords.OsceolaClerk.org/browserview/api/search/clientinfo",
+  "search_url": "https://OfficialRecords.OsceolaClerk.org/searchng_ssl/",
+  "cloudflare_required": false,
+  "akamai_required": false,
+  "captcha_required": false,
+  "platform_notes": "Kofile BrowserView Angular SPA. REST API at /browserview/api/search. freeAccessWithoutLogin=0 — PAID SUBSCRIPTION required via New Vision Systems (https://srvtesting.newvisionsystems.com/SubscriptionWeb/). No anonymous search access. encryptData=0 (no RSA encryption). Authentication: JWT token from /api/account/checktoken POST.",
+  "subscription_portal": "https://srvtesting.newvisionsystems.com/SubscriptionWeb/Account/Register",
+  "client_info_response": {
+    "name": "Kelvin Soto, Esq.",
+    "freeAccessWithoutLogin": "0",
+    "externalSubscriptionApplication": "1",
+    "authentication": "0",
+    "encryptData": "0",
+    "defaultBookType": "O",
+    "showParty": "1",
+    "showDocumentType": "1",
+    "showBookPage": "1",
+    "showLegalDesc": "0",
+    "showCrossPartyInHitlist": "1"
+  },
+  "api_search_payload_shape": {
+    "token": "<jwt_from_login>",
+    "SearchOnName": "ARROYO",
+    "DocTypes": "DEED",
+    "FromDate": "20000101",
+    "ToDate": "20261231",
+    "searchBookType": "O",
+    "rowsPerPage": 100,
+    "startRow": 0
+  },
+  "test_subjects": [
+    {"name": "ARROYO ROBLES,CHRISTOPHER", "address": "1066 Berkeley Dr, Kissimmee, FL"},
+    {"name": "CRITES,MALLORY"},
+    {"name": "MUSSO,MICHAEL"}
+  ],
+  "deferred_reason": "Subscription required. User must purchase access at https://srvtesting.newvisionsystems.com/SubscriptionWeb/Account/Register. Once credentials available, build kofile_browserview adapter using /api/search POST with JWT token.",
+  "probe_notes": "Probed 2026-06-18. OfficialRecords.OsceolaClerk.org/browserview/api/search/clientinfo returns 200 confirming Kofile BrowserView platform. freeAccessWithoutLogin=0 blocks all search. Subscription backend at newvisionsystems.com/SubscriptionWeb. Angular AngularJS SPA with agGrid. Reachable from datacenter (no CF/Akamai) but gated by paid subscription."
+}

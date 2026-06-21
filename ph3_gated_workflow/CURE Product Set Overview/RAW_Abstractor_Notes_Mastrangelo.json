@@ -1,0 +1,409 @@
+{
+  "report_metadata": {
+    "report_type": "Title Examination Abstractor Notes/Chain",
+    "report_version": "2.0",
+    "cure_order_number": "CURE-2026-MASTRANGELO-001",
+    "client_name": null,
+    "client_order_number": null,
+    "exam_date": "04/14/2026",
+    "effective_date": "04/03/2026",
+    "examiner": "CURE TitlePro (Automated Agent)",
+    "report_status": "UPDATED — 2 items outstanding (Reconveyance target + Trust Affidavit review)",
+    "report_generated": "2026-04-14",
+    "data_sources": [
+      "Orange County Clerk-Recorder (cr.occlerkrecorder.gov)",
+      "OC Tax Records",
+      "Public Property Records",
+      "OCR Document Extraction"
+    ],
+    "search_parameters": {
+      "date_range_start": "01/01/2000",
+      "date_range_end": "04/03/2026",
+      "names_searched": ["MASTRANGELO ANTHONY MICHAEL"],
+      "documents_downloaded": 29,
+      "documents_description": "29 recorded instruments retrieved and OCR-extracted (25 original + 4 newly obtained Trust Deeds)"
+    }
+  },
+
+  "property": {
+    "address": "5915 E CALLE PRINCIPIA",
+    "city": "ANAHEIM",
+    "state": "CA",
+    "zip": "92807",
+    "county": "Orange County",
+    "apn": "363-313-04",
+    "property_type": "Single Family Residence",
+    "beds": 3,
+    "baths": 3,
+    "square_footage": 2337,
+    "year_built": 1979,
+    "area": "Anaheim Hills",
+    "tract": "10107",
+    "lot": "3",
+    "pud": "Windsor Terrace",
+    "legal_description": {
+      "parcel_1": "LOT 3 OF TRACT NO. 10107, AS PER MAP RECORDED IN BOOK 448, PAGES 42 TO 44 INCLUSIVE OF MISCELLANEOUS MAPS, IN THE OFFICE OF THE COUNTY RECORDER OF SAID ORANGE COUNTY.",
+      "easements": "RESERVING THEREFROM, NON-EXCLUSIVE EASEMENTS FOR ACCESS, INGRESS, EGRESS, ENCROACHMENT, SUPPORT, DRAINAGE, AND FOR OTHER PURPOSES, ALL AS DESCRIBED IN THE \"DECLARATION\" AND \"MASTER DECLARATION\" REFERRED TO IN EXHIBIT \"A\" ATTACHED HERETO AND INCORPORATED HEREIN BY THIS REFERENCE.",
+      "mineral_exception": "EXCEPTING THEREFROM, ALL MINERALS, OIL, GAS, PETROLEUM, AND OTHER HYDROCARBON SUBSTANCES AND ALL UNDERGROUND WATER IN OR UNDER OR WHICH MAY BE PRODUCED FROM SAID LAND WHICH UNDERLIES A PLANE PARALLEL TO AND 500 FEET BELOW THE PRESENT SURFACE OF SAID LAND FOR THE PURPOSE OF PROSPECTING FOR, THE EXPLORATION, DEVELOPMENT, PRODUCTION, EXTRACTION AND TAKING OF SAID MINERALS, OIL, GAS, PETROLEUM, AND OTHER HYDROCARBON SUBSTANCES AND WATER FROM SAID LAND BY MEANS OF MINES, WELLS, DERRICKS, OR OTHER EQUIPMENT FROM SURFACE LOCATIONS OR ADJOINING OR NEIGHBORING LAND OR LYING OUTSIDE OF THE ABOVE DESCRIBED LAND, IT BEING UNDERSTOOD THAT THE OWNER OF SUCH MINERALS, OIL, GAS, PETROLEUM, AND OTHER HYDROCARBON SUBSTANCES AND WATER, AS SET FORTH ABOVE, SHALL HAVE NO RIGHT TO ENTER UPON THE SURFACE OF THE ABOVE DESCRIBED LAND NOR TO USE ANY OF THE SAID LAND OR ANY PORTION THEREOF ABOVE SAID PLANE PARALLEL TO AND 500 FEET BELOW THE PRESENT SURFACE OF THE SAID LAND FOR ANY PURPOSE WHATSOEVER."
+    }
+  },
+
+  "borrowers": {
+    "borrower_1": {
+      "full_name": "ANTHONY MICHAEL MASTRANGELO",
+      "role": "Trustee"
+    },
+    "borrower_2": {
+      "full_name": "GEORGIANN IRENE MASTRANGELO",
+      "role": "Trustee"
+    },
+    "trust_name": "THE MASTRANGELO FAMILY TRUST DATED FEBRUARY 3, 2021",
+    "vesting": "Trustees of the MASTRANGELO FAMILY TRUST dated February 3, 2021"
+  },
+
+  "title_examination_summary": {
+    "title_status": "ENCUMBERED",
+    "title_status_explanation": "Property has 1 confirmed open lien (Partners FCU $250,000 HELOC) and 1 potentially open lien (Empire of America $573,400). Maximum lien exposure on subject: $823,400. If Reconveyance #2026000053382 releases the Empire DOT, exposure reduces to $250,000.",
+    "insurable": "PENDING — requires resolution of Empire DOT status and Trust Affidavit review",
+    "current_owner": {
+      "entity": "ANTHONY MICHAEL MASTRANGELO AND GEORGIANN IRENE MASTRANGELO, TRUSTEES OF THE MASTRANGELO FAMILY TRUST DATED FEBRUARY 3, 2021",
+      "vesting_type": "Trust",
+      "vesting_deed_type": "TRUST TRANSFER DEED",
+      "vesting_instrument": "2021000188481",
+      "vesting_date": "03/18/2021"
+    },
+    "prior_owners": [
+      {
+        "name": "ANTHONY MASTRANGELO and GEORGIANN MASTRANGELO",
+        "vesting": "Husband and Wife as Joint Tenants",
+        "disposition": "Long-term owners prior to 03/18/2021 trust transfer"
+      },
+      {
+        "name": "PICCIOTTA, DANIELA",
+        "disposition": "Per Grant Deed Doc #2021000182215 recorded 03/16/2021 — likely conveys 148 S Auburn Heights Ln, not the subject"
+      }
+    ],
+    "liens_summary": {
+      "open_liens_on_subject": 2,
+      "confirmed_open": 1,
+      "potentially_open": 1,
+      "maximum_exposure_subject": 823400,
+      "minimum_exposure_subject": 250000,
+      "previously_flagged_now_resolved": 3,
+      "tax_liens": "None found",
+      "judgment_liens": "None found",
+      "mechanics_liens": "None found",
+      "lis_pendens": "None found"
+    },
+    "remaining_issues_count": 2
+  },
+
+  "chain_of_title": [
+    {
+      "order": 1,
+      "instrument": "2021000182215",
+      "recording_date": "03/16/2021",
+      "document_type": "GRANT DEED",
+      "grantor": "PICCIOTTA, DANIELA",
+      "grantee": "MASTRANGELO, ANTHONY MICHAEL, TR",
+      "notes": "Likely conveys 148 S Auburn Heights Ln (not subject) — same-day DOT secures that address"
+    },
+    {
+      "order": 2,
+      "instrument": "2021000188480",
+      "recording_date": "03/18/2021",
+      "document_type": "DEED",
+      "grantor": "MASTRANGELO, ANTHONY M. / MASTRANGELO, GEORGIANN I.",
+      "grantee": "MASTRANGELO, ANTHONY MICHAEL, TR",
+      "notes": "Individual-to-Trust transfer (middle initials used)"
+    },
+    {
+      "order": 3,
+      "instrument": "2021000188481",
+      "recording_date": "03/18/2021",
+      "document_type": "TRUST TRANSFER DEED",
+      "grantor": "MASTRANGELO, ANTHONY / MASTRANGELO, GEORGIANN (H&W as JT)",
+      "grantee": "MASTRANGELO, ANTHONY MICHAEL & GEORGIANN IRENE, Trustees of the MASTRANGELO FAMILY TRUST dtd 02/03/2021",
+      "notes": "CONTROLLING VESTING DEED — Transfer to Trust — R&T 11930 exemption, $0 transfer tax. Confirmed 5915 E Calle Principia."
+    }
+  ],
+
+  "deeds_of_trust": {
+    "open_on_subject": [
+      {
+        "status": "OPEN",
+        "instrument": "2026000034332",
+        "recording_date": "02/13/2026",
+        "deed_date": "01/23/2026",
+        "document_type": "TRUST DEED (HELOC)",
+        "trustor": "MASTRANGELO ANTHONY MICHAEL / TR",
+        "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "original_amount": 250000.00,
+        "loan_type": "REVOLVING CREDIT DEED OF TRUST (HELOC)",
+        "term": "20 years",
+        "signing_capacity": "Dual capacity (individual + trustee)",
+        "apn": "363-313-04",
+        "tract_lot": "LOT 3, TRACT 10107",
+        "pud": "Windsor Terrace",
+        "status_detail": "CONFIRMED ACTIVE LIEN",
+        "document_reviewed": true,
+        "notes": "Partners FCU's third lending relationship with Mastrangelos on this property (prior: 1999 DOT and 2016 HELOC, both reconveyed)"
+      },
+      {
+        "status": "POTENTIALLY OPEN",
+        "instrument": "2021000262319",
+        "recording_date": "04/19/2021",
+        "note_date": "03/25/2021",
+        "document_type": "TRUST DEED",
+        "trustor": "MASTRANGELO ANTHONY MICHAEL TR",
+        "beneficiary": "EMPIRE OF AMERICA CORPORATION / MERS",
+        "original_amount": 573400.00,
+        "loan_type": "Conventional",
+        "maturity_date": "04/01/2051",
+        "loan_number": "21020801",
+        "apn": "363-313-04",
+        "status_detail": "No reconveyance found — may be released by Doc #2026000053382",
+        "document_reviewed": true
+      }
+    ],
+    "trust_deed_document_unavailable": {
+      "instrument": "2023000027298",
+      "recording_date": "02/08/2023",
+      "beneficiary": "FLAGSTAR BANK, N.A.",
+      "original_amount": "UNKNOWN",
+      "notes": "Document could not be downloaded. Secured property unconfirmed. Likely reconveyed by Doc #2026000053382."
+    },
+    "trust_deeds_on_different_properties": [
+      {
+        "instrument": "2021000182216",
+        "recording_date": "03/16/2021",
+        "beneficiary": "EMPIRE OF AMERICA / MERS",
+        "original_amount": 507500.00,
+        "secured_property": "148 S AUBURN HEIGHTS LN, ANAHEIM 92807",
+        "apn": "938-286-37",
+        "status": "NOT on subject"
+      },
+      {
+        "instrument": "2021000262325",
+        "recording_date": "04/19/2021",
+        "beneficiary": "EMPIRE OF AMERICA / MERS",
+        "original_amount": 303600.00,
+        "secured_property": "55 SAPPHIRE, IRVINE 92602",
+        "apn": "932-027-68",
+        "status": "NOT on subject"
+      }
+    ],
+    "empire_portfolio_summary": {
+      "total_financing": 1384500.00,
+      "properties_count": 3,
+      "amount_on_subject": 573400.00
+    },
+    "reconveyed_on_subject": [
+      {
+        "original_instrument": "2017000134001",
+        "original_date": "04/04/2017",
+        "lender": "Quicken Loans / MERS",
+        "original_amount": 408402.00,
+        "loan_number": "3373824677",
+        "reconveyance_instrument": "2020000666908",
+        "reconveyance_date": "11/18/2020",
+        "notes": "Conventional DOT"
+      },
+      {
+        "original_instrument": "2017000134002",
+        "original_date": "04/04/2017",
+        "lender": "Quicken Loans HELOC (assigned to Charles Schwab Bank)",
+        "original_amount": 150000.00,
+        "reconveyance_instrument": "2020000670636",
+        "reconveyance_date": "11/19/2020",
+        "notes": "HELOC. Assigned to Charles Schwab Bank 04/18/2017. Previously reported as 'release unknown' — now confirmed RECONVEYED."
+      },
+      {
+        "original_instrument": "2020000679170",
+        "original_date": "11/23/2020",
+        "lender": "Quicken Loans / MERS",
+        "original_amount": 575000.00,
+        "note_date": "10/30/2020",
+        "maturity_date": "11/01/2050",
+        "reconveyance_instrument": "2021000240977",
+        "reconveyance_date": "04/09/2021",
+        "notes": "APN 363-313-04"
+      },
+      {
+        "original_instrument": "2016000103026",
+        "original_date": "03/11/2016",
+        "lender": "Partners FCU HELOC",
+        "original_amount": 150000.00,
+        "reconveyance_instrument": "2017000164990",
+        "reconveyance_date": "04/25/2017",
+        "notes": "LOANLINER HELOC. 20-year term. APN 363-313-04."
+      },
+      {
+        "original_instrument": "19990706580",
+        "original_date": "10/05/1999",
+        "lender": "Partners FCU",
+        "original_amount": null,
+        "reconveyance_instrument": "2003001060608",
+        "reconveyance_date": "09/02/2003",
+        "notes": "Earliest recorded DOT found for subject property."
+      }
+    ],
+    "unmatched_reconveyance": {
+      "instrument": "2026000053382",
+      "recording_date": "02/23/2026",
+      "notes": "NOT DOWNLOADED. 1 page. Recorded 10 days after Partners FCU HELOC. Likely releases Flagstar (#2023000027298) or Empire DOT on subject (#2021000262319). Obtaining this document is the #1 priority remaining."
+    },
+    "assignments_of_deed_of_trust": [
+      {
+        "instrument": "2017000154868",
+        "recording_date": "04/18/2017",
+        "assignor": "QUICKEN LOANS INC",
+        "assignee": "CHARLES SCHWAB BANK",
+        "underlying_dot": "$150K HELOC (#2017000134002)",
+        "notes": "RESOLVED — Underlying DOT confirmed RECONVEYED 11/2020."
+      },
+      {
+        "instrument": "2007000731113",
+        "recording_date": "12/12/2007",
+        "assignor": "WELLS FARGO BANK, N.A.",
+        "assignee": "U.S. BANK, N.A., TRUSTEE",
+        "underlying_dot": "Unknown",
+        "notes": "\"ANTHONY J\" — different individual. LOW."
+      },
+      {
+        "instrument": "2008000415094",
+        "recording_date": "09/02/2008",
+        "assignor": "WASHINGTON MUTUAL BANK, FA",
+        "assignee": "LASALLE BANK, N.A., TRUSTEE",
+        "underlying_dot": "Unknown",
+        "notes": "\"ANTHONY J\" — different individual. LOW."
+      }
+    ],
+    "conclusion": "After full document image review, the subject property at 5915 E Calle Principia has at most 2 active liens: (1) Partners FCU HELOC at $250,000 (confirmed open), and (2) Empire of America DOT at $573,400 (potentially open — may be released by Reconveyance #2026000053382). The $150,000 Quicken/Schwab HELOC is confirmed reconveyed. Two Empire DOTs previously flagged as potentially open actually secure different properties."
+  },
+
+  "liens_and_encumbrances": {
+    "federal_tax_liens": [],
+    "state_tax_liens": [],
+    "mechanics_liens": [],
+    "judgment_liens": [],
+    "lis_pendens": [],
+    "other_encumbrances": [
+      {
+        "type": "TRUST AFFIDAVIT (2025)",
+        "description": "Affidavit Doc #2025000155224, recorded 06/02/2025 — references \"MASTRANGELO FAMILY TRUST\" with Co-Trustees ANTHONY MARIO and JO ANNE. Different trustees than subject borrowers. Most likely a different trust; requires document review to confirm."
+      },
+      {
+        "type": "EASEMENTS",
+        "description": "Non-exclusive easements for access, ingress, egress, encroachment, support, drainage, and other purposes as described in the Declaration and Master Declaration."
+      },
+      {
+        "type": "MINERAL EXCEPTION",
+        "description": "All minerals, oil, gas, petroleum, and other hydrocarbon substances and all underground water below 500 feet excepted, with no right of surface entry."
+      },
+      {
+        "type": "PROPERTY TAXES",
+        "description": "Subject to General and Special County and City taxes for current fiscal year."
+      },
+      {
+        "type": "SUPPLEMENTAL TAXES",
+        "description": "Subject to Lien of Supplemental Taxes per Chapter 3.5 of the Revenue and Taxation Code."
+      }
+    ]
+  },
+
+  "tax_information": {
+    "apn": "363-313-04",
+    "tax_portal": "taxbill.octreasurer.gov",
+    "current_year": {
+      "tax_year": "2025-2026",
+      "annual_tax": 4080.00,
+      "first_installment": {
+        "description": "1st Installment (Due December 10, 2025)",
+        "amount": 2040.00,
+        "status": "VERIFICATION REQUIRED"
+      },
+      "second_installment": {
+        "description": "2nd Installment (Due April 10, 2026)",
+        "amount": 2040.00,
+        "status": "VERIFICATION REQUIRED"
+      },
+      "assessed_values": {
+        "land": 145559,
+        "improvements": 208532,
+        "total": 354091
+      }
+    },
+    "prior_year": {
+      "tax_year": "2024",
+      "annual_tax": 3987.00,
+      "total_assessed_value": 354091
+    },
+    "note": "Payment status could not be confirmed due to CAPTCHA restrictions on the OC Treasurer portal (taxbill.octreasurer.gov). Manual verification recommended using APN 363-313-04."
+  },
+
+  "notes_and_observations": {
+    "property_ownership_pre_2021": "ANTHONY MASTRANGELO and GEORGIANN MASTRANGELO held title to 5915 E Calle Principia as Husband and Wife, as Joint Tenants. Confirmed by the Trust Transfer Deed (Doc #2021000188481). Their financing history on the subject property spans over 25 years, including: Partners FCU DOT (1999, reconveyed 2003); ABN AMRO DOT ($322,700, 2003); HELOC ($250K, 2005); Citibank DOT ($417K, 2015); Partners FCU HELOC ($150K, 2016, reconveyed 2017); Quicken Loans DOT ($408,402, 2017, reconveyed 11/2020) + HELOC ($150K, 2017, reconveyed 11/2020); Quicken Loans DOT ($575K, 2020, reconveyed 04/2021). All prior liens are confirmed reconveyed.",
+    "heloc_150k_resolved": "$150,000 HELOC — RESOLVED: The Quicken Loans HELOC (DOT #2017000134002, dated 03/25/2017, $150,000, assigned to Charles Schwab Bank via Doc #2017000154868) was reconveyed by Quicken Loans on November 16, 2020. Two reconveyances were filed: Inst. #2020000670636 (recorded 11/19/2020) and Inst. #2020000670635 (duplicate, same date).",
+    "trust_formation_2021": "The MASTRANGELO FAMILY TRUST was created on February 3, 2021. The Trust Transfer Deed (Doc #2021000188481, recorded 03/18/2021) transferred the subject property. Documentary transfer tax was $0 (R&T 11930 exemption — transfer into living trust). A companion deed (Doc #2021000188480) was recorded the same day with middle initials.",
+    "empire_of_america_dots_resolved": "Three Empire of America/MERS Trust Deeds were recorded within 34 days (03/16/2021 – 04/19/2021). Full document review reveals they secure three different properties in the Mastrangelo investment portfolio. Only $573,400 encumbers the subject.",
+    "current_financing_2026": "The most recent Trust Deed (Doc #2026000034332, recorded 02/13/2026) is a $250,000 REVOLVING CREDIT DEED OF TRUST (HELOC) in favor of PARTNERS FEDERAL CREDIT UNION. Dated January 23, 2026. 20-year term. Trustor signs in dual capacity: individually AND as Trustee.",
+    "picciotta_daniela_acquisition": "Grant Deed Doc #2021000182215 conveys from PICCIOTTA DANIELA to MASTRANGELO ANTHONY MICHAEL TR, recorded 03/16/2021. Based on the same-day purchase money DOT (#2021000182216) which secures 148 S Auburn Heights Ln (APN 938-286-37), this Grant Deed most likely conveys that property, not the subject.",
+    "name_variant_anthony_j": "Two assignment documents from 2007 and 2008 reference \"MASTRANGELO ANTHONY J\" — a different middle initial than the subject borrower (ANTHONY MICHAEL). LOW relevance — likely a different individual.",
+    "trust_affidavit_discrepancy": "Affidavit Doc #2025000155224 (recorded 06/02/2025) references \"MASTRANGELO FAMILY TRUST\" but names ANTHONY MARIO and JO ANNE as Co-Trustees. Most likely a different Mastrangelo Family Trust (possibly parents or relatives). Document review recommended to confirm."
+  },
+
+  "documents_examined": [
+    {"instrument": "2021000188481", "type": "TRUST TRANSFER DEED", "recording_date": "03/18/2021", "reviewed": true, "notes": "VESTING DEED — Transfers 5915 E Calle Principia to Trust."},
+    {"instrument": "2021000188480", "type": "DEED", "recording_date": "03/18/2021", "reviewed": false, "notes": "Companion deed — individual to trust transfer (middle initials)"},
+    {"instrument": "2021000182215", "type": "GRANT DEED", "recording_date": "03/16/2021", "reviewed": false, "notes": "PICCIOTTA to MASTRANGELO TR — likely conveys 148 S Auburn Heights"},
+    {"instrument": "2021000182216", "type": "TRUST DEED", "recording_date": "03/16/2021", "reviewed": true, "notes": "Empire/MERS — $507,500 — secures 148 S Auburn Heights Ln (APN 938-286-37) — NOT on subject"},
+    {"instrument": "2021000262319", "type": "TRUST DEED", "recording_date": "04/19/2021", "reviewed": true, "notes": "Empire/MERS — $573,400 — secures subject property (APN 363-313-04) — POTENTIALLY OPEN"},
+    {"instrument": "2021000262325", "type": "TRUST DEED", "recording_date": "04/19/2021", "reviewed": true, "notes": "Empire/MERS — $303,600 — secures 55 Sapphire, Irvine (APN 932-027-68) — NOT on subject"},
+    {"instrument": "2026000034332", "type": "TRUST DEED (HELOC)", "recording_date": "02/13/2026", "reviewed": true, "notes": "Partners FCU — $250,000 HELOC — secures subject property (APN 363-313-04) — OPEN"},
+    {"instrument": "2023000027298", "type": "TRUST DEED", "recording_date": "02/08/2023", "reviewed": false, "notes": "Flagstar Bank — document unavailable for download"},
+    {"instrument": "2026000053382", "type": "RECONVEYANCE", "recording_date": "02/23/2026", "reviewed": false, "notes": "Not downloaded — releases unknown DOT"},
+    {"instrument": "2021000240977", "type": "SUB/FULL RECONVEYANCE", "recording_date": "04/09/2021", "reviewed": true, "notes": "Reconveys DOT #2020000679170 (Quicken, $575K)"},
+    {"instrument": "2020000670636", "type": "SUB/FULL RECONVEYANCE", "recording_date": "11/19/2020", "reviewed": true, "notes": "Reconveys DOT #2017000134002 (Quicken HELOC, $150K)"},
+    {"instrument": "2020000670635", "type": "SUB/FULL RECONVEYANCE", "recording_date": "11/19/2020", "reviewed": true, "notes": "Duplicate reconveyance of DOT #2017000134002"},
+    {"instrument": "2020000666908", "type": "SUB/FULL RECONVEYANCE", "recording_date": "11/18/2020", "reviewed": true, "notes": "Reconveys DOT #2017000134001 (Quicken/MERS, $408,402)"},
+    {"instrument": "2017000164990", "type": "SUB/FULL RECONVEYANCE", "recording_date": "04/25/2017", "reviewed": true, "notes": "Reconveys DOT #2016000103026 (Partners FCU HELOC, $150K)"},
+    {"instrument": "2003001060608", "type": "SUB/FULL RECONVEYANCE", "recording_date": "09/02/2003", "reviewed": true, "notes": "Reconveys DOT #19990706580 (Partners FCU, 1999)"},
+    {"instrument": "2020000679170", "type": "TRUST DEED", "recording_date": "11/23/2020", "reviewed": true, "notes": "Quicken/MERS — $575,000 — APN 363-313-04 — RECONVEYED"},
+    {"instrument": "2017000134001", "type": "TRUST DEED", "recording_date": "04/04/2017", "reviewed": true, "notes": "Quicken/MERS — $408,402 — subject property — RECONVEYED"},
+    {"instrument": "2017000134002", "type": "TRUST DEED (HELOC)", "recording_date": "04/04/2017", "reviewed": true, "notes": "Quicken Loans — $150,000 — subject property — RECONVEYED"},
+    {"instrument": "2016000103026", "type": "TRUST DEED (HELOC)", "recording_date": "03/11/2016", "reviewed": true, "notes": "Partners FCU — $150,000 — subject property — RECONVEYED"},
+    {"instrument": "2017000154868", "type": "ASGT TRUST DEED", "recording_date": "04/18/2017", "reviewed": true, "notes": "Quicken to Schwab. $150K HELOC. Subject property confirmed. Underlying DOT RECONVEYED."},
+    {"instrument": "2025000155224", "type": "AFFIDAVIT", "recording_date": "06/02/2025", "reviewed": false, "notes": "Mastrangelo Family Trust — different trustees (ANTHONY MARIO/JO ANNE)"},
+    {"instrument": "2007000731113", "type": "ASGT TRUST DEED", "recording_date": "12/12/2007", "reviewed": false, "notes": "Wells Fargo to U.S. Bank. \"ANTHONY J\" — different person"},
+    {"instrument": "2008000415094", "type": "ASGT TRUST DEED", "recording_date": "09/02/2008", "reviewed": false, "notes": "WaMu to LaSalle. \"ANTHONY J\" — different person"}
+  ],
+
+  "remaining_issues": [
+    {
+      "id": 1,
+      "severity": "CRITICAL",
+      "title": "RECONVEYANCE TARGET UNKNOWN",
+      "description": "Reconveyance Doc #2026000053382 (recorded 02/23/2026, 1 page) was not downloaded. It likely releases the Empire DOT on subject (#2021000262319, $573,400) or the Flagstar DOT (#2023000027298). Obtaining and reading this document would finalize the lien picture.",
+      "action_required": "Download and review Reconveyance Doc #2026000053382"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "TRUST AFFIDAVIT WITH DIFFERENT TRUSTEES",
+      "description": "Affidavit Doc #2025000155224 (recorded 06/02/2025) references \"MASTRANGELO FAMILY TRUST\" but names ANTHONY MARIO and JO ANNE as Co-Trustees — different from subject borrowers. Most likely a different trust; requires document review to confirm.",
+      "action_required": "Review Affidavit Doc #2025000155224"
+    }
+  ],
+
+  "examiner_recommendations": [
+    {"id": 1, "priority": "HIGHEST", "action": "Obtain Reconveyance Doc #2026000053382", "detail": "Download and read this 1-page reconveyance (recorded 02/23/2026) to determine which Trust Deed it releases. If it releases the Empire DOT (#2021000262319, $573,400), the subject property has only one active lien (Partners FCU HELOC, $250K)."},
+    {"id": 2, "priority": "MEDIUM", "action": "Review Trust Affidavit", "detail": "Read Affidavit Doc #2025000155224 to confirm the \"MASTRANGELO FAMILY TRUST\" with Co-Trustees ANTHONY MARIO and JO ANNE is a different trust than the subject property's trust. If same trust with amended trustees, current vesting may be affected."},
+    {"id": 3, "priority": "MEDIUM", "action": "Tax Verification", "detail": "Verify current 2025-2026 tax payment status at taxbill.octreasurer.gov using APN 363-313-04. The 2nd installment ($2,040.00) was due April 10, 2026."},
+    {"id": 4, "priority": "LOW", "action": "Search Prior Owner (Optional)", "detail": "Run recorder name search for PICCIOTTA DANIELA if the Grant Deed (#2021000182215) is confirmed to affect the subject property. However, since the same-day DOT secures 148 S Auburn Heights Ln, this Grant Deed likely conveys that property instead."},
+    {"id": 5, "priority": "LOW", "action": "Judgment Search", "detail": "Perform judgment search at OC Superior Court and CA Secretary of State (UCC) for both ANTHONY MICHAEL MASTRANGELO and GEORGIANN IRENE MASTRANGELO."},
+    {"id": 6, "priority": "STANDARD", "action": "Title Insurance", "detail": "Obtain a full CLTA/ALTA title insurance commitment before any transaction."}
+  ],
+
+  "disclaimer": "This report is for informational purposes only and does not constitute a commitment to insure title. The information contained herein has been obtained from public records maintained by the Orange County Clerk-Recorder and is believed to be accurate but is not warranted. A full title insurance commitment should be obtained for any real estate transaction. This report identifies open encumbrances that require verification and resolution before any transaction can proceed."
+}

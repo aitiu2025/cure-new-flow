@@ -1,0 +1,36 @@
+{
+  "apn": "502-153-010",
+  "apn_full": "502-153-010-9",
+  "tax_year": "2025",
+  "property_address": "1724 WESLEY AVE, EL CERRITO CA",
+  "tra": "03000",
+  "assessed_value": {
+    "land": 192517.0,
+    "improvements": 76889.0,
+    "gross": 269406.0,
+    "exemptions": 0.0,
+    "net_taxable": 269406.0
+  },
+  "installments": [
+    {
+      "label": "First installment",
+      "status": "PAID",
+      "amount": 2363.01,
+      "paid_date": "12/08/2025"
+    },
+    {
+      "label": "Second installment",
+      "status": "PAID",
+      "amount": 2363.01,
+      "paid_date": "04/08/2026"
+    }
+  ],
+  "annual_total": 3459.98,
+  "source_url_host": "taxcolp.cccttc.us",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "assessed_value.net_taxable",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

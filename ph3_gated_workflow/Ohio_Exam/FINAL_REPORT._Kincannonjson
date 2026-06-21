@@ -1,0 +1,205 @@
+{
+  "exam_metadata": {
+    "exam_date": "04/10/2026",
+    "subject_id": null,
+    "property_address": "3352 Dellwood Rd, Cleveland Heights, OH 44118",
+    "county": "Cuyahoga",
+    "state": "OH",
+    "borrower_1": "Joel R. Kincannon",
+    "borrower_2": "Rebecca L. Callister",
+    "marital_status": "Married",
+    "search_period_start": "01/01/2000",
+    "search_period_end": "04/10/2026",
+    "certified_through": "03/30/2026"
+  },
+  "parcels": [
+    {
+      "parcel_id": "687-12-014",
+      "subdivision": "Henrycaines Lee Road Subd",
+      "lot": "65",
+      "address": "3352 Dellwood Rd, Cleveland Hts, OH 44118",
+      "primary": true
+    }
+  ],
+  "vesting": {
+    "instrument": "202105101253",
+    "recorded_date": "05/10/2021",
+    "doc_type": "DEED",
+    "grantor": "Ward W. Ohlhausen Etal",
+    "grantee": "Rebecca L. Callister Etal and Joel R. Kincannon",
+    "consideration": 195000.00,
+    "parcel": "687-12-014",
+    "legal": "Henrycaines Lee Road Subd, Lot 65",
+    "flag": "INFO"
+  },
+  "prior_owner_vesting": {
+    "instrument": "201809280648",
+    "recorded_date": "09/28/2018",
+    "doc_type": "DEED",
+    "grantor": "Celeste Sayner",
+    "grantee": "Ward W. Ohlhausen Etal",
+    "parcel": "687-12-014",
+    "marginal_reference": "202105101253",
+    "status": "Conveyed out to Kincannon/Callister on 5/10/2021"
+  },
+  "open_liens": [
+    {
+      "severity": "CRITICAL",
+      "instrument": "202105101254",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "05/10/2021",
+      "grantor_mortgagor_1": "Kincannon Joel R Etal",
+      "grantor_mortgagor_2": "Callister Rebecca L",
+      "grantee_mers": "Mortgage Electronic Registration Systems Inc Etal",
+      "grantee_lender": "First Federal Savings and Loan Association of Lakewood",
+      "lender_address": "One Park Drive, Lakewood, OH 44107",
+      "amount": 156000.00,
+      "mers_min": "1001914-0007629264-4",
+      "doc_subtype": "SHORT FORM MORTGAGE",
+      "parcel": "687-12-014",
+      "marginal_references": "NONE",
+      "status": "OPEN - NO RELEASE FOUND",
+      "flag": "UNRELEASED_PRIOR_MORTGAGE",
+      "action_required": "Obtain payoff letter or recorded release from First Federal S&L of Lakewood / MERS"
+    },
+    {
+      "severity": "WARNING",
+      "instrument": "202602040353",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "02/04/2026",
+      "instrument_date": "02/04/2026",
+      "grantor_1": "Kincannon Joel R",
+      "grantor_2": "Callister Rebecca L",
+      "grantee": "KeyBank National Association",
+      "amount": null,
+      "parcel": "687-12-014",
+      "address": "3352 Dellwood Rd, Cleveland Hts, OH 44118",
+      "legal": "Henrycaines Lee Road Subd, Lot 65",
+      "master_form_reference": "201310280632",
+      "status": "OPEN - CURRENT ACTIVE LOAN",
+      "flag": "CURRENT_OPEN_MORTGAGE"
+    }
+  ],
+  "released_liens": [
+    {
+      "instrument": "201809280649",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "09/28/2018",
+      "grantor": "Ohlhausen Ward W Etal",
+      "grantee": "First Federal Savings & Loan Association of Lakewood",
+      "parcel": "687-12-014",
+      "release_instrument": "202306090348",
+      "release_date": "06/09/2023",
+      "released_by": "First Federal Savings & Loan Association of Lakewood",
+      "status": "RELEASED"
+    }
+  ],
+  "administrative_instruments": [
+    {
+      "instrument": "201310280632",
+      "doc_type": "MASTER MORTGAGE FORM",
+      "recorded_date": "10/28/2013",
+      "grantor": "Master Mortgage Form",
+      "grantee": "KeyBank National Association",
+      "note": "Boilerplate master form referenced by current mortgage 202602040353. Not a lien."
+    },
+    {
+      "instrument": "201906250041",
+      "doc_type": "RELEASE ASSIGNMENT",
+      "recorded_date": "06/25/2019",
+      "grantor": "Ohlhausen Ward W",
+      "grantee": "First Fed S&L Assn Lkwd",
+      "note": "Assignment of prior owner's mortgage — administrative."
+    },
+    {
+      "instrument": "201906250042",
+      "doc_type": "RELEASE ASSIGNMENT",
+      "recorded_date": "06/25/2019",
+      "grantor": "Ohlhausen Ward W",
+      "grantee": "First Federal S&L Association of Lorain",
+      "note": "Assignment of prior owner's mortgage — administrative."
+    }
+  ],
+  "non_subject_instruments": [
+    {
+      "instrument": "201408180263",
+      "doc_type": "DEED",
+      "recorded_date": "08/18/2014",
+      "grantor": "Bogusz Dale Etal",
+      "grantee": "Kincannon Joel R",
+      "parcel": "471-26-002",
+      "note": "Prior property of Joel Kincannon — not subject parcel"
+    },
+    {
+      "instrument": "201408180264",
+      "doc_type": "MORTGAGE",
+      "recorded_date": "08/18/2014",
+      "grantor": "Kincannon Joel R",
+      "grantee": "MERS Etal",
+      "parcel": "471-26-002",
+      "release_instrument": "202001310041",
+      "release_date": "01/31/2020",
+      "note": "Prior property mortgage — RELEASED. Not subject parcel."
+    },
+    {
+      "instrument": "201705170169",
+      "doc_type": "DEED-AFFIDAVIT",
+      "recorded_date": "05/17/2017",
+      "grantor": "Kincannon Joel R",
+      "parcel": "471-26-002",
+      "note": "Prior property affidavit — not subject parcel"
+    },
+    {
+      "instrument": "201911080654",
+      "doc_type": "DEED",
+      "recorded_date": "11/08/2019",
+      "grantor": "Kincannon Joel R",
+      "grantee": "Bogusz Dale Etal",
+      "parcel": "471-26-002",
+      "consideration": 100000.00,
+      "note": "Sale of prior property — not subject parcel"
+    },
+    {
+      "instrument": "202001310041",
+      "doc_type": "RELEASE SATISFACTION",
+      "recorded_date": "01/31/2020",
+      "grantor": "MERS Etal",
+      "grantee": "Kincannon Joel R",
+      "parcel": "471-26-002",
+      "note": "Release of prior property mortgage — not subject parcel"
+    }
+  ],
+  "tax_status": {
+    "status": "PENDING",
+    "note": "MyPlace portal inaccessible during automated exam. Manual lookup required at myplace.cuyahogacounty.gov for parcel 687-12-014.",
+    "assessed_value": null,
+    "annual_tax": null,
+    "delinquency": null
+  },
+  "flags": [
+    {
+      "code": "UNRELEASED_PRIOR_MORTGAGE",
+      "severity": "CRITICAL",
+      "instrument": "202105101254",
+      "description": "2021 MERS/First Federal S&L mortgage of $156,000 has no recorded release. Must be satisfied or released before closing. Contact First Federal Savings and Loan Association of Lakewood or MERS servicer."
+    },
+    {
+      "code": "CURRENT_OPEN_MORTGAGE",
+      "severity": "WARNING",
+      "instrument": "202602040353",
+      "description": "Current open mortgage in favor of KeyBank NA recorded 02/04/2026. This is the loan being examined."
+    },
+    {
+      "code": "TAX_STATUS_PENDING",
+      "severity": "WARNING",
+      "description": "Tax status could not be verified. Manual lookup required at myplace.cuyahogacounty.gov for parcel 687-12-014."
+    },
+    {
+      "code": "PRIOR_PROPERTY_NOTED",
+      "severity": "INFO",
+      "description": "Borrower Joel R. Kincannon previously owned parcel 471-26-002 (sold 11/8/2019). All instruments related to that parcel are irrelevant to this examination and have been excluded."
+    }
+  ],
+  "chain_of_title_summary": "The subject property at 3352 Dellwood Rd, Cleveland Heights (Parcel 687-12-014, Henrycaines Lee Road Subd, Lot 65) was acquired by Ward W. Ohlhausen Etal from Celeste Sayner via deed recorded 09/28/2018 (Instrument 201809280648). Ohlhausen simultaneously placed a mortgage on the property with First Federal S&L of Lakewood (Instrument 201809280649), which was subsequently released on 06/09/2023 (Instrument 202306090348). Ohlhausen then conveyed the property to Joel R. Kincannon and Rebecca L. Callister via deed recorded 05/10/2021 (Instrument 202105101253, $195,000). On the same date, Kincannon and Callister placed a MERS mortgage in favor of First Federal S&L of Lakewood for $156,000 (Instrument 202105101254). This mortgage remains open with no release recorded. On 02/04/2026, Kincannon and Callister placed an additional mortgage with KeyBank NA (Instrument 202602040353), which appears to be the current loan under examination.",
+  "examiner_notes": "This examination was conducted using the Cuyahoga County Official Records Search (cuyahoga.oh.publicsearch.us), certified through 03/30/2026. The most critical issue requiring resolution before closing is the unreleased $156,000 MERS/First Federal S&L mortgage (Instrument 202105101254). Property tax data must be manually verified via Cuyahoga County MyPlace for parcel 687-12-014."
+}

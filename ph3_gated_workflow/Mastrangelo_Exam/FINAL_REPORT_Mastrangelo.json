@@ -1,0 +1,117 @@
+{
+  "report_metadata": {
+    "report_type": "RAW Two-Owner Title Search Examination Report",
+    "report_version": "2.0",
+    "cure_order_number": "CURE-2026-MASTRANGELO-001",
+    "exam_date": "04/14/2026",
+    "effective_date": "04/03/2026",
+    "examiner": "CURE TitlePro (Automated Agent)",
+    "recorder_search_date": "04/03/2026",
+    "document_review_date": "04/14/2026",
+    "report_status": "UPDATED — Document images reviewed; 2 items remain outstanding",
+    "report_generated": "2026-04-14T12:00:00Z",
+    "changes_from_v1": [
+      "All 4 available Trust Deed PDFs OCR-extracted and reviewed",
+      "$150K HELOC confirmed RECONVEYED (Nov 2020)",
+      "2 of 3 Empire DOTs secure DIFFERENT properties",
+      "Open liens on subject reduced from 5 to 2",
+      "APN 363-313-04 confirmed"
+    ]
+  },
+  "property": {
+    "address": "5915 E Calle Principia",
+    "city": "Anaheim",
+    "state": "CA",
+    "zip": "92807",
+    "county": "Orange",
+    "apn": "363-313-04",
+    "property_type": "Single Family Residence",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "living_area_sqft": 2337,
+    "year_built": 1979,
+    "pud": "Windsor Terrace",
+    "legal_description": "LOT 3 OF TRACT NO. 10107, Book 448, Pages 42-44, OC Recorder"
+  },
+  "borrowers": {
+    "borrower_1": {"full_name": "ANTHONY MICHAEL MASTRANGELO", "role": "Trustee"},
+    "borrower_2": {"full_name": "GEORGIANN IRENE MASTRANGELO", "role": "Trustee"},
+    "trust": {
+      "name": "MASTRANGELO FAMILY TRUST",
+      "trust_date": "02/03/2021",
+      "trust_type": "Revocable Living Trust"
+    }
+  },
+  "title_status": {
+    "status": "ENCUMBERED",
+    "open_liens_on_subject": 2,
+    "confirmed_open": 1,
+    "potentially_open": 1,
+    "maximum_exposure": 823400,
+    "minimum_exposure": 250000
+  },
+  "open_liens_on_subject": [
+    {
+      "instrument": "2026000034332",
+      "recording_date": "02/13/2026",
+      "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+      "amount": 250000,
+      "type": "HELOC",
+      "status": "OPEN",
+      "apn": "363-313-04",
+      "reviewed": true
+    },
+    {
+      "instrument": "2021000262319",
+      "recording_date": "04/19/2021",
+      "beneficiary": "EMPIRE OF AMERICA CORPORATION / MERS",
+      "amount": 573400,
+      "type": "Conventional — Adjustable Rate",
+      "status": "POTENTIALLY OPEN",
+      "apn": "363-313-04",
+      "reviewed": true
+    }
+  ],
+  "liens_on_other_properties": [
+    {
+      "instrument": "2021000182216",
+      "recording_date": "03/16/2021",
+      "beneficiary": "EMPIRE OF AMERICA / MERS",
+      "amount": 507500,
+      "property": "148 S Auburn Heights Ln, Anaheim, CA 92807",
+      "apn": "938-286-37"
+    },
+    {
+      "instrument": "2021000262325",
+      "recording_date": "04/19/2021",
+      "beneficiary": "EMPIRE OF AMERICA / MERS",
+      "amount": 303600,
+      "property": "55 Sapphire, Irvine, CA 92602",
+      "apn": "932-027-68"
+    }
+  ],
+  "reconveyed_on_subject": [
+    {"instrument": "2017000134001", "amount": 408402, "lender": "Quicken/MERS", "reconveyed_by": "2020000666908", "recon_date": "11/18/2020"},
+    {"instrument": "2017000134002", "amount": 150000, "lender": "Quicken HELOC→Schwab", "reconveyed_by": "2020000670636", "recon_date": "11/19/2020"},
+    {"instrument": "2020000679170", "amount": 575000, "lender": "Quicken/MERS", "reconveyed_by": "2021000240977", "recon_date": "04/09/2021"},
+    {"instrument": "2016000103026", "amount": 150000, "lender": "Partners FCU HELOC", "reconveyed_by": "2017000164990", "recon_date": "04/25/2017"},
+    {"instrument": "19990706580", "amount": null, "lender": "Partners FCU", "reconveyed_by": "2003001060608", "recon_date": "09/02/2003"}
+  ],
+  "unmatched_reconveyance": {
+    "instrument": "2026000053382",
+    "recording_date": "02/23/2026",
+    "target": "UNKNOWN — not downloaded",
+    "likely_releases": "Flagstar #2023000027298 or Empire #2021000262319"
+  },
+  "remaining_issues": [
+    {"severity": "CRITICAL", "title": "Reconveyance target unknown", "action": "Download and read #2026000053382"},
+    {"severity": "HIGH", "title": "Trust Affidavit review", "action": "Read #2025000155224"},
+    {"severity": "MEDIUM", "title": "Tax status unverified", "action": "Check taxbill.octreasurer.gov"},
+    {"severity": "LOW", "title": "Judgment search", "action": "OC Superior Court + CA SOS UCC"}
+  ],
+  "resolved_issues": [
+    {"title": "$150K HELOC release", "resolution": "Confirmed reconveyed Nov 2020"},
+    {"title": "Three DOTs in 34 days", "resolution": "Three different properties — investment portfolio"},
+    {"title": "Quicken→Schwab assignment", "resolution": "Underlying DOT reconveyed"}
+  ]
+}

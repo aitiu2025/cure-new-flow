@@ -1,0 +1,41 @@
+{
+  "search_params": {
+    "name1": "Vondran David",
+    "name2": "Vondran Theresa",
+    "county": "Orange",
+    "party_type": "Grantor/Grantee",
+    "date_range": [
+      "01/01/2000",
+      "04/03/2026"
+    ],
+    "search_timestamp": "2026-04-03T18:43:20.484399"
+  },
+  "summary": {
+    "total_common": 0,
+    "total_name1_only": 0,
+    "total_name2_only": 0
+  },
+  "common_documents": [],
+  "name1_only_documents": [],
+  "name2_only_documents": [],
+  "full_results": {
+    "name1": {
+      "name_searched": "Vondran David",
+      "party_type": "Grantor/Grantee",
+      "start_date": "01/01/2000",
+      "end_date": "04/03/2026",
+      "search_timestamp": "2026-04-03T18:42:48.337288",
+      "result_count": 0,
+      "documents": []
+    },
+    "name2": {
+      "name_searched": "Vondran Theresa",
+      "party_type": "Grantor/Grantee",
+      "start_date": "01/01/2000",
+      "end_date": "04/03/2026",
+      "search_timestamp": "2026-04-03T18:43:20.484321",
+      "result_count": 0,
+      "documents": []
+    }
+  }
+}

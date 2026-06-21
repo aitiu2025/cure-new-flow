@@ -1,0 +1,145 @@
+Search
+Account Summary
+Bill Details
+Account 0298501220000 — 2191 LARIMORE LN
+Address:
+2191 LARIMORE LN MENTONE
+Parcel details
+Request refund form
+Assessment Information
+2025‍ Secured Annual Bill #20251107629
+Assessee: Current Owner
+Print bill (PDF)
+1st Installment
+Delinquent After
+12/10/2025
+PAID
+$3,336.98
+12/09/2025
+2nd Installment
+Delinquent After
+04/10/2026
+PAID
+$3,336.98
+04/08/2026
+Details: 2025‍ Secured Annual Bill #20251107629
+
+Fiscal Year: 2025-26
+
+Assessed Value
+LAND	IMPROVEMENTS	PERSONAL PROPERTY	EXEMPTIONS	NET ASSESSED VALUE
+$149,257	$348,266	$0	-$7,000	$490,523
+Ad Valorem Taxes
+Where Do These Tax Dollars Go?
+TAXING AUTHORITY	RATE	ASSESSED	EXEMPTION	TAXABLE	TAX
+Countywide Tax (Secured)	1.00000000%	$497,523.00	$7,000.00	$490,523.00	$4,905.23
+San Bernardino Community College	0.04989275%	$497,523.00	$7,000.00	$490,523.00	$244.73
+Redlands Unified	0.07442314%	$497,523.00	$7,000.00	$490,523.00	$365.06
+San Bernardino Valley Muni Water Dist	0.11000000%	$497,523.00	$7,000.00	$490,523.00	$539.57
+Total Ad Valorem Taxes	1.23431589%		$6,054.59
+Direct Charges And Special Assessments
+LEVYING AUTHORITY
+CODE
+PHONE NUMBER
+AMOUNT
+San Bndo County Fire - *LEA House Haz Waste Mgmt
+AE001-SL001
+(909) 382-5401
+$5.00
+EHS-*Mosquito And Vector Control-Valley Floor
+AE001-SP008
+(800) 442-2283
+$5.62
+CSA 70 Imp Zone P-14 (Mentone) - *Landscp Improv
+UE062-SL001
+(909) 386-8800
+$426.43
+San Bdno Cnty Fire Prot Dist - *FP-5 East Valley
+UF001-SP015
+(909) 387-5974
+$182.32
+Total Direct Charges And Special Assessments
+$619.37
+Totals
+AMOUNT
+Total
+$6,673.96
+Total Payments Made
+$6,673.96
+Balance Due
+$0.00
+Parcel Details
+GENERAL
+Account Number:
+0298501220000
+Tax Rate Area:
+104-101
+Tax Rate:
+1.23431589%
+Tax Rate Year:
+2025
+ASSESSED VALUES
+Land:
+$149,257
+Improvements:
+$348,266
+Fixtures:
+$0
+Personal Property:
+$0
+Aircraft:
+$0
+Resources:
+$0
+Other:
+$0
+Homeowners Exemption:
+$7,000
+Other Exemption:
+$0
+Total Taxable Value:
+$490,523
+CHANGE IN ASSESSED VALUES
+Land:
+$0
+Improvements:
+$0
+Fixtures:
+$0
+Personal Property:
+$0
+Aircraft:
+$0
+Resources:
+$0
+Other:
+$0
+Homeowners Exemption:
+$0
+Other Exemption:
+$0
+Total Taxable Value:
+BILL INFORMATION
+Bill #:
+20251107629
+Assessment Year:
+2025
+Effective Date:
+JANUARY 01, 2025
+Escrow Company:
+FREEDOM MORTGAGE
+Stub 1 Due & Payable:
+11/01/2025
+Stub 2 Due & Payable:
+02/01/2026
+Tax Bill Issued/Mailed Date:
+10/31/2025
+Total Tax:
+$6,673.96
+DELINQUENCY INFO
+Installment 1 After 12/10/2025:
+$3,670.67
+Installment 2 After 04/10/2026:
+$3,680.67
+LEGAL DESCRIPTION
+TRACT 16602 LOT 56 BOOK 324 PAGE 37

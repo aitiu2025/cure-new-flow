@@ -1,0 +1,285 @@
+{
+  "inputs": [
+    {
+      "tag": "INPUT",
+      "id": "typeahead-input-90676",
+      "name": "",
+      "type": "text",
+      "placeholder": "Name, Address, Account Number, etc.",
+      "text": "",
+      "classes": "form-control",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "id": "nonce",
+      "name": "",
+      "type": "hidden",
+      "placeholder": "",
+      "text": "945aac48679e5bb9cf233b693e63e3e7",
+      "classes": "",
+      "visible": false
+    }
+  ],
+  "buttons": [
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "name": "",
+      "type": "submit",
+      "placeholder": "",
+      "text": "Skip to main content",
+      "classes": "skip-link",
+      "visible": true
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "name": "",
+      "type": "button",
+      "placeholder": "",
+      "text": "",
+      "classes": "btn-close position-absolute close-button",
+      "visible": true
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "name": "",
+      "type": "submit",
+      "placeholder": "",
+      "text": "",
+      "classes": "search-icon h-100",
+      "visible": true
+    },
+    {
+      "tag": "BUTTON",
+      "id": "id-5fd1016b-acbd-424b-a961-237675550add-tab",
+      "name": "",
+      "type": "submit",
+      "placeholder": "",
+      "text": "Help",
+      "classes": "nav-link btn-link bg-transparent border-0 fw-normal ps-0 pe-0 me-4 themed-tabs",
+      "visible": true
+    },
+    {
+      "tag": "BUTTON",
+      "id": "id-45f25c0d-2c83-4d3f-bd1d-b785610c5c6b-tab",
+      "name": "",
+      "type": "submit",
+      "placeholder": "",
+      "text": "Terms of Use",
+      "classes": "nav-link btn-link bg-transparent border-0 fw-normal px-0 me-4 themed-tabs",
+      "visible": true
+    },
+    {
+      "tag": "BUTTON",
+      "id": "id-98e6dbcf-db65-4165-bfe2-a9033edfa2bb-tab",
+      "name": "",
+      "type": "submit",
+      "placeholder": "",
+      "text": "Empty Tab",
+      "classes": "nav-link btn-link bg-transparent border-0 active d-none",
+      "visible": false
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "name": "",
+      "type": "button",
+      "placeholder": "",
+      "text": "",
+      "classes": "btn-close m-0 p-0 footer-close",
+      "visible": false
+    }
+  ],
+  "anchors": [
+    {
+      "text": "",
+      "href": "https://www.browardtax.org/",
+      "classes": "d-flex align-items-center justify-content-center flex-shrink-0 border-end nav-h nav-brand-img-container"
+    },
+    {
+      "text": "Vehicle Registration Renewal",
+      "href": "https://county-taxes.net/dmv/broward/vehicle-registration",
+      "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex-grow-0 align-items-center ps-3 me-3 mb-3"
+    },
+    {
+      "text": "Property Tax",
+      "href": "https://county-taxes.net/broward/property-tax",
+      "classes": "router-link-active router-link-exact-active position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex-grow-0 align-items-center ps-3 me-3"
+    },
+    {
+      "text": "Business Tax",
+      "href": "https://county-taxes.net/broward/business-tax",
+      "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex-grow-0 align-items-center ps-3 me-3 mb-3"
+    },
+    {
+      "text": "Reports",
+      "href": "https://county-taxes.net/broward/reports",
+      "classes": "position-relative smart-burger-link d-inline-flex flex-nowrap flex-shrink-0 flex-grow-0 align-items-center ps-3 me-3 mb-3"
+    },
+    {
+      "text": "Espa\u00f1ol",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "me-3 fw-light d-none d-lg-inline"
+    },
+    {
+      "text": "Notifications\n4",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "position-relative py-1 cursor-pointer"
+    },
+    {
+      "text": "View Less",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "expand-link d-block expanded"
+    },
+    {
+      "text": "View Details",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "expand-link d-block"
+    },
+    {
+      "text": "View Details",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "expand-link d-block"
+    },
+    {
+      "text": "View Details",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "expand-link d-block"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "position-relative cursor-pointer p-0 no-mw bg-white"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "position-relative"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/dmv/broward/vehicle-registration",
+      "classes": "position-relative nav-link px-6 px-lg-7 py-4 border-bottom align-items-center border-end"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/property-tax",
+      "classes": "router-link-active router-link-exact-active position-relative nav-link px-6 px-lg-7 py-4 border-bottom align-items-center border-end"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/business-tax",
+      "classes": "position-relative nav-link px-6 px-lg-7 py-4 border-bottom align-items-center border-end"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/reports",
+      "classes": "position-relative nav-link px-6 px-lg-7 py-4 border-bottom align-items-center border-end"
+    },
+    {
+      "text": "Espa\u00f1ol",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "px-6 py-4 fw-light d-inline d-lg-none"
+    },
+    {
+      "text": "",
+      "href": "https://county-taxes.net/broward/property-tax#",
+      "classes": "cart-icon h-100 position-relative"
+    },
+    {
+      "text": "Need to pay for more than 10 accounts at once?",
+      "href": "https://county-taxes.net/broward/property-tax/upload",
+      "classes": ""
+    },
+    {
+      "text": "Tax Account Help",
+      "href": "https://county-taxes.net/broward/property-tax#tax",
+      "classes": ""
+    },
+    {
+      "text": "Vehicle Registration Help",
+      "href": "https://county-taxes.net/broward/property-tax#registration",
+      "classes": ""
+    },
+    {
+      "text": "Broward Tax Collector",
+      "href": "https://www.browardtax.org/",
+      "classes": ""
+    },
+    {
+      "text": "support@govhub.com",
+      "href": "mailto:GovHub Support<support@govhub.com>",
+      "classes": ""
+    },
+    {
+      "text": "Info About My Registration",
+      "href": "https://county-taxes.net/broward/property-tax#section01",
+      "classes": ""
+    },
+    {
+      "text": "Checkout and Payment",
+      "href": "https://county-taxes.net/broward/property-tax#section02",
+      "classes": ""
+    },
+    {
+      "text": "What Happens After Renewing Online?",
+      "href": "https://county-taxes.net/broward/property-tax#section03",
+      "classes": ""
+    },
+    {
+      "text": "RenewExpress.com",
+      "href": "https://www.renewexpress.com/",
+      "classes": ""
+    },
+    {
+      "text": "Broward Tax Collector's Office",
+      "href": "https://www.browardtax.org/",
+      "classes": ""
+    },
+    {
+      "text": "Back to top",
+      "href": "https://county-taxes.net/broward/property-tax#registration",
+      "classes": ""
+    },
+    {
+      "text": "Back to top",
+      "href": "https://county-taxes.net/broward/property-tax#registration",
+      "classes": ""
+    },
+    {
+      "text": "form",
+      "href": "https://www.flhsmv.gov/pdf/forms/83146.pdf",
+      "classes": ""
+    },
+    {
+      "text": "autotags@browardtax.org",
+      "href": "mailto:autotags@browardtax.org",
+      "classes": ""
+    },
+    {
+      "text": "renewals@grantstreet.com",
+      "href": "mailto:Registration Renewals Support <renewals@grantstreet.com>?subject=Registration%20Renewals%20(Broward%20County)&body=Please%20specify%20the%20license%20plate%20number%20or%20PIN,%20and%20the%20details%20regarding%20your%20issue%20or%20question.",
+      "classes": ""
+    },
+    {
+      "text": "Back to top",
+      "href": "https://county-taxes.net/broward/property-tax#registration",
+      "classes": ""
+    },
+    {
+      "text": "Broward Tax Collector's website",
+      "href": "https://www.browardtax.org/",
+      "classes": ""
+    },
+    {
+      "text": "Powered by Grant Street Group.",
+      "href": "https://www.grantstreet.com/",
+      "classes": ""
+    }
+  ],
+  "selects": [],
+  "forms": []
+}

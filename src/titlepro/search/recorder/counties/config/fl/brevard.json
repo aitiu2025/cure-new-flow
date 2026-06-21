@@ -1,0 +1,156 @@
+{
+  "county_id": "fl_brevard",
+  "county_name": "Brevard",
+  "state": "FL",
+  "platform": "acclaimweb_http",
+  "base_url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/",
+  "search_url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/search/SearchTypeName",
+  "disclaimer_url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/",
+  "captcha_required": false,
+  "cloudflare_required": false,
+  "cookie_jar_path": "~/.titlepro/cookie_jar/brevard.json",
+  "impersonate_profile": "safari17_2_ios",
+  "name_format": "combined",
+  "name_input_format": "last_comma_first",
+  "date_format": "M/D/YYYY",
+  "doc_number_pattern": "^\\d{4}\\d{6,9}$|^\\d{10,}$|^\\d{4}-\\d{5,}$",
+  "antiforgery_token_field": "__RequestVerificationToken",
+  "antiforgery_token_present": false,
+
+  "_SEARCH_FLOW_DELTA_VS_BROWARD": "Brevard AcclaimWeb does NOT use Broward's single-POST SearchByName + HTML-grid-scrape. It is a THREE-STEP chain ending in a JSON grid endpoint. The shared acclaimweb_http_adapter.perform_search() (single POST + HTML scrape) returns EMPTY for Brevard. Wave-2 engineering task: add a search_flow='three_step_json' branch (or a Brevard subclass). All steps verified pure-HTTP 2026-06-10 (no Cloudflare, no anti-forgery token).",
+  "search_flow": "three_step_json",
+  "search_flow_steps": {
+    "step1_name_resolution": {
+      "method": "POST",
+      "url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/search/SearchTypeName?Length=6",
+      "returns": "telerik treeview fragment of indexed name matches",
+      "form_fields": {
+        "party_radio": "Both",
+        "PartyType": "Both",
+        "SearchOnName": "{name}",
+        "DateRangeList": " ",
+        "DocTypes": "{doctype_numeric}",
+        "DocTypesDisplay-input": "{doctype_display}",
+        "DocTypesDisplay": "",
+        "RecordDateFrom": "{date_from}",
+        "RecordDateTo": "{date_to}",
+        "BookTypesDisplay": "OR",
+        "BookTypes": "3",
+        "IsParsedName": "False"
+      }
+    },
+    "step2_prename_commit": {
+      "method": "POST",
+      "url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/Search/SearchTypePreName",
+      "returns": "87KB results-shell page (grid config embedded, rows ajax-bound)",
+      "form_fields": {
+        "NameList": "{pipe_joined_selected_names}",
+        "PartyType": "Both",
+        "RecordDateFrom": "{date_from} 12:00:00 AM",
+        "RecordDateTo": "{date_to} 12:00:00 AM",
+        "BookTypes": "3",
+        "DocTypes": "{doctype_numeric}",
+        "SearchOnName": "{name}",
+        "SearchOnLastOrBusinessName": "",
+        "SearchOnFirstName": ""
+      },
+      "namelist_separator": "|||"
+    },
+    "step3_grid_results": {
+      "method": "POST",
+      "url": "https://vaclmweb1.brevardclerk.us/AcclaimWeb/Search/GridResults",
+      "returns": "application/json {data:[...], total:N} — THE result set",
+      "form_fields": {
+        "page": "1",
+        "size": "50",
+        "orderBy": "",
+        "groupBy": "",
+        "filter": ""
+      },
+      "json_row_fields": {
+        "doc_number": "InstrumentNumber",
+        "transaction_item_id": "TransactionItemId",
+        "party": "Name",
+        "cross_party": "CrossPartyName",
+        "recording_date": "RecordDate",
+        "recording_date_format": "/Date(epoch_ms)/",
+        "doc_type": "DocTypeDescription",
+        "book_type": "BookType",
+        "book_page": "BookPage",
+        "consideration": "Consideration",
+        "legal_description": "DocLegalDescription",
+        "case_number": "CaseNumber"
+      }
+    }
+  },
+
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "Both": "Both",
+    "All": "Both",
+    "Grantor": "Direct",
+    "Grantee": "Reverse"
+  },
+  "supported_party_types": ["Both", "Direct", "Reverse"],
+  "party_types": ["Both", "Direct", "Reverse"],
+  "default_party_type": "Both",
+  "party_radio_field_map": {
+    "Both": "Both",
+    "Direct": "Direct",
+    "Reverse": "Reverse"
+  },
+
+  "book_types": {
+    "1": "C - Condo",
+    "2": "ML - Marriage License",
+    "3": "OR - Official Records",
+    "4": "P - Plats",
+    "5": "R - Road Plat Book",
+    "6": "S - Survey Books"
+  },
+  "default_book_type_numeric": "3",
+
+  "doctype_deed_value": "80",
+  "doctype_deed_display": "DEED (D)",
+  "doctype_numeric_map": {
+    "DEED": "80",
+    "DEED_EXEMPT_STAMPS": "160",
+    "DEED_MORTGAGE_COMBO": "170",
+    "TAX_DEED": "145",
+    "AGREEMENT_FOR_DEED": "65"
+  },
+
+  "doc_image_url_pattern": {
+    "jump_url": "details/JumpToInstrumentNumber/{record_type}/{doc_num}",
+    "start_image_retrieval": "Image/StartImageRetrieval/{token}/0",
+    "viewer_url": "Image/DocumentImage1/{token}",
+    "record_type": 3,
+    "token_regex_options": [
+      "id\\s*=\\s*[\\'\"]hdnTransactionItemId[\\'\"]\\s+value\\s*=\\s*[\\'\"]([0-9]+)[\\'\"]",
+      "value\\s*=\\s*[\\'\"]([0-9]{4,})[\\'\"]\\s+[^>]*id\\s*=\\s*[\\'\"]hdnTransactionItemId[\\'\"]",
+      "DocumentImage1/([A-Za-z0-9_\\-]+)",
+      "StartImageRetrieval/([A-Za-z0-9_\\-]+)"
+    ],
+    "pdf_href_regex": "[\\'\"]([^\\'\"]*WebAtalaCache/[A-Za-z0-9_\\-]+_\\d+_docPdf\\.pdf)[\\'\"]",
+    "pre_pdf_delay_seconds": 5.5,
+    "pdf_fetch_retries": 3,
+    "pdf_retry_delay_seconds": 3,
+    "_DELTA_VS_BROWARD": "record_type=3 (Official Records book type), NOT Broward's 27. transaction token (hdnTransactionItemId) is the numeric TransactionItemId echoed by the GridResults JSON — can be passed directly from the search result without re-parsing the jump page. Image/Atala/WebAtalaCache flow is otherwise identical to Broward; verified end-to-end on instrument 1996067410 -> 103KB valid PDF on 2026-06-10."
+  },
+
+  "indexed_apn_in_detail_response": false,
+  "apn_source": "BCPAO property appraiser anchor (recorder detail does not reliably expose Parcel ID; use phase1_property_appraiser.json)",
+
+  "selectors": {
+    "disclaimer_accept": "//input[@id='btnButton']",
+    "name_field": "//input[@id='SearchOnName']",
+    "start_date_field": "//input[@id='RecordDateFrom']",
+    "end_date_field": "//input[@id='RecordDateTo']",
+    "search_button": "//input[@id='btnSearch']",
+    "result_rows": "//tr[contains(@class,'t-row') or contains(@class,'t-alt') or contains(@class,'t-state-default')]",
+    "no_results": "//*[contains(text(),'No records found')]"
+  },
+
+  "default_record_date_floor": "1/1/1981",
+  "notes": "Brevard County FL Clerk of Court — Harris AcclaimWeb (Telerik MVC 2012.1.214), portal vaclmweb1.brevardclerk.us. Probed live 2026-06-10 for case Brevard_LEWIS_v1 (Angela D. Lewis, 977 Hammacher Ave SW, Palm Bay 32908). KEY DELTAS vs Broward: (1) NO Cloudflare/anti-bot — plain 200 on first GET, no cf_clearance needed; (2) NO __RequestVerificationToken; (3) three-step search chain (SearchTypeName -> SearchTypePreName -> GridResults JSON) instead of single-POST+HTML; (4) DocTypes is NUMERIC (DEED=80) not literal 'DEED'; (5) BookTypes NUMERIC (OR=3) required; (6) IsParsedName='False' required or step-1 errors; (7) party vocab Both/Direct/Reverse (Direct=grantor index, Reverse=grantee index); (8) results are JSON not HTML rows; (9) JumpToInstrumentNumber record_type=3 not 27. Index reaches back to 1/1/1981. Verified vesting deed for LEWIS: instr 1996067410, Brooking,Steve -> Lewis,Angela D, OR 3563/2270, $66,500, legal 'LT 16 BLK 1633 PB 17 PG 34 PORT MALABAR UNIT 32 S 12 T 29 R 36'. Wave-2: implement search_flow='three_step_json' branch in acclaimweb_http_adapter (or Brevard subclass); registry currently routes to platform 'acclaimweb_http' which honors the disclaimer + Atala download flow but NOT yet the 3-step JSON search. stub:true until first live e2e."
+}

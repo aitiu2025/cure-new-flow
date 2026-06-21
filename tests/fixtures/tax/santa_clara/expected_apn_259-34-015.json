@@ -1,0 +1,28 @@
+{
+  "apn": "259-34-015",
+  "tax_year": "2025/2026",
+  "property_address": "1 W SANTA CLARA ST SAN JOSE CA 95113",
+  "tra": "017-108",
+  "installments": [
+    {
+      "label": "Installment 1",
+      "amount": 155306.44,
+      "status": "PAID",
+      "paid_date": "12/09/2025"
+    },
+    {
+      "label": "Installment 2",
+      "amount": 155306.44,
+      "status": "PAID",
+      "paid_date": "04/09/2026"
+    }
+  ],
+  "annual_total": 155306.44,
+  "source_url_host": "santaclaracounty.telleronline.net",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "apn",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

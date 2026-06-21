@@ -1,0 +1,16 @@
+{
+  "county_id": "madera",
+  "county_name": "Madera",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://maderacountyca-web.tylerhost.net/web/user/disclaimer",
+  "disclaimer_url": "https://maderacountyca-web.tylerhost.net/web/user/disclaimer",
+  "search_url": "https://maderacountyca-web.tylerhost.net/web/search/namesearch",
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "notes": "Tyler Technologies with reCAPTCHA v2"
+}

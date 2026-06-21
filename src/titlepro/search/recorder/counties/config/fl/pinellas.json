@@ -1,0 +1,73 @@
+{
+  "county_id": "fl_pinellas",
+  "county_name": "Pinellas",
+  "state": "FL",
+  "platform": "onecare_http",
+  "status": "stub_cf_blocked",
+
+  "base_url": "https://officialrecords.mypinellasclerk.gov/",
+  "disclaimer_url": "https://officialrecords.mypinellasclerk.gov/search/Disclaimer",
+  "search_url": "https://officialrecords.mypinellasclerk.gov/search/SearchTypeName",
+
+  "cloudflare_required": true,
+  "captcha_required": false,
+  "impersonate_profile": "safari17_2_ios",
+
+  "_CF_BLOCK_NOTE": "Pinellas returns 403 (Cloudflare IP-range block) from datacenter (149.40.x.x). Requires residential IP + user-minted cf_clearance cookie (same pattern as Broward). Probe the live portal from residential egress, confirm DocType/BookType numeric IDs match Lake or differ, then update this config.",
+
+  "_TODO_PROBE_FROM_RESIDENTIAL": [
+    "1. Verify disclaimer flow (POST /search/Disclaimer matches Lake pattern)",
+    "2. Load /search/SearchTypeName and capture all DocTypeInfoCheckBox values",
+    "3. Confirm 'DEED' numeric code (likely 26 if same old AcclaimWeb build as Lake)",
+    "4. Confirm 'Official Records' BookType numeric (likely 1 matching Lake)",
+    "5. Run step1 → step2 → GridResults for DOWNING/COLLINS to confirm flow works",
+    "6. Update status from stub_cf_blocked to live and fill confirmed_* fields"
+  ],
+
+  "default_book_type_numeric": "1",
+
+  "_ASSUMED_FROM_LAKE": "DocType and BookType IDs below are copied from Lake; MUST verify live from residential IP — different AcclaimWeb tenants can have different numeric assignments.",
+
+  "doctype_deed_value": "26",
+  "doctype_deed_display": "DEED (D)",
+  "doctype_numeric_map": {
+    "DEED": "26",
+    "MORTGAGE": "41",
+    "SATISFACTION": "55",
+    "RELEASE": "52",
+    "JUDGMENT_LIEN": "31",
+    "LIS_PENDENS": "36",
+    "NOTICE_OF_COMMENCEMENT": "43",
+    "MODIFICATION": "39",
+    "TAX_DEED": "122"
+  },
+
+  "record_type_official_records": 1,
+
+  "party_type_map": {
+    "Both": "Both",
+    "All": "Both",
+    "Grantor": "Direct",
+    "Grantee": "Reverse"
+  },
+  "supported_party_types": ["Both", "Direct", "Reverse"],
+  "default_party_type": "Both",
+
+  "step_delay_seconds": 1.0,
+
+  "apn_source": "Pinellas PA (probe required)",
+  "tax_adapter": "grant_street",
+
+  "subjects": [
+    {
+      "name": "DANIEL DOWNING",
+      "address": "4007 Jenita Dr, Palm Harbor"
+    },
+    {
+      "name": "MICHAEL COLLINS",
+      "address": "Clearwater"
+    }
+  ],
+
+  "notes": "Pinellas County FL Clerk of Court — OneCare / AcclaimWeb. CF-403 from datacenter egress. Same adapter class as Lake (onecare_http_adapter.py). Probe live from residential IP to confirm DocType/BookType IDs and fill in live_confirmed date."
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "sel": "input[type=\"search\"]",
+    "count": 0
+  },
+  {
+    "sel": "input.search-bar__input",
+    "count": 0
+  },
+  {
+    "sel": "input[placeholder*=\"search\" i]",
+    "count": 0
+  },
+  {
+    "sel": "input[placeholder*=\"Name\" i]",
+    "count": 1
+  }
+]

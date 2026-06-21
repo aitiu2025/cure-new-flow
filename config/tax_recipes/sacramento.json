@@ -1,0 +1,163 @@
+{
+  "county": "sacramento",
+  "platform": "playwright_form",
+  "base_url": "https://eproptax.saccounty.gov/",
+  "authoritative_source_hosts": ["county-taxes.net"],
+  "host_whitelist_mode": "strict",
+  "headless": false,
+  "min_delay_seconds": 1,
+  "default_timeout_ms": 45000,
+  "_portal_topology": "eproptax.saccounty.gov 301-redirects to county-taxes.net/sacramento/property-tax (Grant Street Group / GovHub platform — same vendor as SBD's gsgprod). Top page has a typeahead (input[id^='typeahead-input-']). Selecting an option navigates the outer page to /sacramento/property-tax/<base64-account-key> which injects iframe[src*='iframe-taxsys'] hosting the Account Summary. The iframe's host is county-taxes.net (path is /iframe-taxsys/sacramento-ca.county-taxes.com/...). Clicking a bill link inside the iframe navigates the iframe to /<account-key>/bills/<bill-id> which exposes installment + assessed-value data.",
+  "_known_artifact": "Typeahead matches by APN, account, bill number, address, etc. APN format is XXX-XXXX-XXX-XXXX. Suggestion items expose role='option'.",
+  "no_results_patterns": [
+    "no\\s+matching\\s+account",
+    "no\\s+results\\s+found",
+    "account\\s+not\\s+found",
+    "parcel\\s+not\\s+on\\s+file"
+  ],
+  "navigation_steps": [
+    {
+      "action": "goto",
+      "url": "https://eproptax.saccounty.gov/",
+      "settle_ms": 6000,
+      "timeout_ms": 45000
+    },
+    {
+      "action": "fill",
+      "selector": "input[id^='typeahead-input-']",
+      "value": "{apn}",
+      "timeout_ms": 25000
+    },
+    {
+      "action": "sleep",
+      "ms": 4000
+    },
+    {
+      "action": "click",
+      "selector": "[role='option']",
+      "timeout_ms": 20000,
+      "settle_ms": 8000
+    },
+    {
+      "action": "wait_for",
+      "selector": "iframe[src*='iframe-taxsys']",
+      "state": "attached",
+      "timeout_ms": 30000
+    },
+    {
+      "action": "enter_frame",
+      "selector": "iframe[src*='iframe-taxsys']",
+      "url_contains": "iframe-taxsys",
+      "timeout_ms": 25000,
+      "settle_ms": 4000
+    },
+    {
+      "action": "click",
+      "selector": "a:has-text('Secured Annual Bill')",
+      "timeout_ms": 20000,
+      "settle_ms": 8000
+    },
+    {
+      "action": "exit_frame",
+      "to": "top"
+    },
+    {
+      "action": "wait_for",
+      "selector": "iframe[src*='/bills/']",
+      "state": "attached",
+      "timeout_ms": 25000,
+      "optional": true
+    },
+    {
+      "action": "enter_frame",
+      "selector": "iframe[src*='iframe-taxsys']",
+      "url_contains": "/bills/",
+      "timeout_ms": 25000,
+      "settle_ms": 5000
+    },
+    {
+      "action": "wait_for",
+      "selector": "text=/Total\\s+Tax|Net\\s+Assessed\\s+Value|Total\\s+Taxable\\s+Value/i",
+      "state": "visible",
+      "timeout_ms": 20000,
+      "optional": true
+    }
+  ],
+  "output_mode": "html",
+  "extract": {
+    "apn": {
+      "regex": "Account\\s+Number:?\\s*\\n?\\s*([0-9]{3}-[0-9]{4}-[0-9]{3}-[0-9]{4})",
+      "scope": "body"
+    },
+    "tax_year": {
+      "regex": "Fiscal\\s+Year:?\\s*\\n?\\s*(\\d{4}-\\d{2})",
+      "scope": "body"
+    },
+    "tra": {
+      "regex": "Tax\\s+Rate\\s+Area:?\\s*\\n?\\s*([0-9]{3}-[0-9]{3})",
+      "scope": "body"
+    },
+    "property_address": {
+      "regex": "Address:\\s*\\n?\\s*([0-9A-Z][0-9A-Z .,#/-]+?)(?:\\n|Parcel)",
+      "scope": "body"
+    },
+    "assessed_value.land": {
+      "regex": "Land:?\\s*\\n?\\s*\\$?([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.improvements": {
+      "regex": "Improvements:?\\s*\\n?\\s*\\$?([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.exemptions": {
+      "regex": "Homeowners\\s+Exemption:?\\s*\\n?\\s*\\$?([0-9,]+)",
+      "scope": "body",
+      "type": "currency"
+    },
+    "assessed_value.net_taxable": {
+      "regex": "Total\\s+Taxable\\s+Value:?\\s*\\n?\\s*\\$([0-9,]+)\\b",
+      "scope": "body",
+      "type": "currency"
+    },
+    "annual_total": {
+      "regex": "Total\\s+Tax:?\\s*\\n?\\s*\\$?([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].label": {
+      "regex": "(1st Installment)",
+      "scope": "body"
+    },
+    "installments[0].amount": {
+      "regex": "1st Installment[\\s\\S]{0,300}?(?:PAID|UNPAID|DELINQUENT)\\s*\\$?([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[0].status": {
+      "regex": "1st Installment[\\s\\S]{0,300}?\\b(PAID|UNPAID)\\b",
+      "scope": "body"
+    },
+    "installments[1].label": {
+      "regex": "(2nd Installment)",
+      "scope": "body"
+    },
+    "installments[1].amount": {
+      "regex": "2nd Installment[\\s\\S]{0,300}?(?:PAID|UNPAID|DELINQUENT)\\s*\\$?([0-9,]+\\.\\d{2})",
+      "scope": "body",
+      "type": "currency"
+    },
+    "installments[1].status": {
+      "regex": "2nd Installment[\\s\\S]{0,300}?\\b(PAID|UNPAID)\\b",
+      "scope": "body"
+    }
+  },
+  "verification_required": [
+    "apn",
+    "assessed_value.net_taxable",
+    "annual_total",
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

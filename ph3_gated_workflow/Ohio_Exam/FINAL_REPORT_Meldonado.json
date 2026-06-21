@@ -1,0 +1,286 @@
+{
+  "exam_meta": {
+    "subject_id": 3,
+    "exam_date": "04/10/2026",
+    "examiner": "CURE TitlePro AI",
+    "search_start": "01/01/2000",
+    "search_end": "03/30/2026",
+    "county_certified_through": "03/30/2026",
+    "county": "Cuyahoga",
+    "state": "Ohio",
+    "search_type": "Two-Owner Name Search"
+  },
+  "property": {
+    "address": "661 Grayton Rd, Berea, OH 44017",
+    "parcel_number": "361-14-001",
+    "city": "Berea",
+    "state": "Ohio",
+    "zip": "44017",
+    "county": "Cuyahoga",
+    "legal_description": "Part of Original Middleburg Township Lot No. 5, Section No. 18, City of Berea, County of Cuyahoga, State of Ohio. Bounded and described by metes and bounds beginning in the center line of Grayton Road (60 feet wide). Full legal description per Exhibit A to instrument 202602090304.",
+    "property_type": "MultiFamily",
+    "zillow_zestimate": 383800,
+    "zillow_zestimate_date": "04/2026"
+  },
+  "borrowers": [
+    {
+      "name": "MALDONADO ADRIAN",
+      "search_name": "MALDONADO ADRIAN",
+      "search_id": "S-1",
+      "results_count": 32
+    },
+    {
+      "name": "MALDONADO LAURIE",
+      "search_name": "MALDONADO LAURIE",
+      "search_id": "S-2",
+      "results_count": 20,
+      "note": "All S-2 results are duplicates of S-1 instruments"
+    }
+  ],
+  "vesting": {
+    "instrument": "199912170843",
+    "recorded_date": "12/17/1999",
+    "doc_type": "DEED",
+    "grantor": "UNKNOWN (outside search period)",
+    "grantee": "ADRIAN MALDONADO AND LAURIE MALDONADO",
+    "estate_type": "Survivorship Tenancy — for their joint lives, remainder to the survivor of them",
+    "consideration": "Unknown (outside search period)",
+    "parcel": "361-14-001",
+    "note": "Vesting deed pre-dates 01/01/2000 search start. Instrument number and vesting language confirmed via Exhibit A of open mortgage 202602090304.",
+    "flag": "INFO"
+  },
+  "open_mortgages": [
+    {
+      "instrument": "202602090304",
+      "recorded_date": "02/09/2026",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "ADRIAN MALDONADO AND LAURIE MALDONADO, A MARRIED COUPLE",
+      "mortgagee": "FIFTH THIRD BANK, N.A. (NORTHEASTERN OHIO)",
+      "mortgagee_address": "1850 East Paris Grand Rapids, MI 49546",
+      "amount": 50000.00,
+      "instrument_date": "01/22/2026",
+      "maturity_date": "01/25/2056",
+      "parcel": "361-14-001",
+      "address": "661 GRAYTON RD, BEREA, OH 44017",
+      "status": "OPEN",
+      "release_instrument": null,
+      "master_mortgage_form": "200405280146",
+      "notary": "ISABELLE RIOS",
+      "notary_expiry": "09/15/2027",
+      "prepared_by": "FIFTH THIRD BANK, N.A. (NORTHEASTERN OHIO) / LYCIA MAURITS",
+      "rcpt": "20260209000189",
+      "flag": "OPEN_LIEN"
+    },
+    {
+      "instrument": "200210071219",
+      "recorded_date": "10/07/2002",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "MALDONADO ADRIAN (and LAURIE)",
+      "mortgagee": "FIFTH THIRD MORT CO",
+      "amount": 233000.00,
+      "parcel": "361-14-001",
+      "address": "GRAYTON, OHIO",
+      "status": "OPEN — NO RELEASE FOUND",
+      "release_instrument": null,
+      "marginal_reference_check": "Confirmed: No marginal references found in recorder system",
+      "flag": "CRITICAL_OPEN_LIEN"
+    }
+  ],
+  "released_mortgages": [
+    {
+      "instrument": "200107180917",
+      "recorded_date": "07/18/2001",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "MALDONADO ADRIAN (and LAURIE)",
+      "mortgagee": "FIFTH THIRD BK NE OHIO",
+      "amount": 28000.00,
+      "parcel": "361-14-001",
+      "status": "RELEASED",
+      "release_instrument": "200205200111",
+      "release_date": "05/20/2002"
+    },
+    {
+      "instrument": "200409071451",
+      "recorded_date": "09/07/2004",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "MALDONADO ADRIAN (and LAURIE)",
+      "mortgagee": "CITIFINANCIAL INC",
+      "amount": 19140.00,
+      "parcel": "361-14-001 (presumed — address match)",
+      "status": "RELEASED",
+      "release_instrument": "200510110834",
+      "release_date": "10/11/2005"
+    },
+    {
+      "instrument": "200509270365",
+      "recorded_date": "09/27/2005",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "MALDONADO ADRIAN ETAL",
+      "mortgagee": "FIFTH THIRD BK NE OHIO",
+      "amount": 50000.00,
+      "parcel": "361-14-001",
+      "status": "RELEASED",
+      "release_instrument": "202510160009",
+      "release_date": "10/16/2025"
+    }
+  ],
+  "non_subject_mortgages": [
+    {
+      "instrument": "200201241078",
+      "recorded_date": "01/24/2002",
+      "doc_type": "MORTGAGE",
+      "mortgagor": "MALDONADO ADRIAN (and LAURIE)",
+      "mortgagee": "FIFTH THIRD BK NE OHIO",
+      "amount": 139305.00,
+      "parcel": "361-14-003",
+      "status": "RELEASED",
+      "release_instrument": "200603270338",
+      "release_date": "03/27/2006",
+      "note": "Different parcel — 361-14-003 (adjacent lot, not subject property)"
+    }
+  ],
+  "open_liens": [
+    {
+      "instrument": "200703160288",
+      "recorded_date": "03/16/2007",
+      "doc_type": "MECHANIC'S LIEN",
+      "claimant": "KOSTER ENTERPRISES INC DBA, ETAL",
+      "debtor": "MALDONADO ADRIAN ETAL",
+      "amount": 216.00,
+      "parcel": "361-14-001",
+      "status": "OPEN IN INDEX — LIKELY EXPIRED",
+      "expiry_analysis": "Ohio mechanic's liens expire 6 years from recording date if no foreclosure action is commenced. Recorded 03/16/2007; expiry date approximately 03/16/2013. No foreclosure action found in recorder index.",
+      "flag": "INFO"
+    }
+  ],
+  "released_liens": [
+    {
+      "instrument": "201709219036",
+      "recorded_date": "09/21/2017",
+      "doc_type": "FEDERAL TAX LIEN",
+      "claimant": "INTERNAL REVENUE SERVICE",
+      "debtor": "MALDONADO ADRIAN",
+      "amount": 73837.00,
+      "status": "RELEASED",
+      "release_instrument": "202012039060",
+      "release_date": "12/03/2020"
+    },
+    {
+      "instrument": "201803299005",
+      "recorded_date": "03/29/2018",
+      "doc_type": "FEDERAL TAX LIEN",
+      "claimant": "INTERNAL REVENUE SERVICE",
+      "debtor": "MALDONADO ADRIAN",
+      "amount": 18583.00,
+      "status": "RELEASED",
+      "release_instrument": "201809289029",
+      "release_date": "09/28/2018"
+    },
+    {
+      "instrument": "201707170370",
+      "recorded_date": "07/17/2017",
+      "doc_type": "BWC MORTGAGE",
+      "claimant": "OHIO STATE BUREAU OF WORKERS COMPENSATION",
+      "debtor": "MALDONADO ADRIAN ETAL",
+      "amount": 866.00,
+      "status": "RELEASED",
+      "release_instrument": "202510290309",
+      "release_date": "10/29/2025"
+    },
+    {
+      "instrument": "201801190146",
+      "recorded_date": "01/19/2018",
+      "doc_type": "BWC MORTGAGE",
+      "claimant": "OHIO STATE BUREAU OF WORKERS COMPENSATION",
+      "debtor": "ADRIAN MALDONADO AND ASSOCIATES",
+      "amount": 2216.00,
+      "status": "RELEASED",
+      "release_instrument": "202510290310",
+      "release_date": "10/29/2025"
+    },
+    {
+      "instrument": "201609160173",
+      "recorded_date": "09/16/2016",
+      "doc_type": "ODJFS LIEN",
+      "claimant": "OHIO DEPT OF JOB AND FAMILY SERVICES",
+      "debtor": "ADRIAN MALDONADO ASSOCIATES",
+      "amount": 1466.00,
+      "status": "RELEASED",
+      "release_instrument": "202510290307",
+      "release_date": "10/29/2025"
+    },
+    {
+      "instrument": "201705220069",
+      "recorded_date": "05/22/2017",
+      "doc_type": "ODJFS LIEN",
+      "claimant": "OHIO DEPT OF JOB AND FAMILY SERVICES",
+      "debtor": "ADRIAN MALDONADO ASSOCIATES",
+      "amount": 398.00,
+      "status": "RELEASED",
+      "release_instrument": "202510290308",
+      "release_date": "10/29/2025"
+    }
+  ],
+  "tax": {
+    "parcel": "361-14-001",
+    "tax_year": "PENDING",
+    "assessed_value": "PENDING",
+    "annual_tax": "PENDING",
+    "half_year_net_1": "PENDING",
+    "half_year_net_2": "PENDING",
+    "delinquency_status": "PENDING",
+    "note": "Tax portal (Cuyahoga County MyPlace) was inaccessible during automated examination. Manual lookup required."
+  },
+  "flags": [
+    {
+      "code": "CRITICAL_OPEN_LIEN",
+      "severity": "CRITICAL",
+      "instrument": "200210071219",
+      "description": "Mortgage of $233,000 recorded 10/07/2002 in favor of Fifth Third Mort Co has no release or satisfaction recorded. Must be resolved prior to closing."
+    },
+    {
+      "code": "OPEN_LIEN",
+      "severity": "WARNING",
+      "instrument": "202602090304",
+      "description": "Current open mortgage of $50,000 recorded 02/09/2026 in favor of Fifth Third Bank, N.A. This is the loan being examined."
+    },
+    {
+      "code": "MECHANIC_LIEN_EXPIRED",
+      "severity": "INFO",
+      "instrument": "200703160288",
+      "description": "Mechanic's lien of $216 recorded 03/16/2007 remains open in index but is past Ohio's 6-year statute of limitations. No foreclosure action found. Likely expired ~03/16/2013."
+    },
+    {
+      "code": "VESTING_DEED_OUTSIDE_SEARCH_PERIOD",
+      "severity": "INFO",
+      "instrument": "199912170843",
+      "description": "Vesting deed recorded 12/17/1999 is outside the 01/01/2000 search start date. Vesting confirmed via legal description in open mortgage 202602090304. Direct review of vesting deed not performed."
+    },
+    {
+      "code": "MULTI_FAMILY_PROPERTY",
+      "severity": "INFO",
+      "instrument": null,
+      "description": "Property is classified as MultiFamily per Zillow. Underwriting review may be required for loan type."
+    },
+    {
+      "code": "TAX_STATUS_PENDING",
+      "severity": "WARNING",
+      "instrument": null,
+      "description": "Property tax status could not be verified. Manual lookup of Cuyahoga County MyPlace for parcel 361-14-001 is required to confirm current tax status and any delinquency."
+    },
+    {
+      "code": "PRIOR_IRS_LIENS_RELEASED",
+      "severity": "INFO",
+      "instrument": "201709219036 / 201803299005",
+      "description": "Two prior IRS federal tax liens totaling $92,420 were recorded against Adrian Maldonado (2017-2018). Both have been released (2018 and 2020 respectively). No open IRS liens remain."
+    },
+    {
+      "code": "PRIOR_BWC_ODJFS_LIENS_RELEASED",
+      "severity": "INFO",
+      "instrument": "201707170370 / 201801190146 / 201609160173 / 201705220069",
+      "description": "Four prior BWC and ODJFS liens totaling $4,946 were recorded against Adrian Maldonado / Adrian Maldonado & Associates (2016-2018). All four were released on 10/29/2025."
+    }
+  ],
+  "chain_of_title_summary": "The Maldonados acquired 661 Grayton Rd (Parcel 361-14-001) via deed recorded 12/17/1999 (Instrument 199912170843), taking title as survivorship tenants. They have held continuous title since that date. Multiple mortgages were placed on the property over the years, all of which have been released except: (1) the current open mortgage 202602090304 ($50,000, Fifth Third Bank, 2/9/2026), and (2) a prior mortgage 200210071219 ($233,000, Fifth Third Mort Co, 10/7/2002) for which no release has been recorded. The borrowers also owned an adjacent parcel 361-14-003 which was conveyed out to Laura Murdock in 2006. Multiple IRS, BWC, and ODJFS liens were recorded against the borrowers between 2016-2018, all of which have been released as of late 2025.",
+  "examiner_notes": "This examination was conducted using the Cuyahoga County Official Records Search (cuyahoga.oh.publicsearch.us), certified through 03/30/2026. The most critical issue requiring resolution before closing is the unreleased $233,000 mortgage (instrument 200210071219). Property tax data must be manually verified via Cuyahoga County MyPlace for parcel 361-14-001."
+}

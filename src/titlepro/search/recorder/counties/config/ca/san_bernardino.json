@@ -1,0 +1,33 @@
+{
+  "county_id": "san_bernardino",
+  "county_name": "San Bernardino",
+  "state": "CA",
+  "platform": "tyler",
+  "base_url": "https://arcselfservice.sbcounty.gov/web/user/disclaimer",
+  "disclaimer_url": "https://arcselfservice.sbcounty.gov/web/user/disclaimer",
+  "search_url": "https://arcselfservice.sbcounty.gov/web/search/DOCSEARCH516S1",
+  "captcha_required": true,
+  "captcha_type": "recaptcha_v2",
+  "combined_name_search": true,
+  "requires_manual_captcha": true,
+  "manual_captcha_timeout_seconds": 900,
+  "allow_captcha_timeout_renewal": true,
+  "allow_automated_captcha_solver": true,
+  "checkpoint_key_scope": "case_job_search_unit",
+  "resume_detection": {
+    "success_url_contains": "/web/search",
+    "success_selector": "input[name='SearchCriteria'], input[id*='LastName']",
+    "failure_selector": "//iframe[contains(@src, 'recaptcha')]"
+  },
+  "name_format": "split",
+  "date_format": "MM/DD/YYYY",
+  "doc_number_pattern": "^\\d{4}-\\d+$|^\\d{10,}$",
+  "party_types": ["Both", "Grantor", "Grantee"],
+  "party_type_map": {
+    "Grantor/Grantee": "Both",
+    "All": "Both",
+    "Grantor": "Grantor",
+    "Grantee": "Grantee"
+  },
+  "notes": "Tyler Technologies with reCAPTCHA v2. POST-CAPTCHA landing: DOCSEARCH516S1. 3 clicks from disclaimer to Name Search."
+}

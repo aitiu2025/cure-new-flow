@@ -1,0 +1,34 @@
+{
+  "apn": "455-113-24",
+  "tax_year": "2025-26",
+  "property_address": "5041 E HEDGES FR",
+  "tra": "005-427",
+  "assessed_value": {
+    "land": 64524.0,
+    "improvements": 164045.0,
+    "subtotal": 228569.0,
+    "net_taxable": 228569.0
+  },
+  "installments": [
+    {
+      "label": "Installment 1",
+      "amount": 1492.75,
+      "paid_date": "12/08/2025"
+    },
+    {
+      "label": "Installment 2",
+      "amount": 1492.75,
+      "paid_date": "04/08/2026"
+    }
+  ],
+  "annual_total": 2985.50,
+  "delinquent": false,
+  "source_url_host": "fcacttcptr.fresnocountyca.gov",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "assessed_value.net_taxable",
+    "installments[0].amount",
+    "installments[1].amount",
+    "annual_total"
+  ]
+}

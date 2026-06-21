@@ -1,0 +1,28 @@
+{
+  "apn": "4522922300",
+  "tax_year": "2024-2025",
+  "property_address": "3670 8TH AVE, SAN DIEGO",
+  "installments": [
+    {
+      "label": "1st Installment",
+      "paid_date": "2024-12-07",
+      "amount": 11541.45,
+      "paid_amount": 11541.45,
+      "status": "PAID ON 12/07"
+    },
+    {
+      "label": "2nd Installment",
+      "paid_date": "2025-04-09",
+      "amount": 11541.45,
+      "paid_amount": 11541.45,
+      "status": "PAID ON 04/09"
+    }
+  ],
+  "annual_total": 23082.90,
+  "source_url_host": "sdttc.com",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "installments[0].amount",
+    "installments[1].amount"
+  ]
+}

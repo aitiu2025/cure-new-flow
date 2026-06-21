@@ -1,0 +1,225 @@
+{
+  "report_date": "2026-04-13",
+  "property": {
+    "address": "21942 VIA DEL LAGO, TRABUCO CANYON",
+    "county": "Orange"
+  },
+  "current_owners": {
+    "names": "HERRON DAVID R"
+  },
+  "documents_downloaded": [
+    {
+      "instrument_number": "2026000043728",
+      "filename": "B48473442.pdf",
+      "year": "2026",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:33:29.053682"
+    },
+    {
+      "instrument_number": "2026000041247",
+      "filename": "B48473444.pdf",
+      "year": "2026",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:34:19.329649"
+    },
+    {
+      "instrument_number": "2023000121368",
+      "filename": "B48473446.pdf",
+      "year": "2023",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:35:09.445040"
+    },
+    {
+      "instrument_number": "2021000502864",
+      "filename": "B48473449.pdf",
+      "year": "2021",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:36:00.288993"
+    },
+    {
+      "instrument_number": "2021000502863",
+      "filename": "B48473452.pdf",
+      "year": "2021",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:36:50.090957"
+    },
+    {
+      "instrument_number": "2014000234691",
+      "filename": "B48473456.pdf",
+      "year": "2014",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:37:40.162180"
+    },
+    {
+      "instrument_number": "2014000234690",
+      "filename": "B48473458.pdf",
+      "year": "2014",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:38:27.291157"
+    },
+    {
+      "instrument_number": "2010000706590",
+      "filename": "B48473462.pdf",
+      "year": "2010",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:39:14.877110"
+    },
+    {
+      "instrument_number": "2008000576504",
+      "filename": "B48473465.pdf",
+      "year": "2008",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:40:04.291670"
+    },
+    {
+      "instrument_number": "2008000473485",
+      "filename": "B48473467.pdf",
+      "year": "2008",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T12:42:10.653174"
+    },
+    {
+      "instrument_number": "2008000473486",
+      "filename": "B48473567.pdf",
+      "year": "2008",
+      "type": "DOCUMENT",
+      "downloaded_at": "2026-04-13T13:44:20.629943"
+    }
+  ],
+  "documents_metadata": {
+    "2026000043728": {
+      "filename": "B48473442.pdf",
+      "year": "2026",
+      "downloaded_at": "2026-04-13T12:33:29.053682",
+      "all_files": [
+        "B48473442.pdf",
+        "D215255257.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2026000041247": {
+      "filename": "B48473444.pdf",
+      "year": "2026",
+      "downloaded_at": "2026-04-13T12:34:19.329649",
+      "all_files": [
+        "B48473444.pdf",
+        "D215255259.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2023000121368": {
+      "filename": "B48473446.pdf",
+      "year": "2023",
+      "downloaded_at": "2026-04-13T12:35:09.445040",
+      "all_files": [
+        "B48473446.pdf",
+        "D215255262.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2021000502864": {
+      "filename": "B48473449.pdf",
+      "year": "2021",
+      "downloaded_at": "2026-04-13T12:36:00.288993",
+      "all_files": [
+        "B48473449.pdf",
+        "D215255272.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2021000502863": {
+      "filename": "B48473452.pdf",
+      "year": "2021",
+      "downloaded_at": "2026-04-13T12:36:50.090957",
+      "all_files": [
+        "B48473452.pdf",
+        "D215255274.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2014000234691": {
+      "filename": "B48473456.pdf",
+      "year": "2014",
+      "downloaded_at": "2026-04-13T12:37:40.162180",
+      "all_files": [
+        "B48473456.pdf",
+        "D215255286.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2014000234690": {
+      "filename": "B48473458.pdf",
+      "year": "2014",
+      "downloaded_at": "2026-04-13T12:38:27.291157",
+      "all_files": [
+        "B48473458.pdf",
+        "D215255294.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2010000706590": {
+      "filename": "B48473462.pdf",
+      "year": "2010",
+      "downloaded_at": "2026-04-13T12:39:14.877110",
+      "all_files": [
+        "B48473462.pdf",
+        "D215255298.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2008000576504": {
+      "filename": "B48473465.pdf",
+      "year": "2008",
+      "downloaded_at": "2026-04-13T12:40:04.291670",
+      "all_files": [
+        "B48473465.pdf",
+        "D215255307.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2008000473485": {
+      "filename": "B48473467.pdf",
+      "year": "2008",
+      "downloaded_at": "2026-04-13T12:42:10.653174",
+      "all_files": [
+        "B48473467.pdf",
+        "D215255313.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    },
+    "2008000473486": {
+      "filename": "B48473567.pdf",
+      "year": "2008",
+      "downloaded_at": "2026-04-13T13:44:20.629943",
+      "all_files": [
+        "B48473567.pdf",
+        "D215255636.pdf"
+      ],
+      "note": "Downloaded despite connection error"
+    }
+  },
+  "source_files": [
+    "B48473442.pdf",
+    "B48473444.pdf",
+    "B48473446.pdf",
+    "B48473449.pdf",
+    "B48473452.pdf",
+    "B48473456.pdf",
+    "B48473458.pdf",
+    "B48473462.pdf",
+    "B48473465.pdf",
+    "B48473467.pdf",
+    "B48473567.pdf",
+    "D215255257.pdf",
+    "D215255259.pdf",
+    "D215255262.pdf",
+    "D215255272.pdf",
+    "D215255274.pdf",
+    "D215255286.pdf",
+    "D215255294.pdf",
+    "D215255298.pdf",
+    "D215255307.pdf",
+    "D215255313.pdf",
+    "D215255636.pdf"
+  ]
+}

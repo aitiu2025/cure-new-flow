@@ -1,0 +1,27 @@
+{
+  "apn": "291583025",
+  "tax_year": "2025",
+  "property_address": "22264 SUMMER HOLLY AVE, MORENO VALLEY",
+  "assessed_value": {
+    "net_taxable": 442436.0,
+    "exemption": 7000.0
+  },
+  "installments": [
+    {
+      "label": "Payment",
+      "amount": 3591.57,
+      "paid_date": "12/9/2025"
+    },
+    {
+      "label": "Payment",
+      "amount": 3591.57
+    }
+  ],
+  "annual_total": 7183.14,
+  "source_url_host": "ca-riverside-ttc.publicaccessnow.com",
+  "status": "TAX_SUCCESS",
+  "verified_fields": [
+    "assessed_value.net_taxable",
+    "annual_total"
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "reportType": "Abstractor Notes/Chain",
+  "preparedBy": "CURE TitlePro (Automated Agent)",
+  "reportGenerated": "04/14/2026",
+  "reportStatus": "PRELIMINARY — Document image review required to finalize name variation and prior owner chain",
+  "cureOrderNumber": "CURE-2026-VONDRAN-001",
+  "examDate": "04/14/2026",
+  "dataSources": ["Orange County Clerk-Recorder", "OC Tax Records", "Public Property Records"],
+  "sourceData": "Orange County Clerk-Recorder's Office (cr.occlerkrecorder.gov)",
+  "documentsDownloaded": "9+ recorded instruments retrieved and analyzed",
+  "searchPeriod": "Per raw report effective date — 04/13/2026",
+  "subjectOwnerAndProperty": {
+    "owner": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, HUSBAND AND WIFE AS JOINT TENANTS",
+    "streetAddress": "22 CALLE CABRILLO",
+    "city": "FOOTHILL RANCH",
+    "state": "CA",
+    "zip": "92610",
+    "apn": "601-162-01",
+    "county": "Orange County",
+    "countyEffectiveDate": "04/13/2026"
+  },
+  "titleExaminationSummary": {
+    "currentOwner": {
+      "name": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, HUSBAND AND WIFE AS JOINT TENANTS",
+      "asOfDocument": "Grant Deed recorded 05/31/2016, Doc #2016000243774"
+    },
+    "priorOwners": [
+      {
+        "name": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE",
+        "vesting": "Husband and Wife as Joint Tenants",
+        "notes": "Prior to 05/31/2016 grant deed to Vondran — chain not fully searched prior to this transfer"
+      }
+    ],
+    "liensStatus": {
+      "mortgageLiens": "OPEN — 1 active Revolving Credit Deed of Trust recorded. 4 prior Deeds of Trust all properly reconveyed.",
+      "potentiallyUnreleased": "None identified — all prior DOTs have recorded reconveyances.",
+      "taxLiens": "None found in recorder search",
+      "judgmentLiens": "None found in recorder search",
+      "mechanicsLiens": "None found in recorder search"
+    },
+    "titleStatus": "ENCUMBERED",
+    "titleStatusDetail": "Property is subject to one confirmed active deed of trust: a Revolving Credit Deed of Trust (Doc #2026000053140, Partners Federal Credit Union, recorded 02/23/2026, $230,000 credit limit). All four prior deeds of trust have been properly reconveyed. Property is also subject to extensive CC&Rs and easements for the Foothill Ranch planned unit development."
+  },
+  "criticalIssues": [
+    {
+      "issueNumber": 1,
+      "title": "NAME VARIATION — \"THERESA ANN ARM\"",
+      "description": "Document Inst# 2020000187684 (Partners Federal Credit Union DOT dated 04/27/2020) lists borrower as \"THERESA ANN ARM\" while all other documents list \"THERESA ANN VONDRAN.\" Must read document to confirm this is the same person or whether this represents a name discrepancy requiring correction."
+    },
+    {
+      "issueNumber": 2,
+      "title": "PRIOR OWNER CHAIN INCOMPLETE",
+      "description": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE (grantors on acquisition deed) were not fully searched. The prior deed conveying title to the Loves was not found in records. Unreleased encumbrances from prior ownership period may exist."
+    },
+    {
+      "issueNumber": 3,
+      "title": "SALE PRICE DISCREPANCY",
+      "description": "Documentary transfer tax of $986.70 implies a sale price of approximately $493,350, but Redfin records show a last sale price of $896,888 for the same 05/31/2016 transaction. This discrepancy requires clarification — the higher figure may include the concurrent purchase-money DOT ($717,510) or may reflect a data error."
+    }
+  ],
+  "notesAndObservations": [
+    {
+      "topic": "Property Ownership (2016–Present)",
+      "detail": "DAVID JOHN VONDRAN and THERESA ANN VONDRAN acquired title to 22 Calle Cabrillo, Foothill Ranch via Grant Deed (Doc #2016000243774) recorded 05/31/2016 from JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE. Title was taken as Husband and Wife as Joint Tenants. Documentary transfer tax of $986.70 was paid, implying a purchase price of approximately $493,350. A concurrent purchase-money Deed of Trust (Doc #2016000243775, $717,510) was recorded the same day with MERS as nominee for Broadview Mortgage Corporation."
+    },
+    {
+      "topic": "Prior Owners — LOVE",
+      "detail": "Julian Samuel Love and Kimberlee Brandy Burton-Love held title as Husband and Wife as Joint Tenants prior to the 05/31/2016 conveyance. The instrument by which the Loves acquired title was not found in the search records. Chain not fully searched prior to their ownership."
+    },
+    {
+      "topic": "Financing History",
+      "detail": "The Vondrans have had an active borrowing pattern. Five Deeds of Trust appear on record between 2016 and 2026.",
+      "items": [
+        "DOT #5 (2016000243775, 05/31/2016): Purchase-money loan, $717,510, MERS/Broadview Mortgage — RECONVEYED per Inst. 2020000219276 on 05/14/2020.",
+        "DOT #4 (2018000325101, 09/05/2018): Short-form open-end DOT, $95,700, Wells Fargo Bank — RECONVEYED per Inst. 2020000219723 on 05/14/2020.",
+        "DOT #3 (2020000187684, 04/27/2020): Fixed/adjustable rate mortgage, $778,800, Partners Federal Credit Union — RECONVEYED per Inst. 2020000219723 on 05/14/2020.",
+        "DOT #2 (2022000209674, 06/09/2022): HELOC, $200,000, Partners Federal Credit Union — RECONVEYED per Inst. 2026000059280 on 02/27/2026.",
+        "DOT #1 (2026000053140, 02/23/2026): Revolving Credit DOT, $230,000 credit limit, Partners Federal Credit Union — OPEN / ACTIVE."
+      ]
+    },
+    {
+      "topic": "Current Financing (2026)",
+      "detail": "The most recent Deed of Trust (Doc #2026000053140, recorded 02/23/2026) is a Revolving Credit Deed of Trust in favor of Partners Federal Credit Union with a $230,000 credit limit. Trustee is T.D. Service Company, a California Corporation. The prior $200,000 HELOC with the same lender (Doc #2022000209674) was reconveyed 4 days later on 02/27/2026 (Doc #2026000059280), consistent with a refinance/replacement."
+    },
+    {
+      "topic": "Name Variation — THERESA ANN ARM",
+      "detail": "Document Inst# 2020000187684 (Partners FCU DOT, 04/27/2020, $778,800) lists the borrower as \"THERESA ANN ARM\" rather than \"THERESA ANN VONDRAN.\" This is likely a data extraction or OCR error from the recording, but document review is required to confirm identity. This DOT has been reconveyed, so it does not affect current lien status, but the name variation should be noted for chain of title completeness."
+    },
+    {
+      "topic": "Property Type",
+      "detail": "Single Family Residence, 4 bedrooms, 3 bathrooms, 2,637 sq ft living area, built 1994, on a 5,400 sq ft lot, located in the Foothill Ranch area of Orange County. APN 601-162-01. Property is within the Foothill Ranch planned unit development (Canyon Oaks Delegate District-Phase 7)."
+    }
+  ],
+  "currentOwnership": {
+    "asOfDate": "05/31/2016",
+    "owners": [
+      {
+        "name": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "vesting": "Husband and Wife as Joint Tenants"
+      }
+    ],
+    "priorOwners": [
+      {
+        "name": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE",
+        "vesting": "Husband and Wife as Joint Tenants",
+        "notes": "Grantors on Grant Deed Doc #2016000243774 recorded 05/31/2016 — prior acquisition instrument not found in records"
+      }
+    ]
+  },
+  "chainOfTitle": {
+    "period": "2016–2026",
+    "deeds": [
+      {
+        "number": 1,
+        "recordingDate": "05/31/2016",
+        "docNumber": "2016000243774",
+        "type": "GRANT DEED",
+        "grantors": "JULIAN SAMUEL LOVE AND KIMBERLEE BRANDY BURTON-LOVE, H&W as JT",
+        "grantees": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, H&W as JT",
+        "notes": "VESTING DEED — Acquisition of 22 Calle Cabrillo. DTT $986.70 (implies ~$493,350). Confirmed subject property."
+      }
+    ],
+    "chainAnalysis": [
+      "The Grant Deed (#2016000243774) is the controlling vesting deed for the subject property at 22 Calle Cabrillo, Foothill Ranch. It clearly identifies the property via the legal description referencing Lot Line Adjustment LL 92-029 and Foothill Ranch (Canyon Oaks Delegate District-Phase 7).",
+      "The prior deed conveying title to Julian Samuel Love and Kimberlee Brandy Burton-Love was not found in the search records. Chain prior to 05/31/2016 was not fully searched."
+    ]
+  },
+  "deedsOfTrust": {
+    "openDeedsOfTrust": [
+      {
+        "status": "OPEN",
+        "docNumber": "2026000053140",
+        "recordingDate": "02/23/2026",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN, H&W as JT",
+        "beneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "trustee": "T.D. SERVICE COMPANY, A CALIFORNIA CORPORATION",
+        "originalAmount": "$230,000.00 (Credit Limit)",
+        "loanType": "REVOLVING CREDIT DEED OF TRUST",
+        "notes": "NO RECONVEYANCE FOUND — ACTIVE LOAN."
+      }
+    ],
+    "closedDeedsOfTrust": [
+      {
+        "originalRecordingDate": "06/09/2022",
+        "instrumentNumber": "2022000209674",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "originalBeneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "originalAmount": "$200,000.00",
+        "loanType": "HOME EQUITY LINE OF CREDIT DEED OF TRUST",
+        "status": "RECONVEYED",
+        "reconveyanceInstrument": "2026000059280",
+        "reconveyanceDate": "02/27/2026",
+        "notes": "$200,000 HELOC. Replaced by DOT #2026000053140."
+      },
+      {
+        "originalRecordingDate": "04/27/2020",
+        "instrumentNumber": "2020000187684",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "originalBeneficiary": "PARTNERS FEDERAL CREDIT UNION",
+        "originalAmount": "$778,800.00",
+        "loanType": "FIXED/ADJUSTABLE RATE MORTGAGE",
+        "status": "RECONVEYED",
+        "reconveyanceInstrument": "2020000219723",
+        "reconveyanceDate": "05/14/2020",
+        "notes": "$778,800 Fixed/Adj. Rate. Note: Lists \"THERESA ANN ARM\" — name variation."
+      },
+      {
+        "originalRecordingDate": "09/05/2018",
+        "instrumentNumber": "2018000325101",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "originalBeneficiary": "WELLS FARGO BANK N.A.",
+        "originalAmount": "$95,700.00",
+        "loanType": "SHORT FORM OPEN-END DEED OF TRUST",
+        "status": "RECONVEYED",
+        "reconveyanceInstrument": "2020000219723",
+        "reconveyanceDate": "05/14/2020",
+        "notes": "$95,700 Short-form open-end DOT."
+      },
+      {
+        "originalRecordingDate": "05/31/2016",
+        "instrumentNumber": "2016000243775",
+        "trustor": "DAVID JOHN VONDRAN AND THERESA ANN VONDRAN",
+        "originalBeneficiary": "MERS / BROADVIEW MORTGAGE CORPORATION",
+        "originalAmount": "$717,510.00",
+        "loanType": "CONVENTIONAL WITH PLANNED UNIT DEVELOPMENT RIDER",
+        "status": "RECONVEYED",
+        "reconveyanceInstrument": "2020000219276",
+        "reconveyanceDate": "05/14/2020",
+        "notes": "$717,510 Conventional with PUD Rider. Purchase-money DOT."
+      }
+    ],
+    "conclusion": "One confirmed OPEN deed of trust exists (Doc #2026000053140, Partners Federal Credit Union, 02/23/2026, $230,000 revolving credit). All four prior Deeds of Trust have been properly reconveyed with recorded reconveyance instruments. No unreleased or potentially open DOTs identified."
+  },
+  "judgmentsLiensAndEncumbrances": {
+    "federalTaxLiens": "NONE FOUND",
+    "stateTaxLiens": "NONE FOUND",
+    "mechanicsLiens": "NONE FOUND",
+    "judgmentLiens": "NONE FOUND",
+    "otherEncumbrances": [
+      {
+        "type": "EASEMENTS",
+        "detail": "Non-exclusive easements for access, ingress, egress, maintenance, repair, drainage, encroachment, and for other purposes as described in the Master Declaration of Covenants, Conditions and Restrictions and Reservation of Easements for Foothill Ranch recorded 03/26/1990 as Inst. No. 90-156802, in the Amended and Restated Notice of Annexation recorded 07/16/1990 as Inst. No. 90-373146, and in the Notice of Annexation for Canyon Oaks Delegate District-Phase 7 recorded 04/01/1994 as Inst. No. 94-230211."
+      },
+      {
+        "type": "CC&Rs",
+        "detail": "Property subject to Foothill Ranch Master Declaration CC&Rs and associated assessments for the planned unit development."
+      },
+      {
+        "type": "PROPERTY TAXES",
+        "detail": "Subject to General and Special County and City taxes for current fiscal year."
+      },
+      {
+        "type": "SUPPLEMENTAL TAXES",
+        "detail": "Subject to Lien of Supplemental Taxes, if any, assessed pursuant to Chapter 3.5 of the Revenue and Taxation Code."
+      }
+    ],
+    "taxStatus": {
+      "taxYear": "2025-2026",
+      "annualTaxAmount": "$11,109.00",
+      "firstInstallment": "[NOT FOUND IN RECORDS]",
+      "firstInstallmentStatus": "VERIFICATION REQUIRED",
+      "secondInstallment": "[NOT FOUND IN RECORDS]",
+      "secondInstallmentStatus": "VERIFICATION REQUIRED",
+      "totalAnnualTax": "$11,109.00",
+      "assessedValues": {
+        "year": 2025,
+        "landValue": "$678,230",
+        "improvementValue": "$383,499",
+        "totalAssessedValue": "$1,061,729"
+      },
+      "note": "Payment status and installment due dates could not be confirmed. Manual verification recommended using APN 601-162-01 at taxbill.octreasurer.gov."
+    }
+  },
+  "documentsExamined": [
+    {
+      "docNumber": "2016000243774",
+      "type": "GRANT DEED",
+      "recordingDate": "05/31/2016",
+      "notes": "VESTING DEED — Transfers 22 Calle Cabrillo from Love to Vondran. DTT $986.70."
+    },
+    {
+      "docNumber": "2016000243775",
+      "type": "TRUST DEED",
+      "recordingDate": "05/31/2016",
+      "notes": "MERS/Broadview Mortgage — $717,510 — RECONVEYED per Inst. #2020000219276"
+    },
+    {
+      "docNumber": "2018000325101",
+      "type": "TRUST DEED",
+      "recordingDate": "09/05/2018",
+      "notes": "Wells Fargo Bank — $95,700 — RECONVEYED per Inst. #2020000219723"
+    },
+    {
+      "docNumber": "2020000187684",
+      "type": "TRUST DEED",
+      "recordingDate": "04/27/2020",
+      "notes": "Partners Federal Credit Union — $778,800 — RECONVEYED per Inst. #2020000219723. Name variation: \"THERESA ANN ARM.\""
+    },
+    {
+      "docNumber": "2020000219276",
+      "type": "RECONVEYANCE",
+      "recordingDate": "05/14/2020",
+      "notes": "Reconveys DOT #2016000243775 (Broadview Mortgage, $717,510)."
+    },
+    {
+      "docNumber": "2020000219723",
+      "type": "RECONVEYANCE",
+      "recordingDate": "05/14/2020",
+      "notes": "Reconveys DOT #2020000187684 and DOT #2018000325101."
+    },
+    {
+      "docNumber": "2022000209674",
+      "type": "TRUST DEED (HELOC)",
+      "recordingDate": "06/09/2022",
+      "notes": "Partners Federal Credit Union — $200,000 HELOC — RECONVEYED per Inst. #2026000059280"
+    },
+    {
+      "docNumber": "2026000053140",
+      "type": "TRUST DEED (REVOLVING CREDIT)",
+      "recordingDate": "02/23/2026",
+      "notes": "Partners Federal Credit Union — $230,000 Credit Limit — OPEN"
+    },
+    {
+      "docNumber": "2026000059280",
+      "type": "RECONVEYANCE",
+      "recordingDate": "02/27/2026",
+      "notes": "Reconveys DOT #2022000209674 (Partners FCU, $200,000 HELOC)."
+    }
+  ],
+  "legalDescription": {
+    "parcel1": "PARCEL 2, IN THE CITY OF LAKE FOREST, COUNTY OF ORANGE, STATE OF CALIFORNIA, AS SHOWN ON A EXHIBIT 'B' ATTACHED TO THAT CERTAIN LOT LINE ADJUSTMENT LL 92-029 RECORDED SEPTEMBER 10, 1992 AS INSTRUMENT NO. 92-605883 OF OFFICIAL RECORDS OF ORANGE COUNTY, CALIFORNIA.",
+    "parcel2Easements": "NON-EXCLUSIVE EASEMENTS FOR ACCESS, INGRESS, EGRESS, MAINTENANCE, REPAIR, DRAINAGE, ENCROACHMENT, AND FOR OTHER PURPOSES, ALL AS DESCRIBED IN THE MASTER DECLARATION OF COVENANTS, CONDITIONS AND RESTRICTIONS AND RESERVATION OF EASEMENTS FOR FOOTHILL RANCH (\"MASTER DECLARATION\") RECORDED MARCH 26, 1990 AS INSTRUMENT NO. 90-156802 OF OFFICIAL RECORDS OF ORANGE COUNTY, CALIFORNIA, IN THE AMENDED AND RESTATED NOTICE OF ANNEXATION AND ADDITIONAL DECLARATION OF COVENANTS, CONDITIONS AND RESTRICTIONS AND RESERVATION OF EASEMENTS FOR PHASE OF DEVELOPMENT OF FOOTHILL RANCH (\"ADDITIONAL DECLARATION\") RECORDED JULY 16, 1990 AS INSTRUMENT NO. 90-373146 OF SAID OFFICIAL RECORDS, AND IN THE NOTICE OF ANNEXATION AND SUPPLEMENTAL DECLARATION OF COVENANTS, CONDITIONS AND RESERVATION OF EASEMENTS FOR A PHASE OF DEVELOPMENT OF FOOTHILL RANCH (CANYON OAKS DELEGATE DISTRICT-PHASE 7) RECORDED APRIL 1, 1994 AS INSTRUMENT NO. 94-230211 OF SAID OFFICIAL RECORDS.",
+    "apn": "601-162-01"
+  },
+  "examinersRecommendations": [
+    {
+      "number": 1,
+      "title": "Verify Name Variation \"THERESA ANN ARM\"",
+      "detail": "Review Document Inst# 2020000187684 (Partners FCU DOT, 04/27/2020) to confirm whether \"THERESA ANN ARM\" is a recording/OCR error or an actual name discrepancy. Although this DOT has been reconveyed, the name variation should be resolved for chain of title integrity."
+    },
+    {
+      "number": 2,
+      "title": "Confirm Sale Price vs. DTT",
+      "detail": "Documentary transfer tax of $986.70 implies a sale price of ~$493,350, but public records (Redfin) show $896,888. Clarify whether the higher figure includes the concurrent $717,510 purchase-money DOT or is a data error."
+    },
+    {
+      "number": 3,
+      "title": "Search Prior Owner Chain",
+      "detail": "Run recorder name search for JULIAN SAMUEL LOVE and KIMBERLEE BRANDY BURTON-LOVE (Grantor/Grantee) to identify the instrument by which they acquired title and any unreleased encumbrances from their ownership period."
+    },
+    {
+      "number": 4,
+      "title": "Tax Verification",
+      "detail": "Verify current 2025-2026 tax payment status (both installments) at taxbill.octreasurer.gov using APN 601-162-01. Confirm no delinquencies exist."
+    },
+    {
+      "number": 5,
+      "title": "HOA/Assessment Verification",
+      "detail": "Confirm current status of Foothill Ranch HOA assessments and any special assessments. Property is subject to extensive CC&Rs for the planned unit development."
+    },
+    {
+      "number": 6,
+      "title": "Judgment Search",
+      "detail": "Perform a separate judgment-only search at both the Orange County Superior Court and California Secretary of State (UCC filings) for both DAVID JOHN VONDRAN and THERESA ANN VONDRAN."
+    },
+    {
+      "number": 7,
+      "title": "Title Insurance",
+      "detail": "Strongly recommend obtaining a full CLTA/ALTA title insurance commitment before proceeding with any transaction involving this property."
+    }
+  ],
+  "disclaimer": "This report is for informational purposes only and does not constitute a commitment to insure title. The information contained herein has been obtained from public records maintained by the Orange County Clerk-Recorder and is believed to be accurate but is not warranted. A full title insurance commitment should be obtained for any real estate transaction. This report identifies open encumbrances that require verification and resolution before any transaction can proceed."
+}

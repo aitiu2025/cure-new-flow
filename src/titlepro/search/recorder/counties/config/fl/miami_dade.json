@@ -1,0 +1,77 @@
+{
+  "county_id": "fl_miami_dade",
+  "county_name": "Miami-Dade",
+  "state": "FL",
+  "platform": "miami_dade",
+  "status": "blocked_on_access_decision",
+  "access_model": "registration_required",
+  "blocked_until": "commercial_access_decision",
+  "probe_report": "docs/FL/miami_dade_probe.md",
+  "base_url": "https://onlineservices.miamidadeclerk.gov/officialrecords/",
+  "search_url": "https://onlineservices.miamidadeclerk.gov/officialrecords/",
+  "disclaimer_url": "https://onlineservices.miamidadeclerk.gov/officialrecords/",
+  "captcha_required": false,
+  "tax_url": "https://county-taxes.net/fl-miamidade/property-tax",
+  "tax_platform": "Grant Street",
+
+  "name_input_mode": "split_lfm",
+  "name_input_format": "last_first_middle",
+  "effective_date_strategy": "download_timestamp",
+  "result_sort_field": "date",
+  "result_sort_order": "desc",
+  "doc_type_in_result_row": true,
+  "image_open_flow": "two_click",
+  "image_availability_lag_days": 3,
+  "parcel_id_search_supported": "unknown",
+  "party_type_supported": "unknown",
+
+  "date_format": "M/D/YYYY",
+  "doc_number_pattern": "^\\d{4}R\\d{6,10}$|^\\d{8,12}$",
+  "party_types": ["All", "Grantor", "Grantee"],
+  "default_party_type": "All",
+
+  "selectors": {
+    "disclaimer_accept": "",
+    "last_name_field": "",
+    "first_name_field": "",
+    "middle_name_field": "",
+    "start_date_field": "",
+    "end_date_field": "",
+    "search_button": "",
+    "result_rows": "",
+    "result_row_doc_type_cell": "",
+    "detail_open_selector": "",
+    "image_open_selector": "",
+    "no_results": ""
+  },
+
+  "test_subjects": [
+    {
+      "label": "NAVAS",
+      "primary": "NAVAS, LUIS H",
+      "secondary": "NAVAS, MARIA DOLORES",
+      "property_address": "10630 SW 128th Terrace, Miami, FL"
+    },
+    {
+      "label": "HAUGABOOK",
+      "primary": "HAUGABOOK, RACHEL ANNE",
+      "secondary": null,
+      "property_address": "4941 NW 188th Terrace, Miami Gardens, FL"
+    }
+  ],
+
+  "build_inputs": {
+    "design_doc": "docs/FL/Miami_Dade_Indexing_Review.md",
+    "fl_methodology": "docs/implementation_references/CURE_Exam_Methodology_Guide.md",
+    "fl_platform_guide": "docs/FL/FL_Platform_Examination_Guide.md",
+    "url_source_of_truth": "docs/County_URL_Mapping_CA_OH.md"
+  },
+
+  "open_questions_for_tony": [
+    "Does Miami-Dade expose a parcel-number search? (review covers name-search only)",
+    "Is there a Party Type / Grantor-Grantee filter? (review does not mention one)",
+    "Confirm 'Miami-Date' source-docx header is a typo for Miami-Dade"
+  ],
+
+  "notes": "Miami-Dade FL — proprietary platform (custom miamidadeclerk.gov backend, NOT in the Tyler/Landmark/OnceCare/DueProcess/Clericus families). Live-portal probe on 2026-05-21 (see `probe_report` field) confirmed the official portal is an SPA shell with NO public/anonymous name-search form — every entry point funnels to `Register/Login` or the paid Developer API. Custom-scraper adapter path is NOT viable. Two paths forward, both pending a business decision: (1) commercial portal access ($1/exam or $500 for 5000) via account registration; (2) Miami-Dade Developer API (also paid + registered, likely lower per-call cost and far simpler integration than UI scraping). Adapter skeleton remains in place at `miami_dade_adapter.py` and registry wiring is live, so the surface compiles and tests pass — but search/download methods all raise NotImplementedError pointing to the probe report. If the API path is chosen, the Selenium adapter is the wrong abstraction — switch to a `MiamiDadeAPIClient` class. Original Indexing Review's adapter-implications (3-field name, two-click image, 3-day image lag, etc.) describe post-auth behaviour and remain valid as design inputs once access is unlocked."
+}

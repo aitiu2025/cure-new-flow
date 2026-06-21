@@ -1,0 +1,54 @@
+{
+  "owner_name": "HERRON DAVID R",
+  "subject_id": "CURE-2026-HERRON-001",
+  "property_address": "21942 Via del Lago, Trabuco Canyon, CA 92679",
+  "county": "orange",
+  "state": "CA",
+  "start_date": "01/01/2000",
+  "end_date": "04/13/2026",
+  "output_folder_name": "HERRON_DAVID_R",
+  "resume": true,
+  "strict_downloads": true,
+  "download_headless": false,
+  "download_retries": 2,
+  "download_retry_delay_seconds": 2,
+  "download_base_url": "https://www.titlepro247.com/",
+  "download_portal_county": "orange",
+  "use_ocr_fallback": true,
+  "min_page_text_chars": 50,
+  "max_document_chars": 6000,
+  "generate_title_notes": true,
+  "generate_raw_pdf": true,
+  "generate_title_pdf": true,
+  "search_requests": [
+    {
+      "name": "Herron David R",
+      "party_types": ["Grantor", "Grantee", "Grantor/Grantee"]
+    },
+    {
+      "name": "Hench Sandra D",
+      "party_types": ["Grantor", "Grantee", "Grantor/Grantee"]
+    }
+  ],
+  "raw_required_sections": [
+    "## PHASE 1: RECORDER NAME SEARCHES",
+    "## PHASE 2: DOCUMENT INVENTORY & CLASSIFICATION",
+    "## PHASE 3: DOCUMENT RETRIEVAL & DATA EXTRACTION",
+    "## PHASE 4: TAX & PROPERTY LOOKUP",
+    "## PHASE 5: RAW EXAM REPORT"
+  ],
+  "title_required_sections": [
+    "# Abstractor Notes/Chain",
+    "## TITLE EXAMINATION SUMMARY",
+    "## CHAIN OF TITLE",
+    "## DEEDS OF TRUST / MORTGAGES",
+    "## DOCUMENTS EXAMINED"
+  ],
+  "ai": {
+    "provider": "claude",
+    "timeout_seconds": 900,
+    "raw_prompt_path": "/Users/ag/Downloads/0414_CA_Exams/TitleExam_SystemPrompt_Step1.md",
+    "title_prompt_path": "/Users/ag/Downloads/0414_CA_Exams/AbstractorNotes_Step2.md",
+    "design_system_path": "/Users/ag/Downloads/0414_CA_Exams/DESIGN_SYSTEM.md"
+  }
+}
