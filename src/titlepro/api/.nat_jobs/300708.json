@@ -1,0 +1,145 @@
+{
+  "nat_file_number": "300708",
+  "status": "completed",
+  "current_stage": "callback",
+  "created_at": "2026-06-24T10:38:46.958982",
+  "request_data": {
+    "nat_file_number": "300708",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "BUNKER WILLIAM",
+    "county": "polk",
+    "state": "FL",
+    "address": "6836 HAMPSHIRE BLVD",
+    "city": "LAKELAND",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "BUNKER JULIE"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-24T10:38:46.958982",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_polk owner=BUNKER, WILLIAM",
+      "ts": "2026-06-24T10:38:46.997519"
+    },
+    {
+      "event": "pipeline_completed",
+      "detail": "",
+      "ts": "2026-06-24T10:48:05.282814"
+    },
+    {
+      "event": "callback_building_payload",
+      "detail": "",
+      "ts": "2026-06-24T10:48:05.286263"
+    },
+    {
+      "event": "callback_sent",
+      "detail": "",
+      "ts": "2026-06-24T10:48:05.546934"
+    }
+  ],
+  "error": null,
+  "completed_at": "2026-06-24T10:48:05.546934",
+  "county_slug": "fl_polk",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-24T10:38:47.002594",
+      "completed_at": "2026-06-24T10:38:49.713203",
+      "detail": "Found 9 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-24T10:38:49.741403",
+      "completed_at": "2026-06-24T10:38:56.008990",
+      "detail": "9 / 9 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "done",
+      "started_at": "2026-06-24T10:38:56.043509",
+      "completed_at": "2026-06-24T10:39:36.800085",
+      "detail": "9 docs extracted"
+    },
+    "extract_legal_descriptions": {
+      "status": "done",
+      "started_at": "2026-06-24T10:39:36.804080",
+      "completed_at": "2026-06-24T10:39:36.965952"
+    },
+    "phase1_verifications": {
+      "status": "done",
+      "started_at": "2026-06-24T10:39:36.970947",
+      "completed_at": "2026-06-24T10:39:37.503415"
+    },
+    "tax_lookup": {
+      "status": "done",
+      "started_at": "2026-06-24T10:39:37.507410",
+      "completed_at": "2026-06-24T10:39:37.608355"
+    },
+    "generate_raw_report": {
+      "status": "done",
+      "started_at": "2026-06-24T10:39:37.616643",
+      "completed_at": "2026-06-24T10:43:18.274615"
+    },
+    "generate_title_notes": {
+      "status": "done",
+      "started_at": "2026-06-24T10:43:18.280640",
+      "completed_at": "2026-06-24T10:46:44.488856"
+    },
+    "generate_one_report": {
+      "status": "done",
+      "started_at": "2026-06-24T10:46:44.496672",
+      "completed_at": "2026-06-24T10:47:52.583448"
+    },
+    "render_pdfs": {
+      "status": "done",
+      "started_at": "2026-06-24T10:47:52.589767",
+      "completed_at": "2026-06-24T10:48:05.111120"
+    },
+    "serialize_reports": {
+      "status": "done",
+      "started_at": "2026-06-24T10:48:05.116103",
+      "completed_at": "2026-06-24T10:48:05.280802"
+    }
+  },
+  "stage_started_at": "2026-06-24T10:48:05.283796",
+  "result": {
+    "data": {
+      "OfficialPropertyAddress": "6836 Hampshire Boulevard",
+      "City": "LAKELAND",
+      "State": "FL",
+      "County": "Polk",
+      "VestingChainOfTitleInformation": [],
+      "OpenMortgageInformation": [],
+      "OpenJudgmentsAndEncumbrances": [],
+      "LegalDescription": "LOT 30, SOUTHCHASE, ACCORDING TO THE MAP OR PLAT THEREOF, AS RECORDED IN PLAT BOOK 138,\nPAGES 41 THROUGH 43, INCLUSIVE, OF THE PUBLIC RECORDS OF POLK COUNTY, FLORIDA.",
+      "TaxStatus": "skipped",
+      "TaxAPNAccount": "24-29-23-288035-000300",
+      "TaxMunicipalityCounty": "Polk",
+      "TaxYear": "",
+      "TaxPropertyAddress": "",
+      "TaxInstallmentStatus": "",
+      "TaxSource": "",
+      "TaxCapturedAt": "",
+      "TaxAssessedYear": "",
+      "TaxPaymentSchedule": "November (4% discount), December (3% discount), January (2% discount), February (1% discount), March (full payment). Delinquent after April 1.",
+      "TaxDueDate": "March 31",
+      "TaxDelinquentDate": "April 1",
+      "TaxType": "Ad Valorem",
+      "TaxAmount": "",
+      "TaxBuildingValue": "",
+      "TaxTotalValue": "",
+      "TaxAssessedValue": "",
+      "TaxExemptions": "",
+      "TaxComments": ""
+    }
+  }
+}

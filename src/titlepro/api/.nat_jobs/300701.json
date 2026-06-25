@@ -1,0 +1,255 @@
+{
+  "nat_file_number": "300701",
+  "status": "completed",
+  "current_stage": "callback",
+  "created_at": "2026-06-23T07:05:32.917193",
+  "request_data": {
+    "nat_file_number": "300701",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "VOLLMAN ANDREW",
+    "county": "palm beach",
+    "state": "FL",
+    "address": "102 SEGOVIA WAY",
+    "city": "JUPITER",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "WU GRACE"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-23T07:05:32.917193",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T07:05:32.948120"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, mo",
+      "ts": "2026-06-23T07:14:06.697164"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T07:18:13.340003"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T07:18:13.392159"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, mo",
+      "ts": "2026-06-23T07:18:17.688012"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T07:20:23.504652"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T07:20:23.545724"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi",
+      "ts": "2026-06-23T07:20:25.163741"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T07:21:32.090127"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T07:21:32.130928"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi",
+      "ts": "2026-06-23T07:21:36.542068"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T08:00:36.288164"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T08:00:36.360238"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.3-70b-versatile` in organization `org_01kvsnt141fq8bwqyyqs8ee69v` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 34177, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "ts": "2026-06-23T08:00:40.297093"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T08:30:03.878568"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T08:30:03.921622"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: llama-3.3-70b-versatile'}, 'request_id': 'req_011CcKsu45bTRW4cfo6reTn6'}",
+      "ts": "2026-06-23T08:30:11.885691"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-23T08:32:49.870754"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T08:32:49.907053"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.3-70b-versatile` in organization `org_01kvsnt141fq8bwqyyqs8ee69v` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 34708, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "ts": "2026-06-23T08:36:53.878785"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-23T08:56:42.286272"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_palm_beach owner=VOLLMAN, ANDREW",
+      "ts": "2026-06-23T08:56:42.321547"
+    },
+    {
+      "event": "pipeline_completed",
+      "detail": "",
+      "ts": "2026-06-23T09:01:41.274461"
+    },
+    {
+      "event": "callback_building_payload",
+      "detail": "",
+      "ts": "2026-06-23T09:01:41.276465"
+    },
+    {
+      "event": "callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T09:01:42.410686"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T10:15:08.173362"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T11:19:48.156926"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T11:36:03.461377"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T13:10:19.076042"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T14:48:57.603987"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-24T09:39:42.311264"
+    },
+    {
+      "event": "manual_callback_sent",
+      "detail": "",
+      "ts": "2026-06-24T09:45:02.848617"
+    }
+  ],
+  "error": null,
+  "completed_at": "2026-06-23T09:01:42.410686",
+  "county_slug": "fl_palm_beach",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-23T07:05:32.957273",
+      "completed_at": "2026-06-23T07:11:22.968833",
+      "detail": "Found 11 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-23T07:11:22.989231",
+      "completed_at": "2026-06-23T07:11:51.355898",
+      "detail": "11 / 11 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "done",
+      "started_at": "2026-06-23T07:11:51.420605",
+      "completed_at": "2026-06-23T07:14:00.274253",
+      "detail": "11 docs extracted"
+    },
+    "extract_legal_descriptions": {
+      "status": "done",
+      "started_at": "2026-06-23T07:14:00.278246",
+      "completed_at": "2026-06-23T07:14:00.510554"
+    },
+    "phase1_verifications": {
+      "status": "done",
+      "started_at": "2026-06-23T07:14:00.514465",
+      "completed_at": "2026-06-23T07:14:00.871635"
+    },
+    "tax_lookup": {
+      "status": "done",
+      "started_at": "2026-06-23T08:56:42.343962",
+      "completed_at": "2026-06-23T08:56:42.390005"
+    },
+    "generate_raw_report": {
+      "status": "done",
+      "started_at": "2026-06-23T08:32:49.955547",
+      "completed_at": "2026-06-23T08:36:52.321879"
+    },
+    "generate_title_notes": {
+      "status": "done",
+      "started_at": "2026-06-23T08:56:42.397131",
+      "completed_at": "2026-06-23T09:00:25.795833"
+    },
+    "generate_one_report": {
+      "status": "done",
+      "started_at": "2026-06-23T09:00:25.801913",
+      "completed_at": "2026-06-23T09:01:36.077022"
+    },
+    "render_pdfs": {
+      "status": "done",
+      "started_at": "2026-06-23T09:01:36.079019",
+      "completed_at": "2026-06-23T09:01:41.129017"
+    },
+    "serialize_reports": {
+      "status": "done",
+      "started_at": "2026-06-23T09:01:41.131017",
+      "completed_at": "2026-06-23T09:01:41.273449"
+    }
+  },
+  "stage_started_at": "2026-06-23T09:01:41.275466",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\api\\server.py\", line 3486, in _nat_run_extraction\n    _phase_result = getattr(pipeline, _phase)()\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 2259, in generate_title_notes\n    output = self._run_agent(\n             ^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 2567, in _run_agent\n    result = agent.run(system_prompt, user_prompt, cwd=self.repo_root, extra_dirs=extra_dirs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\agent_runners.py\", line 371, in run\n    response = client.chat.completions.create(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\groq\\resources\\chat\\completions.py\", line 462, in create\n    return self._post(\n           ^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\groq\\_base_client.py\", line 1284, in post\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\groq\\_base_client.py\", line 1071, in request\n    raise self._make_status_error_from_response(err.response) from None\ngroq.APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.3-70b-versatile` in organization `org_01kvsnt141fq8bwqyyqs8ee69v` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 34708, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}\n"
+}

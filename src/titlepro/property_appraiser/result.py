@@ -71,6 +71,8 @@ class PropertyAppraiserResult:
     legal_description: str = ""                # appraiser's short legal
     just_value: int = 0
     assessed_value: int = 0
+    land_value: int = 0
+    improvement_value: int = 0
     homestead_active: bool = False
     homestead_amount: int = 0
     year_built: int = 0

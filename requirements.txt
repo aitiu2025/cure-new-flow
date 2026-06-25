@@ -16,6 +16,8 @@ pytesseract>=0.3.13
 
 # HTTP client
 requests>=2.31.0
+curl_cffi>=0.7.0          # TLS-fingerprint impersonation for Cloudflare counties
+beautifulsoup4>=4.12.0    # HTML parsing for property-appraiser adapters (palm_beach_pbcpao)
 
 # Testing
 pytest>=7.4.0

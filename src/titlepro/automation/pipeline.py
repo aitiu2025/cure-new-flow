@@ -73,7 +73,7 @@ ONE_REQUIRED_SECTIONS = [
 # Override per case via workflow_config.ai.{raw_model,title_model,one_model}
 # or the global ai.model (which wins for all phases when set).
 # ---------------------------------------------------------------------------
-DEFAULT_RAW_MODEL = "claude-opus-4-8"
+DEFAULT_RAW_MODEL = "claude-sonnet-4-6"
 DEFAULT_TITLE_MODEL = "claude-sonnet-4-6"
 DEFAULT_ONE_MODEL = "claude-sonnet-4-6"
 # Runaway-cost guard per agent call (USD). The 900s subprocess timeout is the
@@ -291,6 +291,12 @@ class SearchRequest:
 @dataclass
 class AIConfig:
     provider: str = "claude"
+    # Per-phase provider overrides. None -> fall back to global `provider`.
+    # Use this to mix engines per phase (e.g. claude for big RAW prompt,
+    # groq for smaller Title/OnE prompts).
+    raw_provider: Optional[str] = None
+    title_provider: Optional[str] = None
+    one_provider: Optional[str] = None
     # Global model override. When set it wins for EVERY phase (back-compat for
     # callers that pinned a single model). When None, each phase falls back to
     # its per-phase field below, then to the module DEFAULT_*_MODEL constant.
@@ -311,6 +317,9 @@ class AIConfig:
     def from_dict(cls, data: dict[str, Any]) -> "AIConfig":
         return cls(
             provider=data.get("provider", "claude"),
+            raw_provider=data.get("raw_provider"),
+            title_provider=data.get("title_provider"),
+            one_provider=data.get("one_provider"),
             model=data.get("model"),
             raw_model=data.get("raw_model"),
             title_model=data.get("title_model"),
@@ -2030,13 +2039,17 @@ class RecorderAutomationPipeline:
         return payload
 
     def _extract_apn_from_artifacts(self) -> Optional[str]:
-        """Best-effort APN extraction across documents_found.json AND the
-        legal_descriptions.json sidecar. Returns the LONGEST APN string
-        found (most check digits preserved).
+        """Best-effort APN extraction across documents_found.json, the
+        legal_descriptions.json sidecar, and *_extracted.md text files.
+        Returns the LONGEST APN string found (most check digits preserved).
 
         Audit fix: the previous implementation returned the FIRST hit,
         which favored truncated APNs missing check digits (e.g. it would
         return "502-153-010" when "502-153-010-9" was also available).
+
+        Extended 2026-06-23: also scans *_extracted.md for FL parcel-number
+        patterns so tax is not skipped when documents_found.json / legal
+        descriptions lack an APN field (seen in VOLLMAN NAT_300701).
         """
         candidates: list[str] = []
 
@@ -2062,6 +2075,27 @@ class RecorderAutomationPipeline:
             if apn and isinstance(apn, str) and apn.strip():
                 candidates.append(apn.strip())
 
+        # *_extracted.md text — scan for common APN/Parcel/Folio patterns.
+        # This catches the case where the APN is printed in the deed body but
+        # was never stored in documents_found.json or legal_descriptions.json.
+        if not candidates:
+            _apn_re = re.compile(
+                r"(?:Parcel\s+(?:ID|No\.?|Number|Identification)|"
+                r"Folio\s*(?:No\.?|Number)?|APN)[:\s#]+([0-9][0-9\-\.]{6,25})",
+                re.IGNORECASE,
+            )
+            for md_path in sorted(self.case_dir.glob("*_extracted.md")):
+                try:
+                    text = md_path.read_text(encoding="utf-8", errors="ignore")
+                    for m in _apn_re.finditer(text):
+                        val = m.group(1).strip().rstrip(".")
+                        if len(val) >= 8:
+                            candidates.append(val)
+                except Exception:
+                    pass
+                if candidates:
+                    break  # stop after first file with a hit
+
         if not candidates:
             return None
         # Longest wins (most check digits preserved); ties broken by
@@ -2085,7 +2119,9 @@ class RecorderAutomationPipeline:
         user_prompt = self._build_raw_user_prompt()
         self._save_prompt_bundle("raw", system_prompt, user_prompt)
         output = self._run_agent(
-            system_prompt, user_prompt, model=self._resolve_phase_model("raw")
+            system_prompt, user_prompt,
+            model=self._resolve_phase_model("raw"),
+            provider=self._resolve_phase_provider("raw"),
         )
         validation = self._validate_markdown_content(
             output,
@@ -2246,7 +2282,9 @@ class RecorderAutomationPipeline:
         user_prompt = self._build_title_user_prompt()
         self._save_prompt_bundle("title", system_prompt, user_prompt)
         output = self._run_agent(
-            system_prompt, user_prompt, model=self._resolve_phase_model("title")
+            system_prompt, user_prompt,
+            model=self._resolve_phase_model("title"),
+            provider=self._resolve_phase_provider("title"),
         )
         validation = self._validate_markdown_content(
             output,
@@ -2259,15 +2297,43 @@ class RecorderAutomationPipeline:
         # Mirrors the integrity guard pattern used by `_enforce_tax_status_in_raw`.
         if not validation.get("success", False):
             missing = validation.get("missing_sections") or []
-            # Save draft so the operator can inspect what Claude actually generated
-            # before deciding how to fix the prompt or validation.
-            draft_path = self.case_dir / "Title_Examination_Notes_DRAFT.md"
-            draft_path.write_text(output or "(empty output — agent returned nothing)", encoding="utf-8")
-            raise WorkflowError(
-                "Title examination notes validation failed: missing required "
-                f"section(s) {missing}. Draft saved to {draft_path.name} for inspection. "
-                "Re-run with a corrected prompt or verify the agent output before persisting."
-            )
+            # Auto-recover from leading truncation: the Claude CLI subprocess on
+            # Windows sometimes drops the very beginning of a long response, which
+            # cuts off the ## TITLE EXAMINATION SUMMARY header that the AI did
+            # generate. If that is the ONLY missing section and the output body is
+            # substantial (>500 chars), prepend a recovery header and re-validate
+            # rather than failing the entire phase and wasting the AI spend.
+            if missing == ["## TITLE EXAMINATION SUMMARY"] and len(output or "") > 500:
+                print(
+                    "[Title Notes] Leading-truncation recovery: prepending "
+                    "## TITLE EXAMINATION SUMMARY block.",
+                    flush=True,
+                )
+                _recovery = (
+                    "# Abstractor Notes/Chain &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; LOGO\n\n"
+                    "## TITLE EXAMINATION SUMMARY\n\n"
+                    "> *[Summary block auto-recovered — beginning of AI output was truncated "
+                    "by subprocess. Full examination details are in the sections below.]*\n\n"
+                    "---\n\n"
+                )
+                output = _recovery + output
+                validation = self._validate_markdown_content(
+                    output,
+                    self.config.title_required_sections,
+                    label="Title examination notes (truncation-recovered)",
+                )
+
+            if not validation.get("success", False):
+                # Save draft so the operator can inspect what Claude actually generated
+                # before deciding how to fix the prompt or validation.
+                draft_path = self.case_dir / "Title_Examination_Notes_DRAFT.md"
+                draft_path.write_text(output or "(empty output — agent returned nothing)", encoding="utf-8")
+                raise WorkflowError(
+                    "Title examination notes validation failed: missing required "
+                    f"section(s) {validation.get('missing_sections')}. "
+                    f"Draft saved to {draft_path.name} for inspection. "
+                    "Re-run with a corrected prompt or verify the agent output before persisting."
+                )
         self.title_markdown_path().write_text(output, encoding="utf-8")
         # Deterministic legal-description splice (#3) BEFORE validation.
         ld_repair = self._repair_legal_description(
@@ -2321,7 +2387,11 @@ class RecorderAutomationPipeline:
             "- § 3 Open Mortgages is OPEN ONLY — do NOT include released/reconveyed mortgages.\n"
         )
         self._save_prompt_bundle("one", system_prompt, user_prompt)
-        output = self._run_agent(system_prompt, user_prompt, model=self._resolve_phase_model("one"))
+        output = self._run_agent(
+            system_prompt, user_prompt,
+            model=self._resolve_phase_model("one"),
+            provider=self._resolve_phase_provider("one"),
+        )
         validation = self._validate_markdown_content(
             output, self.config.one_required_sections, label="OnE report"
         )
@@ -2483,14 +2553,28 @@ class RecorderAutomationPipeline:
         override, default = phase_overrides.get(phase, (None, None))
         return override or default
 
+    def _resolve_phase_provider(self, phase: str) -> str:
+        """Pick the AI provider for a report phase.
+
+        Precedence: phase-specific override (ai.raw_provider / ai.title_provider
+        / ai.one_provider) -> global ai.provider -> "claude" fallback.
+        """
+        phase_map = {
+            "raw":   self.config.ai.raw_provider,
+            "title": self.config.ai.title_provider,
+            "one":   self.config.ai.one_provider,
+        }
+        return phase_map.get(phase) or self.config.ai.provider or "claude"
+
     def _run_agent(
         self,
         system_prompt: str,
         user_prompt: str,
         model: Optional[str] = None,
+        provider: Optional[str] = None,
     ) -> str:
         agent = build_agent_runner(
-            provider=self.config.ai.provider,
+            provider=provider if provider is not None else self.config.ai.provider,
             model=model if model is not None else self.config.ai.model,
             timeout_seconds=self.config.ai.timeout_seconds,
             max_budget_usd=self.config.ai.max_budget_usd,
@@ -3164,7 +3248,15 @@ class RecorderAutomationPipeline:
                     matrix = fitz.Matrix(300 / 72, 300 / 72)
                     pixmap = page.get_pixmap(matrix=matrix)
                     image = Image.open(io.BytesIO(pixmap.tobytes("png")))
-                    text = pytesseract.image_to_string(image).strip()
+                    try:
+                        text = pytesseract.image_to_string(image).strip()
+                    except Exception as _ocr_exc:
+                        print(
+                            f"[OCR] page {page_index} skipped — "
+                            f"{type(_ocr_exc).__name__}: {str(_ocr_exc)[:120]}",
+                            flush=True,
+                        )
+                        text = "[OCR FAILED — PAGE SKIPPED]"
                     method = "ocr"
                     ocr_used = True
                 total_chars += len(text)

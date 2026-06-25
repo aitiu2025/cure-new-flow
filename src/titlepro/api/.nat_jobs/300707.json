@@ -1,0 +1,94 @@
+{
+  "nat_file_number": "300707",
+  "status": "completed",
+  "current_stage": "callback",
+  "created_at": "2026-06-24T10:37:35.266765",
+  "request_data": {
+    "nat_file_number": "300707",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "OSTIGUY CHRISTINA",
+    "county": "lee",
+    "state": "FL",
+    "address": "2137 CORAL POINT DR",
+    "city": "CAPE CORAL",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "GRENESKO ERIK"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-24T10:37:35.266765",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_lee owner=OSTIGUY, CHRISTINA",
+      "ts": "2026-06-24T10:37:35.301978"
+    },
+    {
+      "event": "pipeline_no_records",
+      "detail": "Recorder returned zero instruments \u2014 sending empty payload to NAT",
+      "ts": "2026-06-24T10:37:36.435046"
+    },
+    {
+      "event": "pipeline_completed",
+      "detail": "",
+      "ts": "2026-06-24T10:37:36.441052"
+    },
+    {
+      "event": "callback_building_payload",
+      "detail": "",
+      "ts": "2026-06-24T10:37:36.446054"
+    },
+    {
+      "event": "callback_sent",
+      "detail": "",
+      "ts": "2026-06-24T10:37:36.635699"
+    }
+  ],
+  "error": null,
+  "completed_at": "2026-06-24T10:37:36.635699",
+  "county_slug": "fl_lee",
+  "phases_progress": {
+    "search": {
+      "status": "no_records",
+      "started_at": "2026-06-24T10:37:35.306421",
+      "detail": "No instruments found"
+    }
+  },
+  "stage_started_at": "2026-06-24T10:37:36.442052",
+  "result": {
+    "data": {
+      "OfficialPropertyAddress": "2137 CORAL POINT DR, CAPE CORAL, FL",
+      "City": "CAPE CORAL",
+      "State": "FL",
+      "County": "Lee",
+      "VestingChainOfTitleInformation": [],
+      "OpenMortgageInformation": [],
+      "OpenJudgmentsAndEncumbrances": [],
+      "LegalDescription": "",
+      "TaxYear": "",
+      "TaxAPNAccount": "",
+      "TaxPropertyAddress": "",
+      "TaxInstallmentStatus": "",
+      "TaxSource": "",
+      "TaxCapturedAt": "",
+      "TaxAssessedYear": "",
+      "TaxMunicipalityCounty": "Lee",
+      "TaxPaymentSchedule": "November (4% discount), December (3% discount), January (2% discount), February (1% discount), March (full payment). Delinquent after April 1.",
+      "TaxDueDate": "March 31",
+      "TaxDelinquentDate": "April 1",
+      "TaxType": "Ad Valorem",
+      "TaxStatus": "",
+      "TaxAmount": "",
+      "TaxBuildingValue": "",
+      "TaxTotalValue": "",
+      "TaxAssessedValue": "",
+      "TaxExemptions": "",
+      "TaxComments": "",
+      "ExamNotes": "Recorder search completed \u2014 no instruments found under the provided name and county."
+    }
+  }
+}

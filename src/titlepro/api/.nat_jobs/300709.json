@@ -1,0 +1,78 @@
+{
+  "nat_file_number": "300709",
+  "status": "cancelled",
+  "current_stage": "tax",
+  "created_at": "2026-06-24T09:12:18.791534",
+  "request_data": {
+    "nat_file_number": "300709",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "RILEY ROBERT",
+    "county": "pasco",
+    "state": "FL",
+    "address": "36700 CHRISTIAN RD",
+    "city": "DADE CITY",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "RILEY LYN"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-24T09:12:18.791534",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_pasco owner=RILEY, ROBERT",
+      "ts": "2026-06-24T09:12:18.834698"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Download validation failed. Missing metadata for ['2005153121'], missing files for none.",
+      "ts": "2026-06-24T09:25:50.136534"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=downloading",
+      "ts": "2026-06-24T09:33:49.457719"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_pasco owner=RILEY, ROBERT",
+      "ts": "2026-06-24T09:33:49.496696"
+    },
+    {
+      "event": "cancelled",
+      "detail": "operator stop",
+      "ts": "2026-06-24T09:34:31.791712"
+    }
+  ],
+  "error": null,
+  "completed_at": null,
+  "county_slug": "fl_pasco",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-24T09:12:18.836655",
+      "completed_at": "2026-06-24T09:12:26.761332",
+      "detail": "Found 83 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-24T09:33:49.515993",
+      "completed_at": "2026-06-24T09:34:23.539842",
+      "detail": "82 / 83 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "running",
+      "started_at": "2026-06-24T09:34:23.571375"
+    }
+  },
+  "stage_started_at": "2026-06-24T09:34:23.569839",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\api\\server.py\", line 3486, in _nat_run_extraction\n    _phase_result = getattr(pipeline, _phase)()\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 1232, in download\n    summary = self._download_validation_summary(raise_on_failure=self.config.strict_downloads)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 1285, in _download_validation_summary\n    raise WorkflowError(\ntitlepro.automation.pipeline.WorkflowError: Download validation failed. Missing metadata for ['2005153121'], missing files for none.\n"
+}

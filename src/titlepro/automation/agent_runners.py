@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 import os
 import shutil
@@ -125,7 +126,7 @@ class ClaudeCliRunner(BaseAgentRunner):
             self.cli_path,
             "--print",
             "--allowedTools",
-            "Read,Bash",
+            "",   # no tools — all context is in the prompt; tool calls waste time and money
         ]
         # Per-phase model selection. Previously self.model was stored but
         # never forwarded, so every report ran on the CLI default (Opus
@@ -162,7 +163,12 @@ class ClaudeCliRunner(BaseAgentRunner):
                 f"Claude generation timed out after {self.timeout_seconds} seconds"
             ) from exc
         finally:
-            prompt_file.unlink(missing_ok=True)
+            try:
+                prompt_file.unlink(missing_ok=True)
+            except PermissionError:
+                # Windows holds the stdin handle briefly after subprocess exits;
+                # the temp file is overwritten on the next run anyway.
+                pass
 
         output = sanitize_markdown_output(result.stdout or "")
         success = result.returncode == 0 and bool(output)
@@ -174,6 +180,214 @@ class ClaudeCliRunner(BaseAgentRunner):
             stdout=result.stdout,
             stderr=result.stderr,
             error=None if success else (result.stderr or "Claude returned no markdown output"),
+        )
+
+
+class AnthropicApiRunner(BaseAgentRunner):
+    """Calls the Anthropic Messages API directly — no subprocess, no tool calls, predictable cost."""
+
+    provider_name = "anthropic_api"
+
+    def __init__(
+        self,
+        model: Optional[str] = None,
+        timeout_seconds: int = 900,
+        api_key: Optional[str] = None,
+        max_budget_usd: Optional[float] = None,
+    ):
+        super().__init__(model=model, timeout_seconds=timeout_seconds, max_budget_usd=max_budget_usd)
+        # Priority: explicit arg > env var > secrets.json
+        self._api_key = api_key or os.environ.get("ANTHROPIC_API_KEY") or self._read_secrets_key()
+
+    @staticmethod
+    def _read_secrets_key() -> Optional[str]:
+        try:
+            secrets_path = Path(__file__).parent.parent.parent.parent / "config" / "secrets.json"
+            return json.loads(secrets_path.read_text(encoding="utf-8")).get("ANTHROPIC_API_KEY")
+        except Exception:
+            return None
+
+    def run(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        cwd: Path,
+        extra_dirs: Iterable[Path] = (),
+    ) -> AgentRunResult:
+        try:
+            import anthropic
+        except ImportError:
+            raise AgentRunnerError(
+                "anthropic package not installed. Run: pip install anthropic"
+            )
+
+        if not self._api_key:
+            raise AgentRunnerError(
+                "No ANTHROPIC_API_KEY found. Set it in config/secrets.json or env."
+            )
+
+        model = self.model or "claude-sonnet-4-6"
+        client = anthropic.Anthropic(
+            api_key=self._api_key,
+            timeout=float(self.timeout_seconds),
+        )
+
+        message = client.messages.create(
+            model=model,
+            max_tokens=16384,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+
+        output = "".join(
+            block.text for block in message.content if hasattr(block, "text")
+        ).strip()
+
+        success = bool(output)
+        return AgentRunResult(
+            success=success,
+            output=output,
+            provider=self.provider_name,
+            command=[f"anthropic.messages.create(model={model})"],
+            stdout=output,
+            stderr="",
+            error=None if success else "Anthropic API returned empty response",
+        )
+
+
+class GoogleAIRunner(BaseAgentRunner):
+    """Calls Google AI Studio (Gemini) API directly — no subprocess, no tool calls."""
+
+    provider_name = "google_ai"
+
+    def __init__(
+        self,
+        model: Optional[str] = None,
+        timeout_seconds: int = 900,
+        api_key: Optional[str] = None,
+        max_budget_usd: Optional[float] = None,
+    ):
+        super().__init__(model=model, timeout_seconds=timeout_seconds, max_budget_usd=max_budget_usd)
+        self._api_key = api_key or os.environ.get("GOOGLE_API_KEY") or self._read_secrets_key()
+
+    @staticmethod
+    def _read_secrets_key() -> Optional[str]:
+        try:
+            secrets_path = Path(__file__).parent.parent.parent.parent / "config" / "secrets.json"
+            return json.loads(secrets_path.read_text(encoding="utf-8")).get("GOOGLE_API_KEY")
+        except Exception:
+            return None
+
+    def run(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        cwd: Path,
+        extra_dirs: Iterable[Path] = (),
+    ) -> AgentRunResult:
+        try:
+            import google.generativeai as genai
+        except ImportError:
+            raise AgentRunnerError(
+                "google-generativeai package not installed. "
+                "Run: pip install google-generativeai"
+            )
+
+        if not self._api_key:
+            raise AgentRunnerError(
+                "No GOOGLE_API_KEY found. Set it in config/secrets.json or env."
+            )
+
+        model_name = self.model or "gemini-2.0-flash"
+        genai.configure(api_key=self._api_key)
+        model_obj = genai.GenerativeModel(
+            model_name=model_name,
+            system_instruction=system_prompt,
+        )
+
+        response = model_obj.generate_content(
+            user_prompt,
+            generation_config=genai.GenerationConfig(max_output_tokens=16384),
+        )
+
+        output = (response.text or "").strip()
+        success = bool(output)
+        return AgentRunResult(
+            success=success,
+            output=output,
+            provider=self.provider_name,
+            command=[f"google.generativeai.generate_content(model={model_name})"],
+            stdout=output,
+            stderr="",
+            error=None if success else "Google AI returned empty response",
+        )
+
+
+class GroqAIRunner(BaseAgentRunner):
+    """Calls Groq API (LLaMA / Mixtral) — very fast inference, no tool calls."""
+
+    provider_name = "groq_ai"
+
+    def __init__(
+        self,
+        model: Optional[str] = None,
+        timeout_seconds: int = 900,
+        api_key: Optional[str] = None,
+        max_budget_usd: Optional[float] = None,
+    ):
+        super().__init__(model=model, timeout_seconds=timeout_seconds, max_budget_usd=max_budget_usd)
+        self._api_key = api_key or os.environ.get("GROQ_API_KEY") or self._read_secrets_key()
+
+    @staticmethod
+    def _read_secrets_key() -> Optional[str]:
+        try:
+            secrets_path = Path(__file__).parent.parent.parent.parent / "config" / "secrets.json"
+            return json.loads(secrets_path.read_text(encoding="utf-8")).get("GROQ_API_KEY")
+        except Exception:
+            return None
+
+    def run(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        cwd: Path,
+        extra_dirs: Iterable[Path] = (),
+    ) -> AgentRunResult:
+        try:
+            from groq import Groq
+        except ImportError:
+            raise AgentRunnerError(
+                "groq package not installed. Run: pip install groq"
+            )
+
+        if not self._api_key:
+            raise AgentRunnerError(
+                "No GROQ_API_KEY found. Set it in config/secrets.json or env."
+            )
+
+        model_name = self.model or "llama-3.3-70b-versatile"
+        client = Groq(api_key=self._api_key, timeout=float(self.timeout_seconds))
+
+        response = client.chat.completions.create(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user",   "content": user_prompt},
+            ],
+            max_tokens=16384,
+            temperature=0.2,
+        )
+
+        output = (response.choices[0].message.content or "").strip()
+        success = bool(output)
+        return AgentRunResult(
+            success=success,
+            output=output,
+            provider=self.provider_name,
+            command=[f"groq.chat.completions.create(model={model_name})"],
+            stdout=output,
+            stderr="",
+            error=None if success else "Groq returned empty response",
         )
 
 
@@ -291,6 +505,28 @@ def build_agent_runner(
     max_budget_usd: Optional[float] = None,
 ) -> BaseAgentRunner:
     normalized = provider.strip().lower()
+    # Groq (LLaMA / Mixtral) — set AI_ENGINE=groq in secrets.json to activate.
+    if normalized in ("groq", "groq_ai"):
+        return GroqAIRunner(
+            model=model,
+            timeout_seconds=timeout_seconds,
+            max_budget_usd=max_budget_usd,
+        )
+    # Google AI Studio — set AI_ENGINE=google in secrets.json to activate.
+    if normalized in ("google", "google_ai", "gemini"):
+        return GoogleAIRunner(
+            model=model,
+            timeout_seconds=timeout_seconds,
+            max_budget_usd=max_budget_usd,
+        )
+    # Direct Anthropic API — no subprocess, no tool calls, predictable cost.
+    # Triggered by AI_ENGINE=claude (or CLAUDE_MODE=api) in secrets.json.
+    if normalized in ("api", "anthropic", "anthropic_api"):
+        return AnthropicApiRunner(
+            model=model,
+            timeout_seconds=timeout_seconds,
+            max_budget_usd=max_budget_usd,
+        )
     if normalized == "claude":
         return ClaudeCliRunner(
             model=model,

@@ -571,48 +571,90 @@ class PalmBeachPBCPAO(AbstractPropertyAppraiser):
 
     @classmethod
     def _parse_assessment_table(cls, soup: BeautifulSoup) -> Dict[str, int]:
-        """Pull the most-recent Assessed Value / Taxable Value / Exemption
-        Amount from the per-year Assessment table.
+        """Pull Assessed Value / Taxable Value / Total Market Value / Land Value /
+        Improvement Value from the PBCPAO per-year assessment/appraisal tables.
 
-        PBCPAO emits two assessment tables (5-year condensed + 10-year full).
-        We use the first one with 'Assessed Value' AND 'Taxable Value' rows
-        and take the leftmost numeric column (the most recent year).
+        PBCPAO may render the assessment rows (Assessed Value, Taxable Value,
+        Exemption Amount) in one table and the appraisal rows (Total Market Value,
+        Land Value, Improvement Value) in a SEPARATE table.  We do two passes:
+
+        Pass 1 — find the table with BOTH "assessed value" AND "taxable value" rows.
+        Pass 2 — scan ALL tables for appraisal rows not yet found (total market value,
+                  land value, improvement value).
         """
+        _APPRAISAL_LABELS = {
+            "assessed value":    "assessed_value",
+            "taxable value":     "taxable_value",
+            "net taxable value": "taxable_value",
+            "exemption amount":  "exemption_amount",
+            "total market value":"just_value",
+            "just value":        "just_value",
+            "market value":      "just_value",
+            "improvement value": "improvement_value",
+            "building value":    "improvement_value",
+            "land value":        "land_value",
+        }
+
+        def _extract_from_table(t) -> Dict[str, int]:
+            extracted: Dict[str, int] = {}
+            for r in t.find_all("tr"):
+                cells = r.find_all(["td", "th"])
+                if len(cells) < 2:
+                    continue
+                label = cells[0].get_text(" ", strip=True).lower().strip()
+                key = _APPRAISAL_LABELS.get(label)
+                if not key:
+                    continue
+                values_text = [c.get_text(" ", strip=True) for c in cells[1:]]
+                first_val = next(
+                    (v for v in values_text if v.startswith("$") or v[:1].isdigit()), ""
+                )
+                if first_val:
+                    amt = cls._safe_money(first_val)
+                    if amt and key not in extracted:
+                        extracted[key] = amt
+            return extracted
+
+        out: Dict[str, int] = {}
+
+        # Pass 1 — primary assessment table (must have assessed value + taxable value)
         for t in soup.find_all("table"):
             rows = t.find_all("tr")
             if len(rows) < 3:
                 continue
-            row_labels = [r.find_all(["td", "th"])[0].get_text(" ", strip=True) for r in rows if r.find_all(["td", "th"])]
-            labels_lower = [l.lower() for l in row_labels]
-            if "assessed value" not in labels_lower or "taxable value" not in labels_lower:
+            row_labels = [
+                r.find_all(["td", "th"])[0].get_text(" ", strip=True).lower()
+                for r in rows if r.find_all(["td", "th"])
+            ]
+            if "assessed value" not in row_labels and "taxable value" not in row_labels:
                 continue
-            out: Dict[str, int] = {}
-            for r in rows:
-                cells = r.find_all(["td", "th"])
-                if len(cells) < 2:
-                    continue
-                label = cells[0].get_text(" ", strip=True).lower()
-                # First data cell after the label = most recent year
-                values_text = [c.get_text(" ", strip=True) for c in cells[1:]]
-                first_val = next((v for v in values_text if v.startswith("$") or v[:1].isdigit()), "")
-                if not first_val:
-                    continue
-                amt = cls._safe_money(first_val)
-                if label == "assessed value":
-                    out["assessed_value"] = amt
-                elif label == "taxable value":
-                    out["taxable_value"] = amt
-                elif label == "exemption amount":
-                    out["exemption_amount"] = amt
-                elif label == "total market value":
-                    out["just_value"] = amt
-                elif label == "improvement value":
-                    out["improvement_value"] = amt
-                elif label == "land value":
-                    out["land_value"] = amt
+            out.update(_extract_from_table(t))
             if out:
-                return out
-        return {}
+                break
+
+        # Pass 2 — look for appraisal table with land/improvement/market rows
+        # that may be separate from the assessment table
+        if not out.get("just_value") or not out.get("land_value"):
+            appraisal_keys = {"just_value", "land_value", "improvement_value"}
+            for t in soup.find_all("table"):
+                rows = t.find_all("tr")
+                if len(rows) < 3:
+                    continue
+                row_labels = [
+                    r.find_all(["td", "th"])[0].get_text(" ", strip=True).lower()
+                    for r in rows if r.find_all(["td", "th"])
+                ]
+                if not any(lbl in _APPRAISAL_LABELS and _APPRAISAL_LABELS[lbl] in appraisal_keys
+                           for lbl in row_labels):
+                    continue
+                partial = _extract_from_table(t)
+                for k, v in partial.items():
+                    if k not in out:
+                        out[k] = v
+                if out.get("just_value") and out.get("land_value"):
+                    break
+
+        return out
 
     @classmethod
     def _parse_exemption_table(cls, soup: BeautifulSoup) -> Dict[str, Any]:
@@ -716,6 +758,8 @@ class PalmBeachPBCPAO(AbstractPropertyAppraiser):
             legal_description=property_detail.get("Legal Description", "").strip(),
             just_value=asmt.get("just_value", 0),
             assessed_value=asmt.get("assessed_value", 0),
+            land_value=asmt.get("land_value", 0),
+            improvement_value=asmt.get("improvement_value", 0),
             homestead_active=exempt.get("homestead_active", False),
             homestead_amount=asmt.get("exemption_amount", 0),
             year_built=year_built,

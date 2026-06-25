@@ -149,6 +149,15 @@ def serve_ui():
     return jsonify({"error": "CURE.html not found", "path": str(cure_path)}), 404
 
 
+@app.route('/nat-audit', methods=['GET'])
+def serve_nat_audit():
+    """Serve the NAT Audit Panel UI — job queue, history, submit form, manual workbench."""
+    audit_path = BASE_DIR / "nat_audit.html"
+    if audit_path.exists():
+        return send_file(audit_path)
+    return jsonify({"error": "nat_audit.html not found", "path": str(audit_path)}), 404
+
+
 @app.route('/pdf/<owner>/<filename>', methods=['GET'])
 def serve_pdf(owner, filename):
     """Serve PDF files from the downloaded_doc folder.
@@ -3244,6 +3253,993 @@ sys.stdout = LogCapture(sys.stdout, server_logs)
 sys.stderr = LogCapture(sys.stderr, server_logs)
 
 
+# =============================================================================
+# NAT INTEGRATION ENDPOINTS
+# Fire-and-forget async pipeline API for NAT order management.
+# =============================================================================  # noqa — duplicate marker removed below
+# Fire-and-forget async pipeline API for NAT order management.
+# NAT POSTs an order → CURE ACKs immediately → background thread runs
+# RecorderAutomationPipeline → CURE POSTs 47-field callback to NAT.
+# =============================================================================
+
+import traceback as _tb
+import requests as _requests
+
+# ── Job tracker ───────────────────────────────────────────────────────────────
+nat_jobs: dict = {}
+NAT_JOBS_DIR = BASE_DIR / ".nat_jobs"
+NAT_JOBS_DIR.mkdir(exist_ok=True)
+NAT_TRASH_DIR = BASE_DIR / ".nat_trash"
+NAT_TRASH_DIR.mkdir(exist_ok=True)
+
+# ── Per-job in-memory log buffer (cleared on server restart) ─────────────────
+_nat_logs: dict = {}   # nfn → list[{"ts": ISO, "msg": str}]
+_server_log: list = [] # global stream — all jobs combined, for Console tab
+_SERVER_LOG_MAX = 3000
+
+
+def _nat_log(nfn: str, msg: str) -> None:
+    ts = datetime.utcnow().isoformat()
+    buf = _nat_logs.setdefault(nfn, [])
+    buf.append({"ts": ts, "msg": msg})
+    if len(buf) > 500:
+        _nat_logs[nfn] = buf[-500:]
+    # Also write to global console stream
+    _server_log.append({"ts": ts, "nfn": nfn, "msg": msg})
+    if len(_server_log) > _SERVER_LOG_MAX:
+        del _server_log[:-_SERVER_LOG_MAX]
+    print(f"[NAT:{nfn}] {msg}", flush=True)
+
+
+# Maps each pipeline phase to the coarse current_stage value used by the NAT modal
+_PHASE_TO_STAGE: dict = {
+    "search": "search",
+    "download": "downloading",
+    "validate_downloads": "downloading",
+    "extract_text": "tax",
+    "extract_legal_descriptions": "tax",
+    "phase1_verifications": "tax",
+    "tax_lookup": "tax",
+    "generate_raw_report": "ai_report_raw",
+    "generate_title_notes": "ai_report_abs",
+    "generate_one_report": "ai_report_abs",
+    "render_pdfs": "ai_report_abs",
+    "serialize_reports": "ai_report_abs",
+}
+
+_PHASE_LABELS: dict = {
+    "search": "Recorder Search",
+    "download": "Download PDFs",
+    "validate_downloads": "Validate Downloads",
+    "extract_text": "Extract Text (OCR)",
+    "extract_legal_descriptions": "Extract Legal Descriptions",
+    "phase1_verifications": "Phase 1 Verifications",
+    "tax_lookup": "Tax Lookup",
+    "generate_raw_report": "Generate RAW Report (AI)",
+    "generate_title_notes": "Generate Title Notes (AI)",
+    "generate_one_report": "Generate OnE Report (AI)",
+    "render_pdfs": "Render PDFs",
+    "serialize_reports": "Serialize Reports",
+}
+
+_NAT_STAGE_PRIORITY: dict = {
+    "queued": -1, "search": 0, "downloading": 1, "tax": 2,
+    "ai_report_raw": 3, "ai_report_abs": 4, "callback": 5,
+}
+_NAT_STAGE_TIMEOUTS: dict = {  # minutes per stage
+    # "tax" covers: extract_text (OCR, ~30-60 min for large batches), legal descriptions,
+    # phase1_verifications, and tax_lookup — 90 min gives OCR room to breathe.
+    "search": 10, "downloading": 30, "tax": 90,
+    "ai_report_raw": 45, "ai_report_abs": 45, "callback": 5,
+}
+
+
+# ── Persistence helpers ───────────────────────────────────────────────────────
+
+def _nat_job_read(nfn: str) -> dict:
+    path = NAT_JOBS_DIR / f"{nfn}.json"
+    if path.exists():
+        try:
+            with open(path, encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return nat_jobs.get(nfn, {})
+
+
+def _nat_job_write(nfn: str, job: dict) -> None:
+    nat_jobs[nfn] = job
+    path = NAT_JOBS_DIR / f"{nfn}.json"
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(job, f, indent=2, default=str)
+    except Exception as exc:
+        print(f"[NAT] Job write failed for {nfn}: {exc}", flush=True)
+
+
+def _nat_checkpoint(job: dict, nfn: str, stage: str) -> None:
+    job["current_stage"] = stage
+    job["stage_started_at"] = datetime.utcnow().isoformat()
+    _nat_job_write(nfn, job)
+
+
+def _nat_event(job: dict, nfn: str, event_type: str, detail: str = "") -> None:
+    job.setdefault("timeline", []).append({
+        "event": event_type,
+        "detail": detail[:500] if detail else "",
+        "ts": datetime.utcnow().isoformat(),
+    })
+    _nat_job_write(nfn, job)
+
+
+def _nat_should_run(stage: str, resume_from: str) -> bool:
+    return _NAT_STAGE_PRIORITY.get(stage, 0) >= _NAT_STAGE_PRIORITY.get(resume_from, 0)
+
+
+# ── NAT callback ──────────────────────────────────────────────────────────────
+
+def _nat_call_back_to_nat(payload: dict) -> bool:
+    callback_url = os.environ.get(
+        "NAT_CALLBACK_URL", "http://localhost/nat_aws_git/api/nat/cure-result"
+    )
+    auth_token = os.environ.get("NAT_AUTH_TOKEN", "cure-nat-shared-secret-change-me")
+    nfn = payload.get("nat_file_number", "?")
+    try:
+        resp = _requests.post(
+            callback_url,
+            json=payload,
+            headers={"X-Cure-Auth": auth_token, "Content-Type": "application/json"},
+            timeout=30,
+        )
+        print(f"[NAT] Callback {nfn} → {callback_url} → {resp.status_code}", flush=True)
+        return resp.status_code in (200, 201)
+    except Exception as exc:
+        print(f"[NAT] Callback {nfn} FAILED: {exc}", flush=True)
+        return False
+
+
+# ── Async extraction thread ───────────────────────────────────────────────────
+
+def _nat_run_extraction(nfn: str, request_data: dict, resume_from: str = "search") -> None:
+    """
+    Main background worker.  Runs RecorderAutomationPipeline then fires
+    the 47-field callback to NAT.  Called in a daemon thread.
+    """
+    job = _nat_job_read(nfn)
+    if not job:
+        print(f"[NAT] _nat_run_extraction: job {nfn} not found on disk — aborting", flush=True)
+        return
+
+    print(f"[NAT] Starting extraction for {nfn}, resume_from={resume_from}", flush=True)
+
+    try:
+        from titlepro.automation.nat_pipeline_bridge import build_nat_workflow_config
+        from titlepro.automation.nat_payload_builder import build_nat_payload
+
+        config = build_nat_workflow_config(request_data, nfn)
+        job["county_slug"] = config.county
+        _nat_job_write(nfn, job)
+
+        # ── Phase: pipeline (search → download → extract → AI reports) ──
+        zero_records = False  # set True when recorder finds no instruments
+        # Run pipeline for all resume_from values EXCEPT "callback"
+        # (callback-only retry skips the pipeline and re-fires the result).
+        # config.resume=True lets the pipeline skip phases already on disk.
+        if resume_from != "callback":
+            job["status"] = "running"
+            _nat_event(job, nfn, "pipeline_started", f"county={config.county} owner={config.owner_name}")
+
+            if not WORKFLOW_AVAILABLE or RecorderAutomationPipeline is None:
+                raise RuntimeError("RecorderAutomationPipeline not available — import failed")
+
+            pipeline = RecorderAutomationPipeline(config)
+            job.setdefault("phases_progress", {})
+
+            for _phase in pipeline.phase_order:
+                if not pipeline.phase_enabled(_phase):
+                    job["phases_progress"][_phase] = {"status": "skipped"}
+                    continue
+
+                # Skip phases already completed from a prior run (resume logic)
+                if config.resume and pipeline._can_skip_phase(_phase):
+                    if _phase not in job["phases_progress"] or job["phases_progress"][_phase].get("status") != "done":
+                        job["phases_progress"][_phase] = {"status": "done", "detail": "already complete"}
+                        _nat_log(nfn, f"⏭ {_PHASE_LABELS.get(_phase, _phase)} — already complete")
+                        _nat_job_write(nfn, job)
+                    continue
+
+                # Update NAT-modal stage before running
+                _nat_checkpoint(job, nfn, _PHASE_TO_STAGE.get(_phase, _phase))
+                _label = _PHASE_LABELS.get(_phase, _phase)
+                _nat_log(nfn, f"▶ {_label}…")
+                # For AI phases, log which engine/model will be used
+                _AI_PHASE_NAMES = {"generate_raw_report", "generate_title_notes", "generate_one_report"}
+                if _phase in _AI_PHASE_NAMES:
+                    try:
+                        from titlepro.automation.nat_pipeline_bridge import _load_secrets_model, _load_secrets_provider
+                        _ai_provider = _load_secrets_provider()
+                        _ai_model = _load_secrets_model()
+                        _nat_log(nfn, f"   🤖 Engine: {_ai_provider} | Model: {_ai_model}")
+                    except Exception:
+                        pass
+                _phase_t0 = __import__("time").monotonic()
+                job["phases_progress"][_phase] = {
+                    "status": "running",
+                    "started_at": datetime.utcnow().isoformat(),
+                }
+                _nat_job_write(nfn, job)
+
+                # For long-running AI phases, emit a heartbeat every 2 min so
+                # the live-log terminal shows the job is alive (not frozen).
+                _AI_PHASES = {"generate_raw_report", "generate_title_notes", "generate_one_report"}
+                _hb_stop = threading.Event()
+                if _phase in _AI_PHASES:
+                    def _heartbeat(_nfn=nfn, _lbl=_label, _stop=_hb_stop):
+                        mins = 0
+                        while not _stop.wait(120):
+                            mins += 2
+                            _nat_log(_nfn, f"⏳ {_lbl} — still generating… ({mins} min elapsed)")
+                    threading.Thread(target=_heartbeat, daemon=True).start()
+
+                try:
+                    pipeline.state_store.mark_started(_phase)
+                    _phase_result = getattr(pipeline, _phase)()
+                    pipeline.state_store.mark_completed(_phase, _phase_result)
+                    _hb_stop.set()  # stop heartbeat
+
+                    job["phases_progress"][_phase]["status"] = "done"
+                    job["phases_progress"][_phase]["completed_at"] = datetime.utcnow().isoformat()
+
+                    # Capture useful counts per phase (with elapsed time)
+                    _elapsed = __import__("time").monotonic() - _phase_t0
+                    _t = f" ({_elapsed:.1f}s)"
+                    if _phase == "search":
+                        _doc_count = (_phase_result or {}).get("total_unique_documents", "?")
+                        job["phases_progress"][_phase]["detail"] = f"Found {_doc_count} documents"
+                        _nat_log(nfn, f"✓ Search complete — {_doc_count} documents found{_t}")
+                    elif _phase == "download":
+                        try:
+                            _dm = json.loads(pipeline.download_manifest_path().read_text(encoding="utf-8"))
+                            _res = _dm.get("results", [])
+                            _ok = sum(1 for r in _res if r.get("status") in ("success", "skipped_existing"))
+                            job["phases_progress"][_phase]["detail"] = f"{_ok} / {len(_res)} PDFs"
+                            _nat_log(nfn, f"✓ Download complete — {_ok}/{len(_res)} PDFs{_t}")
+                        except Exception:
+                            _nat_log(nfn, f"✓ {_label} complete{_t}")
+                    elif _phase == "extract_text":
+                        _ok_ext = (_phase_result or {}).get("extracted_documents", "?")
+                        job["phases_progress"][_phase]["detail"] = f"{_ok_ext} docs extracted"
+                        _nat_log(nfn, f"✓ Text extraction complete — {_ok_ext} docs{_t}")
+                    elif _phase == "tax_lookup":
+                        _tax_status = (_phase_result or {}).get("status", "?")
+                        _nat_log(nfn, f"✓ Tax lookup complete — status: {_tax_status}{_t}")
+                    elif _phase == "generate_raw_report":
+                        _nat_log(nfn, f"✓ RAW report generated{_t}")
+                    elif _phase == "generate_title_notes":
+                        _nat_log(nfn, f"✓ Title Notes generated{_t}")
+                    elif _phase == "generate_one_report":
+                        _one_docx = (_phase_result or {}).get("one_docx")
+                        _docx_note = " (DOCX)" if _one_docx else ""
+                        _nat_log(nfn, f"✓ OnE Report generated{_docx_note}{_t}")
+                    elif _phase == "render_pdfs":
+                        _pdf_list = [v for k, v in (_phase_result or {}).items() if k.endswith("_pdf") and v]
+                        _nat_log(nfn, f"✓ PDFs rendered — {len(_pdf_list)} file(s){_t}")
+                    elif _phase == "serialize_reports":
+                        _nat_log(nfn, f"✓ Reports serialized{_t}")
+                    else:
+                        _nat_log(nfn, f"✓ {_label} complete{_t}")
+
+                    _nat_job_write(nfn, job)
+
+                except Exception as _phase_exc:
+                    _hb_stop.set()  # stop heartbeat on failure too
+                    _msg = str(_phase_exc)
+                    if _phase == "search" and "zero documents" in _msg.lower():
+                        zero_records = True
+                        job["phases_progress"][_phase]["status"] = "no_records"
+                        job["phases_progress"][_phase]["detail"] = "No instruments found"
+                        _nat_log(nfn, "⚠ Search returned zero instruments — continuing with empty result")
+                        _nat_event(job, nfn, "pipeline_no_records",
+                                   "Recorder returned zero instruments — sending empty payload to NAT")
+                        _nat_job_write(nfn, job)
+                        break  # skip remaining phases, proceed to callback
+                    else:
+                        _elapsed_f = __import__("time").monotonic() - _phase_t0
+                        pipeline.state_store.mark_failed(_phase, _msg)
+                        job["phases_progress"][_phase]["status"] = "failed"
+                        job["phases_progress"][_phase]["detail"] = _msg[:500]
+                        _nat_log(nfn, f"✗ {_label} FAILED after {_elapsed_f:.1f}s")
+                        _nat_log(nfn, f"   ERROR: {_msg[:400]}")
+                        _nat_job_write(nfn, job)
+                        raise  # propagate to outer except block
+
+            _nat_event(job, nfn, "pipeline_completed")
+
+        # ── Phase: callback ──
+        if _nat_should_run("callback", resume_from):
+            _nat_checkpoint(job, nfn, "callback")
+            output_dir = str(DOWNLOAD_BASE / f"NAT_{nfn}")
+            _nat_event(job, nfn, "callback_building_payload")
+            cure_data = build_nat_payload(output_dir, request_data)
+            if zero_records:
+                cure_data["ExamNotes"] = (
+                    cure_data.get("ExamNotes") or
+                    "Recorder search completed — no instruments found under the provided name and county."
+                )
+
+            # Collect generated PDF report files for NAT attachment.
+            # Includes the three canonical CURE reports (no-date versions).
+            _report_files: list = []
+            _out_path = Path(output_dir)
+            _exact_pdfs = ["RAW_TWO_OWNER_SEARCH_EXAM.pdf", "Title_Examination_Notes.pdf"]
+            for _pdf_name in _exact_pdfs:
+                _p = _out_path / _pdf_name
+                if _p.exists():
+                    _report_files.append(str(_p.resolve()))
+            # OnE_Report has an owner-specific filename — pick the first non-dated copy
+            for _f in sorted(_out_path.glob("OnE_Report_*.pdf")):
+                if "_NAT_" not in _f.name:
+                    _report_files.append(str(_f.resolve()))
+                    break
+
+            # NAT expects: { nat_file_number, status:"Success"|"Failure",
+            #                status_reason, data:{...}, report_files:[...] }
+            nat_payload = {
+                "nat_file_number": nfn,
+                "status": "Success",
+                "status_reason": None,
+                "data": cure_data,
+                "report_files": _report_files,
+            }
+            ok = _nat_call_back_to_nat(nat_payload)
+            job["status"] = "completed" if ok else "callback_failed"
+            job["completed_at"] = datetime.utcnow().isoformat()
+            # Store cure_data in job["result"]["data"] so the NAT portal's
+            # job-status poll can detect it and show the "Save to Exam Receipt" button.
+            job["result"] = {"data": cure_data}
+            _nat_event(job, nfn, "callback_sent" if ok else "callback_failed")
+            _nat_job_write(nfn, job)
+
+    except Exception as exc:
+        trace = _tb.format_exc()
+        print(f"[NAT] Job {nfn} FAILED: {exc}\n{trace}", flush=True)
+        job["status"] = "failed"
+        job["error"] = str(exc)[:1000]
+        job["error_trace"] = trace[:3000]
+        _nat_event(job, nfn, "pipeline_failed", str(exc)[:500])
+        _nat_job_write(nfn, job)
+        _nat_call_back_to_nat({
+            "nat_file_number": nfn,
+            "status": "Failure",
+            "status_reason": str(exc)[:500],
+            "data": {},
+            "report_files": [],
+        })
+
+
+# ── Fault tolerance: orphan recovery (runs at startup) ───────────────────────
+
+def _nat_recover_orphaned_jobs() -> None:
+    """Mark stale running jobs as failed so NAT can show Retry/Restart."""
+    import time as _time
+    now = _time.time()
+    recovered = 0
+    for jf in NAT_JOBS_DIR.glob("*.json"):
+        try:
+            with open(jf, encoding="utf-8") as f:
+                job = json.load(f)
+        except Exception:
+            continue
+        if job.get("status") not in ("queued", "running", "downloading"):
+            continue
+        started = job.get("created_at") or job.get("stage_started_at", "")
+        try:
+            import datetime as _dt
+            age_s = (
+                _dt.datetime.utcnow()
+                - _dt.datetime.fromisoformat(started.replace("Z", ""))
+            ).total_seconds()
+        except Exception:
+            age_s = 9999
+        if age_s < 600:  # under 10 min — might still be alive
+            continue
+        nfn = jf.stem
+        job["status"] = "failed"
+        job["error"] = "Server restarted while job was running (orphan recovery)"
+        job.setdefault("timeline", []).append({
+            "event": "job_orphaned",
+            "detail": f"age_seconds={int(age_s)}",
+            "ts": datetime.utcnow().isoformat(),
+        })
+        _nat_job_write(nfn, job)
+        _nat_call_back_to_nat({
+            "nat_file_number": nfn,
+            "status": "Failure",
+            "status_reason": "Server restarted while job was running",
+            "data": {},
+            "report_files": [],
+        })
+        recovered += 1
+    if recovered:
+        print(f"[NAT] Orphan recovery: marked {recovered} stale job(s) as failed", flush=True)
+
+
+# ── Fault tolerance: watchdog daemon thread ───────────────────────────────────
+
+def _nat_watchdog_loop() -> None:
+    """Daemon thread — checks stage timeouts every 60 seconds."""
+    import time as _time
+    import datetime as _dt
+    while True:
+        _time.sleep(60)
+        for nfn, job in list(nat_jobs.items()):
+            if job.get("status") not in ("running", "queued", "downloading"):
+                continue
+            stage = job.get("current_stage", "search")
+            started_str = job.get("stage_started_at", "")
+            timeout_m = _NAT_STAGE_TIMEOUTS.get(stage, 30)
+            try:
+                started = _dt.datetime.fromisoformat(started_str.replace("Z", ""))
+                elapsed_m = (
+                    _dt.datetime.utcnow() - started
+                ).total_seconds() / 60
+            except Exception:
+                continue
+            if elapsed_m > timeout_m:
+                print(
+                    f"[NAT] Watchdog: job {nfn} timed out at stage={stage} "
+                    f"({elapsed_m:.1f}m > {timeout_m}m limit)",
+                    flush=True,
+                )
+                job["status"] = "failed"
+                job["error"] = f"Stage '{stage}' exceeded {timeout_m}-minute timeout"
+                _nat_event(job, nfn, "watchdog_timeout", f"stage={stage} elapsed={elapsed_m:.1f}m")
+                _nat_job_write(nfn, job)
+                _nat_call_back_to_nat({
+                    "nat_file_number": nfn,
+                    "status": "Failure",
+                    "status_reason": job["error"],
+                    "data": {},
+                    "report_files": [],
+                })
+
+
+# ── Endpoint: submit order ────────────────────────────────────────────────────
+
+@app.route('/api/nat/start-extraction', methods=['POST'])
+def nat_start_extraction():
+    """
+    Primary NAT → CURE entry point.
+    NAT POSTs order data; CURE ACKs immediately and runs pipeline async.
+
+    Expected JSON body:
+        nat_file_number  str  required
+        owner_name       str  required
+        county           str  required
+        state            str  default "FL"
+        address          str  optional
+        apn              str  optional
+        spouse_name      str  optional
+    """
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    if not data.get("owner_name"):
+        return jsonify({"success": False, "error": "owner_name required"}), 400
+    if not data.get("county"):
+        return jsonify({"success": False, "error": "county required"}), 400
+
+    # Reject duplicate if already running
+    existing = _nat_job_read(nfn)
+    if existing and existing.get("status") in ("queued", "running"):
+        return jsonify({
+            "success": False,
+            "error": f"Job {nfn} already in progress",
+            "status": existing.get("status"),
+        }), 409
+
+    # Create job record
+    job = {
+        "nat_file_number": nfn,
+        "status": "queued",
+        "current_stage": "queued",
+        "created_at": datetime.utcnow().isoformat(),
+        "request_data": data,
+        "timeline": [{"event": "submitted", "ts": datetime.utcnow().isoformat(), "detail": ""}],
+        "error": None,
+        "completed_at": None,
+        "county_slug": None,
+    }
+    _nat_job_write(nfn, job)
+
+    # Create output folder immediately
+    output_dir = DOWNLOAD_BASE / f"NAT_{nfn}"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    print(f"[NAT] Job {nfn} queued — output: {output_dir}", flush=True)
+
+    # Fire background thread
+    t = threading.Thread(
+        target=_nat_run_extraction,
+        args=(nfn, data, "search"),
+        daemon=True,
+        name=f"nat-{nfn}",
+    )
+    t.start()
+
+    return jsonify({"success": True, "status": "queued", "nat_file_number": nfn}), 202
+
+
+# ── Endpoint: poll job status ─────────────────────────────────────────────────
+
+@app.route('/api/nat/job-status/<nfn>', methods=['GET'])
+def nat_job_status(nfn):
+    """Return full job JSON for a given NAT file number."""
+    job = _nat_job_read(nfn)
+    if not job:
+        return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
+    return jsonify({"success": True, "job": job})
+
+
+# ── Endpoint: per-job log stream ─────────────────────────────────────────────
+
+@app.route('/api/nat/logs/<nfn>', methods=['GET'])
+def nat_job_logs(nfn):
+    """Return buffered per-job log lines (cleared on server restart).
+    Query param: offset=N — return only lines[N:] for incremental polling.
+    """
+    offset = request.args.get('offset', 0, type=int)
+    logs = _nat_logs.get(nfn, [])
+    return jsonify({"success": True, "logs": logs[offset:], "total": len(logs)})
+
+
+# ── Endpoint: global console log stream (all jobs combined) ──────────────────
+
+@app.route('/api/nat/console-log', methods=['GET'])
+def nat_console_log():
+    """Return the global server log stream across all jobs.
+    Query param: offset=N — return only entries[N:] for incremental polling.
+    """
+    offset = request.args.get('offset', 0, type=int)
+    return jsonify({"success": True, "logs": _server_log[offset:], "total": len(_server_log)})
+
+
+# ── Endpoint: retry (stage-aware) ─────────────────────────────────────────────
+
+@app.route('/api/nat/retry/<nfn>', methods=['POST'])
+def nat_retry(nfn):
+    """
+    Stage-aware resume. Skips already-completed stages.
+    Optional body: {"force_stage": "search"} to restart from scratch.
+    """
+    job = _nat_job_read(nfn)
+    if not job:
+        return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
+
+    if job.get("status") in ("queued", "running"):
+        return jsonify({
+            "success": False,
+            "error": f"Job {nfn} is already {job.get('status')} — stop it first",
+        }), 409
+
+    body = request.get_json(force=True) or {}
+    force_stage = body.get("force_stage", "")
+    resume_from = force_stage if force_stage else (job.get("current_stage") or "search")
+
+    # If callback already succeeded, just re-fire the callback
+    if resume_from == "callback" and job.get("status") == "completed":
+        # Rebuild payload from existing files and re-POST
+        request_data = job.get("request_data", {})
+        output_dir = str(DOWNLOAD_BASE / f"NAT_{nfn}")
+        try:
+            from titlepro.automation.nat_payload_builder import build_nat_payload
+            cure_data = build_nat_payload(output_dir, request_data)
+            # Collect generated PDF report files (same logic as _nat_run_extraction)
+            _retry_report_files: list = []
+            _retry_out = Path(output_dir)
+            for _pdf_name in ["RAW_TWO_OWNER_SEARCH_EXAM.pdf", "Title_Examination_Notes.pdf"]:
+                _p = _retry_out / _pdf_name
+                if _p.exists():
+                    _retry_report_files.append(str(_p.resolve()))
+            for _f in sorted(_retry_out.glob("OnE_Report_*.pdf")):
+                if "_NAT_" not in _f.name:
+                    _retry_report_files.append(str(_f.resolve()))
+                    break
+            nat_payload = {
+                "nat_file_number": nfn,
+                "status": "Success",
+                "status_reason": None,
+                "data": cure_data,
+                "report_files": _retry_report_files,
+            }
+            ok = _nat_call_back_to_nat(nat_payload)
+            return jsonify({"success": ok, "action": "callback_resent"})
+        except Exception as exc:
+            return jsonify({"success": False, "error": str(exc)}), 500
+
+    job["status"] = "queued"
+    job["error"] = None
+    _nat_event(job, nfn, "retry_queued", f"resume_from={resume_from}")
+    _nat_job_write(nfn, job)
+
+    request_data = job.get("request_data", {})
+    t = threading.Thread(
+        target=_nat_run_extraction,
+        args=(nfn, request_data, resume_from),
+        daemon=True,
+        name=f"nat-retry-{nfn}",
+    )
+    t.start()
+    return jsonify({"success": True, "status": "queued", "resume_from": resume_from})
+
+
+# ── Endpoint: cancel job ──────────────────────────────────────────────────────
+
+@app.route('/api/admin/cancel-job', methods=['POST'])
+def nat_cancel_job():
+    """Mark a job as cancelled (NAT Stop button)."""
+    body = request.get_json(force=True) or {}
+    nfn = str(body.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn)
+    if not job:
+        return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
+    job["status"] = "cancelled"
+    _nat_event(job, nfn, "cancelled", "operator stop")
+    _nat_job_write(nfn, job)
+    return jsonify({"success": True, "status": "cancelled"})
+
+
+# ── Manual workbench endpoints ────────────────────────────────────────────────
+
+@app.route('/api/nat/manual/initialize', methods=['POST'])
+def nat_manual_initialize():
+    """Step 0 — create job record (no pipeline yet)."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = {
+        "nat_file_number": nfn,
+        "status": "initialized",
+        "current_stage": "initialized",
+        "created_at": datetime.utcnow().isoformat(),
+        "request_data": data,
+        "timeline": [{"event": "manual_initialized", "ts": datetime.utcnow().isoformat(), "detail": ""}],
+        "error": None,
+        "completed_at": None,
+        "county_slug": None,
+    }
+    _nat_job_write(nfn, job)
+    output_dir = DOWNLOAD_BASE / f"NAT_{nfn}"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    return jsonify({"success": True, "nat_file_number": nfn, "status": "initialized"})
+
+
+@app.route('/api/nat/manual/search', methods=['POST'])
+def nat_manual_search():
+    """Step 1 — run recorder search only (no download, no AI)."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn) or {
+        "nat_file_number": nfn, "request_data": data, "timeline": [],
+    }
+    job["status"] = "running"
+    _nat_checkpoint(job, nfn, "search")
+    _nat_event(job, nfn, "manual_search_started")
+
+    def _run():
+        try:
+            from titlepro.automation.nat_pipeline_bridge import build_nat_workflow_config
+            config = build_nat_workflow_config(data, nfn)
+            if RecorderAutomationPipeline is None:
+                raise RuntimeError("RecorderAutomationPipeline not available")
+            # Run only search phases (phase 1–2)
+            config.generate_title_notes = False
+            config.generate_raw_pdf = False
+            config.generate_title_pdf = False
+            config.fetch_tax = False
+            pipeline = RecorderAutomationPipeline(config)
+            pipeline.run()
+            job["status"] = "search_complete"
+            _nat_event(job, nfn, "manual_search_completed")
+            _nat_job_write(nfn, job)
+        except Exception as exc:
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            _nat_event(job, nfn, "manual_search_failed", str(exc))
+            _nat_job_write(nfn, job)
+
+    threading.Thread(target=_run, daemon=True, name=f"nat-msearch-{nfn}").start()
+    return jsonify({"success": True, "status": "running", "message": "Search started in background"}), 202
+
+
+@app.route('/api/nat/manual/download', methods=['POST'])
+def nat_manual_download():
+    """Step 2 — download PDFs only."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn) or {"nat_file_number": nfn, "request_data": data, "timeline": []}
+    job["status"] = "downloading"
+    _nat_checkpoint(job, nfn, "downloading")
+    _nat_event(job, nfn, "manual_download_started")
+    _nat_job_write(nfn, job)
+    return jsonify({"success": True, "status": "downloading", "message": "Download phase — run full pipeline to execute"})
+
+
+@app.route('/api/nat/manual/tax', methods=['POST'])
+def nat_manual_tax():
+    """Step 3 — fetch tax data only."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn) or {"nat_file_number": nfn, "request_data": data, "timeline": []}
+    _nat_checkpoint(job, nfn, "tax")
+    _nat_event(job, nfn, "manual_tax_started")
+    _nat_job_write(nfn, job)
+    return jsonify({"success": True, "status": "tax", "message": "Tax phase — run full pipeline to execute"})
+
+
+@app.route('/api/nat/manual/ai-reports', methods=['POST'])
+def nat_manual_ai_reports():
+    """Step 4 — generate AI reports only (assumes PDFs already downloaded)."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn) or {"nat_file_number": nfn, "request_data": data, "timeline": []}
+    _nat_checkpoint(job, nfn, "ai_report_raw")
+    _nat_event(job, nfn, "manual_ai_started")
+
+    def _run():
+        try:
+            from titlepro.automation.nat_pipeline_bridge import build_nat_workflow_config
+            config = build_nat_workflow_config(data, nfn)
+            if RecorderAutomationPipeline is None:
+                raise RuntimeError("RecorderAutomationPipeline not available")
+            config.resume = True
+            pipeline = RecorderAutomationPipeline(config)
+            pipeline.run()
+            job["status"] = "ai_complete"
+            _nat_event(job, nfn, "manual_ai_completed")
+            _nat_job_write(nfn, job)
+        except Exception as exc:
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            _nat_event(job, nfn, "manual_ai_failed", str(exc))
+            _nat_job_write(nfn, job)
+
+    threading.Thread(target=_run, daemon=True, name=f"nat-mai-{nfn}").start()
+    return jsonify({"success": True, "status": "running", "message": "AI report generation started"}), 202
+
+
+@app.route('/api/nat/manual/send-callback', methods=['POST'])
+def nat_manual_send_callback():
+    """Step 5 — build 47-field payload from existing files and POST to NAT."""
+    data = request.get_json(force=True) or {}
+    nfn = str(data.get("nat_file_number", "")).strip()
+    if not nfn:
+        return jsonify({"success": False, "error": "nat_file_number required"}), 400
+    job = _nat_job_read(nfn) or {}
+    request_data = job.get("request_data") or data
+    output_dir = str(DOWNLOAD_BASE / f"NAT_{nfn}")
+    try:
+        from titlepro.automation.nat_payload_builder import build_nat_payload
+        cure_data = build_nat_payload(output_dir, request_data)
+        _manual_report_files: list = []
+        _manual_out = Path(output_dir)
+        for _pdf_name in ["RAW_TWO_OWNER_SEARCH_EXAM.pdf", "Title_Examination_Notes.pdf"]:
+            _p = _manual_out / _pdf_name
+            if _p.exists():
+                _manual_report_files.append(str(_p.resolve()))
+        for _f in sorted(_manual_out.glob("OnE_Report_*.pdf")):
+            if "_NAT_" not in _f.name:
+                _manual_report_files.append(str(_f.resolve()))
+                break
+        nat_payload = {
+            "nat_file_number": nfn,
+            "status": "Success",
+            "status_reason": None,
+            "data": cure_data,
+            "report_files": _manual_report_files,
+        }
+        ok = _nat_call_back_to_nat(nat_payload)
+        job["status"] = "completed" if ok else "callback_failed"
+        _nat_event(job, nfn, "manual_callback_sent" if ok else "manual_callback_failed")
+        _nat_job_write(nfn, job)
+        return jsonify({"success": ok, "payload_keys": list(cure_data.keys())})
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
+
+
+# ── Audit / history endpoints ─────────────────────────────────────────────────
+
+@app.route('/api/nat/history', methods=['GET'])
+def nat_history():
+    """List all NAT jobs (most recent first). ?active=1 for running only."""
+    active_only = request.args.get("active") == "1"
+    jobs = []
+    for jf in sorted(NAT_JOBS_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True):
+        try:
+            with open(jf, encoding="utf-8") as f:
+                j = json.load(f)
+            if active_only and j.get("status") not in ("queued", "running", "downloading"):
+                continue
+            # Return summary only (no trace or full timeline)
+            jobs.append({
+                "nat_file_number": j.get("nat_file_number"),
+                "status": j.get("status"),
+                "current_stage": j.get("current_stage"),
+                "created_at": j.get("created_at"),
+                "completed_at": j.get("completed_at"),
+                "county_slug": j.get("county_slug"),
+                "error": j.get("error"),
+            })
+        except Exception:
+            pass
+    return jsonify({"success": True, "jobs": jobs, "count": len(jobs)})
+
+
+@app.route('/api/nat/history/<nfn>', methods=['GET'])
+def nat_history_detail(nfn):
+    """Full audit detail for one NAT file number."""
+    job = _nat_job_read(nfn)
+    if not job:
+        return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
+    # Omit the giant error_trace from the main job detail for readability
+    job_view = {k: v for k, v in job.items() if k != "error_trace"}
+    return jsonify({"success": True, "job": job_view})
+
+
+@app.route('/api/nat/file/<nfn>/<path:file_path>', methods=['GET'])
+def nat_serve_file(nfn, file_path):
+    """Serve an artifact file from a NAT job's output folder."""
+    safe_nfn = re.sub(r"[^A-Za-z0-9_\-]", "", nfn)
+    target = DOWNLOAD_BASE / f"NAT_{safe_nfn}" / file_path
+    if not target.exists():
+        return jsonify({"error": "File not found"}), 404
+    # Prevent path traversal
+    try:
+        target.resolve().relative_to((DOWNLOAD_BASE / f"NAT_{safe_nfn}").resolve())
+    except ValueError:
+        return jsonify({"error": "Forbidden"}), 403
+    return send_file(target)
+
+
+# ── Delete / Trash endpoints ──────────────────────────────────────────────────
+
+@app.route('/api/nat/delete/<nfn>', methods=['POST'])
+def nat_soft_delete(nfn):
+    """
+    Soft-delete: move job JSON from .nat_jobs/ to .nat_trash/.
+    Job disappears from Queue and History; appears in Trash tab.
+    Only allowed when job is NOT actively running.
+    """
+    src = NAT_JOBS_DIR / f"{nfn}.json"
+    if not src.exists():
+        return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
+
+    job = _nat_job_read(nfn)
+    if job.get("status") in ("queued", "running", "downloading"):
+        return jsonify({
+            "success": False,
+            "error": f"Job {nfn} is still {job.get('status')} — stop it before deleting",
+        }), 409
+
+    dst = NAT_TRASH_DIR / f"{nfn}.json"
+    try:
+        import shutil as _shutil
+        _shutil.move(str(src), str(dst))
+        nat_jobs.pop(nfn, None)
+        print(f"[NAT] Job {nfn} moved to trash", flush=True)
+        return jsonify({"success": True, "message": f"Job {nfn} moved to trash"})
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
+
+
+@app.route('/api/nat/trash', methods=['GET'])
+def nat_list_trash():
+    """List all jobs currently in trash."""
+    jobs = []
+    for jf in sorted(NAT_TRASH_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True):
+        try:
+            with open(jf, encoding="utf-8") as f:
+                j = json.load(f)
+            jobs.append({
+                "nat_file_number": j.get("nat_file_number"),
+                "status": j.get("status"),
+                "current_stage": j.get("current_stage"),
+                "created_at": j.get("created_at"),
+                "completed_at": j.get("completed_at"),
+                "county_slug": j.get("county_slug"),
+                "error": j.get("error"),
+            })
+        except Exception:
+            pass
+    return jsonify({"success": True, "jobs": jobs, "count": len(jobs)})
+
+
+@app.route('/api/nat/trash/<nfn>', methods=['GET'])
+def nat_trash_detail(nfn):
+    """Return full job record from trash for the audit panel detail view."""
+    p = NAT_TRASH_DIR / f"{nfn}.json"
+    if not p.exists():
+        return jsonify({"success": False, "error": f"Job {nfn} not in trash"}), 404
+    try:
+        job = json.loads(p.read_text(encoding="utf-8"))
+        return jsonify({"success": True, "job": job})
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
+
+
+@app.route('/api/nat/trash/restore/<nfn>', methods=['POST'])
+def nat_restore_from_trash(nfn):
+    """Restore a job from trash back to .nat_jobs/ (appears in History again)."""
+    src = NAT_TRASH_DIR / f"{nfn}.json"
+    if not src.exists():
+        return jsonify({"success": False, "error": f"Job {nfn} not in trash"}), 404
+
+    dst = NAT_JOBS_DIR / f"{nfn}.json"
+    if dst.exists():
+        return jsonify({"success": False, "error": f"Job {nfn} already exists in active jobs"}), 409
+
+    try:
+        import shutil as _shutil
+        _shutil.move(str(src), str(dst))
+        print(f"[NAT] Job {nfn} restored from trash", flush=True)
+        return jsonify({"success": True, "message": f"Job {nfn} restored"})
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
+
+
+@app.route('/api/nat/trash/delete/<nfn>', methods=['POST'])
+def nat_permanent_delete(nfn):
+    """
+    Permanent delete: remove job JSON from trash AND output folder from disk.
+    This cannot be undone.
+    """
+    trash_file = NAT_TRASH_DIR / f"{nfn}.json"
+    if not trash_file.exists():
+        return jsonify({"success": False, "error": f"Job {nfn} not in trash — soft-delete it first"}), 404
+
+    deleted = []
+    errors = []
+
+    # Remove job JSON from trash
+    try:
+        trash_file.unlink()
+        deleted.append(f".nat_trash/{nfn}.json")
+    except Exception as exc:
+        errors.append(f"job file: {exc}")
+
+    # Remove output folder if it exists
+    output_dir = DOWNLOAD_BASE / f"NAT_{nfn}"
+    if output_dir.exists():
+        try:
+            import shutil as _shutil
+            _shutil.rmtree(output_dir)
+            deleted.append(f"downloaded_doc/NAT_{nfn}/")
+        except Exception as exc:
+            errors.append(f"output folder: {exc}")
+
+    print(f"[NAT] Permanent delete {nfn}: removed {deleted}", flush=True)
+    return jsonify({
+        "success": not errors,
+        "deleted": deleted,
+        "errors": errors,
+        "message": f"Job {nfn} permanently deleted" if not errors else "Partial delete — see errors",
+    })
+
+
+# ─── END NAT INTEGRATION ENDPOINTS ───────────────────────────────────────────
+
+
 @app.route('/api/logs', methods=['GET'])
 def api_get_logs():
     """
@@ -3265,10 +4261,17 @@ def api_get_logs():
 
 
 if __name__ == '__main__':
+    # ── NAT fault tolerance startup ───────────────────────────────────────────
+    _nat_recover_orphaned_jobs()
+    _wdg = threading.Thread(target=_nat_watchdog_loop, daemon=True, name="nat-watchdog")
+    _wdg.start()
+    # ─────────────────────────────────────────────────────────────────────────
+
     print("=" * 60)
     print("TitlePro API Server - CURE Multi-County Edition")
     print("=" * 60)
     print(f"Download folder: {DOWNLOAD_BASE}")
+    print(f"NAT jobs folder: {NAT_JOBS_DIR}")
     print("")
 
     # Show multi-county status
@@ -3314,6 +4317,24 @@ if __name__ == '__main__':
     print("  POST /generate-report             - Generate RAW Two Owner Search report")
     print("  GET  /get-report/<owner>          - Get existing report for owner")
     print("  POST /download-pdf                - Download report as formatted PDF")
+    print("")
+    print("NAT Audit Panel:")
+    print("  GET  /nat-audit                       - Browser UI (queue, history, workbench)")
+    print("")
+    print("NAT Integration Endpoints:")
+    print("  POST /api/nat/start-extraction        - Submit NAT order (fire-and-forget)")
+    print("  GET  /api/nat/job-status/<nfn>        - Poll job status")
+    print("  POST /api/nat/retry/<nfn>             - Stage-aware retry/resume")
+    print("  POST /api/admin/cancel-job            - Stop a running job")
+    print("  POST /api/nat/manual/initialize       - Workbench step 0")
+    print("  POST /api/nat/manual/search           - Workbench step 1")
+    print("  POST /api/nat/manual/download         - Workbench step 2")
+    print("  POST /api/nat/manual/tax              - Workbench step 3")
+    print("  POST /api/nat/manual/ai-reports       - Workbench step 4")
+    print("  POST /api/nat/manual/send-callback    - Workbench step 5")
+    print("  GET  /api/nat/history                 - All jobs list")
+    print("  GET  /api/nat/history/<nfn>           - Job audit detail")
+    print("  GET  /api/nat/file/<nfn>/<path>       - Serve job artifact")
     print("")
     print(f"Note: {RECORDER_NOTE}")
     print("")

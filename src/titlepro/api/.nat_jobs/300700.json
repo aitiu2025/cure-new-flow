@@ -1,0 +1,219 @@
+{
+  "nat_file_number": "300700",
+  "status": "completed",
+  "current_stage": "callback",
+  "created_at": "2026-06-22T10:52:21.800367",
+  "request_data": {
+    "nat_file_number": "300700",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "FROMER ALANA",
+    "county": "hillsborough",
+    "state": "FL",
+    "address": "4004 W NORTH B ST",
+    "city": "TAMPA",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "FROMER MICHAEL"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-22T10:52:21.800367",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T10:52:21.958972"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Claude returned no markdown output",
+      "ts": "2026-06-22T11:14:32.643027"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-22T11:20:16.759016"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T11:20:16.784493"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\titlepro_agent_prompt.txt'",
+      "ts": "2026-06-22T11:34:02.137524"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-22T11:37:58.585111"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T11:37:58.618818"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Title examination notes validation failed: missing required section(s) ['## TITLE EXAMINATION SUMMARY']. Draft saved to Title_Examination_Notes_DRAFT.md for inspection. Re-run with a corrected prompt or verify the agent output before persisting.",
+      "ts": "2026-06-22T11:51:52.116084"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-22T13:31:27.289876"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T13:31:27.315121"
+    },
+    {
+      "event": "job_orphaned",
+      "detail": "age_seconds=10152",
+      "ts": "2026-06-22T13:41:33.844832"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-22T14:57:02.866567"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T14:57:02.901957"
+    },
+    {
+      "event": "job_orphaned",
+      "detail": "age_seconds=16528",
+      "ts": "2026-06-22T15:27:50.510798"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-22T15:28:44.212222"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-22T15:28:44.245082"
+    },
+    {
+      "event": "job_orphaned",
+      "detail": "age_seconds=66948",
+      "ts": "2026-06-23T05:28:10.401149"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-23T05:29:00.115891"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-23T05:29:00.164111"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "anthropic package not installed. Run: pip install anthropic",
+      "ts": "2026-06-23T05:29:01.097454"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-23T05:39:45.796919"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_hillsborough owner=FROMER, ALANA",
+      "ts": "2026-06-23T05:39:45.973890"
+    },
+    {
+      "event": "pipeline_completed",
+      "detail": "",
+      "ts": "2026-06-23T05:42:29.556503"
+    },
+    {
+      "event": "callback_building_payload",
+      "detail": "",
+      "ts": "2026-06-23T05:42:29.558565"
+    },
+    {
+      "event": "callback_sent",
+      "detail": "",
+      "ts": "2026-06-23T05:42:30.369837"
+    }
+  ],
+  "error": null,
+  "completed_at": "2026-06-23T05:42:30.369837",
+  "county_slug": "fl_hillsborough",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-22T10:52:21.960973",
+      "completed_at": "2026-06-22T10:52:30.981396",
+      "detail": "Found 26 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-22T10:52:31.000237",
+      "completed_at": "2026-06-22T10:53:08.343064",
+      "detail": "26 / 26 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "done",
+      "started_at": "2026-06-22T10:53:08.358556",
+      "completed_at": "2026-06-22T11:00:46.902401",
+      "detail": "26 docs extracted"
+    },
+    "extract_legal_descriptions": {
+      "status": "done",
+      "started_at": "2026-06-22T11:00:46.903319",
+      "completed_at": "2026-06-22T11:00:46.981445"
+    },
+    "phase1_verifications": {
+      "status": "done",
+      "started_at": "2026-06-22T11:00:46.985551",
+      "completed_at": "2026-06-22T11:00:47.679414"
+    },
+    "tax_lookup": {
+      "status": "done",
+      "started_at": "2026-06-23T05:39:46.020006",
+      "completed_at": "2026-06-23T05:39:46.116561"
+    },
+    "generate_raw_report": {
+      "status": "done",
+      "started_at": "2026-06-22T11:00:47.774230",
+      "completed_at": "2026-06-22T11:04:47.150672"
+    },
+    "generate_title_notes": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "generate_one_report": {
+      "status": "done",
+      "started_at": "2026-06-23T05:39:46.265038",
+      "completed_at": "2026-06-23T05:42:19.727945"
+    },
+    "render_pdfs": {
+      "status": "done",
+      "started_at": "2026-06-23T05:42:19.733406",
+      "completed_at": "2026-06-23T05:42:29.171839"
+    },
+    "serialize_reports": {
+      "status": "done",
+      "started_at": "2026-06-23T05:42:29.172840",
+      "completed_at": "2026-06-23T05:42:29.555517"
+    }
+  },
+  "stage_started_at": "2026-06-23T05:42:29.557497",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\agent_runners.py\", line 218, in run\n    import anthropic\nModuleNotFoundError: No module named 'anthropic'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 2536, in _run_agent\n    result = agent.run(system_prompt, user_prompt, cwd=self.repo_root, extra_dirs=extra_dirs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\agent_runners.py\", line 220, in run\n    raise AgentRunnerError(\ntitlepro.automation.agent_runners.AgentRunnerError: anthropic package not installed. Run: pip install anthropic\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\api\\server.py\", line 3468, in _nat_run_extraction\n    _phase_result = getattr(pipeline, _phase)()\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 2352, in generate_one_report\n    output = self._run_agent(system_prompt, user_prompt, model=self._resolve_phase_model(\"one\"))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 2538, in _run_agent\n    raise WorkflowError(str(exc)) from exc\ntitlepro.automation.pipeline.WorkflowError: anthropic package not installed. Run: pip install anthropic\n"
+}
