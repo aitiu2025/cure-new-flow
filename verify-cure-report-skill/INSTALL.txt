@@ -1,0 +1,49 @@
+verify-cure-report — CURE TitlePro Report Verifier (Claude Code skill)
+======================================================================
+
+WHAT THIS IS
+  A Claude Code skill that audits CURE TitlePro reports (RAW, Title
+  Examination Notes, and OnE) against Tony Roveda's six directives,
+  Peter Bodonyi's OnE template, and the known failure modes. Invoked
+  with /verify-cure-report inside Claude Code.
+
+INSTALL (1 minute)
+  1. Copy the "verify-cure-report" folder into your personal skills dir:
+
+       mkdir -p ~/.claude/skills
+       cp -R verify-cure-report ~/.claude/skills/
+
+  2. Restart Claude Code (or run /skills) so it picks up the new skill.
+
+  3. Confirm it loaded:  type  /verify-cure-report   in any session.
+
+USAGE
+  From a CURE case folder, ask Claude to:
+     "Verify the <SUBJECT> report"
+  or run the skill directly:
+     /verify-cure-report
+  It scores the report PASS/FAIL/WARN and stamps the 🟢/🟡/🔴 badge.
+
+ABOUT THE _memory FOLDER  (important)
+  SKILL.md lists 5 "Background reading" files it loads for full context.
+  Two of them live in the titlePro repo (CLAUDE.md and
+  docs/Cure_Response/...), so you already have those if you've cloned
+  the repo.
+
+  The other THREE are personal-memory files from Amit's machine. They
+  are included here under _memory/ :
+     - tony_review_directives.md
+     - state_contamination_assertion.md
+     - codev_title_abstractor_findings.md
+
+  The skill still runs without them, but for identical scoring behavior
+  copy them where SKILL.md expects them, OR just keep them handy and
+  point Claude at the _memory/ folder when it asks for that context.
+
+  If you want the exact paths SKILL.md references, drop them at:
+     ~/.claude/projects/<your-titlepro-project-slug>/memory/
+  (your project slug will differ from Amit's — easiest is to keep the
+  files in _memory/ and reference them as needed.)
+
+QUESTIONS
+  Ping Amit (amit.gupta@tiuconsulting.com).

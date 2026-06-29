@@ -271,12 +271,16 @@ class GoogleAIRunner(BaseAgentRunner):
         self._api_key = api_key or os.environ.get("GOOGLE_API_KEY") or self._read_secrets_key()
 
     @staticmethod
-    def _read_secrets_key() -> Optional[str]:
+    def _read_secrets() -> dict:
         try:
             secrets_path = Path(__file__).parent.parent.parent.parent / "config" / "secrets.json"
-            return json.loads(secrets_path.read_text(encoding="utf-8")).get("GOOGLE_API_KEY")
+            return json.loads(secrets_path.read_text(encoding="utf-8"))
         except Exception:
-            return None
+            return {}
+
+    @staticmethod
+    def _read_secrets_key() -> Optional[str]:
+        return GoogleAIRunner._read_secrets().get("GOOGLE_API_KEY")
 
     def run(
         self,
@@ -298,17 +302,54 @@ class GoogleAIRunner(BaseAgentRunner):
                 "No GOOGLE_API_KEY found. Set it in config/secrets.json or env."
             )
 
+        import re as _re
+        import time as _time
+
+        import os as _os
         model_name = self.model or "gemini-2.0-flash"
-        genai.configure(api_key=self._api_key)
+        # Prefer service account JSON (bypasses free-tier API key quota limits)
+        _sa_json = self._read_secrets().get("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+        if _sa_json and _os.path.exists(_sa_json):
+            try:
+                from google.oauth2 import service_account as _sa
+                _creds = _sa.Credentials.from_service_account_file(
+                    _sa_json,
+                    scopes=["https://www.googleapis.com/auth/generative-language"],
+                )
+                genai.configure(credentials=_creds)
+            except Exception as _sa_exc:
+                print(f"[Gemini] Service account load failed ({_sa_exc}), falling back to API key", flush=True)
+                genai.configure(api_key=self._api_key)
+        elif self._api_key:
+            genai.configure(api_key=self._api_key)
+        else:
+            raise AgentRunnerError("No GOOGLE_API_KEY or GOOGLE_SERVICE_ACCOUNT_JSON found in secrets.json")
         model_obj = genai.GenerativeModel(
             model_name=model_name,
             system_instruction=system_prompt,
         )
 
-        response = model_obj.generate_content(
-            user_prompt,
-            generation_config=genai.GenerationConfig(max_output_tokens=16384),
-        )
+        _max_retries = 5
+        _attempt = 0
+        while True:
+            try:
+                response = model_obj.generate_content(
+                    user_prompt,
+                    generation_config=genai.GenerationConfig(max_output_tokens=16384),
+                )
+                break  # success
+            except Exception as _exc:
+                _msg = str(_exc)
+                _is_429 = "429" in _msg or "ResourceExhausted" in type(_exc).__name__ or "quota" in _msg.lower()
+                if _is_429 and _attempt < _max_retries:
+                    # Parse "Please retry in X.Xs" from the error message
+                    _delay_match = _re.search(r"retry in\s+([\d.]+)s", _msg, _re.IGNORECASE)
+                    _delay = float(_delay_match.group(1)) + 2 if _delay_match else min(30 * (2 ** _attempt), 120)
+                    print(f"[Gemini] 429 rate-limit on attempt {_attempt + 1} — waiting {_delay:.1f}s before retry…", flush=True)
+                    _time.sleep(_delay)
+                    _attempt += 1
+                    continue
+                raise
 
         output = (response.text or "").strip()
         success = bool(output)

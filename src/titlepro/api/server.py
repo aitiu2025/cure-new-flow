@@ -3600,6 +3600,12 @@ def _nat_run_extraction(nfn: str, request_data: dict, resume_from: str = "search
             _nat_event(job, nfn, "callback_sent" if ok else "callback_failed")
             _nat_job_write(nfn, job)
 
+            # ── Phase: auto-verify (post-callback, non-blocking) ──────────
+            # Runs Tony's 6-directive + Q1-Q4 scorecard after callback fires.
+            # Saves verify_report.md + verify_report.json in the job folder.
+            if ok and not zero_records:
+                _nat_generate_verify_report(nfn, output_dir, job)
+
     except Exception as exc:
         trace = _tb.format_exc()
         print(f"[NAT] Job {nfn} FAILED: {exc}\n{trace}", flush=True)
@@ -3615,6 +3621,255 @@ def _nat_run_extraction(nfn: str, request_data: dict, resume_from: str = "search
             "data": {},
             "report_files": [],
         })
+
+
+# ── Auto-verify phase (runs after callback succeeds) ─────────────────────────
+
+def _nat_generate_verify_report(nfn: str, output_dir: str, job: dict) -> None:
+    """
+    Post-callback quality-assurance phase.
+
+    Scores the generated RAW / Title / OnE reports against Tony's Six Directives
+    and the four Broward-Standard Quality Gates (Q1-Q4).  Saves the result as
+    verify_report.md + verify_report.json in the NAT job folder.
+
+    Called inline after a successful callback (already in a background thread).
+    Any exception is caught and logged — never re-raises so it cannot kill the job.
+    """
+    _nat_log(nfn, "▶ Auto-verify: scoring reports against Tony's directives…")
+    job.setdefault("phases_progress", {})["verify_report"] = {
+        "status": "running",
+        "started_at": datetime.utcnow().isoformat(),
+    }
+    _nat_job_write(nfn, job)
+
+    try:
+        _t0 = time.monotonic()
+        out = Path(output_dir)
+
+        # ── 1. Load report markdown files ──────────────────────────────────
+        def _read_text(path_or_glob):
+            p = out / path_or_glob
+            if p.exists():
+                return p.read_text(encoding="utf-8", errors="replace")
+            matches = sorted(out.glob(path_or_glob))
+            if matches:
+                return matches[0].read_text(encoding="utf-8", errors="replace")
+            return None
+
+        raw_md   = _read_text("RAW_TWO_OWNER_SEARCH_EXAM.md")
+        title_md = _read_text("Title_Examination_Notes.md")
+        one_mds  = sorted(out.glob("OnE_Report_*.md"))
+        one_md   = one_mds[0].read_text(encoding="utf-8", errors="replace") if one_mds else None
+
+        if not raw_md and not title_md and not one_md:
+            _nat_log(nfn, "⚠ Auto-verify: no report .md files found — skipping")
+            job["phases_progress"]["verify_report"]["status"] = "skipped"
+            job["phases_progress"]["verify_report"]["detail"] = "No report .md files found"
+            _nat_job_write(nfn, job)
+            return
+
+        # ── 2. Load JSON artifacts ──────────────────────────────────────────
+        def _read_json(fname):
+            p = out / fname
+            if p.exists():
+                try:
+                    return json.loads(p.read_text(encoding="utf-8"))
+                except Exception:
+                    return {}
+            return {}
+
+        search_results  = _read_json("search_results.json")
+        docs_found      = _read_json("documents_found.json")
+        workflow_cfg    = _read_json("workflow_config.json")
+        phase1_verifs   = _read_json("phase1_verifications.json")
+        pa_anchor       = _read_json("phase1_property_appraiser.json")
+
+        subject = workflow_cfg.get("property_address") or workflow_cfg.get("subject_address") or "Unknown"
+        owner   = workflow_cfg.get("owner_name") or "Unknown"
+        county  = workflow_cfg.get("county") or "Unknown"
+
+        # Per-search counts for D3 / state-contamination check
+        sr_counts = [r.get("result_count", 0) for r in search_results.get("runs", [])]
+        search_names = [
+            req.get("name", "") for req in workflow_cfg.get("search_requests", [])
+        ]
+
+        # Doc numbers in documents_found (may be a list or a dict)
+        if isinstance(docs_found, list):
+            doc_nums = [d.get("document_number", "") for d in docs_found]
+        else:
+            doc_nums = []
+
+        # ── 3. Trim report content to fit prompt budget ─────────────────────
+        def _trim(text, max_chars=7000):
+            if not text:
+                return "(not found)"
+            return text[:max_chars] + ("\n\n[... truncated ...]" if len(text) > max_chars else "")
+
+        pa_status = pa_anchor.get("status", "MISSING") if pa_anchor else "MISSING"
+
+        # ── 4. Build the verify prompt ──────────────────────────────────────
+        prompt = f"""You are a TitlePro CURE report quality-assurance agent.
+Score the CURE reports below against Tony Roveda's Six Directives and the Broward-Standard Quality Gates (Q1-Q4).
+
+## CASE INFO
+Owner: {owner}
+Subject property: {subject}
+County: {county}
+Names to search: {search_names}
+Per-search result counts from search_results.json: {sr_counts}
+Documents found count: {len(doc_nums)}
+Property Appraiser anchor status: {pa_status}
+
+## TONY'S SIX DIRECTIVES — SCORE EACH
+D1 — No Selenium/Playwright in search phase (HTTP adapter only)
+  PASS if no selenium/playwright references in logs; WARN if selenium used but HTTP adapter exists; FAIL if only selenium with no HTTP adapter.
+
+D2 — Deed-first methodology (vesting deed is a WD or Deed type)
+  PASS if vesting deed cited is type Warranty Deed / WD / Deed; WARN if all-doctype search used but verifier ran; FAIL if non-deed used as vesting.
+
+D3 — All provided names searched with results
+  Names required: {search_names}
+  Counts: {sr_counts}
+  FAIL if counts pattern is [N, 0, 0, ...] (state contamination — only first search returned results).
+  FAIL if fewer searches ran than names provided.
+  PASS if all names returned results or any zero-result name is explicitly noted as absence-finding.
+
+D4 — NLP subject-address verification ran on every deed candidate
+  Check phase1_verifications subject_address_verification block.
+  FAIL if no verification data at all; FAIL if a NO_MATCH deed was used as vesting; PASS if all deed candidates verified MATCH.
+
+D5 — Every indexed document examined; no silent drops
+  Documents found: {len(doc_nums)} (from documents_found.json)
+  Check that every doc# appears in the RAW report (examined or documented as excluded).
+  FAIL if any doc silently missing with no exclusion note.
+
+D6 — Released mortgages excluded from Open Mortgages section
+  Check mortgage_classifications in phase1_verifications.
+  FAIL if any mortgage classified 'released' appears in the Open Mortgages section.
+  PASS if all released mortgages are in a Released/Satisfied section with satisfaction doc# cited.
+
+## QUALITY GATES — SCORE EACH
+Q1 — No placeholder language (manual fetch, to be confirmed, not available, outside search window, pending direct pull, not verified)
+  Grep the Title/RAW report text for these phrases. Any hit without a statutory citation = FAIL.
+
+Q2 — Tax data present (real annual tax dollar amount in the report)
+  FAIL if report contains "TAX STATUS NOT VERIFIED", "tax bill amount not retrieved", or has no dollar amount in the tax section.
+
+Q3 — Property Appraiser anchor present
+  PA status from phase1_property_appraiser.json: {pa_status}
+  FAIL if status is MISSING or PA_NO_RUNNER; WARN if PA_NO_RESULTS after retry; PASS if PA_SUCCESS.
+
+Q4 — Concrete grantor/grantee in every chain-of-title row
+  FAIL if any chain row shows "(Unknown)", "(prior owner)", "unknown grantor", or similar placeholder.
+
+## RAW REPORT (RAW_TWO_OWNER_SEARCH_EXAM.md)
+{_trim(raw_md)}
+
+## TITLE EXAMINATION NOTES (Title_Examination_Notes.md)
+{_trim(title_md)}
+
+## OnE REPORT
+{_trim(one_md)}
+
+## PHASE 1 VERIFICATIONS (phase1_verifications.json)
+{json.dumps(phase1_verifs, indent=2)[:2500]}
+
+## OUTPUT FORMAT (produce ONLY this markdown, nothing else)
+
+# CURE Auto-Verify Report — {owner} / {county}
+
+**Verdict:** SHIPPABLE | SHIPPABLE WITH FIXES | BLOCKED
+
+## Directives Scorecard
+
+| # | Check | Status | Evidence |
+|---|---|---|---|
+| D1 | No Selenium/Playwright | 🟢 PASS / 🟡 WARN / 🔴 FAIL | one-line evidence |
+| D2 | Deed-first methodology | ... | ... |
+| D3 | All names searched | ... | ... |
+| D4 | NLP address verification | ... | ... |
+| D5 | No silent drops | ... | ... |
+| D6 | Released mortgages excluded | ... | ... |
+
+## Quality Gates
+
+| Gate | Check | Status | Evidence |
+|---|---|---|---|
+| Q1 | No placeholder language | ... | ... |
+| Q2 | Tax data present | ... | ... |
+| Q3 | PA anchor present | ... | ... |
+| Q4 | Concrete grantor/grantee | ... | ... |
+
+## Fix List
+- (one bullet per FAIL/WARN with exact file and remediation)
+
+## Summary
+(2-3 sentences, direct and factual)
+"""
+
+        # ── 5. Call the configured AI engine ───────────────────────────────
+        from titlepro.automation.agent_runners import build_agent_runner
+        from titlepro.automation.nat_pipeline_bridge import _load_secrets_provider, _load_secrets_model
+
+        provider = _load_secrets_provider()
+        model    = _load_secrets_model()
+        _nat_log(nfn, f"   🤖 Verify engine: {provider} | {model}")
+        runner = build_agent_runner(provider, model=model, timeout_seconds=180)
+
+        system_prompt = (
+            "You are a TitlePro CURE report quality-assurance agent. "
+            "Score the provided reports objectively against the listed checks. "
+            "Output ONLY the scorecard markdown — no preamble, no extra commentary."
+        )
+
+        verify_md = runner.run(system_prompt=system_prompt, user_prompt=prompt)
+
+        # ── 6. Derive verdict from scorecard ────────────────────────────────
+        has_fail = "🔴 FAIL" in verify_md or ("FAIL" in verify_md and "BLOCKED" in verify_md.upper())
+        has_warn = "🟡 WARN" in verify_md
+        if "BLOCKED" in verify_md.upper():
+            verdict = "BLOCKED"
+        elif has_fail:
+            verdict = "BLOCKED"
+        elif has_warn:
+            verdict = "SHIPPABLE WITH FIXES"
+        else:
+            verdict = "SHIPPABLE"
+
+        # ── 7. Save verify_report.md + verify_report.json ──────────────────
+        verify_md_path   = out / "verify_report.md"
+        verify_json_path = out / "verify_report.json"
+
+        verify_md_path.write_text(verify_md, encoding="utf-8")
+        verify_json_path.write_text(json.dumps({
+            "verdict": verdict,
+            "has_fail": has_fail,
+            "has_warn": has_warn,
+            "generated_at": datetime.utcnow().isoformat(),
+            "report_md_path": str(verify_md_path),
+            "owner": owner,
+            "county": county,
+        }, indent=2), encoding="utf-8")
+
+        _elapsed = time.monotonic() - _t0
+        _nat_log(nfn, f"✓ Auto-verify complete — verdict: {verdict} ({_elapsed:.1f}s)")
+        _nat_log(nfn, f"   📄 verify_report.md saved in job folder")
+
+        job["phases_progress"]["verify_report"] = {
+            "status": "done",
+            "completed_at": datetime.utcnow().isoformat(),
+            "detail": verdict,
+        }
+        job["verify_verdict"] = verdict
+        _nat_job_write(nfn, job)
+
+    except Exception as _verify_exc:
+        _nat_log(nfn, f"⚠ Auto-verify failed (non-blocking): {str(_verify_exc)[:300]}")
+        job["phases_progress"].setdefault("verify_report", {})["status"] = "failed"
+        job["phases_progress"]["verify_report"]["detail"] = str(_verify_exc)[:300]
+        _nat_job_write(nfn, job)
 
 
 # ── Fault tolerance: orphan recovery (runs at startup) ───────────────────────
