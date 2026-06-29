@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CURE — NAT Audit Panel</title>
+<style>
+:root {
+  --bg:        #0D1117;
+  --surface:   #161B22;
+  --surface2:  #21262D;
+  --surface3:  #2D333B;
+  --border:    #30363D;
+  --text:      #E6EDF3;
+  --text2:     #8B949E;
+  --text3:     #484F58;
+  --green:     #3FB950;
+  --green-bg:  #0D2B0F;
+  --red:       #F85149;
+  --red-bg:    #2D0F0F;
+  --yellow:    #D29922;
+  --yellow-bg: #2B1F00;
+  --blue:      #58A6FF;
+  --blue-bg:   #0D1F3C;
+  --orange:    #E89C3A;
+  --cyan:      #22C4D8;
+  --cyan-bg:   #031F24;
+  --purple:    #BC8CFF;
+  --mono:      'Courier New', Courier, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.5; }
+
+/* ── Layout ── */
+.shell { display: grid; grid-template-rows: 48px 1fr; height: 100vh; }
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border);
+          display: flex; align-items: center; padding: 0 20px; gap: 16px; }
+.topbar-logo { font-family: var(--mono); font-size: 13px; font-weight: 700;
+               color: var(--cyan); letter-spacing: .06em; }
+.topbar-logo span { color: var(--orange); }
+.topbar-sep { width: 1px; height: 20px; background: var(--border); }
+.topbar-title { color: var(--text2); font-size: 12px; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+         animation: pulse 2s infinite; }
+.pulse.off { background: var(--red); animation: none; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.server-label { font-family: var(--mono); font-size: 11px; color: var(--text2); }
+.refresh-label { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+
+.body { display: grid; grid-template-columns: 300px 1fr; overflow: hidden; }
+
+/* ── Left panel ── */
+.left { border-right: 1px solid var(--border); display: flex; flex-direction: column;
+        overflow: hidden; background: var(--surface); }
+.tabs { display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0; flex-wrap: wrap; }
+.tab { flex: 1; padding: 9px 2px; text-align: center; font-size: 10px; font-weight: 600;
+       letter-spacing: .03em; text-transform: uppercase; color: var(--text2);
+       cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s;
+       min-width: 44px; white-space: nowrap; }
+.tab:hover { color: var(--text); background: var(--surface2); }
+.tab.active { color: var(--cyan); border-bottom-color: var(--cyan); background: var(--surface2); }
+.tab.tab-console { color: var(--purple); }
+.tab.tab-console.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+.job-list { flex: 1; overflow-y: auto; }
+.job-list::-webkit-scrollbar { width: 4px; }
+.job-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.job-item { padding: 11px 14px; border-bottom: 1px solid var(--border); cursor: pointer;
+            transition: background .1s; }
+.job-item:hover { background: var(--surface2); }
+.job-item.selected { background: var(--surface3); border-left: 2px solid var(--cyan); }
+.job-item-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.job-nfn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text); }
+.status-badge { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .06em;
+                text-transform: uppercase; padding: 2px 6px; border-radius: 3px; flex-shrink: 0; }
+.s-queued    { background: var(--blue-bg);   color: var(--blue); }
+.s-running   { background: var(--yellow-bg); color: var(--yellow); }
+.s-completed { background: var(--green-bg);  color: var(--green); }
+.s-failed    { background: var(--red-bg);    color: var(--red); }
+.s-cancelled { background: var(--surface3);  color: var(--text2); }
+.s-callback_failed { background: var(--red-bg); color: var(--orange); }
+.s-other     { background: var(--surface2);  color: var(--text2); }
+.job-meta { font-size: 11px; color: var(--text2); display: flex; gap: 8px; }
+.job-county { color: var(--cyan); font-family: var(--mono); font-size: 10px; }
+.empty-state { padding: 40px 20px; text-align: center; color: var(--text3); font-size: 12px; }
+.spinner { display: inline-block; width: 12px; height: 12px;
+           border: 2px solid var(--border); border-top-color: var(--cyan);
+           border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Right panel ── */
+.right { overflow-y: auto; background: var(--bg); }
+.right::-webkit-scrollbar { width: 4px; }
+.right::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.detail-empty { display: flex; align-items: center; justify-content: center;
+                height: 100%; color: var(--text3); font-size: 13px; }
+
+/* ── Job detail ── */
+.detail { padding: 24px; }
+.detail-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+                 padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.detail-nfn { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--text); }
+.detail-meta { flex: 1; }
+.detail-meta-row { font-size: 12px; color: var(--text2); margin-bottom: 3px; }
+.detail-meta-row strong { color: var(--text); }
+.detail-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.btn { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .04em;
+       padding: 6px 14px; border-radius: 4px; border: 1px solid; cursor: pointer;
+       transition: all .15s; text-transform: uppercase; }
+.btn:hover { opacity: .85; }
+.btn-retry  { background: var(--yellow-bg); color: var(--yellow); border-color: var(--yellow); }
+.btn-stop   { background: var(--red-bg);    color: var(--red);    border-color: var(--red); }
+.btn-restart{ background: var(--surface2);  color: var(--text2);  border-color: var(--border); }
+.btn-primary{ background: var(--cyan-bg);   color: var(--cyan);   border-color: var(--cyan); }
+.btn-delete { background: #1A0A0A;          color: #C0392B;       border-color: #6B1A1A; }
+.btn-perm   { background: var(--red-bg);    color: var(--red);    border-color: var(--red); }
+.btn-restore{ background: var(--green-bg);  color: var(--green);  border-color: var(--green); }
+.btn-small  { padding: 4px 10px; font-size: 10px; }
+
+/* sections */
+.section { margin-bottom: 24px; }
+.section-label { font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+                 text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+.kv-grid { display: grid; grid-template-columns: 160px 1fr; gap: 1px;
+           background: var(--border); border: 1px solid var(--border); border-radius: 4px;
+           overflow: hidden; }
+.kv-k { background: var(--surface); padding: 7px 12px; font-family: var(--mono);
+         font-size: 11px; color: var(--text2); }
+.kv-v { background: var(--surface2); padding: 7px 12px; font-family: var(--mono);
+         font-size: 11px; color: var(--text); word-break: break-all; }
+.kv-v.green { color: var(--green); }
+.kv-v.red   { color: var(--red); }
+.kv-v.yellow{ color: var(--yellow); }
+.kv-v.blue  { color: var(--blue); }
+
+/* timeline */
+.timeline { position: relative; }
+.tl-item { display: flex; gap: 12px; margin-bottom: 2px; }
+.tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 20px; }
+.tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan);
+          flex-shrink: 0; margin-top: 4px; }
+.tl-dot.ev-failed  { background: var(--red); }
+.tl-dot.ev-completed { background: var(--green); }
+.tl-dot.ev-retry  { background: var(--yellow); }
+.tl-dot.ev-cancel { background: var(--text3); }
+.tl-line { width: 1px; flex: 1; background: var(--border); margin: 2px 0; min-height: 8px; }
+.tl-content { padding: 1px 0 10px; flex: 1; }
+.tl-event { font-family: var(--mono); font-size: 11px; color: var(--text); font-weight: 600; }
+.tl-detail { font-size: 11px; color: var(--text2); margin-top: 1px; word-break: break-all; }
+.tl-ts { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+/* error block */
+.error-block { background: var(--red-bg); border: 1px solid var(--red);
+               border-radius: 4px; padding: 12px 14px; margin-bottom: 16px; }
+.error-block pre { font-family: var(--mono); font-size: 10px; color: var(--red);
+                   white-space: pre-wrap; word-break: break-all; max-height: 160px;
+                   overflow-y: auto; }
+
+/* ── Log terminal ── */
+.log-terminal {
+  background: #0A0E14;
+  color: #c9d1d9;
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  overflow-y: auto;
+  line-height: 1.7;
+  border: 1px solid var(--border);
+}
+.log-terminal::-webkit-scrollbar { width: 4px; }
+.log-terminal::-webkit-scrollbar-thumb { background: var(--border); }
+.log-line { display: flex; gap: 8px; }
+.log-ts   { color: #484F58; flex-shrink: 0; user-select: none; }
+.log-nfn  { color: #58A6FF; flex-shrink: 0; font-weight: 700; min-width: 60px; }
+.log-msg  { flex: 1; word-break: break-all; white-space: pre-wrap; }
+.log-msg.c-start  { color: #79c0ff; }  /* ▶ phase start  */
+.log-msg.c-ok     { color: #3fb950; }  /* ✓ success      */
+.log-msg.c-fail   { color: #f85149; }  /* ✗ error        */
+.log-msg.c-warn   { color: #e3b341; }  /* ⚠ warning      */
+.log-msg.c-skip   { color: #6e7681; }  /* ⏭ skipped      */
+.log-msg.c-ai     { color: #bc8cff; }  /* 🤖 AI engine   */
+.log-msg.c-hb     { color: #484F58; }  /* ⏳ heartbeat    */
+.log-msg.c-phase  { color: #e89c3a; }  /* phase separator */
+.log-sep { border-top: 1px solid #21262D; margin: 4px 0; }
+
+/* ── Console tab full-screen ── */
+.console-panel { height: 100%; display: flex; flex-direction: column; }
+.console-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+                   border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+.console-title { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--purple); }
+.console-badge { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 10px;
+                 background: #1A0F2A; border: 1px solid var(--purple); color: var(--purple); }
+.console-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 0; }
+.console-terminal { flex: 1; overflow-y: auto; background: #0A0E14; font-family: var(--mono);
+                    font-size: 11px; padding: 12px 16px; line-height: 1.7; }
+.console-terminal::-webkit-scrollbar { width: 4px; }
+.console-terminal::-webkit-scrollbar-thumb { background: #30363D; }
+
+/* ── Submit form ── */
+.form-panel { padding: 24px; }
+.form-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.form-sub   { font-size: 12px; color: var(--text2); margin-bottom: 20px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+               text-transform: uppercase; color: var(--text2); }
+.field input, .field select {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 10px; border-radius: 4px; font-family: var(--mono); font-size: 12px;
+  outline: none; transition: border-color .15s; }
+.field input:focus, .field select:focus { border-color: var(--cyan); }
+.field input::placeholder { color: var(--text3); }
+.form-footer { display: flex; gap: 10px; align-items: center; }
+.form-result { font-family: var(--mono); font-size: 11px; padding: 6px 12px;
+               border-radius: 4px; }
+.form-result.ok  { background: var(--green-bg); color: var(--green); }
+.form-result.err { background: var(--red-bg);   color: var(--red); }
+
+/* ── Workbench ── */
+.wb-panel { padding: 24px; }
+.wb-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.wb-sub   { font-size: 12px; color: var(--text2); margin-bottom: 20px; }
+.wb-nfn-row { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 24px; }
+.wb-nfn-row .field { flex: 1; }
+.step-list { display: flex; flex-direction: column; gap: 10px; }
+.step-card { background: var(--surface); border: 1px solid var(--border);
+             border-radius: 6px; padding: 14px 16px;
+             display: flex; align-items: center; gap: 14px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--surface3);
+            border: 1px solid var(--border); display: flex; align-items: center;
+            justify-content: center; font-family: var(--mono); font-size: 11px;
+            font-weight: 700; color: var(--cyan); flex-shrink: 0; }
+.step-info { flex: 1; }
+.step-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.step-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.step-result { font-family: var(--mono); font-size: 10px; margin-top: 4px; }
+.step-result.ok  { color: var(--green); }
+.step-result.err { color: var(--red); }
+.step-result.run { color: var(--yellow); }
+
+/* auto-refresh bar */
+.ar-bar { height: 2px; background: var(--border); position: relative; overflow: hidden; flex-shrink: 0; }
+.ar-fill { height: 100%; background: var(--cyan); width: 0%; transition: width linear; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-logo"><span>NAT</span> ↔ CURE</div>
+    <div class="topbar-sep"></div>
+    <div class="topbar-title">Audit Panel</div>
+    <div class="topbar-right">
+      <div class="pulse" id="serverPulse"></div>
+      <span class="server-label" id="serverLabel">localhost:5555</span>
+      <div class="topbar-sep"></div>
+      <span class="refresh-label" id="refreshLabel">auto-refresh: on</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- Left panel -->
+    <div class="left">
+      <div class="tabs">
+        <div class="tab active"      onclick="switchTab('queue')"     id="tab-queue">Queue</div>
+        <div class="tab"             onclick="switchTab('history')"   id="tab-history">History</div>
+        <div class="tab"             onclick="switchTab('submit')"    id="tab-submit">Submit</div>
+        <div class="tab"             onclick="switchTab('workbench')" id="tab-workbench">WB</div>
+        <div class="tab"             onclick="switchTab('trash')"     id="tab-trash" style="color:var(--red)">Trash</div>
+        <div class="tab tab-console" onclick="switchTab('console')"   id="tab-console">Console</div>
+      </div>
+      <div class="ar-bar"><div class="ar-fill" id="arFill"></div></div>
+      <div class="job-list" id="jobList">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right" id="rightPanel">
+      <div class="detail-empty">← Select a job to view details</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+let currentTab = 'queue';
+let selectedNfn = null;
+let refreshTimer = null;
+let arTimer = null;
+const REFRESH_MS = 4000;
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  selectedNfn = null;
+
+  if (tab === 'submit') {
+    stopRefresh();
+    showSubmitForm();
+  } else if (tab === 'workbench') {
+    stopRefresh();
+    showWorkbench();
+  } else if (tab === 'trash') {
+    stopRefresh();
+    loadTrash();
+  } else if (tab === 'console') {
+    stopRefresh();
+    showConsole();
+  } else {
+    startRefresh();
+    loadJobs();
+  }
+}
+
+// ── Job list loading — NO-BLINK (smart DOM update) ────────────────────────────
+async function loadJobs() {
+  const active = currentTab === 'queue';
+  const url = API + '/api/nat/history' + (active ? '?active=1' : '');
+  try {
+    const r = await fetch(url);
+    const d = await r.json();
+    renderJobList(d.jobs || []);
+    setServerOnline(true);
+  } catch(e) {
+    setServerOnline(false);
+    document.getElementById('jobList').innerHTML =
+      '<div class="empty-state" style="color:var(--red)">Server offline or unreachable</div>';
+  }
+}
+
+function renderJobList(jobs) {
+  const el = document.getElementById('jobList');
+
+  if (!jobs.length) {
+    // Only replace content if it's not already showing the empty state
+    if (!el.querySelector('.empty-state')) {
+      el.innerHTML = '<div class="empty-state">' +
+        (currentTab === 'queue' ? 'No active jobs' : 'No jobs yet') + '</div>';
+    }
+    return;
+  }
+
+  // Remove any empty-state placeholder
+  el.querySelectorAll('.empty-state').forEach(e => e.remove());
+
+  // Index existing DOM items by NFN
+  const existing = {};
+  el.querySelectorAll('.job-item[data-nfn]').forEach(item => {
+    existing[item.dataset.nfn] = item;
+  });
+
+  const newNfnSet = new Set(jobs.map(j => j.nat_file_number));
+
+  // Remove jobs no longer in the list (no re-render, just delete the node)
+  Object.keys(existing).forEach(nfn => {
+    if (!newNfnSet.has(nfn)) existing[nfn].remove();
+  });
+
+  // Update existing nodes in-place or append new ones — no full re-render
+  jobs.forEach(j => {
+    const nfn = j.nat_file_number;
+    const sc  = statusClass(j.status);
+    const county = (j.county_slug || '').replace('fl_','').replace(/_/g,' ') || '—';
+    const ts = j.created_at ? j.created_at.slice(0,16).replace('T',' ') : '';
+
+    if (existing[nfn]) {
+      const item = existing[nfn];
+      // Update only what can change — badge text/class, stage
+      const badge = item.querySelector('.status-badge');
+      const newText = statusIcon(j.status) + ' ' + (j.status || 'unknown');
+      if (badge) {
+        if (badge.className !== 'status-badge ' + sc) badge.className = 'status-badge ' + sc;
+        if (badge.textContent !== newText) badge.textContent = newText;
+      }
+      const stageEl = item.querySelector('.job-stage');
+      if (stageEl && stageEl.textContent !== (j.current_stage || ''))
+        stageEl.textContent = j.current_stage || '';
+      item.classList.toggle('selected', nfn === selectedNfn);
+    } else {
+      // New job — create the DOM node once
+      const div = document.createElement('div');
+      div.className = 'job-item' + (nfn === selectedNfn ? ' selected' : '');
+      div.dataset.nfn = nfn;
+      div.addEventListener('click', () => selectJob(nfn));
+      div.innerHTML =
+        `<div class="job-item-top">
+           <span class="job-nfn">${esc(nfn)}</span>
+           <span class="status-badge ${sc}">${statusIcon(j.status)} ${esc(j.status||'unknown')}</span>
+         </div>
+         <div class="job-meta">
+           <span class="job-county">${esc(county)}</span>
+           <span class="job-stage">${esc(j.current_stage||'')}</span>
+           <span style="margin-left:auto">${esc(ts)}</span>
+         </div>`;
+      el.appendChild(div);
+    }
+  });
+}
+
+function statusClass(s) {
+  const map = {queued:'s-queued', running:'s-running', completed:'s-completed',
+               failed:'s-failed', cancelled:'s-cancelled', callback_failed:'s-callback_failed'};
+  return map[s] || 's-other';
+}
+function statusIcon(s) {
+  const map = {queued:'⏳', running:'⚡', completed:'✅', failed:'❌',
+               cancelled:'⏹', callback_failed:'⚠️'};
+  return map[s] || '●';
+}
+
+// ── Job detail ────────────────────────────────────────────────────────────────
+async function selectJob(nfn) {
+  selectedNfn = nfn;
+  document.querySelectorAll('.job-item[data-nfn]').forEach(el => {
+    el.classList.toggle('selected', el.dataset.nfn === nfn);
+  });
+  await loadJobDetail(nfn);
+}
+
+async function loadJobDetail(nfn) {
+  const rp = document.getElementById('rightPanel');
+  if (!rp.querySelector('.detail')) {
+    rp.innerHTML = '<div class="detail-empty"><div class="spinner"></div></div>';
+  }
+  try {
+    const r = await fetch(API + '/api/nat/job-status/' + nfn);
+    const d = await r.json();
+    if (!d.success) { rp.innerHTML = '<div class="detail-empty">Job not found</div>'; return; }
+    renderJobDetail(d.job);
+  } catch(e) {
+    rp.innerHTML = '<div class="detail-empty" style="color:var(--red)">Failed to load</div>';
+  }
+}
+
+function renderJobDetail(job) {
+  const nfn = job.nat_file_number;
+  const rd = job.request_data || {};
+  const county = (job.county_slug || rd.county || '').replace('fl_','').replace(/_/g,' ');
+  const sc = statusClass(job.status);
+  const logTerminalId = `log-term-${nfn}`;
+
+  const actionBtns = renderActions(job);
+  const kvRows = [
+    ['NAT File #', nfn],
+    ['Status', `<span class="${sc}" style="font-weight:700">${statusIcon(job.status)} ${job.status}</span>`],
+    ['Current Stage', job.current_stage || '—'],
+    ['County', county || '—'],
+    ['Owner', rd.owner_name || '—'],
+    ['Address', rd.address || '—'],
+    ['APN', rd.apn || '—'],
+    ['Created', (job.created_at||'').replace('T',' ').slice(0,19)],
+    ['Completed', (job.completed_at||'—').toString().replace('T',' ').slice(0,19)],
+    ['Stage Started', (job.stage_started_at||'—').toString().replace('T',' ').slice(0,19)],
+  ].map(([k,v]) => `<div class="kv-k">${k}</div><div class="kv-v">${v}</div>`).join('');
+
+  const errorHtml = job.error
+    ? `<div class="error-block"><pre>${esc(job.error)}${job.error_trace ? '\n\n' + esc(job.error_trace.slice(0,1200)) : ''}</pre></div>`
+    : '';
+
+  const timeline = (job.timeline || []).map((ev, i, arr) => {
+    const dotClass = ev.event.includes('fail') ? 'ev-failed'
+                   : ev.event.includes('complete') || ev.event === 'callback_sent' ? 'ev-completed'
+                   : ev.event.includes('retry') ? 'ev-retry'
+                   : ev.event.includes('cancel') ? 'ev-cancel' : '';
+    const isLast = i === arr.length - 1;
+    return `<div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot ${dotClass}"></div>
+        ${!isLast ? '<div class="tl-line"></div>' : ''}
+      </div>
+      <div class="tl-content">
+        <div class="tl-event">${ev.event}</div>
+        ${ev.detail ? `<div class="tl-detail">${esc(ev.detail)}</div>` : ''}
+        <div class="tl-ts">${(ev.ts||'').replace('T',' ').slice(0,19)} UTC</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const phasesHtml = renderPhasesProgress(job);
+
+  document.getElementById('rightPanel').innerHTML = `
+    <div class="detail">
+      <div class="detail-header">
+        <div class="detail-meta">
+          <div class="detail-nfn">${esc(nfn)}</div>
+          <div class="detail-meta-row" style="margin-top:4px">
+            <strong>${esc(rd.owner_name || '—')}</strong> · ${esc(county || '—')} · ${esc(rd.address || '—')}
+          </div>
+          <div class="detail-meta-row" style="margin-top:2px">
+            <span class="status-badge ${sc}">${statusIcon(job.status)} ${job.status}</span>
+            <span style="margin-left:8px;color:var(--text3)">Stage: <strong style="color:var(--text2)">${esc(job.current_stage||'—')}</strong></span>
+          </div>
+        </div>
+        <div class="detail-actions">${actionBtns}</div>
+      </div>
+
+      ${errorHtml}
+
+      ${phasesHtml ? `<div class="section"><div class="section-label">Pipeline Phases</div>${phasesHtml}</div>` : ''}
+
+      <div class="section">
+        <div class="section-label" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span>📋 Live Phase Log</span>
+          <div style="display:flex;gap:6px;align-items:center">
+            <span id="log-count-${nfn}" style="font-size:10px;color:var(--text3)"></span>
+            <button onclick="clearLogView('${logTerminalId}')"
+              style="font-size:10px;padding:2px 8px;background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--text3);cursor:pointer">Clear</button>
+          </div>
+        </div>
+        <div id="${logTerminalId}" class="log-terminal" style="height:320px">
+          <span style="color:#484F58">Waiting for log entries…</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Job Info</div>
+        <div class="kv-grid">${kvRows}</div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Timeline (${(job.timeline||[]).length} events)</div>
+        <div class="timeline">${timeline || '<div style="color:var(--text3);font-size:12px">No events yet</div>'}</div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Output Folder</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--cyan);padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:4px">
+          downloaded_doc/NAT_${esc(nfn)}/
+        </div>
+      </div>
+    </div>`;
+
+  startLogPoller(nfn, logTerminalId);
+
+  if (['queued','running','downloading'].includes(job.status) && selectedNfn === nfn) {
+    setTimeout(() => { if (selectedNfn === nfn) loadJobDetail(nfn); }, REFRESH_MS);
+  }
+}
+
+// ── Phase progress ────────────────────────────────────────────────────────────
+const _PHASE_INFO = [
+  { key:'search',                    icon:'🔎', label:'Recorder Search' },
+  { key:'download',                  icon:'📄', label:'Download PDFs' },
+  { key:'validate_downloads',        icon:'✔',  label:'Validate Downloads' },
+  { key:'extract_text',              icon:'📝', label:'Extract Text' },
+  { key:'extract_legal_descriptions',icon:'📐', label:'Legal Descriptions' },
+  { key:'phase1_verifications',      icon:'🛡', label:'Address Verify' },
+  { key:'tax_lookup',                icon:'💰', label:'Tax Lookup' },
+  { key:'generate_raw_report',       icon:'🧠', label:'RAW Report (AI)' },
+  { key:'generate_title_notes',      icon:'📋', label:'Title Notes (AI)' },
+  { key:'generate_one_report',       icon:'📑', label:'OnE Report (AI)' },
+  { key:'render_pdfs',               icon:'🖨', label:'Render PDFs' },
+  { key:'serialize_reports',         icon:'💾', label:'Serialize' },
+];
+
+function renderPhasesProgress(job) {
+  const pp = job.phases_progress;
+  if (!pp || Object.keys(pp).length === 0) return '';
+  let html = '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+  for (const info of _PHASE_INFO) {
+    const p = pp[info.key];
+    if (!p) continue;
+    const st = p.status || 'pending';
+    let bg, color, label;
+    if      (st==='done')       { bg='#22c55e22'; color='#22c55e'; label='✓'; }
+    else if (st==='running')    { bg='#3b82f622'; color='#3b82f6'; label='↻'; }
+    else if (st==='failed')     { bg='#ef444422'; color='#ef4444'; label='✗'; }
+    else if (st==='no_records') { bg='#f59e0b22'; color='#f59e0b'; label='⚠'; }
+    else if (st==='skipped')    { bg='var(--surface)'; color='var(--text3)'; label='—'; }
+    else                        { bg='var(--surface)'; color='var(--text3)'; label='○'; }
+    const detail = p.detail ? ` <span style="color:var(--text3);font-size:10px">${esc(p.detail)}</span>` : '';
+    const spin = st==='running'
+      ? '<span class="spinner" style="width:10px;height:10px;border-width:1.5px;margin-right:4px;vertical-align:middle;display:inline-block"></span>'
+      : '';
+    html += `<div style="border:1px solid ${color};border-radius:5px;background:${bg};padding:4px 8px;font-size:11px;display:flex;align-items:center;gap:4px;white-space:nowrap" title="${esc(info.key)}">
+      <span style="color:${color};font-weight:700">${spin}${label}</span>
+      <span>${info.icon} ${info.label}</span>${detail}
+    </div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+// ── Log terminal poller (per-job) ─────────────────────────────────────────────
+const _logPollers = {};
+
+function logMsgClass(msg) {
+  if (msg.startsWith('✗') || msg.startsWith('   ERROR'))  return 'c-fail';
+  if (msg.startsWith('✓'))                                 return 'c-ok';
+  if (msg.startsWith('⚠'))                                return 'c-warn';
+  if (msg.startsWith('▶'))                                 return 'c-start';
+  if (msg.startsWith('⏭'))                                return 'c-skip';
+  if (msg.startsWith('   🤖') || msg.startsWith('🤖'))    return 'c-ai';
+  if (msg.startsWith('⏳'))                                return 'c-hb';
+  return '';
+}
+
+function appendLogLine(el, ts, msg, nfn) {
+  const timeStr = (ts || '').replace('T',' ').slice(11,19);
+  const cls = logMsgClass(msg);
+  const div = document.createElement('div');
+  div.className = 'log-line';
+  const nfnHtml = nfn ? `<span class="log-nfn">${esc(nfn)}</span>` : '';
+  div.innerHTML =
+    `<span class="log-ts">${esc(timeStr)}</span>${nfnHtml}<span class="log-msg ${cls}">${esc(msg)}</span>`;
+  el.appendChild(div);
+}
+
+function startLogPoller(nfn, termId) {
+  // Stop any poller for a different job
+  Object.keys(_logPollers).forEach(k => {
+    if (k !== nfn) { clearInterval(_logPollers[k].timer); delete _logPollers[k]; }
+  });
+  if (_logPollers[nfn]) return;
+
+  const state = { offset: 0, initialized: false };
+  const tick = async () => {
+    const el = document.getElementById(termId);
+    if (!el) { clearInterval(_logPollers[nfn]?.timer); delete _logPollers[nfn]; return; }
+    try {
+      const r = await fetch(API + `/api/nat/logs/${nfn}?offset=${state.offset}`);
+      const d = await r.json();
+      if (d.logs && d.logs.length > 0) {
+        if (!state.initialized) { el.innerHTML = ''; state.initialized = true; }
+        d.logs.forEach(entry => appendLogLine(el, entry.ts, entry.msg || '', null));
+        el.scrollTop = el.scrollHeight;
+        state.offset = d.total;
+        const countEl = document.getElementById(`log-count-${nfn}`);
+        if (countEl) countEl.textContent = `${d.total} entries`;
+      } else if (!state.initialized && d.total === 0) {
+        el.innerHTML = '<span style="color:#484F58">No log entries yet — logs appear once the job starts running.</span>';
+      }
+    } catch(e) { /* ignore */ }
+  };
+  tick();
+  _logPollers[nfn] = { timer: setInterval(tick, 1200), state };
+}
+
+function clearLogView(termId) {
+  const el = document.getElementById(termId);
+  if (el) el.innerHTML = '<span style="color:#484F58">(view cleared — new entries appear below)</span>';
+}
+
+// ── Console tab (global server log stream) ────────────────────────────────────
+let _consoleOffset = 0;
+let _consoleTimer  = null;
+let _consolePaused = false;
+
+function showConsole() {
+  const rp = document.getElementById('rightPanel');
+  rp.style.overflow = 'hidden';
+  rp.innerHTML = `
+    <div class="console-panel">
+      <div class="console-toolbar">
+        <span class="console-title">📟 Live Server Console</span>
+        <span class="console-badge" id="consoleBadge">0 entries</span>
+        <div style="flex:1"></div>
+        <button onclick="toggleConsolePause()" id="consolePauseBtn"
+          style="font-size:10px;padding:3px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text2);cursor:pointer">⏸ Pause</button>
+        <button onclick="clearConsole()"
+          style="font-size:10px;padding:3px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text2);cursor:pointer">Clear</button>
+        <button onclick="scrollConsoleToBottom()"
+          style="font-size:10px;padding:3px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text2);cursor:pointer">↓ Bottom</button>
+      </div>
+      <div class="console-body">
+        <div id="consoleTerminal" class="console-terminal">
+          <span style="color:#484F58">Waiting for server activity…</span>
+        </div>
+      </div>
+    </div>`;
+
+  // Also show job list in left panel as "recent activity"
+  document.getElementById('jobList').innerHTML =
+    '<div class="empty-state" style="font-size:11px;padding:20px 12px;text-align:left;line-height:1.8">' +
+    '<div style="color:var(--purple);font-weight:700;margin-bottom:8px">📟 Console Mode</div>' +
+    '<div style="color:var(--text3)">Right panel shows all server log activity in real time.<br><br>Switch to Queue or History to view jobs.</div>' +
+    '</div>';
+
+  _consoleOffset = 0;
+  _consolePaused = false;
+  startConsolePoller();
+}
+
+function startConsolePoller() {
+  if (_consoleTimer) clearInterval(_consoleTimer);
+  const tick = async () => {
+    if (_consolePaused) return;
+    const el = document.getElementById('consoleTerminal');
+    if (!el) { clearInterval(_consoleTimer); _consoleTimer = null; return; }
+    try {
+      const r = await fetch(API + `/api/nat/console-log?offset=${_consoleOffset}`);
+      const d = await r.json();
+      if (d.logs && d.logs.length > 0) {
+        const wasAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 40;
+        if (_consoleOffset === 0) el.innerHTML = '';
+        d.logs.forEach(entry => appendLogLine(el, entry.ts, entry.msg || '', entry.nfn || ''));
+        _consoleOffset = d.total;
+        const badge = document.getElementById('consoleBadge');
+        if (badge) badge.textContent = `${d.total} entries`;
+        if (wasAtBottom) el.scrollTop = el.scrollHeight;
+      }
+    } catch(e) { /* server offline */ }
+  };
+  tick();
+  _consoleTimer = setInterval(tick, 1000);
+}
+
+function toggleConsolePause() {
+  _consolePaused = !_consolePaused;
+  const btn = document.getElementById('consolePauseBtn');
+  if (btn) btn.textContent = _consolePaused ? '▶ Resume' : '⏸ Pause';
+}
+
+function clearConsole() {
+  _consoleOffset = 0;
+  const el = document.getElementById('consoleTerminal');
+  if (el) el.innerHTML = '<span style="color:#484F58">(console cleared)</span>';
+}
+
+function scrollConsoleToBottom() {
+  const el = document.getElementById('consoleTerminal');
+  if (el) el.scrollTop = el.scrollHeight;
+}
+
+// Stop console poller when leaving the tab
+function stopConsolePoller() {
+  if (_consoleTimer) { clearInterval(_consoleTimer); _consoleTimer = null; }
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+function renderActions(job) {
+  const nfn = job.nat_file_number;
+  const active = ['queued','running','downloading'].includes(job.status);
+  const failed = ['failed','cancelled','callback_failed'].includes(job.status);
+  let btns = '';
+  if (active)  btns += `<button class="btn btn-stop" onclick="cancelJob('${nfn}')">⏹ Stop</button>`;
+  if (failed)  btns += `<button class="btn btn-retry" onclick="retryJob('${nfn}')">↺ Retry</button>`;
+  if (failed || job.status === 'completed')
+               btns += `<button class="btn btn-restart" onclick="retryJob('${nfn}','search')">↻ Restart</button>`;
+  if (job.status === 'completed')
+               btns += `<button class="btn btn-primary btn-small" onclick="resendCallback('${nfn}')">↑ Resend</button>`;
+  if (!active)
+               btns += `<button class="btn btn-delete btn-small" onclick="softDeleteJob('${nfn}')">🗑 Delete</button>`;
+  return btns;
+}
+
+// ── Delete / Trash ────────────────────────────────────────────────────────────
+async function softDeleteJob(nfn) {
+  if (!confirm(`Move job ${nfn} to Trash?\n\nYou can restore it or permanently delete it from the Trash tab.`)) return;
+  try {
+    const r = await fetch(API + '/api/nat/delete/' + nfn, {method:'POST'});
+    const d = await r.json();
+    if (d.success) {
+      document.getElementById('rightPanel').innerHTML =
+        `<div class="detail-empty" style="color:var(--yellow)">🗑 Job ${nfn} moved to Trash</div>`;
+      loadJobs(); updateTrashBadge();
+    } else { alert('Delete failed: ' + (d.error || 'Unknown error')); }
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function updateTrashBadge() {
+  try {
+    const r = await fetch(API + '/api/nat/trash');
+    const d = await r.json();
+    const tab = document.getElementById('tab-trash');
+    if (tab) tab.textContent = d.count ? `Trash (${d.count})` : 'Trash';
+  } catch(e) {}
+}
+
+async function loadTrash() {
+  const el = document.getElementById('jobList');
+  el.innerHTML = '<div class="empty-state">Loading…</div>';
+  document.getElementById('rightPanel').innerHTML = '<div class="detail-empty">← Select a trashed job</div>';
+  try {
+    const r = await fetch(API + '/api/nat/trash');
+    const d = await r.json();
+    if (!d.jobs || !d.jobs.length) {
+      el.innerHTML = '<div class="empty-state" style="color:var(--text3)">Trash is empty</div>'; return;
+    }
+    el.innerHTML = d.jobs.map(j => {
+      const sc = statusClass(j.status);
+      const county = (j.county_slug||'').replace('fl_','').replace('_',' ') || '—';
+      const ts = (j.created_at||'').slice(0,16).replace('T',' ');
+      return `<div class="job-item" data-nfn="${j.nat_file_number}" onclick="selectTrashJob('${j.nat_file_number}')"
+                style="opacity:.7;border-left:2px solid var(--red)">
+        <div class="job-item-top">
+          <span class="job-nfn">${j.nat_file_number}</span>
+          <span class="status-badge ${sc}">${statusIcon(j.status)} ${j.status}</span>
+        </div>
+        <div class="job-meta">
+          <span class="job-county">${county}</span>
+          <span>${ts}</span>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div class="empty-state" style="color:var(--red)">Server unreachable</div>';
+  }
+}
+
+async function selectTrashJob(nfn) {
+  document.querySelectorAll('.job-item[data-nfn]').forEach(el =>
+    el.classList.toggle('selected', el.dataset.nfn === nfn));
+  const rp = document.getElementById('rightPanel');
+  rp.innerHTML = '<div class="detail-empty"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch(API + '/api/nat/trash/' + nfn);
+    const d = await r.json();
+    if (!d.success) { rp.innerHTML = '<div class="detail-empty">Not found in trash</div>'; return; }
+    const job = d.job;
+    const sc = statusClass(job.status);
+    const rd = job.request_data || {};
+    const county = (job.county_slug||rd.county||'').replace('fl_','').replace(/_/g,' ');
+    rp.innerHTML = `
+      <div class="detail">
+        <div class="detail-header">
+          <div class="detail-meta">
+            <div class="detail-nfn" style="color:var(--text2)">${nfn}
+              <span style="font-size:13px;color:var(--red);font-weight:400;margin-left:8px">🗑 In Trash</span>
+            </div>
+            <div class="detail-meta-row" style="margin-top:4px">
+              <strong>${esc(rd.owner_name||'—')}</strong> · ${esc(county||'—')} · ${esc(rd.address||'—')}
+            </div>
+            <div class="detail-meta-row" style="margin-top:2px">
+              <span class="status-badge ${sc}">${statusIcon(job.status)} ${job.status}</span>
+            </div>
+          </div>
+          <div class="detail-actions">
+            <button class="btn btn-restore btn-small" onclick="restoreJob('${nfn}')">↩ Restore</button>
+            <button class="btn btn-perm btn-small" onclick="permanentDelete('${nfn}')">🗑 Delete Permanently</button>
+          </div>
+        </div>
+        <div style="background:var(--red-bg);border:1px solid #6B1A1A;border-radius:4px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:#C0392B;">
+          ⚠️ This job is in Trash. Restore it to run again, or permanently delete to remove all files.
+        </div>
+        <div class="section">
+          <div class="section-label">Job Info</div>
+          <div class="kv-grid">
+            <div class="kv-k">NAT File #</div><div class="kv-v">${nfn}</div>
+            <div class="kv-k">Original Status</div><div class="kv-v">${job.status}</div>
+            <div class="kv-k">Stage When Deleted</div><div class="kv-v">${job.current_stage||'—'}</div>
+            <div class="kv-k">County</div><div class="kv-v">${county||'—'}</div>
+            <div class="kv-k">Owner</div><div class="kv-v">${esc(rd.owner_name||'—')}</div>
+            <div class="kv-k">Created</div><div class="kv-v">${(job.created_at||'').replace('T',' ').slice(0,19)}</div>
+            ${job.error ? `<div class="kv-k">Error</div><div class="kv-v red">${esc(job.error)}</div>` : ''}
+          </div>
+        </div>
+      </div>`;
+  } catch(e) {
+    rp.innerHTML = '<div class="detail-empty" style="color:var(--red)">Failed to load</div>';
+  }
+}
+
+async function restoreJob(nfn) {
+  if (!confirm(`Restore job ${nfn} from Trash?\n\nIt will reappear in History.`)) return;
+  try {
+    const r = await fetch(API + '/api/nat/trash/restore/' + nfn, {method:'POST'});
+    const d = await r.json();
+    if (d.success) {
+      document.getElementById('rightPanel').innerHTML =
+        `<div class="detail-empty" style="color:var(--green)">✅ Job ${nfn} restored to History</div>`;
+      loadTrash(); updateTrashBadge();
+    } else { alert('Restore failed: ' + (d.error || 'Unknown')); }
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function permanentDelete(nfn) {
+  if (!confirm(`⚠️ PERMANENTLY DELETE job ${nfn}?\n\nThis will remove:\n• The job record\n• The output folder (downloaded_doc/NAT_${nfn}/)\n\nThis CANNOT be undone.`)) return;
+  try {
+    const r = await fetch(API + '/api/nat/trash/delete/' + nfn, {method:'POST'});
+    const d = await r.json();
+    if (d.success) {
+      document.getElementById('rightPanel').innerHTML =
+        `<div class="detail-empty" style="color:var(--text3)">🗑 Job ${nfn} permanently deleted</div>`;
+      loadTrash(); updateTrashBadge();
+    } else { alert('Delete failed: ' + (d.errors||[]).join(', ')); }
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function cancelJob(nfn) {
+  if (!confirm('Stop job ' + nfn + '?')) return;
+  await fetch(API + '/api/admin/cancel-job', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({nat_file_number: nfn})
+  });
+  await loadJobDetail(nfn); loadJobs();
+}
+async function retryJob(nfn, forceStage) {
+  const body = {nat_file_number: nfn};
+  if (forceStage) body.force_stage = forceStage;
+  await fetch(API + '/api/nat/retry/' + nfn, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  await loadJobDetail(nfn); loadJobs();
+}
+async function resendCallback(nfn) {
+  await fetch(API + '/api/nat/manual/send-callback', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({nat_file_number: nfn})
+  });
+  await loadJobDetail(nfn);
+}
+
+// ── Submit form ───────────────────────────────────────────────────────────────
+function showSubmitForm() {
+  document.getElementById('rightPanel').style.overflow = '';
+  document.getElementById('rightPanel').innerHTML = `
+    <div class="form-panel">
+      <div class="form-title">Submit Test Job</div>
+      <div class="form-sub">Fire a new extraction job directly — without going through NAT portal.</div>
+      <div class="form-grid">
+        <div class="field"><label>NAT File Number *</label>
+          <input id="f_nfn" placeholder="e.g. TEST_001" /></div>
+        <div class="field"><label>State</label>
+          <select id="f_state"><option value="FL">FL — Florida</option></select></div>
+        <div class="field"><label>Owner Name *</label>
+          <input id="f_owner" placeholder="e.g. SMITH JOHN A" /></div>
+        <div class="field"><label>Spouse Name (optional)</label>
+          <input id="f_spouse" placeholder="e.g. SMITH MARY B" /></div>
+        <div class="field"><label>County *</label>
+          <input id="f_county" placeholder="e.g. hillsborough" /></div>
+        <div class="field"><label>APN (optional)</label>
+          <input id="f_apn" placeholder="e.g. 12-34-567-890" /></div>
+        <div class="field full"><label>Property Address</label>
+          <input id="f_addr" placeholder="e.g. 123 Main St, Tampa FL 33601" /></div>
+      </div>
+      <div class="form-footer">
+        <button class="btn btn-primary" onclick="submitJob()">▶ Submit Job</button>
+        <div id="submitResult"></div>
+      </div>
+      <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+        <div class="section-label" style="margin-bottom:12px">Quick Presets</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-small" style="background:var(--surface);border-color:var(--border);color:var(--text2)"
+            onclick="fillPreset('HABER_TEST','HABER DANA M','palm beach','21831 Palm Grass Dr, Boca Raton FL 33428','00-41-47-22-04-000-1090','')">
+            HABER DANA M (Palm Beach)
+          </button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('jobList').innerHTML = '<div class="empty-state">Fill the form →</div>';
+}
+
+function fillPreset(nfn, owner, county, addr, apn, spouse) {
+  document.getElementById('f_nfn').value   = nfn;
+  document.getElementById('f_owner').value = owner;
+  document.getElementById('f_county').value= county;
+  document.getElementById('f_addr').value  = addr;
+  document.getElementById('f_apn').value   = apn;
+  document.getElementById('f_spouse').value= spouse;
+}
+
+async function submitJob() {
+  const nfn    = document.getElementById('f_nfn').value.trim();
+  const owner  = document.getElementById('f_owner').value.trim();
+  const county = document.getElementById('f_county').value.trim();
+  const addr   = document.getElementById('f_addr').value.trim();
+  const apn    = document.getElementById('f_apn').value.trim();
+  const spouse = document.getElementById('f_spouse').value.trim();
+  const state  = document.getElementById('f_state').value;
+  const res    = document.getElementById('submitResult');
+
+  if (!nfn || !owner || !county) {
+    res.className = 'form-result err';
+    res.textContent = 'NAT File #, Owner Name, and County are required';
+    return;
+  }
+
+  res.className = 'form-result run';
+  res.innerHTML = '<span class="spinner"></span> Submitting…';
+
+  const body = {nat_file_number: nfn, owner_name: owner, county, state, address: addr};
+  if (apn)    body.apn = apn;
+  if (spouse) body.spouse_name = spouse;
+
+  try {
+    const r = await fetch(API + '/api/nat/start-extraction', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    const d = await r.json();
+    if (d.success) {
+      res.className = 'form-result ok';
+      res.textContent = '✅ Job ' + nfn + ' queued — switch to Queue tab to monitor';
+    } else {
+      res.className = 'form-result err';
+      res.textContent = '❌ ' + (d.error || 'Unknown error');
+    }
+  } catch(e) {
+    res.className = 'form-result err';
+    res.textContent = '❌ Server unreachable: ' + e.message;
+  }
+}
+
+// ── Workbench ──────────────────────────────────────────────────────────────────
+const WB_STEPS = [
+  { num:0, name:'Initialize',    desc:'Create job record on disk',             ep:'/api/nat/manual/initialize' },
+  { num:1, name:'Search',        desc:'Run county recorder search',             ep:'/api/nat/manual/search' },
+  { num:2, name:'Download',      desc:'Download PDFs from recorder',            ep:'/api/nat/manual/download' },
+  { num:3, name:'Tax',           desc:'Fetch property tax data',                ep:'/api/nat/manual/tax' },
+  { num:4, name:'AI Reports',    desc:'Generate RAW + Title + OnE reports',     ep:'/api/nat/manual/ai-reports' },
+  { num:5, name:'Send Callback', desc:'Build 47-field payload and POST to NAT', ep:'/api/nat/manual/send-callback' },
+];
+
+function showWorkbench() {
+  document.getElementById('rightPanel').style.overflow = '';
+  const steps = WB_STEPS.map(s => `
+    <div class="step-card" id="wbstep-${s.num}">
+      <div class="step-num">${s.num}</div>
+      <div class="step-info">
+        <div class="step-name">${s.name}</div>
+        <div class="step-desc">${s.desc}</div>
+        <div class="step-result" id="wbres-${s.num}"></div>
+      </div>
+      <button class="btn btn-primary btn-small" onclick="runWbStep(${s.num})">Run</button>
+    </div>`).join('');
+
+  document.getElementById('rightPanel').innerHTML = `
+    <div class="wb-panel">
+      <div class="wb-title">Manual Workbench</div>
+      <div class="wb-sub">Run pipeline stages one at a time. Useful for debugging a stuck job or re-running a single phase.</div>
+      <div class="wb-nfn-row">
+        <div class="field">
+          <label>NAT File Number</label>
+          <input id="wb_nfn" placeholder="e.g. 300700" />
+        </div>
+        <button class="btn btn-small" style="background:var(--surface2);border-color:var(--border);color:var(--text2);margin-bottom:0"
+          onclick="loadWbJob()">Load Job</button>
+      </div>
+      <div id="wbJobInfo" style="margin-bottom:16px;font-size:12px;color:var(--text2)"></div>
+      <div class="step-list">${steps}</div>
+    </div>`;
+  document.getElementById('jobList').innerHTML = '<div class="empty-state">Enter file # →</div>';
+}
+
+async function loadWbJob() {
+  const nfn = document.getElementById('wb_nfn').value.trim();
+  if (!nfn) return;
+  try {
+    const r = await fetch(API + '/api/nat/job-status/' + nfn);
+    const d = await r.json();
+    const info = document.getElementById('wbJobInfo');
+    if (d.success) {
+      const j = d.job;
+      info.innerHTML = `<span style="color:var(--text)">Job found:</span>
+        Status = <strong style="color:var(--cyan)">${j.status}</strong>
+        | Stage = <strong>${j.current_stage}</strong>
+        | Owner = ${esc((j.request_data||{}).owner_name || '—')}`;
+    } else {
+      info.innerHTML = `<span style="color:var(--text3)">Job not found — Initialize first (Step 0)</span>`;
+    }
+  } catch(e) {
+    document.getElementById('wbJobInfo').innerHTML = `<span style="color:var(--red)">Server unreachable</span>`;
+  }
+}
+
+async function runWbStep(stepNum) {
+  const nfn = document.getElementById('wb_nfn').value.trim();
+  const resEl = document.getElementById('wbres-' + stepNum);
+  if (!nfn) { resEl.className='step-result err'; resEl.textContent='Enter NAT File # first'; return; }
+  const step = WB_STEPS[stepNum];
+  resEl.className = 'step-result run';
+  resEl.innerHTML = '<span class="spinner"></span> Running…';
+  try {
+    const r = await fetch(API + step.ep, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({nat_file_number: nfn})
+    });
+    const d = await r.json();
+    if (d.success || r.ok) {
+      resEl.className = 'step-result ok';
+      resEl.textContent = '✅ ' + (d.message || d.status || 'Done');
+    } else {
+      resEl.className = 'step-result err';
+      resEl.textContent = '❌ ' + (d.error || r.status);
+    }
+  } catch(e) {
+    resEl.className = 'step-result err';
+    resEl.textContent = '❌ ' + e.message;
+  }
+  await loadWbJob();
+}
+
+// ── Auto-refresh ──────────────────────────────────────────────────────────────
+function startRefresh() {
+  stopRefresh();
+  animateBar();
+  refreshTimer = setInterval(() => {
+    loadJobs();
+    if (selectedNfn) loadJobDetail(selectedNfn);
+    animateBar();
+  }, REFRESH_MS);
+}
+function stopRefresh() {
+  clearInterval(refreshTimer);
+  clearTimeout(arTimer);
+  refreshTimer = null;
+  stopConsolePoller();
+  const fill = document.getElementById('arFill');
+  if (fill) { fill.style.transition='none'; fill.style.width='0%'; }
+  document.getElementById('refreshLabel').textContent = 'auto-refresh: off';
+}
+function animateBar() {
+  const fill = document.getElementById('arFill');
+  if (!fill) return;
+  fill.style.transition = 'none'; fill.style.width = '0%';
+  requestAnimationFrame(() => {
+    fill.style.transition = `width ${REFRESH_MS}ms linear`; fill.style.width = '100%';
+  });
+  document.getElementById('refreshLabel').textContent = 'auto-refresh: 4s';
+}
+
+// ── Server health ─────────────────────────────────────────────────────────────
+function setServerOnline(online) {
+  const p = document.getElementById('serverPulse');
+  if (p) p.className = 'pulse' + (online ? '' : ' off');
+}
+
+async function checkServer() {
+  try { await fetch(API + '/status'); setServerOnline(true); }
+  catch(e) { setServerOnline(false); }
+}
+
+function esc(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+checkServer();
+startRefresh();
+loadJobs();
+updateTrashBadge();
+</script>
+</body>
+</html>
