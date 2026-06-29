@@ -1,0 +1,170 @@
+{
+  "nat_file_number": "300705",
+  "status": "failed",
+  "current_stage": "ai_report_abs",
+  "created_at": "2026-06-25T06:15:58.832352",
+  "request_data": {
+    "nat_file_number": "300705",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "SKINNER MICHAEL",
+    "county": "duval",
+    "state": "FL",
+    "address": "4409 CROOKED BROOK COURT",
+    "city": "WINTER GARDEN",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "SKINNER SALLY"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-25T06:15:58.832352",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T06:15:58.864667"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Error code: 403 - {'error': {'message': 'Access denied. Please check your network settings.'}}",
+      "ts": "2026-06-25T06:27:45.992304"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_raw",
+      "ts": "2026-06-25T06:33:58.264615"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T06:33:58.296240"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CcPX88vj8oDz6SWfGRfeY'}",
+      "ts": "2026-06-25T06:40:08.738818"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-25T07:14:25.112321"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T07:14:25.150139"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi",
+      "ts": "2026-06-25T07:14:29.222837"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-25T07:17:30.511554"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T07:17:30.551409"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, mo",
+      "ts": "2026-06-25T07:22:02.627942"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-25T07:41:51.003834"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T07:41:51.069290"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi",
+      "ts": "2026-06-25T07:46:02.616280"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=ai_report_abs",
+      "ts": "2026-06-25T08:01:40.376119"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_duval owner=SKINNER, MICHAEL",
+      "ts": "2026-06-25T08:01:40.462687"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi",
+      "ts": "2026-06-25T08:06:02.825083"
+    }
+  ],
+  "error": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 57.504062013s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n   ",
+  "completed_at": null,
+  "county_slug": "fl_duval",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-25T06:15:58.867676",
+      "completed_at": "2026-06-25T06:19:06.432137",
+      "detail": "Found 9 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-25T06:19:06.456295",
+      "completed_at": "2026-06-25T06:20:16.671549",
+      "detail": "9 / 9 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "done",
+      "started_at": "2026-06-25T06:20:16.693596",
+      "completed_at": "2026-06-25T06:27:39.409444",
+      "detail": "9 docs extracted"
+    },
+    "extract_legal_descriptions": {
+      "status": "done",
+      "started_at": "2026-06-25T06:27:39.412976",
+      "completed_at": "2026-06-25T06:27:39.536650"
+    },
+    "phase1_verifications": {
+      "status": "done",
+      "started_at": "2026-06-25T06:27:39.541653",
+      "completed_at": "2026-06-25T06:27:40.010969"
+    },
+    "tax_lookup": {
+      "status": "done",
+      "started_at": "2026-06-25T06:27:40.015276",
+      "completed_at": "2026-06-25T06:27:42.177329"
+    },
+    "generate_raw_report": {
+      "status": "done",
+      "started_at": "2026-06-25T06:33:58.313203",
+      "completed_at": "2026-06-25T06:36:56.647507"
+    },
+    "generate_title_notes": {
+      "status": "done",
+      "started_at": "2026-06-25T06:36:56.650468",
+      "completed_at": "2026-06-25T06:40:07.023713"
+    },
+    "generate_one_report": {
+      "status": "failed",
+      "started_at": "2026-06-25T08:01:40.498992",
+      "detail": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemi"
+    }
+  },
+  "stage_started_at": "2026-06-25T08:01:40.489734",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\google\\api_core\\grpc_helpers.py\", line 55, in error_remapped_callable\n    return callable_(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_interceptor.py\", line 276, in __call__\n    response, ignored_call = self._with_call(\n                             ^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_interceptor.py\", line 331, in _with_call\n    return call.result(), call\n           ^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_channel.py\", line 438, in result\n    raise self\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_interceptor.py\", line 314, in continuation\n    response, call = self._thunk(new_method).with_call(\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_channel.py\", line 1173, in with_call\n    return _end_unary_response_blocking(state, call, True, None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\grpc\\_channel.py\", line 990, in _end_unary_response_blocking\n    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ngrpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:\n\tstatus = StatusCode.RESOURCE_EXHAUSTED\n\tdetails = \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 57.504062013s.\"\n\tdebug_error_string = \"RESOURCE_EXHAUSTED:You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/genera"
+}

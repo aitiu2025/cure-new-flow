@@ -1,0 +1,161 @@
+{
+  "nat_file_number": "300711",
+  "status": "completed",
+  "current_stage": "callback",
+  "created_at": "2026-06-25T05:51:10.451149",
+  "request_data": {
+    "nat_file_number": "300711",
+    "request_type": "RAW_TWO_OWNER",
+    "owner_name": "GUILD MARYKE",
+    "county": "volusia",
+    "state": "FL",
+    "address": "435 ELSIE AVE",
+    "city": "DAYTONA BEACH",
+    "apn": "",
+    "start_date": "",
+    "end_date": "",
+    "spouse_name": "GUILD JUSTIN"
+  },
+  "timeline": [
+    {
+      "event": "submitted",
+      "ts": "2026-06-25T05:51:10.451149",
+      "detail": ""
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_volusia owner=GUILD, MARYKE",
+      "ts": "2026-06-25T05:51:10.519346"
+    },
+    {
+      "event": "pipeline_failed",
+      "detail": "Failed to perform, curl: (28) Failed to connect to app02.clerk.org port 443 after 21148 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "ts": "2026-06-25T05:51:32.628182"
+    },
+    {
+      "event": "retry_queued",
+      "detail": "resume_from=search",
+      "ts": "2026-06-25T05:51:48.214249"
+    },
+    {
+      "event": "pipeline_started",
+      "detail": "county=fl_volusia owner=GUILD, MARYKE",
+      "ts": "2026-06-25T05:51:48.246178"
+    },
+    {
+      "event": "pipeline_completed",
+      "detail": "",
+      "ts": "2026-06-25T06:09:59.636077"
+    },
+    {
+      "event": "callback_building_payload",
+      "detail": "",
+      "ts": "2026-06-25T06:09:59.642586"
+    },
+    {
+      "event": "callback_sent",
+      "detail": "",
+      "ts": "2026-06-25T06:09:59.946887"
+    }
+  ],
+  "error": null,
+  "completed_at": "2026-06-25T06:09:59.946887",
+  "county_slug": "fl_volusia",
+  "phases_progress": {
+    "search": {
+      "status": "done",
+      "started_at": "2026-06-25T05:51:48.249176",
+      "completed_at": "2026-06-25T05:51:58.550153",
+      "detail": "Found 50 documents"
+    },
+    "download": {
+      "status": "done",
+      "started_at": "2026-06-25T05:51:58.579080",
+      "completed_at": "2026-06-25T05:53:38.655344",
+      "detail": "0 / 50 PDFs"
+    },
+    "validate_downloads": {
+      "status": "done",
+      "detail": "already complete"
+    },
+    "extract_text": {
+      "status": "done",
+      "started_at": "2026-06-25T05:53:38.684795",
+      "completed_at": "2026-06-25T05:53:38.731505",
+      "detail": "50 docs extracted"
+    },
+    "extract_legal_descriptions": {
+      "status": "done",
+      "started_at": "2026-06-25T05:53:38.734018",
+      "completed_at": "2026-06-25T05:53:38.831122"
+    },
+    "phase1_verifications": {
+      "status": "done",
+      "started_at": "2026-06-25T05:53:38.833644",
+      "completed_at": "2026-06-25T05:53:38.987951"
+    },
+    "tax_lookup": {
+      "status": "done",
+      "started_at": "2026-06-25T05:53:38.991975",
+      "completed_at": "2026-06-25T05:53:39.075572"
+    },
+    "generate_raw_report": {
+      "status": "done",
+      "started_at": "2026-06-25T05:53:39.080562",
+      "completed_at": "2026-06-25T05:57:12.595263"
+    },
+    "generate_title_notes": {
+      "status": "done",
+      "started_at": "2026-06-25T05:57:12.598264",
+      "completed_at": "2026-06-25T06:01:48.153050"
+    },
+    "generate_one_report": {
+      "status": "done",
+      "started_at": "2026-06-25T06:01:48.160547",
+      "completed_at": "2026-06-25T06:09:44.264994"
+    },
+    "render_pdfs": {
+      "status": "done",
+      "started_at": "2026-06-25T06:09:44.273279",
+      "completed_at": "2026-06-25T06:09:59.401481"
+    },
+    "serialize_reports": {
+      "status": "done",
+      "started_at": "2026-06-25T06:09:59.404504",
+      "completed_at": "2026-06-25T06:09:59.631609"
+    }
+  },
+  "stage_started_at": "2026-06-25T06:09:59.638075",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\requests\\session.py\", line 732, in _request_once\n    c.perform()\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\curl.py\", line 505, in perform\n    self._check_error(ret, \"perform\")\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\curl.py\", line 269, in _check_error\n    raise error\ncurl_cffi.curl.CurlError: Failed to perform, curl: (28) Failed to connect to app02.clerk.org port 443 after 21148 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\api\\server.py\", line 3486, in _nat_run_extraction\n    _phase_result = getattr(pipeline, _phase)()\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 866, in search\n    return self._run_search_with_recorder(recorder, navigate=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\automation\\pipeline.py\", line 911, in _run_search_with_recorder\n    recorder.navigate_to_search()\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\search\\recorder\\counties\\adapters\\volusia_or_m_adapter.py\", line 202, in navigate_to_search\n    self._accept_disclaimer()\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\src\\titlepro\\search\\recorder\\counties\\adapters\\volusia_or_m_adapter.py\", line 179, in _accept_disclaimer\n    resp = self.session.get(self._entry_url, timeout=30)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\requests\\session.py\", line 842, in get\n    return self.request(method=\"GET\", url=url, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\requests\\session.py\", line 795, in request\n    return self._request_once(\n           ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\10X Door CURE AI\\Amit New Flow Of Cure\\Amit-0422_titlePro_checkpoint\\venv\\Lib\\site-packages\\curl_cffi\\requests\\session.py\", line 739, in _request_once\n    raise error(str(e), e.code, rsp) from e\ncurl_cffi.requests.exceptions.Timeout: Failed to perform, curl: (28) Failed to connect to app02.clerk.org port 443 after 21148 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.ht",
+  "result": {
+    "data": {
+      "OfficialPropertyAddress": "435 ELSIE AVE, DAYTONA BEACH, FL",
+      "City": "DAYTONA BEACH",
+      "State": "FL",
+      "County": "Volusia",
+      "VestingChainOfTitleInformation": [],
+      "OpenMortgageInformation": [],
+      "OpenJudgmentsAndEncumbrances": [],
+      "LegalDescription": "**[NOT FOUND IN RECORDS]**\n\nNo document PDF was retrieved. The legal description cannot be transcribed. A verbatim legal description must be obtained from the face of Deed 2023134695 (or the most recently recorded vesting deed confirmed to cover 435 Elsie Ave) before this examination can proceed.",
+      "TaxStatus": "skipped",
+      "TaxAPNAccount": "",
+      "TaxMunicipalityCounty": "Volusia",
+      "TaxYear": "",
+      "TaxPropertyAddress": "",
+      "TaxInstallmentStatus": "",
+      "TaxSource": "",
+      "TaxCapturedAt": "",
+      "TaxAssessedYear": "",
+      "TaxPaymentSchedule": "November (4% discount), December (3% discount), January (2% discount), February (1% discount), March (full payment). Delinquent after April 1.",
+      "TaxDueDate": "March 31",
+      "TaxDelinquentDate": "April 1",
+      "TaxType": "Ad Valorem",
+      "TaxAmount": "",
+      "TaxBuildingValue": "",
+      "TaxTotalValue": "",
+      "TaxAssessedValue": "",
+      "TaxExemptions": "",
+      "TaxComments": ""
+    }
+  }
+}
