@@ -3272,6 +3272,21 @@ NAT_JOBS_DIR.mkdir(exist_ok=True)
 NAT_TRASH_DIR = BASE_DIR / ".nat_trash"
 NAT_TRASH_DIR.mkdir(exist_ok=True)
 
+# ── Pipeline concurrency control ───────────────────────────────────────────────
+# 1 = serial queue (safest — one job runs, rest wait in order).
+# Raise to 2-3 only after confirming recorder/Claude rate limits allow it.
+# Configurable via "MAX_CONCURRENT_NAT_JOBS" in config/secrets.json.
+def _nat_load_max_concurrent() -> int:
+    try:
+        _s = json.loads((BASE_DIR / "config" / "secrets.json").read_text(encoding="utf-8"))
+        return max(1, int(_s.get("MAX_CONCURRENT_NAT_JOBS", 1)))
+    except Exception:
+        return 1
+
+MAX_CONCURRENT_NAT_JOBS: int = _nat_load_max_concurrent()
+_NAT_PIPELINE_SEMAPHORE = threading.Semaphore(MAX_CONCURRENT_NAT_JOBS)
+print(f"[NAT] Pipeline concurrency limit: {MAX_CONCURRENT_NAT_JOBS} slot(s)", flush=True)
+
 # ── Per-job in-memory log buffer (cleared on server restart) ─────────────────
 _nat_logs: dict = {}   # nfn → list[{"ts": ISO, "msg": str}]
 _server_log: list = [] # global stream — all jobs combined, for Console tab
@@ -3872,6 +3887,77 @@ Q4 — Concrete grantor/grantee in every chain-of-title row
         _nat_job_write(nfn, job)
 
 
+# ── Queue helpers ─────────────────────────────────────────────────────────────
+
+def _nat_queue_position(nfn: str) -> int:
+    """
+    Return how many 'pending' jobs are ahead of this one in the queue.
+    0 = this job is next; 3 = three jobs ahead of it.
+    """
+    this_job = _nat_job_read(nfn)
+    if not this_job:
+        return 0
+    this_created = this_job.get("created_at", "")
+    pos = 0
+    for jf in NAT_JOBS_DIR.glob("*.json"):
+        if jf.stem == nfn:
+            continue
+        try:
+            other = json.loads(jf.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if other.get("status") == "pending" and other.get("created_at", "") < this_created:
+            pos += 1
+    return pos
+
+
+def _nat_run_with_queue(nfn: str, data: dict, resume_from: str = "search") -> None:
+    """
+    Queue wrapper around _nat_run_extraction.
+
+    Blocks on _NAT_PIPELINE_SEMAPHORE until a pipeline slot is free,
+    then runs the full extraction and releases the slot on completion.
+
+    With MAX_CONCURRENT_NAT_JOBS=1 this gives a strict serial queue:
+    Job 1 runs → Job 2 waits → Job 3 waits → … → each starts only when
+    the previous one finishes (success OR failure).
+    """
+    job = _nat_job_read(nfn)
+    if not job:
+        return
+
+    pos = _nat_queue_position(nfn)
+    if pos > 0:
+        _nat_log(nfn, f"⏳ In queue — position #{pos + 1} — waiting for the current job to finish…")
+    else:
+        _nat_log(nfn, "⏳ Waiting for pipeline slot…")
+
+    # Block here until a slot is free
+    _NAT_PIPELINE_SEMAPHORE.acquire()
+    try:
+        # Re-read after potentially long wait — job may have been cancelled
+        job = _nat_job_read(nfn)
+        if not job or job.get("status") == "cancelled":
+            _nat_log(nfn, "⚠ Job cancelled while waiting in queue — skipping")
+            return
+
+        _nat_log(nfn, f"✅ Pipeline slot acquired — starting extraction now…")
+        _nat_run_extraction(nfn, data, resume_from)
+    finally:
+        _NAT_PIPELINE_SEMAPHORE.release()
+        # Log how many jobs are still waiting (safe read)
+        _pending = 0
+        for _jf in NAT_JOBS_DIR.glob("*.json"):
+            if _jf.stem == nfn:
+                continue
+            try:
+                if json.loads(_jf.read_text(encoding="utf-8")).get("status") == "pending":
+                    _pending += 1
+            except Exception:
+                pass
+        print(f"[NAT] Job {nfn} released pipeline slot — {_pending} job(s) still pending", flush=True)
+
+
 # ── Fault tolerance: orphan recovery (runs at startup) ───────────────────────
 
 def _nat_recover_orphaned_jobs() -> None:
@@ -3885,7 +3971,7 @@ def _nat_recover_orphaned_jobs() -> None:
                 job = json.load(f)
         except Exception:
             continue
-        if job.get("status") not in ("queued", "running", "downloading"):
+        if job.get("status") not in ("queued", "running", "downloading", "pending"):
             continue
         started = job.get("created_at") or job.get("stage_started_at", "")
         try:
@@ -3985,20 +4071,20 @@ def nat_start_extraction():
     if not data.get("county"):
         return jsonify({"success": False, "error": "county required"}), 400
 
-    # Reject duplicate if already running
+    # Reject duplicate if already active (pending, queued, or running)
     existing = _nat_job_read(nfn)
-    if existing and existing.get("status") in ("queued", "running"):
+    if existing and existing.get("status") in ("pending", "queued", "running"):
         return jsonify({
             "success": False,
-            "error": f"Job {nfn} already in progress",
+            "error": f"Job {nfn} already in progress (status: {existing.get('status')})",
             "status": existing.get("status"),
         }), 409
 
-    # Create job record
+    # Create job record — status "pending" means waiting in queue for a slot
     job = {
         "nat_file_number": nfn,
-        "status": "queued",
-        "current_stage": "queued",
+        "status": "pending",
+        "current_stage": "pending",
         "created_at": datetime.utcnow().isoformat(),
         "request_data": data,
         "timeline": [{"event": "submitted", "ts": datetime.utcnow().isoformat(), "detail": ""}],
@@ -4011,29 +4097,43 @@ def nat_start_extraction():
     # Create output folder immediately
     output_dir = DOWNLOAD_BASE / f"NAT_{nfn}"
     output_dir.mkdir(parents=True, exist_ok=True)
-    print(f"[NAT] Job {nfn} queued — output: {output_dir}", flush=True)
 
-    # Fire background thread
+    # Count how many jobs are already pending/running so we can tell the caller queue position
+    _ahead = _nat_queue_position(nfn)
+    print(f"[NAT] Job {nfn} added to queue (position #{_ahead + 1}) — output: {output_dir}", flush=True)
+
+    # Fire background thread — it will block on _NAT_PIPELINE_SEMAPHORE until a slot is free
     t = threading.Thread(
-        target=_nat_run_extraction,
+        target=_nat_run_with_queue,
         args=(nfn, data, "search"),
         daemon=True,
         name=f"nat-{nfn}",
     )
     t.start()
 
-    return jsonify({"success": True, "status": "queued", "nat_file_number": nfn}), 202
+    return jsonify({
+        "success": True,
+        "status": "pending",
+        "queue_position": _ahead + 1,
+        "nat_file_number": nfn,
+        "message": f"Job queued at position #{_ahead + 1} — will start automatically when current job finishes" if _ahead > 0 else "Job starting now (no queue)",
+    }), 202
 
 
 # ── Endpoint: poll job status ─────────────────────────────────────────────────
 
 @app.route('/api/nat/job-status/<nfn>', methods=['GET'])
 def nat_job_status(nfn):
-    """Return full job JSON for a given NAT file number."""
+    """Return full job JSON for a given NAT file number.
+    When the job is pending in the queue, also returns queue_position (1=next up).
+    """
     job = _nat_job_read(nfn)
     if not job:
         return jsonify({"success": False, "error": f"Job {nfn} not found"}), 404
-    return jsonify({"success": True, "job": job})
+    resp = {"success": True, "job": job}
+    if job.get("status") == "pending":
+        resp["queue_position"] = _nat_queue_position(nfn) + 1
+    return jsonify(resp)
 
 
 # ── Endpoint: per-job log stream ─────────────────────────────────────────────
@@ -4112,20 +4212,28 @@ def nat_retry(nfn):
         except Exception as exc:
             return jsonify({"success": False, "error": str(exc)}), 500
 
-    job["status"] = "queued"
+    job["status"] = "pending"
+    job["current_stage"] = "pending"
     job["error"] = None
     _nat_event(job, nfn, "retry_queued", f"resume_from={resume_from}")
     _nat_job_write(nfn, job)
 
     request_data = job.get("request_data", {})
+    _ahead = _nat_queue_position(nfn)
     t = threading.Thread(
-        target=_nat_run_extraction,
+        target=_nat_run_with_queue,
         args=(nfn, request_data, resume_from),
         daemon=True,
         name=f"nat-retry-{nfn}",
     )
     t.start()
-    return jsonify({"success": True, "status": "queued", "resume_from": resume_from})
+    return jsonify({
+        "success": True,
+        "status": "pending",
+        "queue_position": _ahead + 1,
+        "resume_from": resume_from,
+        "message": f"Retry queued at position #{_ahead + 1}" if _ahead > 0 else "Retry starting now",
+    })
 
 
 # ── Endpoint: cancel job ──────────────────────────────────────────────────────
