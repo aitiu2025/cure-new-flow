@@ -1,0 +1,90 @@
+name: Deploy cure-new-flow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate-requirements:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python 3.12 (matches server)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create venv
+        run: |
+          python -m venv venv
+          venv/bin/pip install --upgrade --quiet pip packaging
+      - name: Validate requirements.txt parses
+        run: |
+          venv/bin/python - <<'PY'
+          from pathlib import Path
+          from packaging.requirements import Requirement, InvalidRequirement
+          bad = []
+          for n, line in enumerate(Path("requirements.txt").read_text().splitlines(), 1):
+              s = line.strip()
+              if not s or s.startswith("#") or s.startswith("-"):
+                  continue
+              try:
+                  Requirement(s)
+              except InvalidRequirement as e:
+                  bad.append(f"line {n}: {s!r} - {e}")
+          if bad:
+              print("requirements.txt has malformed lines:")
+              for b in bad:
+                  print("  " + b)
+              raise SystemExit(1)
+          print("requirements.txt: all lines parse cleanly")
+          PY
+      - name: Dry-run resolve inside venv
+        run: venv/bin/pip install --dry-run --quiet -r requirements.txt
+
+  deploy:
+    needs: validate-requirements
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy to server
+        run: |
+          ssh -i ~/.ssh/id_rsa \
+              -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} bash -s << 'EOF'
+            set -e
+            set -x
+            cd /home/ubuntu/projects/evictsure-workspace/cure-new-flow
+            BEFORE=$(git rev-parse HEAD)
+            git fetch origin
+            git checkout main
+            git reset --hard origin/main
+            # .env, config/secrets.json + its symlinks, and venv are gitignored/
+            # untracked -> preserved across reset --hard.
+            venv/bin/pip install --upgrade --quiet -r requirements.txt
+            pm2 restart cure-new-flow --update-env
+            pm2 save
+            AFTER=$(git rev-parse HEAD)
+            echo "Deployed $BEFORE -> $AFTER"
+            code=000
+            for i in 1 2 3 4 5; do
+              code=$(curl -sS -o /dev/null -w "%{http_code}" http://localhost:5556/status || echo 000)
+              echo "post-restart health check $i: HTTP $code"
+              [ "$code" = "200" ] && break
+              sleep 3
+            done
+            [ "$code" = "200" ] || { echo "cure-new-flow :5556 /status not 200 after restart"; pm2 logs cure-new-flow --lines 30 --nostream || true; exit 1; }
+            curl -sk -o /dev/null -w "public /status    -> %{http_code}\n" https://cure10xdoor.surecafe.ai/status
+            curl -sk -o /dev/null -w "public /nat-audit  -> %{http_code}\n" https://cure10xdoor.surecafe.ai/nat-audit
+          EOF
+        env:
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
