@@ -26,8 +26,8 @@ jobs:
           from packaging.requirements import Requirement, InvalidRequirement
           bad = []
           for n, line in enumerate(Path("requirements.txt").read_text().splitlines(), 1):
-              s = line.strip()
-              if not s or s.startswith("#") or s.startswith("-"):
+              s = line.split("#", 1)[0].strip()   # drop inline comments before parsing
+              if not s or s.startswith("-"):
                   continue
               try:
                   Requirement(s)
