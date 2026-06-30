@@ -17,6 +17,7 @@ pytesseract>=0.3.13
 # HTTP client
 requests>=2.31.0
 curl_cffi>=0.7.0          # TLS-fingerprint impersonation for Cloudflare counties
+anthropic>=0.40.0          # Anthropic SDK — AI agent runner (api provider, claude models)
 beautifulsoup4>=4.12.0    # HTML parsing for property-appraiser adapters (palm_beach_pbcpao)
 lxml>=5.0.0              # lxml parser backend for BeautifulSoup (recorder HTTP adapters, e.g. pasco)
 
