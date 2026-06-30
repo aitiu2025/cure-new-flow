@@ -3451,6 +3451,13 @@ def _nat_run_extraction(nfn: str, request_data: dict, resume_from: str = "search
             job.setdefault("phases_progress", {})
 
             for _phase in pipeline.phase_order:
+                # ── Cancellation gate — check at the start of every phase ──
+                # Re-read from disk so a cancel from the UI is detected promptly.
+                _live_job = _nat_job_read(nfn)
+                if not _live_job or _live_job.get("status") == "cancelled":
+                    _nat_log(nfn, f"⚠ Job cancelled — stopping pipeline before '{_phase}'")
+                    return  # finally in _nat_run_with_queue releases the semaphore
+
                 if not pipeline.phase_enabled(_phase):
                     job["phases_progress"][_phase] = {"status": "skipped"}
                     continue
@@ -4252,6 +4259,63 @@ def nat_cancel_job():
     _nat_event(job, nfn, "cancelled", "operator stop")
     _nat_job_write(nfn, job)
     return jsonify({"success": True, "status": "cancelled"})
+
+
+@app.route('/api/admin/reset-queue', methods=['POST'])
+def nat_reset_queue():
+    """
+    Emergency endpoint — releases ALL pipeline semaphore slots and marks every
+    pending/running/queued job as 'failed'.
+
+    Use when a stuck job holds the semaphore and new jobs are blocked in 'pending'.
+    After calling this, submit new jobs normally — the queue is clean.
+
+    POST /api/admin/reset-queue
+    Body: {} (no params needed)
+    """
+    released = 0
+    failed_jobs = []
+
+    # Mark all active jobs as failed so the queue is visually clean
+    for jf in NAT_JOBS_DIR.glob("*.json"):
+        try:
+            job = json.loads(jf.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        nfn_stuck = jf.stem
+        if job.get("status") in ("pending", "queued", "running", "downloading"):
+            job["status"] = "failed"
+            job["error"] = "Queue forcibly reset by admin (reset-queue endpoint)"
+            _nat_event(job, nfn_stuck, "queue_reset", "admin forced reset")
+            _nat_job_write(nfn_stuck, job)
+            failed_jobs.append(nfn_stuck)
+
+    # Drain the semaphore completely then restore it to MAX_CONCURRENT_NAT_JOBS slots
+    # so new jobs can run immediately.
+    drained = 0
+    while True:
+        acquired = _NAT_PIPELINE_SEMAPHORE.acquire(blocking=False)
+        if not acquired:
+            break
+        drained += 1
+    # Release MAX_CONCURRENT slots (restore full capacity)
+    for _ in range(MAX_CONCURRENT_NAT_JOBS):
+        _NAT_PIPELINE_SEMAPHORE.release()
+        released += 1
+
+    msg = (
+        f"Queue reset complete. "
+        f"Marked {len(failed_jobs)} job(s) as failed: {failed_jobs}. "
+        f"Semaphore restored to {released} slot(s). "
+        f"Submit new jobs now."
+    )
+    print(f"[NAT] ADMIN reset-queue: {msg}", flush=True)
+    return jsonify({
+        "success": True,
+        "failed_jobs": failed_jobs,
+        "semaphore_slots_restored": released,
+        "message": msg,
+    })
 
 
 # ── Manual workbench endpoints ────────────────────────────────────────────────
