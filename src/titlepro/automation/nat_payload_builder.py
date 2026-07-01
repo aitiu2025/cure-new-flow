@@ -31,6 +31,49 @@ def _read_file_safe(path: str | Path) -> str:
         return ""
 
 
+def _extract_legal_from_deed_md(deed_md_path: str | Path) -> str:
+    """Extract verbatim legal description from a deed's OCR-extracted markdown file.
+
+    Normalises multi-line whitespace so that descriptions split across blank lines
+    (common in Hillsborough watermark-API OCR output) are matched as one string.
+    Searches between the 'to-wit:' clause and 'TO HAVE AND TO HOLD'.
+    """
+    text = _read_file_safe(deed_md_path)
+    if not text:
+        return ""
+
+    # Collapse blank lines and stray line-breaks into a single space so multi-line
+    # legal descriptions become searchable without multiline/DOTALL flags.
+    normalized = re.sub(r"[ \t]*\n[ \t]*\n[ \t]*", " ", text)
+    normalized = re.sub(r"\n", " ", normalized)
+    normalized = re.sub(r"\s{2,}", " ", normalized)
+
+    # Primary: between "to-wit:" (or "to wit,") and "TO HAVE AND TO HOLD"
+    # Optional leading comma/space handles OCR artefacts like "to-wit: , The East..."
+    m = re.search(
+        r"to[- ]wit[,:]?\s*[,]?\s*(.{20,600}?)\s+TO HAVE AND TO HOLD",
+        normalized, re.IGNORECASE,
+    )
+    if m:
+        desc = m.group(1).strip().rstrip(",~").strip()
+        if len(desc) > 20:
+            return desc
+
+    # Fallback: "The [directional] N feet of Lot M ... Plat Book ... Florida"
+    m = re.search(
+        r"(The\s+(?:East|West|North|South)\s+\d+[^|]{10,500}?"
+        r"(?:Plat\s+Book|Public\s+Records|Official\s+Records)[^|]{0,300}"
+        r"(?:Florida|County)(?:\s*[~])?)",
+        normalized, re.IGNORECASE,
+    )
+    if m:
+        desc = m.group(1).strip().rstrip(",~").strip()
+        if 20 < len(desc) < 800:
+            return desc
+
+    return ""
+
+
 def _find_tax_json(output_dir: str) -> dict:
     """Find and merge all tax_*.json files in the output folder.
 
@@ -150,9 +193,11 @@ def _clean_consideration(raw: str) -> str:
 
 # ── Vesting chain extraction ───────────────────────────────────────────────────
 
-def _parse_vesting_chain(raw_text: str, sections: dict) -> list[dict]:
+def _parse_vesting_chain(raw_text: str, sections: dict, title_text: str = "") -> list[dict]:
     """
     Extract vesting/chain-of-title instruments from the RAW report.
+    Falls back to the Title_Examination_Notes.md Chain of Title wide table when
+    the RAW report has no parseable chain data.
     Prefers the 8-column Phase 5 Chain of Title table format; falls back to
     the legacy 5-column pipe-table format.
     """
@@ -221,6 +266,10 @@ def _parse_vesting_chain(raw_text: str, sections: dict) -> list[dict]:
                 "VestingMannerOfHolding":     _extract_manner_of_holding(chain_text, inst),
                 "VestingComments":            "",
             })
+
+    # ── Title Notes wide-table fallback ──
+    if not chain and title_text:
+        chain = _parse_vesting_from_title(title_text)
 
     return chain
 
@@ -373,9 +422,9 @@ def _parse_mortgage_blocks(text: str) -> list[dict]:
     return results
 
 
-def _parse_open_mortgages(raw_text: str, sections: dict) -> list[dict]:
+def _parse_open_mortgages(raw_text: str, sections: dict, title_text: str = "") -> list[dict]:
     """Extract OPEN/POTENTIALLY OPEN mortgages from Phase 5 Section F tables,
-    with fallback to the legacy 5-column pipe-table scan."""
+    with fallback to the legacy 5-column pipe-table scan, then Title Notes wide table."""
     # Build the mortgage/Phase 5 text slice
     mtg_text = ""
     for key in sections:
@@ -453,6 +502,10 @@ def _parse_open_mortgages(raw_text: str, sections: dict) -> list[dict]:
                 "OpenMortgageMaturityDate":      _extract_maturity_date(raw_text, inst),
             })
 
+    # ── Title Notes wide-table fallback ──
+    if not mortgages and title_text:
+        mortgages = _parse_mortgages_from_title(title_text)
+
     return mortgages
 
 
@@ -465,6 +518,256 @@ def _extract_maturity_date(text: str, inst: str) -> str:
     ctx = _context_around(text, inst, 400)
     m = re.search(r"matur\w*\s*(?:date)?[:\s]+(\d{1,2}/\d{1,2}/\d{4}|\w+\s+\d{4})", ctx, re.IGNORECASE)
     return m.group(1).strip() if m else ""
+
+
+def _extract_dated_from_notes(notes: str) -> str:
+    """Extract agreement/note execution date from a mortgage notes string."""
+    m = re.search(
+        r"(?:agreement|agmt|note)\s+dated?\s+(\d{1,2}/\d{1,2}/\d{4})",
+        notes, re.IGNORECASE,
+    )
+    if m:
+        return m.group(1)
+    m = re.search(r"\bdated\s+(\d{1,2}/\d{1,2}/\d{4})", notes, re.IGNORECASE)
+    return m.group(1) if m else ""
+
+
+def _extract_maturity_from_notes(notes: str) -> str:
+    """Extract maturity/due date from a mortgage notes string."""
+    m = re.search(
+        r"maturit[y\w]*\s*(?:date\s+)?(?:is\s+)?(\d{1,2}/\d{1,2}/\d{4})",
+        notes, re.IGNORECASE,
+    )
+    if m:
+        return m.group(1)
+    m = re.search(r"\bdue\s+(?:date\s+)?(\d{1,2}/\d{1,2}/\d{4})", notes, re.IGNORECASE)
+    return m.group(1) if m else ""
+
+
+# ── Title Notes wide-table mortgage parser ────────────────────────────────────
+
+def _parse_mortgages_from_title(title_text: str) -> list[dict]:
+    """
+    Parse mortgage tables from Title_Examination_Notes.md wide-column format.
+
+    Handles the '## DEEDS OF TRUST / MORTGAGES' section which contains:
+      ### Open Mortgages
+        | Status | Instr. # | Rec. Date | Mortgagor | Mortgagee / Lender | Original Amount | Notes |
+      ### Potentially Open — No Satisfaction Found ...
+        | Status | Instr. # | Rec. Date | Mortgagor | Mortgagee / Lender | Original Amount | Maturity | Notes |
+    """
+    if not title_text:
+        return []
+
+    mtg_m = re.search(r"##\s+DEEDS OF TRUST\s*/\s*MORTGAGES\b", title_text, re.IGNORECASE)
+    if not mtg_m:
+        return []
+
+    # Slice from this section to the next ## heading
+    remaining = title_text[mtg_m.start():]
+    next_h2 = re.search(r"\n##\s+(?!#)", remaining[5:])
+    mtg_section = remaining[: next_h2.start() + 5] if next_h2 else remaining
+
+    mortgages: list[dict] = []
+    seen: set = set()
+    is_potentially = False
+    current_headers: list[str] = []
+
+    for line in mtg_section.splitlines():
+        stripped = line.strip()
+
+        # Track ### sub-section context
+        if stripped.startswith("###"):
+            sub_title = stripped.lstrip("#").strip().upper()
+            # Skip HELOC modification chain — different table format
+            if "MODIFICATION" in sub_title or "CHAIN" in sub_title:
+                current_headers = []
+                continue
+            is_potentially = "POTENTIALLY" in sub_title
+            current_headers = []
+            continue
+
+        if not stripped.startswith("|"):
+            continue
+
+        # Skip markdown separator rows (|---|---|...)
+        if re.match(r"^\|[\s\-|]+\|$", stripped):
+            continue
+
+        cells = [re.sub(r"\*+", "", c).strip() for c in stripped.split("|")]
+        if cells and not cells[0]:
+            cells = cells[1:]
+        if cells and not cells[-1]:
+            cells = cells[:-1]
+        if not cells:
+            continue
+
+        # Detect header row: first cell is "Status" (case-insensitive)
+        if not current_headers and cells[0].lower() == "status":
+            current_headers = [c.lower() for c in cells]
+            continue
+
+        if not current_headers:
+            continue
+
+        row = {h: (cells[i] if i < len(cells) else "") for i, h in enumerate(current_headers)}
+
+        # Extract instrument number (header aliases: "instr. #", "instr #", "cfn")
+        inst = ""
+        for hkey in current_headers:
+            if "instr" in hkey or hkey in ("cfn", "cfn#", "instrument"):
+                inst = row.get(hkey, "").strip()
+                break
+        if not inst or not re.match(r"^\d{5,}", inst):
+            continue
+        if inst in seen:
+            continue
+        seen.add(inst)
+
+        rec_date = row.get("rec. date", row.get("rec.date", row.get("recorded", "")))
+        mortgagor = row.get("mortgagor", row.get("borrower", ""))
+        mortgagee = row.get("mortgagee / lender", row.get("lender", row.get("mortgagee", "")))
+        amount_raw = row.get("original amount", row.get("amount", ""))
+        maturity = row.get("maturity", row.get("maturity date", ""))
+        status_cell = row.get("status", "")
+        notes = row.get("notes", "")
+
+        # For OPEN mortgages the dated/maturity live inside Notes column
+        dated = _extract_dated_from_notes(notes)
+        if not maturity:
+            maturity = _extract_maturity_from_notes(notes)
+
+        status = (
+            "POTENTIALLY OPEN"
+            if (is_potentially or "POTENTIALLY" in status_cell.upper())
+            else "OPEN"
+        )
+
+        mortgages.append({
+            "OpenMortgageInstrument":        inst,
+            "OpenMortgageRecordedDate":      rec_date,
+            "OpenMortgageDated":             dated,
+            "OpenMortgageDocumentType":      "MORTGAGE",
+            "OpenMortgageBorrowerMortgagor": mortgagor,
+            "OpenMortgageLenderMortgagee":   mortgagee,
+            "OpenMortgageAmount":            _clean_consideration(amount_raw) if amount_raw else "",
+            "OpenMortgageBookPage":          "",
+            "OpenMortgageTrustee1":          "",
+            "OpenMortgageTrustee2":          "",
+            "OpenMortgageComments":          notes[:300] if notes else "",
+            "OpenMortgageStatus":            status,
+            "OpenMortgageMaturityDate":      maturity,
+        })
+
+    return mortgages
+
+
+# ── Title Notes wide-table vesting/chain parser ───────────────────────────────
+
+def _parse_vesting_from_title(title_text: str) -> list[dict]:
+    """
+    Parse Chain of Title deed table from Title_Examination_Notes.md.
+
+    Column format:
+      | # | Recording Date | Instr. # | Type | Grantor(s) | Grantee(s) | Notes |
+    """
+    if not title_text:
+        return []
+
+    chain_m = re.search(r"##\s+CHAIN OF TITLE\b", title_text, re.IGNORECASE)
+    if not chain_m:
+        return []
+
+    remaining = title_text[chain_m.start():]
+    next_h2 = re.search(r"\n##\s+(?!#)", remaining[5:])
+    chain_section = remaining[: next_h2.start() + 5] if next_h2 else remaining
+
+    chain: list[dict] = []
+    seen: set = set()
+    current_headers: list[str] = []
+    in_excluded = False
+
+    for line in chain_section.splitlines():
+        stripped = line.strip()
+
+        # Track "Examined and Excluded" sub-tables — skip those rows
+        if re.search(r"examined\s+and\s+excluded", stripped, re.IGNORECASE) and not stripped.startswith("|"):
+            in_excluded = True
+        if stripped == "---":
+            in_excluded = False
+
+        if not stripped.startswith("|"):
+            continue
+        if re.match(r"^\|[\s\-|]+\|$", stripped):
+            continue
+
+        cells = [re.sub(r"\*+", "", c).strip() for c in stripped.split("|")]
+        if cells and not cells[0]:
+            cells = cells[1:]
+        if cells and not cells[-1]:
+            cells = cells[:-1]
+        if not cells:
+            continue
+
+        # Detect header row: look for "recording date" among cells
+        if not current_headers and any("recording date" in c.lower() for c in cells):
+            current_headers = [c.lower() for c in cells]
+            in_excluded = False
+            continue
+
+        if not current_headers:
+            continue
+
+        row = {h: (cells[i] if i < len(cells) else "") for i, h in enumerate(current_headers)}
+
+        inst = row.get("instr. #", row.get("instr#", row.get("instrument", ""))).strip()
+        if not inst or not re.match(r"^\d{5,}", inst):
+            continue
+        if inst in seen:
+            continue
+
+        doc_type = row.get("type", "").strip().upper()
+        if not any(kw in doc_type for kw in ("DEED", "QCD", "CONV", "GRANT", "TRUST")):
+            continue
+
+        if in_excluded:
+            continue
+        notes = row.get("notes", "")
+        if re.search(r"examined\s+and\s+excluded|different\s+propert", notes, re.IGNORECASE):
+            continue
+
+        seen.add(inst)
+
+        grantor = row.get("grantor(s)", row.get("grantor", ""))
+        grantee = row.get("grantee(s)", row.get("grantee", ""))
+        rec_date = row.get("recording date", row.get("rec. date", ""))
+        consideration = _extract_dollar_amount(notes)
+        # Direct phrase search against grantee + notes (no instrument-anchor needed)
+        search_text = (grantee + " " + notes).lower()
+        manner = ""
+        for phrase in (
+            "husband and wife", "tenants by the entireties", "joint tenants",
+            "tenants in common", "as trustees", "living trust",
+            "revocable trust", "single", "unmarried",
+        ):
+            if phrase in search_text:
+                manner = phrase.title()
+                break
+
+        chain.append({
+            "VestingInstrument":          inst,
+            "VestingRecordedDate":        rec_date,
+            "VestingDated":               "",
+            "VestingDeedType":            doc_type,
+            "VestingGrantor":             grantor,
+            "VestedAsGrantee":            grantee,
+            "VestingBookPage":            "",
+            "VestingConsiderationAmount": consideration,
+            "VestingMannerOfHolding":     manner,
+            "VestingComments":            notes[:300] if notes else "",
+        })
+
+    return chain
 
 
 # ── Open judgments/liens extraction ──────────────────────────────────────────
@@ -871,6 +1174,139 @@ def _try_palm_beach_tax_fallback(apn: str, output_dir: str = "") -> dict:
         return {}
 
 
+# ── Hillsborough live PA fallback ────────────────────────────────────────────
+
+def _try_hillsborough_tax_fallback(apn: str, output_dir: str = "") -> dict:
+    """
+    Attempt a live HCPA Property Appraiser lookup to fill TaxTotalValue /
+    TaxBuildingValue when the pipeline's tax phase was skipped (apn_missing).
+
+    TaxYear / TaxAssessedYear are always set from the Florida tax calendar
+    (prior calendar year) regardless of whether the PA call succeeds.
+
+    On success, caches result to tax_z_hcpa_live.json (sorts after
+    tax_lookup_status.json so it overwrites 'skipped' on subsequent calls).
+
+    Returns a dict of NAT payload keys; always returns at least TaxYear.
+    """
+    import datetime as _dt
+    tax_year = str(_dt.datetime.now().year - 1)
+
+    base: dict = {
+        "TaxYear":          tax_year,
+        "TaxAssessedYear":  tax_year,
+        "TaxType":          "Ad Valorem",
+        "TaxPaymentSchedule": _FL_TAX_SCHEDULE,
+        "TaxDueDate":       "March 31",
+        "TaxDelinquentDate": "April 1",
+    }
+
+    try:
+        from titlepro.property_appraiser.counties.hillsborough_hcpa import HillsboroughHCPA  # noqa: PLC0415
+
+        pa = HillsboroughHCPA({})
+        pa_result = pa.lookup_by_apn(apn)
+
+        out = dict(base)
+
+        if getattr(pa_result, "status", "") == "PA_SUCCESS":
+            def _fmt(v: object) -> str:
+                try:
+                    return f"${int(float(str(v))):,}"
+                except (ValueError, TypeError):
+                    return str(v) if v else ""
+
+            if pa_result.just_value:
+                out["TaxTotalValue"] = _fmt(pa_result.just_value)
+                out["TaxTotalValue2"] = _fmt(pa_result.just_value)
+            if pa_result.improvement_value:
+                out["TaxBuildingValue"] = _fmt(pa_result.improvement_value)
+            # PA short legal description as last-resort LegalDescription source
+            if pa_result.legal_description:
+                out["_pa_legal_description"] = pa_result.legal_description
+            out["TaxStatus"] = "partial"
+
+            # Cache so subsequent Resend calls skip the live HTTP call.
+            # Named tax_z_* so it sorts AFTER tax_lookup_status.json and wins.
+            # Only store non-zero value fields to avoid _TAX_KEY_MAP mapping 0 as "0".
+            if output_dir:
+                try:
+                    raw_info: dict = {
+                        "tax_year": tax_year,
+                        "status":   "partial",
+                        "apn":      apn,
+                        "county":   "fl_hillsborough",
+                    }
+                    if pa_result.just_value:
+                        raw_info["just_value"] = pa_result.just_value
+                    if pa_result.improvement_value:
+                        raw_info["improvement_value"] = pa_result.improvement_value
+                    if pa_result.land_value:
+                        raw_info["land_value"] = pa_result.land_value
+                    cache_path = Path(output_dir) / "tax_z_hcpa_live.json"
+                    with open(cache_path, "w", encoding="utf-8") as _f:
+                        json.dump(
+                            {"fetch_success": True, "tax_information": raw_info},
+                            _f, indent=2,
+                        )
+                except Exception:
+                    pass
+        else:
+            out["TaxStatus"] = "skipped"
+
+        # ── Grant Street Tax Collector — annual tax bill ───────────────────
+        # TaxAmount (annual_total) is not available from the PA; it requires
+        # the Tax Collector portal (county-taxes.net/hillsborough).  The
+        # grant_street_http adapter already has Hillsborough configured.
+        # Hillsborough Tax Collector's Algolia index uses the 'A'-prefixed
+        # digits-only folio (e.g. "115146-0000" → "A1151460000").
+        try:
+            from titlepro.tax.grant_street_http import lookup_grant_street_tax  # noqa: PLC0415
+
+            hs_folio_digits = re.sub(r"[^0-9]", "", apn)
+            hs_tc_apn = f"A{hs_folio_digits}"
+            gs_result = lookup_grant_street_tax(
+                hs_tc_apn,
+                "hillsborough",
+                Path(output_dir) if output_dir else Path("."),
+                safe_owner="tax_gs",
+            )
+            if gs_result.status in ("TAX_SUCCESS", "TAX_PARTIAL") and gs_result.annual_total:
+                out["TaxAmount"] = f"${gs_result.annual_total:,.2f}"
+                out["TaxStatus"] = "partial"
+                # Persist annual_total into the cache so subsequent Resend
+                # calls read it from tax_z_hcpa_live.json via _TAX_KEY_MAP
+                # without another Grant Street HTTP round-trip.
+                if output_dir:
+                    try:
+                        cache_path = Path(output_dir) / "tax_z_hcpa_live.json"
+                        if cache_path.exists():
+                            with open(cache_path, encoding="utf-8") as _cf:
+                                cached = json.load(_cf)
+                        else:
+                            cached = {"fetch_success": True, "tax_information": {}}
+                        cached.setdefault("tax_information", {})
+                        cached["tax_information"]["annual_total"] = gs_result.annual_total
+                        with open(cache_path, "w", encoding="utf-8") as _cf:
+                            json.dump(cached, _cf, indent=2)
+                    except Exception:
+                        pass
+        except Exception as _gs_exc:
+            _log.warning("Hillsborough Grant Street tax lookup failed: %s: %s", type(_gs_exc).__name__, _gs_exc)
+
+        return out
+
+    except ImportError as _exc:
+        _log.warning("HillsboroughHCPA import failed (%s); returning base tax fields", _exc)
+        return {**base, "TaxStatus": "skipped"}
+    except Exception as _exc:
+        _log.warning(
+            "Hillsborough PA tax fallback failed for APN %r: %s: %s",
+            apn, type(_exc).__name__, _exc,
+        )
+        return {**base, "TaxStatus": "skipped"}
+
+
 # ── APN extraction from report text ──────────────────────────────────────────
 
 def _extract_apn_from_text(text: str) -> str:
@@ -878,8 +1314,10 @@ def _extract_apn_from_text(text: str) -> str:
     patterns = [
         r"\*\*APN[:/\s]*\*\*\s*([\d\-]+)",
         r"APN[:/\s]+\**([\d\-]+)\**",
+        # "Folio No.: 115146-0000" and "**Folio No.:** 115146-0000" formats
+        r"\*{0,2}Folio\s+No\.?\*{0,2}\s*[:\s]+([0-9][0-9\-]{5,28})",
         r"(?:APN|Folio|Parcel(?:\s+(?:ID|Number|No\.?))?)[:\s]+\**([0-9\-]{8,30})\**",
-        r"folio\s*(?:number)?[:\s]+\**([0-9\-]{8,30})\**",
+        r"folio\s*(?:no\.?|number)?\s*[:\s]+\**([0-9\-]{8,30})\**",
     ]
     for pat in patterns:
         m = re.search(pat, text, re.IGNORECASE)
@@ -1012,6 +1450,21 @@ def _extract_legal_description(raw_text: str, title_text: str) -> str:
         if m:
             return m.group(1).strip()
 
+    # Priority 5: "Phase 2 classification" / "brief description" in Title Notes
+    # Matches e.g. "Subject parcel per Phase 2 classification: East 10 feet of Lot 4 ..."
+    pat_phase2 = re.compile(
+        r"(?:Phase 2 classification|brief description)[:\s]+([^.]{20,400})",
+        re.IGNORECASE,
+    )
+    for text in (title_text, raw_text):
+        if not text:
+            continue
+        m = pat_phase2.search(text)
+        if m:
+            desc = m.group(1).strip().rstrip(".")
+            if 20 < len(desc) < 600:
+                return desc
+
     # Fallback: generous label match, hard-capped at 800 chars
     pat_fallback = re.compile(
         r"(?:Legal Description|Exhibit A)[:\s]*\n+(.*?)(?=\n##|\n###|\Z)",
@@ -1071,9 +1524,28 @@ def build_nat_payload(output_dir: str, request_data: dict) -> dict:
     sections = _split_raw_sections(raw_text)
 
     # ── Assemble payload ──
-    county_slug = request_data.get("county", "")
+    county_slug = request_data.get("county", "") or request_data.get("county_slug", "")
 
     flat = _extract_flat_fields_from_title(title_text or raw_text, request_data)
+
+    # Extract these separately so we can reference them for fallbacks below.
+    vesting_chain  = _parse_vesting_chain(raw_text, sections, title_text)
+    open_mortgages = _parse_open_mortgages(raw_text, sections, title_text)
+    open_judgments = _parse_open_judgments(raw_text, sections)
+
+    # ── LegalDescription: deed MD first (verbatim with Plat Book ref), then text fallback ──
+    # Priority 1: read the vesting deed's OCR markdown — the "to-wit: … TO HAVE AND TO
+    # HOLD" extraction gives the most complete verbatim legal including Plat Book citation.
+    # Priority 2: text-based extraction from RAW/Title Notes (includes Phase 2 brief desc).
+    legal_desc = ""
+    if vesting_chain:
+        vesting_inst = vesting_chain[0].get("VestingInstrument", "")
+        if vesting_inst:
+            deed_md = output_path / f"{vesting_inst}_extracted.md"
+            if deed_md.exists():
+                legal_desc = _extract_legal_from_deed_md(deed_md)
+    if not legal_desc:
+        legal_desc = _extract_legal_description(raw_text, title_text)
 
     payload: dict[str, Any] = {
         "OfficialPropertyAddress": flat.get("OfficialPropertyAddress", ""),
@@ -1081,11 +1553,13 @@ def build_nat_payload(output_dir: str, request_data: dict) -> dict:
         "State":                   flat.get("State", "FL"),
         "County":                  flat.get("County", ""),
 
-        "VestingChainOfTitleInformation": _parse_vesting_chain(raw_text, sections),
-        "OpenMortgageInformation":        _parse_open_mortgages(raw_text, sections),
-        "OpenJudgmentsAndEncumbrances":   _parse_open_judgments(raw_text, sections),
+        # NAT PHP CureCallbackController._mapCureToExamFields() reads these exact key names
+        # from data{} and maps them into the files_exam_receipt DB table.
+        "VestingChainOfTitleInformation": vesting_chain,
+        "OpenMortgageInformation":        open_mortgages,
+        "OpenJudgmentsAndEncumbrances":   open_judgments,
 
-        "LegalDescription": _extract_legal_description(raw_text, title_text),
+        "LegalDescription": legal_desc,
     }
 
     # ── Tax fields ──
@@ -1112,6 +1586,25 @@ def build_nat_payload(output_dir: str, request_data: dict) -> dict:
         if live_tax:
             for k, v in live_tax.items():
                 payload[k] = v  # overwrite skipped values with live data
+
+    # ── Hillsborough live PA fallback ─────────────────────────────────────────
+    # When tax was skipped for Hillsborough, call the HCPA property-appraiser
+    # adapter to populate TaxYear, TaxTotalValue, TaxBuildingValue, and the
+    # Grant Street Tax Collector for TaxAmount (annual tax bill).
+    # Fires when either TaxYear or TaxAmount is missing so a second Resend
+    # after the HCPA-only cache still fetches TaxAmount via Grant Street.
+    if (
+        re.search(r"hillsborough", county_slug, re.IGNORECASE)
+        and (not payload.get("TaxYear") or not payload.get("TaxAmount"))
+        and payload.get("TaxAPNAccount")
+    ):
+        live_tax = _try_hillsborough_tax_fallback(payload["TaxAPNAccount"], str(output_path))
+        pa_legal = live_tax.pop("_pa_legal_description", "")
+        for k, v in live_tax.items():
+            payload[k] = v  # overwrite skipped values with live data
+        # Use PA short legal as last resort if LegalDescription still empty
+        if pa_legal and not payload.get("LegalDescription"):
+            payload["LegalDescription"] = pa_legal
 
     # Ensure all tax keys are present
     for key in (
