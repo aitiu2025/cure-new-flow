@@ -302,6 +302,8 @@ def markdown_to_html(markdown_content: str) -> str:
     table_rows: list[list[str]] = []
     in_blockquote = False
     blockquote_lines: list[str] = []
+    in_openxml = False
+    openxml_lines: list[str] = []
 
     def flush_table() -> None:
         nonlocal in_table, table_rows
@@ -387,6 +389,24 @@ def markdown_to_html(markdown_content: str) -> str:
         if stripped == "---":
             flush_table()
             html_parts.append('<hr class="section-divider">')
+            continue
+
+        # Pandoc raw OpenXML fenced blocks (```{=openxml}...```) are Word-only.
+        # Convert a Word page-break to an HTML page-break that weasyprint
+        # understands; silently discard any other OpenXML content.
+        if stripped == "```{=openxml}":
+            flush_table()
+            in_openxml = True
+            openxml_lines = []
+            continue
+        if in_openxml:
+            if stripped == "```":
+                in_openxml = False
+                block = " ".join(openxml_lines)
+                if "w:br" in block and "page" in block:
+                    html_parts.append('<div class="page-break-before"></div>')
+            else:
+                openxml_lines.append(stripped)
             continue
 
         # Raw HTML page-break directives — pass through verbatim so weasyprint /

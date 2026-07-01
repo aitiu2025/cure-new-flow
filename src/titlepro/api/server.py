@@ -3912,6 +3912,37 @@ Q4 — Concrete grantor/grantee in every chain-of-title row
             "county": county,
         }, indent=2), encoding="utf-8")
 
+        # ── 8. Append scorecard as final page of the OnE PDF ───────────────
+        try:
+            if one_mds:
+                one_md_path = one_mds[0]
+                one_pdf_candidates = sorted(out.glob(one_md_path.stem + ".pdf"))
+                if not one_pdf_candidates:
+                    one_pdf_candidates = sorted(out.glob("OnE_Report_*.pdf"))
+                one_pdf_path = one_pdf_candidates[0] if one_pdf_candidates else out / (one_md_path.stem + ".pdf")
+
+                from titlepro.automation.renderers import render_markdown_pdf, RAW_DOC_TYPE
+
+                combined_md = (
+                    one_md_path.read_text(encoding="utf-8")
+                    + "\n\n---\n\n"
+                    + "```{=openxml}\n<w:p><w:r><w:br w:type=\"page\"/></w:r></w:p>\n```\n\n"
+                    + verify_md
+                )
+                combined_md_path = out / "_one_with_verify.md"
+                combined_md_path.write_text(combined_md, encoding="utf-8")
+                render_markdown_pdf(
+                    combined_md_path,
+                    one_pdf_path,
+                    title=f"OnE Report — {owner} / {county}",
+                    header_left=f"{owner} | {subject}",
+                    doc_type=RAW_DOC_TYPE,
+                )
+                combined_md_path.unlink(missing_ok=True)
+                _nat_log(nfn, f"   📎 OnE PDF updated with verify scorecard appended ({one_pdf_path.name})")
+        except Exception as _pdf_exc:
+            _nat_log(nfn, f"⚠ Could not append scorecard to OnE PDF (non-blocking): {str(_pdf_exc)[:200]}")
+
         _elapsed = time.monotonic() - _t0
         _nat_log(nfn, f"✓ Auto-verify complete — verdict: {verdict} ({_elapsed:.1f}s)")
         _nat_log(nfn, f"   📄 verify_report.md saved in job folder")
