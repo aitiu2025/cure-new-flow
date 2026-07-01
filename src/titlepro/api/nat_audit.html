@@ -512,12 +512,12 @@ function renderJobDetail(job) {
           <span>📋 Live Phase Log</span>
           <div style="display:flex;gap:6px;align-items:center">
             <span id="log-count-${nfn}" style="font-size:10px;color:var(--text3)"></span>
-            <button onclick="clearLogView('${logTerminalId}')"
+            <button onclick="clearJobLog('${nfn}','${logTerminalId}')"
               style="font-size:10px;padding:2px 8px;background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--text3);cursor:pointer">Clear</button>
           </div>
         </div>
         <div id="${logTerminalId}" class="log-terminal" style="height:320px">
-          <span style="color:#484F58">Waiting for log entries…</span>
+          <span style="color:#484F58">Loading log…</span>
         </div>
       </div>
 
@@ -637,7 +637,7 @@ function startLogPoller(nfn, termId) {
         const countEl = document.getElementById(`log-count-${nfn}`);
         if (countEl) countEl.textContent = `${d.total} entries`;
       } else if (!state.initialized && d.total === 0) {
-        el.innerHTML = '<span style="color:#484F58">No log entries yet — logs appear once the job starts running.</span>';
+        el.innerHTML = '<span style="color:#484F58">No log entries yet. Logs appear once the job starts running and persist across server restarts.</span>';
       }
     } catch(e) { /* ignore */ }
   };
@@ -648,6 +648,18 @@ function startLogPoller(nfn, termId) {
 function clearLogView(termId) {
   const el = document.getElementById(termId);
   if (el) el.innerHTML = '<span style="color:#484F58">(view cleared — new entries appear below)</span>';
+}
+
+async function clearJobLog(nfn, termId) {
+  // Clear server-side persistent log + reset in-memory poller offset
+  try { await fetch(API + `/api/nat/logs/${nfn}/clear`, {method:'POST'}); } catch(e) {}
+  const el = document.getElementById(termId);
+  if (el) el.innerHTML = '<span style="color:#484F58">(log cleared)</span>';
+  // Reset the poller so it starts from offset 0 again
+  if (_logPollers[nfn]) {
+    clearInterval(_logPollers[nfn].timer);
+    delete _logPollers[nfn];
+  }
 }
 
 // ── Console tab (global server log stream) ────────────────────────────────────
