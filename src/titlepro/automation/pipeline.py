@@ -1015,6 +1015,14 @@ class RecorderAutomationPipeline:
             )
 
         if not ordered_documents:
+            _last_failure = getattr(recorder, "last_failure", None)
+            if _last_failure == "needs_cookie_mint":
+                raise WorkflowError(
+                    "Recorder search completed but found zero documents. "
+                    "NEEDS_COOKIE_MINT: this county requires warmed Akamai cookies. "
+                    "Run tools/diagnostics/mint_lee_cookies.py from your local workstation "
+                    "(residential IP) once, then retry this job."
+                )
             raise WorkflowError("Recorder search completed but found zero documents.")
         return search_payload["summary"]
 

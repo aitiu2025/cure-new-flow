@@ -3287,16 +3287,25 @@ MAX_CONCURRENT_NAT_JOBS: int = _nat_load_max_concurrent()
 _NAT_PIPELINE_SEMAPHORE = threading.Semaphore(MAX_CONCURRENT_NAT_JOBS)
 print(f"[NAT] Pipeline concurrency limit: {MAX_CONCURRENT_NAT_JOBS} slot(s)", flush=True)
 
-# ── Per-job in-memory log buffer (cleared on server restart) ─────────────────
+# ── Per-job in-memory log buffer ──────────────────────────────────────────────
+# In-memory: cleared on server restart.
+# Disk mirror: DOWNLOAD_BASE/NAT_{nfn}/pipeline_log.jsonl  — appended on each
+# _nat_log() call so logs survive server restarts and are "persistent until
+# the user clicks Clear" (which calls /api/nat/logs/<nfn>/clear).
 _nat_logs: dict = {}   # nfn → list[{"ts": ISO, "msg": str}]
 _server_log: list = [] # global stream — all jobs combined, for Console tab
 _SERVER_LOG_MAX = 3000
 
 
+def _nat_log_file(nfn: str) -> "Path":
+    return DOWNLOAD_BASE / f"NAT_{nfn}" / "pipeline_log.jsonl"
+
+
 def _nat_log(nfn: str, msg: str) -> None:
     ts = datetime.utcnow().isoformat()
+    entry = {"ts": ts, "msg": msg}
     buf = _nat_logs.setdefault(nfn, [])
-    buf.append({"ts": ts, "msg": msg})
+    buf.append(entry)
     if len(buf) > 500:
         _nat_logs[nfn] = buf[-500:]
     # Also write to global console stream
@@ -3304,6 +3313,14 @@ def _nat_log(nfn: str, msg: str) -> None:
     if len(_server_log) > _SERVER_LOG_MAX:
         del _server_log[:-_SERVER_LOG_MAX]
     print(f"[NAT:{nfn}] {msg}", flush=True)
+    # Persist to disk so logs survive server restart
+    log_file = _nat_log_file(nfn)
+    if log_file.parent.exists():
+        try:
+            with open(log_file, "a", encoding="utf-8") as _lf:
+                _lf.write(json.dumps(entry) + "\n")
+        except Exception:
+            pass
 
 
 # Maps each pipeline phase to the coarse current_stage value used by the NAT modal
@@ -3559,8 +3576,13 @@ def _nat_run_extraction(nfn: str, request_data: dict, resume_from: str = "search
                     if _phase == "search" and "zero documents" in _msg.lower():
                         zero_records = True
                         job["phases_progress"][_phase]["status"] = "no_records"
-                        job["phases_progress"][_phase]["detail"] = "No instruments found"
-                        _nat_log(nfn, "⚠ Search returned zero instruments — continuing with empty result")
+                        if "NEEDS_COOKIE_MINT" in _msg:
+                            job["phases_progress"][_phase]["detail"] = "Akamai cookies missing — needs manual mint"
+                            _nat_log(nfn, "⚠ Search returned 0 instruments — Akamai cookie jar missing for this county")
+                            _nat_log(nfn, "   ACTION: Run tools/diagnostics/mint_lee_cookies.py from your workstation (residential IP), then click Retry")
+                        else:
+                            job["phases_progress"][_phase]["detail"] = "No instruments found"
+                            _nat_log(nfn, "⚠ Search returned zero instruments — continuing with empty result")
                         _nat_event(job, nfn, "pipeline_no_records",
                                    "Recorder returned zero instruments — sending empty payload to NAT")
                         _nat_job_write(nfn, job)
@@ -3846,7 +3868,12 @@ Q4 — Concrete grantor/grantee in every chain-of-title row
             "Output ONLY the scorecard markdown — no preamble, no extra commentary."
         )
 
-        verify_md = runner.run(system_prompt=system_prompt, user_prompt=prompt)
+        _run_result = runner.run(system_prompt=system_prompt, user_prompt=prompt, cwd=out)
+        verify_md = _run_result.output if _run_result.success else ""
+        if not verify_md:
+            raise RuntimeError(
+                f"AI runner returned empty output: {_run_result.error or 'unknown error'}"
+            )
 
         # ── 6. Derive verdict from scorecard ────────────────────────────────
         has_fail = "🔴 FAIL" in verify_md or ("FAIL" in verify_md and "BLOCKED" in verify_md.upper())
@@ -4147,12 +4174,37 @@ def nat_job_status(nfn):
 
 @app.route('/api/nat/logs/<nfn>', methods=['GET'])
 def nat_job_logs(nfn):
-    """Return buffered per-job log lines (cleared on server restart).
+    """Return buffered per-job log lines.
+    Persistent: if in-memory buffer is empty, loads from disk (pipeline_log.jsonl).
     Query param: offset=N — return only lines[N:] for incremental polling.
     """
     offset = request.args.get('offset', 0, type=int)
     logs = _nat_logs.get(nfn, [])
+    if not logs:
+        # Reload from disk after server restart
+        log_file = _nat_log_file(nfn)
+        if log_file.exists():
+            try:
+                lines = log_file.read_text(encoding="utf-8").splitlines()
+                disk_logs = [json.loads(ln) for ln in lines if ln.strip()]
+                _nat_logs[nfn] = disk_logs
+                logs = disk_logs
+            except Exception:
+                pass
     return jsonify({"success": True, "logs": logs[offset:], "total": len(logs)})
+
+
+@app.route('/api/nat/logs/<nfn>/clear', methods=['POST'])
+def nat_clear_logs(nfn):
+    """Clear the persistent log for a job (both memory and disk)."""
+    _nat_logs.pop(nfn, None)
+    log_file = _nat_log_file(nfn)
+    try:
+        if log_file.exists():
+            log_file.unlink()
+    except Exception:
+        pass
+    return jsonify({"success": True, "message": f"Logs cleared for job {nfn}"})
 
 
 # ── Endpoint: global console log stream (all jobs combined) ──────────────────
@@ -4580,12 +4632,22 @@ def nat_soft_delete(nfn):
         }), 409
 
     dst = NAT_TRASH_DIR / f"{nfn}.json"
+    deleted_folder = None
     try:
         import shutil as _shutil
         _shutil.move(str(src), str(dst))
         nat_jobs.pop(nfn, None)
-        print(f"[NAT] Job {nfn} moved to trash", flush=True)
-        return jsonify({"success": True, "message": f"Job {nfn} moved to trash"})
+        # Also delete the output folder so no orphaned files remain on disk
+        output_dir = DOWNLOAD_BASE / f"NAT_{nfn}"
+        if output_dir.exists():
+            _shutil.rmtree(output_dir)
+            deleted_folder = str(output_dir)
+        print(f"[NAT] Job {nfn} moved to trash; folder deleted: {deleted_folder}", flush=True)
+        return jsonify({
+            "success": True,
+            "message": f"Job {nfn} moved to trash",
+            "deleted_folder": deleted_folder,
+        })
     except Exception as exc:
         return jsonify({"success": False, "error": str(exc)}), 500
 
