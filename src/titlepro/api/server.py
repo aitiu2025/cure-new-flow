@@ -4476,11 +4476,31 @@ def nat_manual_send_callback():
             "data": cure_data,
             "report_files": _manual_report_files,
         }
+        # Save full payload to disk for post-send debugging
+        _dbg_path = ""
+        try:
+            _dbg_path = str(Path(output_dir) / "nat_callback_payload_debug.json")
+            with open(_dbg_path, "w", encoding="utf-8") as _dbg_f:
+                json.dump(nat_payload, _dbg_f, indent=2, default=str)
+        except Exception:
+            pass
         ok = _nat_call_back_to_nat(nat_payload)
         job["status"] = "completed" if ok else "callback_failed"
+        job["result"] = {"data": cure_data}
         _nat_event(job, nfn, "manual_callback_sent" if ok else "manual_callback_failed")
         _nat_job_write(nfn, job)
-        return jsonify({"success": ok, "payload_keys": list(cure_data.keys())})
+        vesting_count = len(cure_data.get("vesting_attributes", []))
+        mortgage_count = len(cure_data.get("open_mortgage_attributes", []))
+        judgment_count = len(cure_data.get("open_judgments_attributes", []))
+        return jsonify({
+            "success": ok,
+            "payload_keys": list(cure_data.keys()),
+            "vesting_count": vesting_count,
+            "mortgage_count": mortgage_count,
+            "judgment_count": judgment_count,
+            "tax_apn": cure_data.get("TaxAPNAccount", ""),
+            "debug_payload_file": _dbg_path,
+        })
     except Exception as exc:
         return jsonify({"success": False, "error": str(exc)}), 500
 

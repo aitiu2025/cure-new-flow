@@ -1326,9 +1326,23 @@ class RecorderAutomationPipeline:
             extraction = self._extract_pdf(pdf_path)
             extracted_path.write_text(extraction["markdown"], encoding="utf-8")
             if extraction["total_chars"] < self.config.min_page_text_chars:
-                raise WorkflowError(
-                    f"Extracted text for {pdf_path.name} is too small ({extraction['total_chars']} chars)."
+                # OCR not available (tesseract not installed) or PDF is image-only
+                # with no readable text. Promote to examined_and_excluded rather
+                # than crashing the whole job — the report will note the doc as
+                # unreadable.
+                _warn = (
+                    f"Extracted text for {pdf_path.name} is too small "
+                    f"({extraction['total_chars']} chars) — "
+                    f"{'OCR not available (install tesseract + pytesseract)' if pytesseract is None else 'OCR attempted but yielded no text'}. "
+                    f"Promoting to examined_and_excluded."
                 )
+                print(f"[EXTRACT] WARNING: {_warn}", flush=True)
+                results.append({
+                    "document_number": doc_num,
+                    "examined_and_excluded": True,
+                    "reason": _warn,
+                })
+                continue
             results.append(
                 {
                     "document_number": doc_num,
