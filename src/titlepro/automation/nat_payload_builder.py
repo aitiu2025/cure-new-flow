@@ -612,10 +612,12 @@ def _parse_mortgages_from_title(title_text: str) -> list[dict]:
 
         row = {h: (cells[i] if i < len(cells) else "") for i, h in enumerate(current_headers)}
 
-        # Extract instrument number (header aliases: "instr. #", "instr #", "cfn")
+        # Extract instrument number (header aliases: many column name variants)
+        _INST_KEYS = ("instr. #", "instr#", "instrument", "doc number", "doc#",
+                      "doc no", "document number", "cfn", "cfn#")
         inst = ""
         for hkey in current_headers:
-            if "instr" in hkey or hkey in ("cfn", "cfn#", "instrument"):
+            if hkey in _INST_KEYS or "instr" in hkey:
                 inst = row.get(hkey, "").strip()
                 break
         if not inst or not re.match(r"^\d{5,}", inst):
@@ -624,9 +626,32 @@ def _parse_mortgages_from_title(title_text: str) -> list[dict]:
             continue
         seen.add(inst)
 
-        rec_date = row.get("rec. date", row.get("rec.date", row.get("recorded", "")))
-        mortgagor = row.get("mortgagor", row.get("borrower", ""))
-        mortgagee = row.get("mortgagee / lender", row.get("lender", row.get("mortgagee", "")))
+        rec_date = (
+            row.get("rec. date")
+            or row.get("rec.date")
+            or row.get("recorded")
+            or row.get("recording date")
+            or ""
+        )
+        mortgagor = (
+            row.get("mortgagor")
+            or row.get("borrower")
+            or row.get("mortgagors")
+            or row.get("trustor / mortgagor")
+            or row.get("trustor/mortgagor")
+            or row.get("trustors / mortgagors")
+            or ""
+        )
+        mortgagee = (
+            row.get("mortgagee / lender")
+            or row.get("lender")
+            or row.get("mortgagee")
+            or row.get("beneficiary / mortgagee")
+            or row.get("beneficiary/mortgagee")
+            or row.get("beneficiary")
+            or row.get("original mortgagee")
+            or ""
+        )
         amount_raw = row.get("original amount", row.get("amount", ""))
         maturity = row.get("maturity", row.get("maturity date", ""))
         status_cell = row.get("status", "")
@@ -720,7 +745,17 @@ def _parse_vesting_from_title(title_text: str) -> list[dict]:
 
         row = {h: (cells[i] if i < len(cells) else "") for i, h in enumerate(current_headers)}
 
-        inst = row.get("instr. #", row.get("instr#", row.get("instrument", ""))).strip()
+        inst = (
+            row.get("instr. #")
+            or row.get("instr#")
+            or row.get("instrument")
+            or row.get("doc number")
+            or row.get("doc#")
+            or row.get("doc no")
+            or row.get("cfn")
+            or row.get("cfn#")
+            or ""
+        ).strip()
         if not inst or not re.match(r"^\d{5,}", inst):
             continue
         if inst in seen:
@@ -738,9 +773,25 @@ def _parse_vesting_from_title(title_text: str) -> list[dict]:
 
         seen.add(inst)
 
-        grantor = row.get("grantor(s)", row.get("grantor", ""))
-        grantee = row.get("grantee(s)", row.get("grantee", ""))
-        rec_date = row.get("recording date", row.get("rec. date", ""))
+        grantor = (
+            row.get("grantor(s)")
+            or row.get("grantor")
+            or row.get("grantor(s) / trustor(s)")
+            or ""
+        )
+        grantee = (
+            row.get("grantee(s)")
+            or row.get("grantee")
+            or row.get("grantee(s) / beneficiary(ies)")
+            or ""
+        )
+        rec_date = (
+            row.get("recording date")
+            or row.get("rec. date")
+            or row.get("rec.date")
+            or row.get("recorded")
+            or ""
+        )
         consideration = _extract_dollar_amount(notes)
         # Direct phrase search against grantee + notes (no instrument-anchor needed)
         search_text = (grantee + " " + notes).lower()
