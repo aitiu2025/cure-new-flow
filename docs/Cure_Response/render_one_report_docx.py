@@ -80,7 +80,7 @@ def md_to_docx(md_path: Path, docx_path: Path, reference_doc: Path | None = None
         "pandoc",
         str(src_md),
         "-o", str(docx_path),
-        "-f", "markdown+pipe_tables+raw_html+hard_line_breaks",
+        "-f", "markdown+pipe_tables+raw_html+hard_line_breaks+raw_attribute",
         "-t", "docx",
         "--standalone",
     ]
