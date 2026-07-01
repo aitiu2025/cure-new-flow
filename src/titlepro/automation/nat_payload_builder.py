@@ -350,11 +350,12 @@ _MTG_FIELD_ALIASES: dict[str, str] = {
     "type": "doc_type",
     "document type": "doc_type",
     # Mortgagor/borrower
+    "mortgagor": "mortgagor",
+    "mortgagor(s)": "mortgagor",
     "mortgagors": "mortgagor",
     "mortgagors / borrowers": "mortgagor",
     "mortgagors/borrowers": "mortgagor",
     "borrowers": "mortgagor",
-    "mortgagor": "mortgagor",
     # Mortgagee/lender
     "original mortgagee": "mortgagee",
     "mortgagee": "mortgagee",
@@ -635,6 +636,7 @@ def _parse_mortgages_from_title(title_text: str) -> list[dict]:
         )
         mortgagor = (
             row.get("mortgagor")
+            or row.get("mortgagor(s)")
             or row.get("borrower")
             or row.get("mortgagors")
             or row.get("trustor / mortgagor")
