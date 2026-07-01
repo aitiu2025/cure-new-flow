@@ -3725,18 +3725,28 @@ def _nat_generate_verify_report(nfn: str, output_dir: str, job: dict) -> None:
 
         search_results  = _read_json("search_results.json")
         docs_found      = _read_json("documents_found.json")
-        workflow_cfg    = _read_json("workflow_config.json")
+        workflow_status = _read_json("workflow_status.json")
         phase1_verifs   = _read_json("phase1_verifications.json")
         pa_anchor       = _read_json("phase1_property_appraiser.json")
 
-        subject = workflow_cfg.get("property_address") or workflow_cfg.get("subject_address") or "Unknown"
-        owner   = workflow_cfg.get("owner_name") or "Unknown"
-        county  = workflow_cfg.get("county") or "Unknown"
+        # Owner / county / subject — read from job request_data first (most
+        # reliable), then fall back to workflow_status.json case block.
+        _req = job.get("request_data", {})
+        _ws_case = workflow_status.get("case", {})
+        owner   = (_req.get("owner_name") or _ws_case.get("owner_name") or "Unknown").strip()
+        county  = (_req.get("county") or _ws_case.get("county") or job.get("county_slug") or "Unknown").strip()
+        subject = (
+            _req.get("address") or _req.get("property_address")
+            or _ws_case.get("subject_id") or "Unknown"
+        ).strip()
+        if _req.get("city") and subject != "Unknown" and _req.get("city") not in subject:
+            subject = f"{subject}, {_req['city']}, {_req.get('state', 'FL')}"
 
         # Per-search counts for D3 / state-contamination check
         sr_counts = [r.get("result_count", 0) for r in search_results.get("runs", [])]
+        _sp = search_results.get("search_parameters", {})
         search_names = [
-            req.get("name", "") for req in workflow_cfg.get("search_requests", [])
+            req.get("name", "") for req in _sp.get("search_requests", [])
         ]
 
         # Doc numbers in documents_found (may be a list or a dict)
